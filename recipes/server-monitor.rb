@@ -21,7 +21,6 @@ case node[:platform]
 		#start nrsysmond
 		service "newrelic-sysmond" do
 			supports :restart => true, :status => true
-			#supports :start => true, :stop => true, :restart => true, :reload => false, :force-reload => true, :status => true, :force-stop => true
 			#starts the service if it's not running and enables it to start at system boot time
 			action [:enable, :start]
 		end
