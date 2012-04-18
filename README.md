@@ -27,13 +27,17 @@ Attributes
 Usage
 =====
 
-Include `recipe[chef-newrelic]` in a run list.
-Change the `node['newrelic']['license_key']` attribute to the license key displayed on your New Relic account settings page.
+1) include `recipe[chef-newrelic]` and/or `recipe[chef-newrelic::php-agent]` and/or `recipe[chef-newrelic::server-monitor]` in a run list
+2)
+	change the `node['newrelic']['license_key']` attribute to the license key displayed on your New Relic account settings page
+	--- OR ---
+	override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 References
 ==========
 
 * [New Relic home page] (http://newrelic.com/)
+* [New Relic for PHP] (https://newrelic.com/docs/php/new-relic-for-php)
 * [New Relic for Server Monitoring] (https://newrelic.com/docs/server/new-relic-for-server-monitoring)
 * ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
 * ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
