@@ -22,14 +22,14 @@ This cookbook doesn't have direct dependencies on other cookbooks.
 Attributes
 ==========
 
-* `node['newrelic']['license_key']` - Your new relic license key. From Account Settings -> Account Information.
+* `node['newrelic']['license_key']` - Your New Relic license key.
 
 Usage
 =====
 
 1) include `recipe[chef-newrelic]` and/or `recipe[chef-newrelic::php-agent]` and/or `recipe[chef-newrelic::server-monitor]` in a run list
 2)
-	change the `node['newrelic']['license_key']` attribute to the license key displayed on your New Relic account settings page
+	change the `node['newrelic']['license_key']` attribute to your New Relic license key
 	--- OR ---
 	override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
