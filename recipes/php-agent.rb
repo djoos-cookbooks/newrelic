@@ -27,7 +27,7 @@ case node[:platform]
 			variables(
 				:license_key => node['newrelic']['license_key']
 			)
-			action :create_if_missing
+			action :create
 		end
 
 		#restart newrelic-daemon
