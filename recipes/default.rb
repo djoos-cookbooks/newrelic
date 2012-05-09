@@ -9,7 +9,7 @@ case node[:platform]
 	when "debian", "ubuntu"
 		#trust the New Relic GPG Key
 		#this step is required to tell apt that you trust the integrity of New Relic's apt repository
-		gpg_key_id = "548C16BF"
+		gpg_key_id = node['newrelic']['repository_key']
 
 		if gpg_key_id
 			gpg_key_url = "http://download.newrelic.com/#{gpg_key_id}.gpg"
