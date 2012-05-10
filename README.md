@@ -22,6 +22,7 @@ This cookbook doesn't have direct dependencies on other cookbooks.
 Attributes
 ==========
 
+* `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 * `node['newrelic']['license_key']` - Your New Relic license key.
 
 Usage
