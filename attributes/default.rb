@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: chef-newrelic
+# Cookbook Name:: newrelic
 # Attributes:: default
 #
 # Copyright 2012, Escape Studios

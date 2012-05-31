@@ -28,7 +28,7 @@ Attributes
 Usage
 =====
 
-1) include `recipe[chef-newrelic]` and/or `recipe[chef-newrelic::php-agent]` and/or `recipe[chef-newrelic::server-monitor]` in a run list
+1) include `recipe[newrelic]` and/or `recipe[newrelic::php-agent]` and/or `recipe[newrelic::server-monitor]` in a run list
 2)
 	change the `node['newrelic']['license_key']` attribute to your New Relic license key
 	--- OR ---
