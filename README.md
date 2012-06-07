@@ -18,6 +18,9 @@ This cookbook doesn't have direct dependencies on other cookbooks.
 
 * Ubuntu
 * Debian
+* RHEL
+* CentOS
+* Fedora
 
 Attributes
 ==========
@@ -28,7 +31,14 @@ Attributes
 Usage
 =====
 
-1) include `recipe[newrelic]` and/or `recipe[newrelic::php-agent]` and/or `recipe[newrelic::server-monitor]` in a run list
+1)
+include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::install]` and `recipe[newrelic::server-monitor]`
+- OR -
+include the bits and pieces explicitly in a run list:
+`recipe[newrelic::install]`
+`recipe[newrelic::server-monitor]`
+`recipe[newrelic::php-agent]`
+
 2)
 	change the `node['newrelic']['license_key']` attribute to your New Relic license key
 	--- OR ---
@@ -40,6 +50,8 @@ References
 * [New Relic home page] (http://newrelic.com/)
 * [New Relic for PHP] (https://newrelic.com/docs/php/new-relic-for-php)
 * [New Relic for Server Monitoring] (https://newrelic.com/docs/server/new-relic-for-server-monitoring)
+
+* ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
 * ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
 * ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
 
