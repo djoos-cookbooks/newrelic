@@ -55,6 +55,8 @@ References
 * ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
 * ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
 
+* a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
+
 License and Authors
 ===================
 
