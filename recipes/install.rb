@@ -17,8 +17,9 @@ case node[:platform]
 			gpg_key_already_installed = "apt-key list | grep #{gpg_key_id}"
 
 			if gpg_key_url
-				execute "wget -O - #{gpg_key_url} | apt-key add -" do
-					notifies :run, "execute[apt-get-update]", :immediately
+				execute "newrelic-add-gpg-key" do
+					command "wget -O - #{gpg_key_url} | apt-key add -"
+					notifies :run, "execute[newrelic-apt-get-update]", :immediately
 					not_if gpg_key_already_installed
 				end
 			end
@@ -32,12 +33,12 @@ case node[:platform]
 			owner "root"
 			group "root"
 			mode 0640
-			notifies :run, "execute[apt-get-update]", :immediately
+			notifies :run, "execute[newrelic-apt-get-update]", :immediately
 			action :create_if_missing
 		end
 
 		#update the local package list
-		execute "apt-get-update" do
+		execute "newrelic-apt-get-update" do
 			command "apt-get update"
 			action :nothing
 		end
