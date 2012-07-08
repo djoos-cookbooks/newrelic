@@ -32,7 +32,7 @@ case node[:platform]
 			source "http://download.newrelic.com/debian/newrelic.list"
 			owner "root"
 			group "root"
-			mode 0640
+			mode 0644
 			notifies :run, "execute[newrelic-apt-get-update]", :immediately
 			action :create_if_missing
 		end
