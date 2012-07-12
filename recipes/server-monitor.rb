@@ -11,7 +11,7 @@ package "newrelic-sysmond" do
 end
 
 #configure your New Relic license key
-execute "nrsysmond-config" do
+execute "newrelic-nrsysmond-config" do
 	command "nrsysmond-config --set license_key=#{node[:newrelic][:license_key]}"
 	action :run
 end
