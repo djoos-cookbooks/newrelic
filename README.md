@@ -5,6 +5,7 @@ This cookbook provides an easy way to install the New Relic PHP agent and the Ne
 
 More information?
 https://newrelic.com/docs/php/new-relic-for-php
+https://newrelic.com/docs/python/new-relic-for-python
 https://newrelic.com/docs/server/new-relic-for-server-monitoring
 
 Requirements
@@ -12,7 +13,12 @@ Requirements
 
 ## Cookbooks:
 
-This cookbook doesn't have direct dependencies on other cookbooks.
+The php and python recipies in this cookbook depend on the following:
+
+* php
+* apache2
+* apache2::mod_php5
+* python::pip
 
 ## Platforms:
 
@@ -27,6 +33,7 @@ Attributes
 
 * `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 * `node['newrelic']['license_key']` - Your New Relic license key.
+* `node['newrelic']['app_name']` - Your New Relic application name.
 
 Usage
 =====
@@ -38,6 +45,7 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::install]`
 `recipe[newrelic::server-monitor]`
 `recipe[newrelic::php-agent]`
+`recipe[newrelic::python-agent]`
 
 2)
 	change the `node['newrelic']['license_key']` attribute to your New Relic license key
@@ -49,6 +57,7 @@ References
 
 * [New Relic home page] (http://newrelic.com/)
 * [New Relic for PHP] (https://newrelic.com/docs/php/new-relic-for-php)
+* [New Relic for Python] (https://newrelic.com/docs/python/new-relic-for-python)
 * [New Relic for Server Monitoring] (https://newrelic.com/docs/server/new-relic-for-server-monitoring)
 
 * ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
@@ -56,6 +65,15 @@ References
 * ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
 
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
+
+CHANGELOG :
+===========
+### x.x.x
+    * New python agent installation (Paul Rossman)
+    * New newrelic.python.erb
+    * New `node['newrelic']['app_name']` attribute
+    * Added apache2, php, python depends to metadata.db
+    * Modified php-agent.php to use servicees
 
 License and Authors
 ===================

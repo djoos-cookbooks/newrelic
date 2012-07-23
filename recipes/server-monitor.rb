@@ -17,6 +17,6 @@ execute "newrelic-nrsysmond-config" do
 end
 
 service "newrelic-sysmond" do
-	supports :status => true, :restart => true
+    supports :status => true, :start => true, :stop => true, :restart => true
 	action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
 end
