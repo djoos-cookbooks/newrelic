@@ -7,3 +7,4 @@
 
 default['newrelic']['repository_key'] = "548C16BF"
 default['newrelic']['license_key'] = "CHANGE_ME"
+default['newrelic']['app_name'] = "CHANGE_ME"

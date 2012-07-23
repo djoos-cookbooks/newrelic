@@ -5,6 +5,11 @@
 # Copyright 2012, Escape Studios
 #
 
+# Execute apache2 receipe + mod_php5 receipe
+include_recipe "php"
+include_recipe "apache2"
+include_recipe "apache2::mod_php5"
+
 #install the php agent
 package "newrelic-php5" do
 	action :install
@@ -28,21 +33,9 @@ template "/etc/newrelic/newrelic.cfg" do
 	action :create
 end
 
-#restart newrelic-daemon
-execute "newrelic-daemon" do
-	command "/etc/init.d/newrelic-daemon restart"
-	action :run
-end
-
-#restart apache
-case node['platform']
-	when "debian", "ubuntu"
-		apache_service_name = "apache2"
-	when "redhat", "centos", "fedora"
-		apache_service_name = "httpd"
-end
-
-service "#{apache_service_name}" do
-	supports :restart => true, :reload => true
-	action [:start]
+#starts and enables at boot the newrelic-daemon then restarts apache2
+service "newrelic-daemon" do
+  supports :status => true, :start => true, :stop => true, :restart => true
+  action [:enable, :start]
+  notifies :restart, "service[apache2]", :delayed
 end
