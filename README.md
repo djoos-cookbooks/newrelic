@@ -4,16 +4,16 @@ Description
 This cookbook provides an easy way to install the New Relic PHP agent and the New Relic server monitor.
 
 More information?
+https://newrelic.com/docs/server/new-relic-for-server-monitoring
 https://newrelic.com/docs/php/new-relic-for-php
 https://newrelic.com/docs/python/new-relic-for-python
-https://newrelic.com/docs/server/new-relic-for-server-monitoring
 
 Requirements
 ============
 
 ## Cookbooks:
 
-The php and python recipies in this cookbook depend on the following:
+This cookbook has dependencies on the following cookbooks:
 
 * php
 * apache2
@@ -33,7 +33,7 @@ Attributes
 
 * `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 * `node['newrelic']['license_key']` - Your New Relic license key.
-* `node['newrelic']['app_name']` - Your New Relic application name.
+* `node['newrelic']['app_name']` - Your New Relic application name. (python agent only)
 
 Usage
 =====
@@ -56,9 +56,9 @@ References
 ==========
 
 * [New Relic home page] (http://newrelic.com/)
+* [New Relic for Server Monitoring] (https://newrelic.com/docs/server/new-relic-for-server-monitoring)
 * [New Relic for PHP] (https://newrelic.com/docs/php/new-relic-for-php)
 * [New Relic for Python] (https://newrelic.com/docs/python/new-relic-for-python)
-* [New Relic for Server Monitoring] (https://newrelic.com/docs/server/new-relic-for-server-monitoring)
 
 * ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
 * ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
