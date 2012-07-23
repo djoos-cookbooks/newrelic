@@ -12,12 +12,6 @@ python_pip "newrelic" do
   action :install
 end
 
-#run newrelic-install
-execute "newrelic-install" do
-	command "newrelic-install install"
-	action :run
-end
-
 #configure your New Relic license key
 template "/etc/newrelic/newrelic.ini" do
 	source "newrelic.python.erb"
