@@ -19,6 +19,7 @@ template "/etc/newrelic/newrelic.ini" do
 	group "root"
 	mode "0644"
 	variables(
+		:license_key => node[:newrelic][:license_key],
 		:app_name => node[:newrelic][:app_name]
 	)
 	action :create
