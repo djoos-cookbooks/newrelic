@@ -68,12 +68,12 @@ References
 
 CHANGELOG :
 ===========
-### x.x.x
+### 0.3.4
     * New python agent installation (Paul Rossman)
     * New newrelic.python.erb
     * New `node['newrelic']['app_name']` attribute
     * Added apache2, php, python depends to metadata.db
-    * Modified php-agent.php to use servicees
+    * Modified php-agent.php to use services
 
 License and Authors
 ===================
