@@ -66,8 +66,8 @@ References
 
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
 
-CHANGELOG :
-===========
+Changelog
+=========
 
 ### 0.3.5
 	* Fixed missing license_key from newrelic.python.erb
