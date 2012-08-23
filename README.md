@@ -34,6 +34,7 @@ Attributes
 * `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 * `node['newrelic']['license_key']` - Your New Relic license key.
 * `node['newrelic']['app_name']` - Your New Relic application name. (python agent only)
+* `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/ (python agent only)
 
 Usage
 =====
@@ -68,6 +69,9 @@ References
 
 Changelog
 =========
+
+### 0.3.6
+    * Added attribute to specify python version. Versions can be found at http://download.newrelic.com/python_agent/release/
 
 ### 0.3.5
 	* Fixed missing license_key from newrelic.python.erb
