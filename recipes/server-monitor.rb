@@ -11,9 +11,15 @@ package "newrelic-sysmond" do
 end
 
 #configure your New Relic license key
-execute "newrelic-nrsysmond-config" do
-	command "nrsysmond-config --set license_key=#{node[:newrelic][:license_key]}"
-	action :run
+template "/etc/newrelic/nrsysmond.cfg" do
+	source "nrsysmond.cfg.erb"
+	owner "root"
+	group "newrelic"
+	mode "640"
+	variables(
+		:license_key => node[:newrelic][:license_key]
+	)
+	notifies :restart, "service[newrelic-sysmond]"
 end
 
 service "newrelic-sysmond" do
