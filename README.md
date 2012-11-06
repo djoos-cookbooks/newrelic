@@ -32,9 +32,10 @@ Attributes
 ==========
 
 * `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
-* `node['newrelic']['license_key']` - Your New Relic license key.
-* `node['newrelic']['app_name']` - Your New Relic application name. (python agent only)
-* `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/ (python agent only)
+* `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode, defaults to "agent" (New Relic for PHP only)
+* `node['newrelic']['license_key']` - Your New Relic license key
+* `node['newrelic']['app_name']` - Your New Relic application name (New Relic for Python only)
+* `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/ (New Relic for Python only)
 
 Usage
 =====
@@ -59,6 +60,7 @@ References
 * [New Relic home page] (http://newrelic.com/)
 * [New Relic for Server Monitoring] (https://newrelic.com/docs/server/new-relic-for-server-monitoring)
 * [New Relic for PHP] (https://newrelic.com/docs/php/new-relic-for-php)
+* [newrelic-daemon startup modes] (https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
 * [New Relic for Python] (https://newrelic.com/docs/python/new-relic-for-python)
 
 * ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
@@ -69,6 +71,12 @@ References
 
 Changelog
 =========
+
+### 0.3.7
+    * Use a template to configure the server-monitor instead of the non-idempotent execute (Chris Griego)
+    * PHP Agent 3.0 (http://blog.newrelic.com/2012/10/23/new-relic-launches-php-agent-3-0-includes-multi-tenancy-support/)
+    * PHP agent newrelic-daemon startup modes: agent (new default) / external (historical default)
+    * Renamed newrelic.python.erb template to newrelic.cfg.python.erb
 
 ### 0.3.6
     * Added attribute to specify python version. Versions can be found at http://download.newrelic.com/python_agent/release/

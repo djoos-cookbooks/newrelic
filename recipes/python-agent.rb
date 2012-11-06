@@ -17,7 +17,7 @@ end
 
 #configure your New Relic license key
 template "/etc/newrelic/newrelic.ini" do
-	source "newrelic.python.erb"
+	source "newrelic.ini.python.erb"
 	owner "root"
 	group "root"
 	mode "0644"
