@@ -62,11 +62,9 @@ References
 * [New Relic for PHP] (https://newrelic.com/docs/php/new-relic-for-php)
 * [newrelic-daemon startup modes] (https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
 * [New Relic for Python] (https://newrelic.com/docs/python/new-relic-for-python)
-
 * ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
 * ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
 * ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
-
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
 
 Changelog
