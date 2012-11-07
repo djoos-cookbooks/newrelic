@@ -51,7 +51,7 @@ if node[:newrelic][:startup_mode] == "agent"
 
 	#configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
 	#and restart apache in order to pick up the new settings
-	template "/etc/newrelic/newrelic.ini" do
+	template "#{node[:php][:ext_conf_dir]}/newrelic.ini" do
 		source "newrelic.ini.php.erb"
 		owner "root"
 		group "root"
