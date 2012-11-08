@@ -72,9 +72,9 @@ Changelog
 
 ### 0.3.7
     * Use a template to configure the server-monitor instead of the non-idempotent execute (Chris Griego)
-    * PHP Agent 3.0 (http://blog.newrelic.com/2012/10/23/new-relic-launches-php-agent-3-0-includes-multi-tenancy-support/)
+    * PHP agent 3.0 (http://blog.newrelic.com/2012/10/23/new-relic-launches-php-agent-3-0-includes-multi-tenancy-support/)
     * PHP agent newrelic-daemon startup modes: agent (new default) / external (historical default)
-    * Renamed newrelic.python.erb template to newrelic.cfg.python.erb
+    * Renamed newrelic.python.erb template to newrelic.ini.python.erb
 
 ### 0.3.6
     * Added attribute to specify python version. Versions can be found at http://download.newrelic.com/python_agent/release/
