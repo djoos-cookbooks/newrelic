@@ -32,7 +32,7 @@ Attributes
 ==========
 
 * `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
-* `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode, defaults to "agent" (New Relic for PHP only)
+* `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent" (New Relic for PHP only)
 * `node['newrelic']['license_key']` - Your New Relic license key
 * `node['newrelic']['app_name']` - Your New Relic application name (New Relic for Python only)
 * `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/ (New Relic for Python only)
