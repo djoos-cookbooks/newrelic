@@ -42,7 +42,7 @@ case node[:platform]
 			command "apt-get update"
 			action :nothing
 		end
-	when "redhat", "centos", "fedora"
+	when "redhat", "centos", "fedora", "scientific"
 		#install the newrelic-repo package, which configures a new package repository for yum
 		if node[:kernel][:machine] == "x86_64"
 			machine = "x86_64"
