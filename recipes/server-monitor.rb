@@ -26,7 +26,7 @@ template "/etc/newrelic/nrsysmond.cfg" do
 		:ssl_ca_bundle => node[:newrelic][:server_monitoring][:ssl_ca_bundle],
 		:pidfile => node[:newrelic][:server_monitoring][:pidfile],
 		:collector_host => node[:newrelic][:server_monitoring][:collector_host],
-		:timeout => node[:newrelic][:server_monitoring][:timeout],
+		:timeout => node[:newrelic][:server_monitoring][:timeout]
 	)
 	notifies :restart, "service[newrelic-sysmond]"
 end
