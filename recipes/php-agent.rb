@@ -10,6 +10,7 @@ include_recipe "php"
 include_recipe "apache2"
 include_recipe "apache2::mod_php5"
 
+#install/update latest php agent
 package "newrelic-php5" do
 	action :upgrade
 end
