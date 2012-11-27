@@ -31,11 +31,59 @@ This cookbook has dependencies on the following cookbooks:
 Attributes
 ==========
 
-* `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
+### BASIC
+* `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as application monitoring license)
+* `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as server monitoring license)
+
+### ADVANCED
+* `node['newrelic']['server_monitoring']['logfile']`
+* `node['newrelic']['server_monitoring']['loglevel']`
+* `node['newrelic']['server_monitoring']['proxy']`
+* `node['newrelic']['server_monitoring']['ssl']`
+* `node['newrelic']['server_monitoring']['ssl_ca_bundle']`
+* `node['newrelic']['server_monitoring']['ssl_ca_path']`
+* `node['newrelic']['server_monitoring']['pidfile']`
+* `node['newrelic']['server_monitoring']['collector_host']`
+* `node['newrelic']['server_monitoring']['timeout']`
+* `node['newrelic']['application_monitoring']['enabled']`
+* `node['newrelic']['application_monitoring']['logfile']`
+* `node['newrelic']['application_monitoring']['loglevel']`
+* `node['newrelic']['application_monitoring']['appname']`
+* `node['newrelic']['application_monitoring']['daemon']['logfile']`
+* `node['newrelic']['application_monitoring']['daemon']['loglevel']`
+* `node['newrelic']['application_monitoring']['daemon']['port']`
+* `node['newrelic']['application_monitoring']['daemon']['max_threads']`
+* `node['newrelic']['application_monitoring']['daemon']['ssl']`
+* `node['newrelic']['application_monitoring']['daemon']['ssl_ca_path']`
+* `node['newrelic']['application_monitoring']['daemon']['ssl_ca_bundle']`
+* `node['newrelic']['application_monitoring']['daemon']['proxy']`
+* `node['newrelic']['application_monitoring']['daemon']['pidfile']`
+* `node['newrelic']['application_monitoring']['daemon']['location']`
+* `node['newrelic']['application_monitoring']['daemon']['collector_host']`
+* `node['newrelic']['application_monitoring']['daemon']['dont_launch']`
+* `node['newrelic']['application_monitoring']['capture_params']`
+* `node['newrelic']['application_monitoring']['ignored_params']`
+* `node['newrelic']['application_monitoring']['error_collector']['enable']`
+* `node['newrelic']['application_monitoring']['error_collector']['record_database_errors']`
+* `node['newrelic']['application_monitoring']['error_collector']['prioritize_api_errors']`
+* `node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']`
+* `node['newrelic']['application_monitoring']['transaction_tracer']['enable']`
+* `node['newrelic']['application_monitoring']['transaction_tracer']['threshold']`
+* `node['newrelic']['application_monitoring']['transaction_tracer']['detail']`
+* `node['newrelic']['application_monitoring']['transaction_tracer']['slow_sql']`
+* `node['newrelic']['application_monitoring']['transaction_tracer']['stack_trace_threshold']`
+* `node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold']`
+* `node['newrelic']['application_monitoring']['transaction_tracer']['record_sql']`
+* `node['newrelic']['application_monitoring']['transaction_tracer']['custom']`
+* `node['newrelic']['application_monitoring']['framework']`
+* `node['newrelic']['application_monitoring']['webtransaction']['name']['remove_trailing_path']`
+* `node['newrelic']['application_monitoring']['webtransaction']['name']['functions']`
+* `node['newrelic']['application_monitoring']['webtransaction']['name']['files']`
+
+### MISC
 * `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent" (New Relic for PHP only)
-* `node['newrelic']['license_key']` - Your New Relic license key
-* `node['newrelic']['app_name']` - Your New Relic application name (New Relic for Python only)
 * `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/ (New Relic for Python only)
+* `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 
 Usage
 =====

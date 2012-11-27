@@ -8,10 +8,8 @@
 #############
 #BASIC CONFIG
 #############
-#SERVER MONITORING
+#LICENSE(S)
 default['newrelic']['server_monitoring']['license'] = "CHANGE_ME"
-
-#APPLICATION MONITORING
 default['newrelic']['application_monitoring']['license'] = "CHANGE_ME"
 
 ################
