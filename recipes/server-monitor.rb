@@ -17,7 +17,16 @@ template "/etc/newrelic/nrsysmond.cfg" do
 	group "newrelic"
 	mode "640"
 	variables(
-		:license_key => node[:newrelic][:license_key]
+		:license => node[:newrelic][:server_monitoring][:license],
+		:logfile => node[:newrelic][:server_monitoring][:logfile],
+		:loglevel => node[:newrelic][:server_monitoring][:loglevel],
+		:proxy => node[:newrelic][:server_monitoring][:proxy],
+		:ssl => node[:newrelic][:server_monitoring][:ssl],
+		:ssl_ca_path => node[:newrelic][:server_monitoring][:ssl_ca_path],
+		:ssl_ca_bundle => node[:newrelic][:server_monitoring][:ssl_ca_bundle],
+		:pidfile => node[:newrelic][:server_monitoring][:pidfile],
+		:collector_host => node[:newrelic][:server_monitoring][:collector_host],
+		:timeout => node[:newrelic][:server_monitoring][:timeout],
 	)
 	notifies :restart, "service[newrelic-sysmond]"
 end

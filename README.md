@@ -70,6 +70,10 @@ References
 Changelog
 =========
 
+### 0.4.0
+    * add support for scientific linux (Aaron Jensen)
+    * advanced configuration (newrelic.ini, nrsysmond.cfg & newrelic.cfg) via attributes
+
 ### 0.3.7
     * Use a template to configure the server-monitor instead of the non-idempotent execute (Chris Griego)
     * PHP agent 3.0 (http://blog.newrelic.com/2012/10/23/new-relic-launches-php-agent-3-0-includes-multi-tenancy-support/)

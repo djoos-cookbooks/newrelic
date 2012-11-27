@@ -26,7 +26,11 @@ extension=newrelic.so
 ;          agent will not initialize at all. However, you can selectively
 ;          disable the agent on a per-directory basis.
 ;
-;newrelic.enabled=true
+<% if @enabled.nil? %>
+;newrelic.enabled = true
+<% else %>
+newrelic.enabled = <%= @enabled %>
+<% end %>
 
 ;
 ; Setting: newrelic.license
@@ -53,7 +57,7 @@ extension=newrelic.so
 ;          eliminate the potential for confusion about exactly where the key
 ;          is coming from.
 ;
-newrelic.license = "<%= @license_key %>"
+newrelic.license = "<%= @license %>"
 
 ;
 ; Setting: newrelic.logfile
@@ -62,7 +66,11 @@ newrelic.license = "<%= @license_key %>"
 ; Default: none
 ; Info   : Sets the name of the file to send log messages to.
 ;
+<% if @logfile.nil? %>
 newrelic.logfile = "/var/log/newrelic/php_agent.log"
+<% else %>
+newrelic.logfile = "<%= @logfile %>"
+<% end %>
 
 ;
 ; Setting: newrelic.loglevel
@@ -74,7 +82,11 @@ newrelic.logfile = "/var/log/newrelic/php_agent.log"
 ;          the guidance of technical support. This option has changed meaning
 ;          fairly significantly from agent versions 1.x and 2.x.
 ;
+<% if @loglevel.nil? %>
 ;newrelic.loglevel = "info"
+<% else %>
+newrelic.loglevel = "<%= @loglevel %>"
+<% end %>
 
 ;
 ; Setting: newrelic.appname
@@ -87,7 +99,11 @@ newrelic.logfile = "/var/log/newrelic/php_agent.log"
 ;          list is considered the 'primary' application name and must be unique
 ;          for each account / license key.
 ;
+<% if @appname.nil? %>
 ;newrelic.appname = "PHP Application"
+<% else %>
+newrelic.appname = "<%= @appname %>"
+<% end %>
 
 ;
 ; Beginning with version 3.0 of the agent, the daemon can be automatically
@@ -119,7 +135,7 @@ newrelic.logfile = "/var/log/newrelic/php_agent.log"
 ; Default: none
 ; Info   : Sets the name of the file to send daemon log messages to.
 ;
-newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
+newrelic.daemon.logfile = "<%= @daemon_logfile %>"
 
 ;
 ; Setting: newrelic.daemon.loglevel
@@ -131,7 +147,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          the guidance of technical support. This option has changed meaning
 ;          fairly significantly from agent versions 1.x and 2.x.
 ;
+<% if @daemon_loglevel.nil? %>
 ;newrelic.daemon.loglevel = "info"
+<% else %>
+newrelic.daemon.loglevel = "<%= @daemon_loglevel %>"
+<% end %>
 
 ;
 ; Setting: newrelic.daemon.port
@@ -142,7 +162,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          daemon listens on. This is used for the worker processes and CLI
 ;          invocations to communicate with the daemon.
 ;
+<% if @daemon_port.nil? %>
 ;newrelic.daemon.port = 33142
+<% else %>
+newrelic.daemon.port = <%= @daemon_port %>
+<% end %>
 
 ;
 ; Setting: newrelic.daemon.max_threads
@@ -153,7 +177,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          used for processing requests from each agent. The minimum is 4 and
 ;          the maximum is 128.
 ;
+<% if @daemon_max_threads.nil? %>
 ;newrelic.daemon.max_threads = 8
+<% else %>
+newrelic.daemon.max_threads = <%= @daemon_max_threads %>
+<% end %>
 
 ;
 ; Setting: newrelic.daemon.ssl
@@ -167,7 +195,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          PEM-encoded certificate file, or a directory that contains a list
 ;          of such files, using the following two options.
 ;
+<% if @daemon_ssl.nil? %>
 ;newrelic.daemon.ssl = false
+<% else %>
+newrelic.daemon.ssl = <%= @daemon_ssl %>
+<% end %>
 
 ;
 ; Setting: newrelic.daemon.ssl_ca_path
@@ -179,8 +211,16 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          of certificate authorities. May be required when you enable https
 ;          support above.
 ;
+<% if @daemon_ssl_ca_path.nil? %>
 ;newrelic.daemon.ssl_ca_path = ""
+<% else %>
+newrelic.daemon.ssl_ca_path = "<%= @daemon_ssl_ca_path %>"
+<% end %>
+<% if @daemon_ssl_ca_bundle.nil? %>
 ;newrelic.daemon.ssl_ca_bundle = ""
+<% else %>
+newrelic.daemon.ssl_ca_bundle = "<%= @daemon_ssl_ca_bundle %>"
+<% end %>
 
 ;
 ; Setting: newrelic.daemon.proxy
@@ -198,7 +238,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;             user:password@hostname
 ;             user:password@hostname:port
 ;
+<% if @daemon_proxy.nil? %>
 ;newrelic.daemon.proxy = ""
+<% else %>
+newrelic.daemon.proxy = "<%= @daemon_proxy %>"
+<% end %>
 
 ;
 ; Setting: newrelic.daemon.pidfile
@@ -209,7 +253,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          (PID) in. This file is used by the daemon startup and shutdown
 ;          script to determine whether or not the daemon is already running.
 ;
+<% if @daemon_pidfile.nil? %>
 ;newrelic.daemon.pidfile = ""
+<% else %>
+newrelic.daemon.pidfile = "<%= @daemon_pidfile %>"
+<% end %>
 
 ;
 ; Setting: newrelic.daemon.location
@@ -221,7 +269,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          filesystem, the default daemon location is
 ;          /opt/newrelic/bin/newrelic-daemon.
 ;
+<% if @daemon_location.nil? %>
 ;newrelic.daemon.location = "/usr/bin/newrelic-daemon"
+<% else %>
+newrelic.daemon.location = "<%= @daemon_location %>"
+<% end %>
 
 ;
 ; Setting: newrelic.daemon.collector_host
@@ -235,7 +287,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          circumstances, and then only on instruction from a New Relic sales
 ;          person or support staff member.
 ;
+<% if @daemon_collector_host.nil? %>
 ;newrelic.daemon.collector_host = "collector.newrelic.com"
+<% else %>
+newrelic.daemon.collector_host = "<%= @daemon_collector_host %>"
+<% end %>
 
 ;
 ; Setting: newrelic.daemon.dont_launch
@@ -251,7 +307,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          2 - only CLI agents can start the daemon
 ;          3 - the agent will never start the daemon
 ;
+<% if @daemon_dont_launch.nil? %>
 ;newrelic.daemon.dont_launch = 0
+<% else %>
+newrelic.daemon.dont_launch = <%= @daemon_dont_launch %>
+<% end %>
 
 ;
 ; Setting: newrelic.capture_params
@@ -266,7 +326,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          parameters are simply used for parameters without sensitive data but
 ;          that are meaningful to each transaction then you can enable this.
 ;
+<% if @capture_params.nil? %>
 ;newrelic.capture_params = false
+<% else %>
+newrelic.capture_params = <%= @capture_params %>
+<% end %>
 
 ; Setting: newrelic.ignored_params
 ; Type   : string
@@ -276,7 +340,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          capturing is enabled above. You can use this to filter out sensitive
 ;          user data that may appear as a URL parameter.
 ;
+<% if @ignored_params.nil? %>
 ;newrelic.ignored_params = ""
+<% else %>
+newrelic.ignored_params = "<%= @ignored_params %>"
+<% end %>
 
 ;
 ; Setting: newrelic.error_collector.enable
@@ -288,7 +356,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          Please also note that your New Relic subscription level may force
 ;          this to be disabled regardless of any value you set for it.
 ;
+<% if @error_collector_enable.nil? %>
 ;newrelic.error_collector.enable = true
+<% else %>
+newrelic.error_collector.enable = <%= @error_collector_enable %>
+<% end %>
 
 ;
 ; Setting: newrelic.error_collector.record_database_errors
@@ -301,7 +373,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          collection. This is only objeyed if the error collector is enabled
 ;          above and the account subscription level permits error trapping.
 ;
+<% if @error_collector_record_database_errors.nil? %>
 ;newrelic.error_collector.record_database_errors = false
+<% else %>
+newrelic.error_collector.record_database_errors = <%= @error_collector_record_database_errors %>
+<% end %>
 
 ;
 ; Setting: newrelic.error_collector.prioritize_api_errors
@@ -312,7 +388,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          notice an error, if this is set to true then assign the highest
 ;          priority to such errors.
 ;
+<% if @error_collector_prioritize_api_errors.nil? %>
 ;newrelic.error_collector.prioritize_api_errors = false
+<% else %>
+newrelic.error_collector.prioritize_api_errors = <%= @error_collector_prioritize_api_errors %>
+<% end %>
 
 ;
 ; Setting: newrelic.browser_monitoring.auto_instrument
@@ -323,7 +403,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          When enabled will cause the agent to insert a header and a footer
 ;          in HTML output that will time the actual end-user experience.
 ;
+<% if @browser_monitoring_auto_instrument.nil? %>
 ;newrelic.browser_monitoring.auto_instrument = true
+<% else %>
+newrelic.browser_monitoring.auto_instrument = <%= @browser_monitoring_auto_instrument %>
+<% end %>
 
 ;
 ; Setting: newrelic.transaction_tracer.enable
@@ -339,7 +423,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          note that TT's may be disabled by your account subscription level
 ;          regardless of what you set here.
 ;
+<% if @transaction_tracer_enable.nil? %>
 ;newrelic.transaction_tracer.enable = true
+<% else %>
+newrelic.transaction_tracer.enable = <%= @transaction_tracer_enable %>
+<% end %>
 
 ;
 ; Setting: newrelic.transaction_tracer.threshold
@@ -353,7 +441,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          Thus the threshold changes according to your apdex_t setting. This
 ;          is the default.
 ;
+<% if @transaction_tracer_threshold.nil? %>
 ;newrelic.transaction_tracer.threshold = "apdex_f"
+<% else %>
+newrelic.transaction_tracer.threshold = "<%= @transaction_tracer_threshold %>"
+<% end %>
 
 ;
 ; Setting: newrelic.transaction_tracer.detail
@@ -373,7 +465,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;
 ;          In earlier releases of the agent this was known as "top100".
 ;
+<% if @transaction_tracer_detail.nil? %>
 ;newrelic.transaction_tracer.detail = 1
+<% else %>
+newrelic.transaction_tracer.detail = <%= @transaction_tracer_detail %>
+<% end %>
 
 ;
 ; Setting: newrelic.transaction_tracer.slow_sql
@@ -384,7 +480,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          record the top 10 slowest SQL calls along with a stack trace of
 ;          where the call occurred in your code.
 ;
+<% if @transaction_tracer_slow_sql.nil? %>
 ;newrelic.transaction_tracer.slow_sql = true
+<% else %>
+newrelic.transaction_tracer.slow_sql = <%= @transaction_tracer_slow_sql %>
+<% end %>
 
 ;
 ; Setting: newrelic.transaction_tracer.stack_trace_threshold
@@ -394,7 +494,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ; Info   : Sets the threshold above which the New Relic agent will record a
 ;          stack trace for a transaction trace.
 ;
+<% if @transaction_tracer_stack_trace_threshold.nil? %>
 ;newrelic.transaction_tracer.stack_trace_threshold = 500
+<% else %>
+newrelic.transaction_tracer.stack_trace_threshold = <%= @transaction_tracer_stack_trace_threshold %>
+<% end %>
 
 ;
 ; Setting: newrelic.transaction_tracer.explain_threshold
@@ -407,7 +511,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          base for slow SQL. This latter feature may not be active yet, please
 ;          refer to the agent release notes to see when it becomes available.
 ;
+<% if @transaction_tracer_explain_threshold.nil? %>
 ;newrelic.transaction_tracer.explain_threshold = 500
+<% else %>
+newrelic.transaction_tracer.explain_threshold = <%= @transaction_tracer_explain_threshold %>
+<% end %>
 
 ;
 ; Setting: newrelic.transaction_tracer.record_sql
@@ -420,7 +528,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          has considerable security implications as it can expose sensitive
 ;          and private customer data.
 ;
+<% if @transaction_tracer_record_sql.nil? %>
 ;newrelic.transaction_tracer.record_sql = "obfuscated"
+<% else %>
+newrelic.transaction_tracer.record_sql = "<%= @transaction_tracer_record_sql %>"
+<% end %>
 
 ; Setting: newrelic.transaction_tracer.custom
 ; Type   : string
@@ -431,7 +543,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          set newrelic.transaction_tracer.detail to 0. This can be a comma-
 ;          separated list of function or class method names.
 ;
+<% if @transaction_tracer_custom.nil? %>
 ;newrelic.transaction_tracer.custom = ""
+<% else %>
+newrelic.transaction_tracer.custom = "<%= @transaction_tracer_custom %>"
+<% end %>
 
 ;
 ; Setting: newrelic.framework
@@ -446,7 +562,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          cakephp, codeigniter, drupal, joomla, kohana, magento, mediawiki,
 ;          symfony, wordpress, yii, zend or no_framework.
 ;
+<% if @framework.nil? %>
 ;newrelic.framework = ""
+<% else %>
+newrelic.framework = "<%= @framework %>"
+<% end %>
 
 ;
 ; Setting: newrelic.webtransaction.name.remove_trailing_path
@@ -459,7 +579,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          would cause the "/xyz/zy" to be stripped from a URL such as
 ;          "/path/to/foo.php/xyz/zy".
 ;
+<% if @webtransaction_name_remove_trailing_path.nil? %>
 ;newrelic.webtransaction.name.remove_trailing_path = false
+<% else %>
+newrelic.webtransaction.name.remove_trailing_path = <%= @webtransaction_name_remove_trailing_path %>
+<% end %>
 
 ;
 ; Setting: newrelic.webtransaction.name.functions
@@ -475,7 +599,11 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          and the function names specified here will be used to name the
 ;          transaction.
 ;
+<% if @webtransaction_name_functions.nil? %>
 ;newrelic.webtransaction.name.functions = ""
+<% else %>
+newrelic.webtransaction.name.functions = "<%= @webtransaction_name_functions %>"
+<% end %>
 
 ;
 ; Setting: newrelic.webtransaction.name.files
@@ -486,5 +614,8 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;          names instead of function names. Accepts standard POSIX regular
 ;          expressions.
 ;
+<% if @webtransaction_name_files.nil? %>
 ;newrelic.webtransaction.name.files = ""
-
+<% else %>
+newrelic.webtransaction.name.files = "<%= @webtransaction_name_files %>"
+<% end %>
