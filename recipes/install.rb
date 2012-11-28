@@ -17,8 +17,9 @@ case node[:platform]
 			gpg_key_already_installed = "apt-key list | grep #{gpg_key_id}"
 
 			if gpg_key_url
-				execute "wget -O - #{gpg_key_url} | apt-key add -" do
-					notifies :run, "execute[apt-get-update]", :immediately
+				execute "newrelic-add-gpg-key" do
+					command "wget -O - #{gpg_key_url} | apt-key add -"
+					notifies :run, "execute[newrelic-apt-get-update]", :immediately
 					not_if gpg_key_already_installed
 				end
 			end
@@ -31,17 +32,17 @@ case node[:platform]
 			source "http://download.newrelic.com/debian/newrelic.list"
 			owner "root"
 			group "root"
-			mode 0640
-			notifies :run, "execute[apt-get-update]", :immediately
+			mode 0644
+			notifies :run, "execute[newrelic-apt-get-update]", :immediately
 			action :create_if_missing
 		end
 
 		#update the local package list
-		execute "apt-get-update" do
+		execute "newrelic-apt-get-update" do
 			command "apt-get update"
 			action :nothing
 		end
-	when "redhat", "centos", "fedora"
+	when "redhat", "centos", "fedora", "scientific"
 		#install the newrelic-repo package, which configures a new package repository for yum
 		if node[:kernel][:machine] == "x86_64"
 			machine = "x86_64"
