@@ -27,6 +27,7 @@ This cookbook has dependencies on the following cookbooks:
 * RHEL
 * CentOS
 * Fedora
+* Amazon
 
 Attributes
 ==========
