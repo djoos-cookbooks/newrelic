@@ -118,6 +118,9 @@ References
 Changelog
 =========
 
+### 0.4.1
+    * add support for amazon
+
 ### 0.4.0
     * add support for scientific linux (Aaron Jensen)
     * advanced configuration (newrelic.ini, nrsysmond.cfg & newrelic.cfg) via attributes
