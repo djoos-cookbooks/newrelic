@@ -5,6 +5,8 @@
 # Copyright 2012, Escape Studios
 #
 
+package "wget"
+
 case node[:platform]
 	when "debian", "ubuntu"
 		#trust the New Relic GPG Key
