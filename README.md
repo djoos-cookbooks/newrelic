@@ -120,6 +120,10 @@ References
 Changelog
 =========
 
+### 0.4.2
+    * recommend dependencies (Darrin Eden)
+    * install wget dependency (Darrin Eden)
+
 ### 0.4.1
     * add support for amazon
 
