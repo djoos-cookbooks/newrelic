@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: php-agent
 #
-# Copyright 2012, Escape Studios
+# Copyright 2012-2013, Escape Studios
 #
 
 # Execute apache2 receipe + mod_php5 receipe
