@@ -12,6 +12,9 @@
 default['newrelic']['server_monitoring']['license'] = "CHANGE_ME"
 default['newrelic']['application_monitoring']['license'] = "CHANGE_ME"
 
+# Set the host service that needs to be restarted-- e.g. php5-fpm or apache2
+default['newrelic']['php_service'] = "php5-fpm"
+
 ################
 #ADVANCED CONFIG
 ################
