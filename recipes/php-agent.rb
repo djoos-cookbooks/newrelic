@@ -5,10 +5,8 @@
 # Copyright 2012, Escape Studios
 #
 
-# Execute apache2 receipe + mod_php5 receipe
+# Execute apache2 receipe + mod_php5 recipe
 include_recipe "php"
-include_recipe "apache2"
-include_recipe "apache2::mod_php5"
 
 #the older version (3.0) had a bug in the init scripts that when it shut down the daemon it would also kill dpkg as it was trying to upgrade
 #let's remove the old packages before continuing
@@ -26,12 +24,12 @@ end
 execute "newrelic-install" do
 	command "newrelic-install install"
 	action :run
-	notifies :restart, "service[apache2]", :delayed
+	notifies :restart, "service[#{node[:newrelic][:php_service]}]", :delayed
 end
 
 service "newrelic-daemon" do
   supports :status => true, :start => true, :stop => true, :restart => true
-  notifies :restart, "service[apache2]", :delayed
+	notifies :restart, "service[#{node[:newrelic][:php_service]}]", :delayed
 end
 
 #https://newrelic.com/docs/php/newrelic-daemon-startup-modes
@@ -102,7 +100,7 @@ if node[:newrelic][:startup_mode] == "agent"
 			:webtransaction_name_files => node[:newrelic][:application_monitoring][:webtransaction][:name][:files]
 		)
 		action :create
-		notifies :restart, "service[apache2]", :delayed
+	notifies :restart, "service[#{node[:newrelic][:php_service]}]", :delayed
 	end
 else
 	#external startup mode
