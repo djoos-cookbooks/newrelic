@@ -122,6 +122,10 @@ References
 Changelog
 =========
 
+### 0.4.3
+    * update copyrights
+    * remove apache2-dependency by making cookbook web server and php process manager 'agnostic'
+
 ### 0.4.2
     * recommend dependencies (Darrin Eden)
     * install wget dependency (Darrin Eden)
