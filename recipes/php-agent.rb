@@ -5,10 +5,10 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-# Execute apache2 receipe + mod_php5 receipe
 include_recipe "php"
-include_recipe "apache2"
-include_recipe "apache2::mod_php5"
+
+include_recipe "#{node[:newrelic][:web_server][:recipe_name]}"
+include_recipe "#{node[:newrelic][:php_process_manager][:recipe_name]}"
 
 #the older version (3.0) had a bug in the init scripts that when it shut down the daemon it would also kill dpkg as it was trying to upgrade
 #let's remove the old packages before continuing
@@ -26,12 +26,12 @@ end
 execute "newrelic-install" do
 	command "newrelic-install install"
 	action :run
-	notifies :restart, "service[apache2]", :delayed
+	notifies :restart, "service[#{node[:newrelic][:web_server][:service_name]}]", :delayed
 end
 
 service "newrelic-daemon" do
   supports :status => true, :start => true, :stop => true, :restart => true
-  notifies :restart, "service[apache2]", :delayed
+  notifies :restart, "service[#{node[:newrelic][:web_server][:service_name]}]", :delayed
 end
 
 #https://newrelic.com/docs/php/newrelic-daemon-startup-modes
@@ -58,7 +58,7 @@ if node[:newrelic][:startup_mode] == "agent"
     end
 
 	#configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
-	#and restart apache in order to pick up the new settings
+	#and restart the web server in order to pick up the new settings
 	template "#{node[:php][:ext_conf_dir]}/newrelic.ini" do
 		source "newrelic.ini.php.erb"
 		owner "root"
@@ -102,7 +102,7 @@ if node[:newrelic][:startup_mode] == "agent"
 			:webtransaction_name_files => node[:newrelic][:application_monitoring][:webtransaction][:name][:files]
 		)
 		action :create
-		notifies :restart, "service[apache2]", :delayed
+		notifies :restart, "service[#{node[:newrelic][:web_server][:service_name]}]", :delayed
 	end
 else
 	#external startup mode
