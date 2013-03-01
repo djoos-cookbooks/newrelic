@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Attributes:: default
 #
-# Copyright 2012, Escape Studios
+# Copyright 2012-2013, Escape Studios
 #
 
 #############
@@ -64,6 +64,10 @@ default['newrelic']['application_monitoring']['webtransaction']['name']['files']
 
 #php setup specific
 default['newrelic']['startup_mode'] = "agent"
+default['newrelic']['web_server']['recipe_name'] = "apache2"
+default['newrelic']['web_server']['service_name'] = "apache2" 
+default['newrelic']['php_process_manager']['recipe_name'] = "apache2::mod_php5"
+
 #python setup specific
 default['newrelic']['python_version'] = "latest"
 
