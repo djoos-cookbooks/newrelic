@@ -5,14 +5,9 @@ description      "Installs/Configures New Relic"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          "0.4.2"
 
-supports "ubuntu"
-supports "debian"
-supports "centos"
-supports "redhat"
-supports "fedora"
-supports "scientific"
-supports "amazon"
+%w{ debian ubuntu redhat centos fedora scientific amazon }.each do |os|
+supports os
+end
 
-recommends "apache2"
 recommends "php"
 recommends "python"
