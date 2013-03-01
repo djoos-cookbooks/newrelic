@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: server-monitor
 #
-# Copyright 2012, Escape Studios
+# Copyright 2012-2013, Escape Studios
 #
 
 #install the server monitor
