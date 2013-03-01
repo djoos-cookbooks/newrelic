@@ -20,12 +20,13 @@ end
 #install/update latest php agent
 package "newrelic-php5" do
     action :upgrade
+    notifies :run, "execute[newrelic-install]", :immediately
 end
 
 #run newrelic-install
 execute "newrelic-install" do
     command "newrelic-install install"
-    action :run
+    action :nothing
     notifies :restart, "service[#{node[:newrelic][:web_server][:service_name]}]", :delayed
 end
 
