@@ -16,14 +16,12 @@ Requirements
 This cookbook has dependencies on the following cookbooks:
 
 * php
-* apache2
-* apache2::mod_php5
 * python::pip
 
 ## Platforms:
 
-* Ubuntu
 * Debian
+* Ubuntu
 * RHEL
 * CentOS
 * Fedora
@@ -84,6 +82,10 @@ Attributes
 
 ### MISC
 * `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent" (New Relic for PHP only)
+
+* `node['newrelic']['web_server']['recipe_name']` - The web server recipe name, defaults to "apache2" (New Relic for PHP only)
+* `node['newrelic']['web_server']['service_name']` - The web server service name, defaults to "apache2" (New Relic for PHP only)
+* `node['newrelic']['php_process_manager']['recipe_name']` - The php process manager recipe name, defaults to "apache2::mod_php5" (New Relic for PHP only)
 * `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/ (New Relic for Python only)
 * `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 
@@ -156,7 +158,7 @@ License and Authors
 
 Author: David Joos <david@escapestudios.com>
 Author: Escape Studios Development <dev@escapestudios.com>
-Copyright: 2012, Escape Studios
+Copyright: 2012-2013, Escape Studios
 
 Unless otherwise noted, all files are released under the MIT license,
 possible exceptions will contain licensing information in them.
