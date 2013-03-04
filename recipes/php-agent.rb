@@ -7,9 +7,6 @@
 
 include_recipe "php"
 
-include_recipe "#{node[:newrelic][:web_server][:recipe_name]}"
-include_recipe "#{node[:newrelic][:php_process_manager][:recipe_name]}"
-
 #the older version (3.0) had a bug in the init scripts that when it shut down the daemon it would also kill dpkg as it was trying to upgrade
 #let's remove the old packages before continuing
 package "newrelic-php5" do
