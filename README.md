@@ -119,6 +119,10 @@ References
 Changelog
 =========
 
+### 0.4.4
+    * don't unnecessarily install or trigger web server restarts
+    * attributes-cleanup
+
 ### 0.4.3
     * update copyrights
     * remove apache2-dependency by making cookbook web server and php process manager 'agnostic'
