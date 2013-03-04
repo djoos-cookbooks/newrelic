@@ -32,7 +32,6 @@ end
 
 service "newrelic-daemon" do
     supports :status => true, :start => true, :stop => true, :restart => true
-    notifies :restart, "service[#{node[:newrelic][:web_server][:service_name]}]", :delayed
 end
 
 #https://newrelic.com/docs/php/newrelic-daemon-startup-modes
@@ -127,6 +126,8 @@ else
             :daemon_collector_host => node[:newrelic][:application_monitoring][:daemon][:collector_host]
         )
         action :create
+        notifies :restart, "service[newrelic-daemon]", :immediately
+        notifies :restart, "service[#{node[:newrelic][:web_server][:service_name]}]", :delayed
     end
 
     service "newrelic-daemon" do
