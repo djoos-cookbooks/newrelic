@@ -7,9 +7,6 @@
 
 include_recipe "php"
 
-include_recipe "#{node[:newrelic][:web_server][:recipe_name]}"
-include_recipe "#{node[:newrelic][:php_process_manager][:recipe_name]}"
-
 #the older version (3.0) had a bug in the init scripts that when it shut down the daemon it would also kill dpkg as it was trying to upgrade
 #let's remove the old packages before continuing
 package "newrelic-php5" do
@@ -20,18 +17,18 @@ end
 #install/update latest php agent
 package "newrelic-php5" do
     action :upgrade
+    notifies :run, "execute[newrelic-install]", :immediately
 end
 
 #run newrelic-install
 execute "newrelic-install" do
     command "newrelic-install install"
-    action :run
+    action :nothing
     notifies :restart, "service[#{node[:newrelic][:web_server][:service_name]}]", :delayed
 end
 
 service "newrelic-daemon" do
     supports :status => true, :start => true, :stop => true, :restart => true
-    notifies :restart, "service[#{node[:newrelic][:web_server][:service_name]}]", :delayed
 end
 
 #https://newrelic.com/docs/php/newrelic-daemon-startup-modes
@@ -126,6 +123,8 @@ else
             :daemon_collector_host => node[:newrelic][:application_monitoring][:daemon][:collector_host]
         )
         action :create
+        notifies :restart, "service[newrelic-daemon]", :immediately
+        notifies :restart, "service[#{node[:newrelic][:web_server][:service_name]}]", :delayed
     end
 
     service "newrelic-daemon" do

@@ -82,10 +82,7 @@ Attributes
 
 ### MISC
 * `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent" (New Relic for PHP only)
-
-* `node['newrelic']['web_server']['recipe_name']` - The web server recipe name, defaults to "apache2" (New Relic for PHP only)
 * `node['newrelic']['web_server']['service_name']` - The web server service name, defaults to "apache2" (New Relic for PHP only)
-* `node['newrelic']['php_process_manager']['recipe_name']` - The php process manager recipe name, defaults to "apache2::mod_php5" (New Relic for PHP only)
 * `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/ (New Relic for Python only)
 * `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 
@@ -121,6 +118,10 @@ References
 
 Changelog
 =========
+
+### 0.4.4
+    * don't unnecessarily install or trigger web server restarts
+    * attributes-cleanup
 
 ### 0.4.3
     * update copyrights
