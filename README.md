@@ -119,6 +119,9 @@ References
 Changelog
 =========
 
+### 0.4.5
+    * metadata-changes: name & recipe attribute(s)
+
 ### 0.4.4
     * don't unnecessarily install or trigger web server restarts
     * attributes-cleanup
