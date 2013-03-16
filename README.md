@@ -119,6 +119,9 @@ References
 Changelog
 =========
 
+### 0.4.6
+    * refactoring
+
 ### 0.4.5
     * metadata-changes: name & recipe attribute(s)
 
