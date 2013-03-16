@@ -12,25 +12,16 @@ case node[:platform]
         #trust the New Relic GPG Key
         #this step is required to tell apt that you trust the integrity of New Relic's apt repository
         gpg_key_id = node[:newrelic][:repository_key]
+        gpg_key_url = "http://download.newrelic.com/#{gpg_key_id}.gpg"
 
-        if gpg_key_id
-            gpg_key_url = "http://download.newrelic.com/#{gpg_key_id}.gpg"
-
-            gpg_key_already_installed = "apt-key list | grep #{gpg_key_id}"
-
-            if gpg_key_url
-                execute "newrelic-add-gpg-key" do
-                    command "wget -O - #{gpg_key_url} | apt-key add -"
-                    notifies :run, "execute[newrelic-apt-get-update]", :immediately
-                    not_if gpg_key_already_installed
-                end
-            end
+        execute "newrelic-add-gpg-key" do
+            command "wget -O - #{gpg_key_url} | apt-key add -"
+            notifies :run, "execute[newrelic-apt-get-update]", :immediately
+            not_if "apt-key list | grep #{gpg_key_id}"
         end
 
         #configure the New Relic apt repository
-        local_file = "/etc/apt/sources.list.d/newrelic.list"
-
-        remote_file "#{local_file}" do
+        remote_file "/etc/apt/sources.list.d/newrelic.list" do
             source "http://download.newrelic.com/debian/newrelic.list"
             owner "root"
             group "root"
