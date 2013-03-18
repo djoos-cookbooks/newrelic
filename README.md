@@ -31,6 +31,8 @@ This cookbook has dependencies on the following cookbooks:
 Attributes
 ==========
 
+## default.rb:
+
 ### BASIC
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as application monitoring license)
 * `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as server monitoring license)
@@ -80,11 +82,15 @@ Attributes
 * `node['newrelic']['application_monitoring']['webtransaction']['name']['functions']`
 * `node['newrelic']['application_monitoring']['webtransaction']['name']['files']`
 
-### MISC
-* `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent" (New Relic for PHP only)
-* `node['newrelic']['web_server']['service_name']` - The web server service name, defaults to "apache2" (New Relic for PHP only)
-* `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/ (New Relic for Python only)
+## install.rb:
 * `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
+
+## php-agent.rb:
+* `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
+* `node['newrelic']['web_server']['service_name']` - The web server service name, defaults to "apache2"
+
+## python-agent.rb:
+* `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
 
 Usage
 =====
@@ -118,6 +124,9 @@ References
 
 Changelog
 =========
+
+### 0.4.7
+    * splitting up attributes into recipe-specific files
 
 ### 0.4.6
     * refactoring

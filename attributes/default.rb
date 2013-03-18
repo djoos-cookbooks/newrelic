@@ -15,7 +15,7 @@ default['newrelic']['application_monitoring']['license'] = "CHANGE_ME"
 ################
 #ADVANCED CONFIG
 ################
-#SERVER MONITORING
+#server monitoring
 default['newrelic']['server_monitoring']['logfile'] = nil
 default['newrelic']['server_monitoring']['loglevel'] = nil
 default['newrelic']['server_monitoring']['proxy'] = nil
@@ -26,7 +26,7 @@ default['newrelic']['server_monitoring']['pidfile'] = nil
 default['newrelic']['server_monitoring']['collector_host'] = nil
 default['newrelic']['server_monitoring']['timeout'] = nil
 
-#APPLICATION MONITORING
+#application monitoring
 default['newrelic']['application_monitoring']['enabled'] = nil
 default['newrelic']['application_monitoring']['logfile'] = nil
 default['newrelic']['application_monitoring']['loglevel'] = nil
@@ -61,12 +61,3 @@ default['newrelic']['application_monitoring']['framework'] = nil
 default['newrelic']['application_monitoring']['webtransaction']['name']['remove_trailing_path'] = nil
 default['newrelic']['application_monitoring']['webtransaction']['name']['functions'] = nil
 default['newrelic']['application_monitoring']['webtransaction']['name']['files'] = nil
-
-#php setup specific
-default['newrelic']['startup_mode'] = "agent"
-default['newrelic']['web_server']['service_name'] = "apache2" 
-
-#python setup specific
-default['newrelic']['python_version'] = "latest"
-
-default['newrelic']['repository_key'] = "548C16BF"
