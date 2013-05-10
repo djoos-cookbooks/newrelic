@@ -34,10 +34,12 @@ Attributes
 ## default.rb:
 
 ### BASIC
-* `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as application monitoring license)
-* `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as server monitoring license)
+* `node['newrelic']['license_key']` - Your New Relic license key. This is usually the same for server and application monitoring, if required you can assign discrete keys using advanced attributes detailed below.
+
 
 ### ADVANCED
+* `node['newrelic']['server_monitoring']['license']`
+* `node['newrelic']['application_monitoring']['license']`
 * `node['newrelic']['server_monitoring']['logfile']`
 * `node['newrelic']['server_monitoring']['loglevel']`
 * `node['newrelic']['server_monitoring']['proxy']`
@@ -96,34 +98,43 @@ Usage
 =====
 
 1)
-include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::install]` and `recipe[newrelic::server-monitor]`
-- OR -
+include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::install]` and `recipe[newrelic::server-monitor]`  
+--- OR ---  
 include the bits and pieces explicitly in a run list:
-`recipe[newrelic::install]`
-`recipe[newrelic::server-monitor]`
-`recipe[newrelic::php-agent]`
-`recipe[newrelic::python-agent]`
+
+```ruby
+recipe[newrelic::install]  
+recipe[newrelic::server-monitor]  
+recipe[newrelic::php-agent]  
+recipe[newrelic::python-agent]  
+```
 
 2)
-	change the `node['newrelic']['license_key']` attribute to your New Relic license key
-	--- OR ---
-	override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+change the `node['newrelic']['license_key']` attribute to your New Relic license key  
+--- OR ---  
+override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 References
 ==========
 
-* [New Relic home page] (http://newrelic.com/)
-* [New Relic for Server Monitoring] (https://newrelic.com/docs/server/new-relic-for-server-monitoring)
-* [New Relic for PHP] (https://newrelic.com/docs/php/new-relic-for-php)
-* [newrelic-daemon startup modes] (https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
-* [New Relic for Python] (https://newrelic.com/docs/python/new-relic-for-python)
-* ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
-* ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
-* ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
+* [New Relic home page](http://newrelic.com/)
+* [New Relic for Server Monitoring](https://newrelic.com/docs/server/new-relic-for-server-monitoring)
+* [New Relic for PHP](https://newrelic.com/docs/php/new-relic-for-php)
+* [newrelic-daemon startup modes](https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
+* [New Relic for Python](https://newrelic.com/docs/python/new-relic-for-python)
+* ["newrelic" cookbook by heavywater on github](https://github.com/heavywater/chef-newrelic)
+* ["newrelic_monitoring" cookbook on community.opscode.com](http://community.opscode.com/cookbooks/newrelic_monitoring)
+* ["newrelic_monitoring" cookbook on github](https://github.com/8thBridge/chef-newrelic-monitoring)
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
 
 Changelog
 =========
+
+### 0.4.8
+    * use apt_repository LWRP for installing on debian variants (Robert Coleman)
+    * refactor style for to pass foodcritic (Robert Coleman)
+    * add `license_key` meta attribute (Robert Coleman)
+    * case statement for php-agent startup mode (Robert Coleman)
 
 ### 0.4.7
     * splitting up attributes into recipe-specific files
@@ -163,7 +174,7 @@ Changelog
     * Added attribute to specify python version. Versions can be found at http://download.newrelic.com/python_agent/release/
 
 ### 0.3.5
-	* Fixed missing license_key from newrelic.python.erb
+    * Fixed missing license_key from newrelic.python.erb
     * Cleanup of README
 
 ### 0.3.4
