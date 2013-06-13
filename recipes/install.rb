@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: newrelic
-# Recipe:: default
+# Recipe:: install
 #
 # Copyright 2012-2013, Escape Studios
 #
