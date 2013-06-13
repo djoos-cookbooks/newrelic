@@ -108,7 +108,7 @@ include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:reposi
 include the bits and pieces explicitly in a run list:
 `recipe[newrelic::repository]`
 `recipe[newrelic::server-monitor]`
-`recipe[newrelic::php-agent]`:
+`recipe[newrelic::php-agent]`
 `recipe[newrelic::python-agent]`
 
 2)
