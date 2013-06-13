@@ -17,6 +17,7 @@ This cookbook has dependencies on the following cookbooks:
 
 * php
 * python::pip
+* ms_dotnet4
 
 ## Platforms:
 
@@ -27,6 +28,7 @@ This cookbook has dependencies on the following cookbooks:
 * Fedora
 * Scientific
 * Amazon
+* Windows
 
 Attributes
 ==========
@@ -82,8 +84,13 @@ Attributes
 * `node['newrelic']['application_monitoring']['webtransaction']['name']['functions']`
 * `node['newrelic']['application_monitoring']['webtransaction']['name']['files']`
 
-## install.rb:
+## repository.rb:
 * `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
+
+## server-monitor.rb:
+* `['newrelic']['server_monitoring']['windows_version']` - The windows version to install, meant to be editable.
+* `['newrelic']['server_monitoring']['windows64_checksum']` - Checksum of the 64bit windows version.
+* `['newrelic']['server_monitoring']['windows32_checksum']` - Checksum of the 32bit windows version.
 
 ## php-agent.rb:
 * `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
@@ -96,16 +103,16 @@ Usage
 =====
 
 1)
-include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::install]` and `recipe[newrelic::server-monitor]`
+include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:repository]` and `recipe[newrelic::server-monitor]`
 - OR -
 include the bits and pieces explicitly in a run list:
-`recipe[newrelic::install]`
+`recipe[newrelic::repository]`
 `recipe[newrelic::server-monitor]`
 `recipe[newrelic::php-agent]`
 `recipe[newrelic::python-agent]`
 
 2)
-	change the `node['newrelic']['license_key']` attribute to your New Relic license key
+	change the `node['newrelic']['server_monitoring']['license']` attribute to your New Relic license key
 	--- OR ---
 	override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
@@ -124,6 +131,12 @@ References
 
 Changelog
 =========
+
+### 0.4.8
+    * renamed install recipe to repository to more accurately reflect behaviour
+    * copied default to install recipe to avoid surprises for users of ::install
+    * added windows support to the server-monitor recipe
+    * some reformatting and documentation updates
 
 ### 0.4.7
     * splitting up attributes into recipe-specific files

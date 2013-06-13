@@ -6,4 +6,3 @@
 #
 
 include_recipe "newrelic::install"
-include_recipe "newrelic::server-monitor"
