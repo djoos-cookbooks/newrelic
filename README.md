@@ -49,6 +49,9 @@ Attributes
 * `node['newrelic']['server_monitoring']['pidfile']`
 * `node['newrelic']['server_monitoring']['collector_host']`
 * `node['newrelic']['server_monitoring']['timeout']`
+* `node['newrelic']['server_monitoring']['windows_version']` - the Windows version to install
+* `node['newrelic']['server_monitoring']['windows64_checksum']` - checksum of the 64-bit Windows version
+* `node['newrelic']['server_monitoring']['windows32_checksum']` - checksum of the 32-bit Windows version
 * `node['newrelic']['application_monitoring']['enabled']`
 * `node['newrelic']['application_monitoring']['logfile']`
 * `node['newrelic']['application_monitoring']['loglevel']`
@@ -86,11 +89,6 @@ Attributes
 
 ## repository.rb:
 * `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
-
-## server-monitor.rb:
-* `['newrelic']['server_monitoring']['windows_version']` - The windows version to install, meant to be editable.
-* `['newrelic']['server_monitoring']['windows64_checksum']` - Checksum of the 64bit windows version.
-* `['newrelic']['server_monitoring']['windows32_checksum']` - Checksum of the 32bit windows version.
 
 ## php-agent.rb:
 * `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
@@ -133,10 +131,9 @@ Changelog
 =========
 
 ### 0.4.8
-    * renamed install recipe to repository to more accurately reflect behaviour
-    * copied default to install recipe to avoid surprises for users of ::install
-    * added windows support to the server-monitor recipe
-    * some reformatting and documentation updates
+    * renamed install recipe to repository to more accurately reflect behaviour (Alex Trull)
+    * added Windows support to the server-monitor recipe (Alex Trull)
+    * some reformatting and documentation updates (Alex Trull)
 
 ### 0.4.7
     * splitting up attributes into recipe-specific files
