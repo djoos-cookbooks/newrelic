@@ -1,14 +1,18 @@
 #
 # Cookbook Name:: newrelic
-# Recipe:: install
+# Recipe:: repository
 #
 # Copyright 2012-2013, Escape Studios
 #
 
-package "wget"
+case node[:platform]
+    when "debian", "ubuntu", "redhat", "centos", "fedora", "scientific", "amazon"
+        package "wget"
+end
 
 case node[:platform]
     when "debian", "ubuntu"
+
         #trust the New Relic GPG Key
         #this step is required to tell apt that you trust the integrity of New Relic's apt repository
         gpg_key_id = node[:newrelic][:repository_key]

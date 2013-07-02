@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: newrelic
-# Attributes:: install
+# Attributes:: repository
 #
 # Copyright 2012-2013, Escape Studios
 #
