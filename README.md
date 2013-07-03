@@ -37,7 +37,7 @@ Attributes
 
 ### BASIC
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as application monitoring license)
-* `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as server monitoring license)
+* `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (usually same license key as server monitoring license)
 
 ### ADVANCED
 * `node['newrelic']['server_monitoring']['logfile']`
@@ -110,7 +110,7 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::python-agent]`
 
 2)
-	change the `node['newrelic']['server_monitoring']['license']` attribute to your New Relic license key
+	change the `node['newrelic']['license']` attribute to your New Relic license key
 	--- OR ---
 	override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
@@ -130,10 +130,11 @@ References
 Changelog
 =========
 
-### 0.4.8
+### 0.5.0
     * renamed install recipe to repository to more accurately reflect behaviour (Alex Trull)
     * added Windows support to the server-monitor recipe (Alex Trull)
     * some reformatting and documentation updates (Alex Trull)
+    * refactor style to pass foodcritic (Robert Coleman)
 
 ### 0.4.7
     * splitting up attributes into recipe-specific files
