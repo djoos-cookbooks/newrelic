@@ -14,9 +14,14 @@ case node[:platform]
         gpg_key_id = node[:newrelic][:repository_key]
         gpg_key_url = "http://download.newrelic.com/#{gpg_key_id}.gpg"
 
+        execute "newrelic-apt-get-update" do
+            command "apt-get update"
+            action :nothing
+        end
+
         execute "newrelic-add-gpg-key" do
             command "wget -O - #{gpg_key_url} | apt-key add -"
-            notifies :run, "execute[newrelic-apt-get-update]", :immediately
+            notifies :run, resources(:execute => "newrelic-apt-get-update"), :immediately
             not_if "apt-key list | grep #{gpg_key_id}"
         end
 
@@ -26,14 +31,8 @@ case node[:platform]
             owner "root"
             group "root"
             mode 0644
-            notifies :run, "execute[newrelic-apt-get-update]", :immediately
+            notifies :run, resources(:execute => "newrelic-apt-get-update"), :immediately
             action :create_if_missing
-        end
-
-        #update the local package list
-        execute "newrelic-apt-get-update" do
-            command "apt-get update"
-            action :nothing
         end
     when "redhat", "centos", "fedora", "scientific", "amazon"
         #install the newrelic-repo package, which configures a new package repository for yum
