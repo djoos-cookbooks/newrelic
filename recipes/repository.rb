@@ -1,17 +1,20 @@
 #
 # Cookbook Name:: newrelic
-# Recipe:: install
+# Recipe:: repository
 #
 # Copyright 2012-2013, Escape Studios
 #
 
-package "wget"
+case node['platform']
+    when "debian", "ubuntu", "redhat", "centos", "fedora", "scientific", "amazon"
+        package "wget"
+end
 
-case node[:platform]
+case node['platform']
     when "debian", "ubuntu"
         #trust the New Relic GPG Key
         #this step is required to tell apt that you trust the integrity of New Relic's apt repository
-        gpg_key_id = node[:newrelic][:repository_key]
+        gpg_key_id = node['newrelic']['repository_key']
         gpg_key_url = "http://download.newrelic.com/#{gpg_key_id}.gpg"
 
         execute "newrelic-add-gpg-key" do
@@ -37,19 +40,19 @@ case node[:platform]
         end
     when "redhat", "centos", "fedora", "scientific", "amazon"
         #install the newrelic-repo package, which configures a new package repository for yum
-        if node[:kernel][:machine] == "x86_64"
+        if node['kernel']['machine'] == "x86_64"
             machine = "x86_64"
         else
             machine = "i386"
         end
 
-        remote_file "/tmp/newrelic-repo-5-3.noarch.rpm" do
+        remote_file "#{Chef::Config['file_cache_path'] || '/tmp'}/newrelic-repo-5-3.noarch.rpm" do
             source "http://download.newrelic.com/pub/newrelic/el5/#{machine}/newrelic-repo-5-3.noarch.rpm"
             action :create_if_missing
         end
 
         package "newrelic-repo" do
-            source "/tmp/newrelic-repo-5-3.noarch.rpm"
+            source "#{Chef::Config['file_cache_path'] || '/tmp'}/newrelic-repo-5-3.noarch.rpm"
             provider Chef::Provider::Package::Rpm
             action :install
         end

@@ -17,6 +17,7 @@ This cookbook has dependencies on the following cookbooks:
 
 * php
 * python::pip
+* ms_dotnet4
 
 ## Platforms:
 
@@ -27,6 +28,7 @@ This cookbook has dependencies on the following cookbooks:
 * Fedora
 * Scientific
 * Amazon
+* Windows
 
 Attributes
 ==========
@@ -35,7 +37,7 @@ Attributes
 
 ### BASIC
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as application monitoring license)
-* `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as server monitoring license)
+* `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (usually same license key as server monitoring license)
 
 ### ADVANCED
 * `node['newrelic']['server_monitoring']['logfile']`
@@ -47,6 +49,9 @@ Attributes
 * `node['newrelic']['server_monitoring']['pidfile']`
 * `node['newrelic']['server_monitoring']['collector_host']`
 * `node['newrelic']['server_monitoring']['timeout']`
+* `node['newrelic']['server_monitoring']['windows_version']` - the Windows version to install
+* `node['newrelic']['server_monitoring']['windows64_checksum']` - checksum of the 64-bit Windows version
+* `node['newrelic']['server_monitoring']['windows32_checksum']` - checksum of the 32-bit Windows version
 * `node['newrelic']['application_monitoring']['enabled']`
 * `node['newrelic']['application_monitoring']['logfile']`
 * `node['newrelic']['application_monitoring']['loglevel']`
@@ -82,7 +87,7 @@ Attributes
 * `node['newrelic']['application_monitoring']['webtransaction']['name']['functions']`
 * `node['newrelic']['application_monitoring']['webtransaction']['name']['files']`
 
-## install.rb:
+## repository.rb:
 * `node['newrelic']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 
 ## php-agent.rb:
@@ -96,16 +101,16 @@ Usage
 =====
 
 1)
-include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::install]` and `recipe[newrelic::server-monitor]`
+include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:repository]` and `recipe[newrelic::server-monitor]`
 - OR -
 include the bits and pieces explicitly in a run list:
-`recipe[newrelic::install]`
+`recipe[newrelic::repository]`
 `recipe[newrelic::server-monitor]`
 `recipe[newrelic::php-agent]`
 `recipe[newrelic::python-agent]`
 
 2)
-	change the `node['newrelic']['license_key']` attribute to your New Relic license key
+	change the `node['newrelic']['license']` attribute to your New Relic license key
 	--- OR ---
 	override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
@@ -124,6 +129,12 @@ References
 
 Changelog
 =========
+
+### 0.5.0
+    * renamed install recipe to repository to more accurately reflect behaviour (Alex Trull)
+    * added Windows support to the server-monitor recipe (Alex Trull)
+    * some reformatting and documentation updates (Alex Trull)
+    * refactor style to pass foodcritic (Robert Coleman)
 
 ### 0.4.7
     * splitting up attributes into recipe-specific files
