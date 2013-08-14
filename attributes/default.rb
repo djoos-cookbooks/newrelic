@@ -12,6 +12,16 @@
 default['newrelic']['server_monitoring']['license'] = "CHANGE_ME"
 default['newrelic']['application_monitoring']['license'] = "CHANGE_ME"
 
+default['newrelic']['service_name'] = value_for_platform(
+    'smartos' => {'default' => 'nrsysmond'},
+    'default' => 'newrelic-sysmond'
+)
+default['newrelic']['config_path'] = value_for_platform(
+    'smartos' => {'default' => '/opt/local/etc'},
+    'default' => '/etc/newrelic'
+)
+
+
 ################
 #ADVANCED CONFIG
 ################
@@ -28,6 +38,10 @@ default['newrelic']['server_monitoring']['timeout'] = nil
 default['newrelic']['server_monitoring']['windows_version'] = "2.0.0.198"
 default['newrelic']['server_monitoring']['windows64_checksum'] = "5a8f3f5e8f15997463430401756d377c321c8899c2790ca85e5587a5b643651e"
 default['newrelic']['server_monitoring']['windows32_checksum'] = "ac2b65eecaad461fdd2e4386e3e4c9f96ea940b35bdf7a8c532c21dbd1c99ff0"
+default['newrelic']['server_monitoring']['config_file_group'] = value_for_platform(
+    'smartos' => {'default' => 'root'},
+    'default' => 'newrelic'
+)
 
 #application monitoring
 default['newrelic']['application_monitoring']['enabled'] = nil
