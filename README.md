@@ -97,6 +97,10 @@ Attributes
 ## python-agent.rb:
 * `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
 
+## dotnet.rb:
+* `node['newrelic']['dotnet']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
+* `node['newrelic']['dotnet']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
+
 Usage
 =====
 
@@ -108,6 +112,7 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::server-monitor]`
 `recipe[newrelic::php-agent]`
 `recipe[newrelic::python-agent]`
+`recipe[newrelic::dotnet]`
 
 2)
 	change the `node['newrelic']['license']` attribute to your New Relic license key
@@ -122,6 +127,7 @@ References
 * [New Relic for PHP] (https://newrelic.com/docs/php/new-relic-for-php)
 * [newrelic-daemon startup modes] (https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
 * [New Relic for Python] (https://newrelic.com/docs/python/new-relic-for-python)
+* [New Relic for .NET] (https://newrelic.com/docs/dotnet/new-relic-for-net)
 * ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
 * ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
 * ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
