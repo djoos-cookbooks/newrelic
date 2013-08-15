@@ -16,7 +16,7 @@ case node['platform']
         template "#{node['newrelic']['config_path']}/nrsysmond.cfg" do
             source "nrsysmond.cfg.erb"
             owner "root"
-            group node['newrelic']['server_monitoring']['config_file_group']
+            group node['newrelic']['config_file_group']
             mode "640"
             variables(
                 :license => node['newrelic']['server_monitoring']['license'],
