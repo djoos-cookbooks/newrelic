@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: newrelic
-# Attributes:: dotnet
+# Attributes:: dotnet-agent
 #
 # Copyright 2012-2013, Escape Studios
 #
