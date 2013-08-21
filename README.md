@@ -29,6 +29,7 @@ This cookbook has dependencies on the following cookbooks:
 * Scientific
 * Amazon
 * Windows
+* SmartOS
 
 Attributes
 ==========
@@ -98,8 +99,13 @@ Attributes
 * `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
 
 ## dotnet.rb:
-* `node['newrelic']['dotnet']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
-* `node['newrelic']['dotnet']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
+* `node['newrelic']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
+* `node['newrelic']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
+
+## server-monitor.rb:
+* `node['newrelic']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
+* `node['newrelic']['config_path']` - The New Relic server monitoring config path, defaults to "/etc/newrelic"
+* `node['newrelic']['config_file_group']` - The New Relic server monitoring config file group, defaults to "newrelic"
 
 Usage
 =====
@@ -132,63 +138,6 @@ References
 * ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
 * ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
-
-Changelog
-=========
-
-### 0.5.0
-    * renamed install recipe to repository to more accurately reflect behaviour (Alex Trull)
-    * added Windows support to the server-monitor recipe (Alex Trull)
-    * some reformatting and documentation updates (Alex Trull)
-    * refactor style to pass foodcritic (Robert Coleman)
-
-### 0.4.7
-    * splitting up attributes into recipe-specific files
-
-### 0.4.6
-    * refactoring
-
-### 0.4.5
-    * metadata-changes: name & recipe attribute(s)
-
-### 0.4.4
-    * don't unnecessarily install or trigger web server restarts
-    * attributes-cleanup
-
-### 0.4.3
-    * update copyrights
-    * remove apache2-dependency by making cookbook web server and php process manager 'agnostic'
-
-### 0.4.2
-    * recommend dependencies (Darrin Eden)
-    * install wget dependency (Darrin Eden)
-
-### 0.4.1
-    * add support for amazon
-
-### 0.4.0
-    * add support for scientific linux (Aaron Jensen)
-    * advanced configuration (newrelic.ini, nrsysmond.cfg & newrelic.cfg) via attributes
-
-### 0.3.7
-    * Use a template to configure the server-monitor instead of the non-idempotent execute (Chris Griego)
-    * PHP agent 3.0 (http://blog.newrelic.com/2012/10/23/new-relic-launches-php-agent-3-0-includes-multi-tenancy-support/)
-    * PHP agent newrelic-daemon startup modes: agent (new default) / external (historical default)
-    * Renamed newrelic.python.erb template to newrelic.ini.python.erb
-
-### 0.3.6
-    * Added attribute to specify python version. Versions can be found at http://download.newrelic.com/python_agent/release/
-
-### 0.3.5
-	* Fixed missing license_key from newrelic.python.erb
-    * Cleanup of README
-
-### 0.3.4
-    * New python agent installation (Paul Rossman)
-    * New newrelic.python.erb
-    * New `node['newrelic']['app_name']` attribute
-    * Added apache2, php, python depends to metadata.db
-    * Modified php-agent.php to use services
 
 License and Authors
 ===================
