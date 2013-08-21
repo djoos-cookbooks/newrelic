@@ -10,6 +10,10 @@ remote_file local_file do
   mode 0644
 end
 
+if node['newrelic']['application_monitoring']['appname'].nil?
+  node.set['newrelic']['application_monitoring']['appname'] = node['hostname']
+end   
+
 #configure your New Relic license key
 conf_file = node['newrelic']['java']['install_dir'] + '/newrelic.yml'
 template conf_file do
