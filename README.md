@@ -101,6 +101,17 @@ Attributes
 * `node['newrelic']['dotnet']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
 * `node['newrelic']['dotnet']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 
+## java-agent.rb:
+* `node['newrelic']['java']['https_download_url']` -  The url to download the jar vor the NewRelic java agent
+* `node['newrelic']['java']['jar_file']` -  The name of the newrelic jar file
+* `node['newrelic']['java']['install_dir']` -  The directory to install the newrelic jar and config file
+* `node['newrelic']['java']['app_user']` - The user that runs the java application that will use the New Relic java agent
+* `node['newrelic']['java']['app_group']` -  The group for the app_user
+* `node['newrelic']['java']['audit_mode']` -  Boolean, Log all data to and from New Relic in plain text
+* `node['newrelic']['java']['log_file_count']` -  The number of log files to use
+* `node['newrelic']['java']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
+* `node['newrelic']['java']['log_daily']` - Override other log rolling configuration and roll the logs daily
+
 Usage
 =====
 

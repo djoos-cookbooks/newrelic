@@ -7,6 +7,8 @@ end
 local_file = node['newrelic']['java']['install_dir'] + '/newrelic.jar'
 remote_file local_file do
   source   node['newrelic']['java']['https_download_url']
+  owner node['newrelic']['java']['app_user']
+  group node['newrelic']['java']['app_group']
   mode 0644
 end
 
@@ -18,8 +20,8 @@ end
 conf_file = node['newrelic']['java']['install_dir'] + '/newrelic.yml'
 template conf_file do
     source "newrelic.yml.java.erb"
-    owner "root"
-    group "root"
+    owner node['newrelic']['java']['app_user']
+    group node['newrelic']['java']['app_group']
     mode 0644
     variables(
         :license => node['newrelic']['application_monitoring']['license'],
