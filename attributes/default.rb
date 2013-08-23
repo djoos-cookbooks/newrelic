@@ -11,6 +11,7 @@
 #license(s)
 default['newrelic']['server_monitoring']['license'] = "CHANGE_ME"
 default['newrelic']['application_monitoring']['license'] = "CHANGE_ME"
+default['newrelic']['config_path'] = "/etc/newrelic"
 
 ################
 #ADVANCED CONFIG

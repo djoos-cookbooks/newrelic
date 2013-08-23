@@ -20,7 +20,7 @@ Make sure you run Chef >= 0.10.0.
 This cookbook recommends on the following cookbooks:
 
 * php
-* python
+* python::pip
 * ms_dotnet4
 * curl
 
@@ -51,6 +51,7 @@ Attributes
 ### BASIC
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as application monitoring license)
 * `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (usually same license key as server monitoring license)
+* `node['newrelic']['config_path']` - The New Relic config path, defaults to "/etc/newrelic"
 
 ### ADVANCED
 * `node['newrelic']['server_monitoring']['logfile']`
@@ -130,6 +131,17 @@ Attributes
 * `node['newrelic']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
 * `node['newrelic']['log_daily']` - Override other log rolling configuration and roll the logs daily
 
+## plugin-agent.rb
+* `node['newrelic']['plugin-agent']['poll_interval']`
+* `node['newrelic']['plugin-agent']['pidfile']`
+* `node['newrelic']['plugin-agent']['logfile']`
+* `node['newrelic']['plugin-agent']['service_config']`
+* `node['newrelic']['plugin-agent']['config_file']`
+* `node['newrelic']['plugin-agent']['owner']`
+* `node['newrelic']['plugin-agent']['group']`
+* `node['newrelic']['plugin-agent']['mode']`
+* `node['newrelic']['plugin-agent']['pip_package']`
+
 Resources / Providers
 =====================
 
@@ -159,11 +171,12 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::php-agent]`
 `recipe[newrelic::python-agent]`
 `recipe[newrelic::dotnet]`
+`recipe[newrelic::plugin-agent]`
 
 2)
-	change the `node['newrelic']['server_monitoring']['license']` and `node['newrelic']['application_monitoring']['license']` attributes to your New Relic license keys
+	change the `node['newrelic']['license']` attribute to your New Relic license key
 	--- OR ---
-	override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+	override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 References
 ==========
@@ -177,6 +190,7 @@ References
 * ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
 * ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
 * ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
+* ["newrelic-ng" cookbook on GitHub](https://github.com/flinc-chef/newrelic-ng)
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
 
 License and Authors
@@ -184,6 +198,7 @@ License and Authors
 
 Author: David Joos <david@escapestudios.com>
 Author: Escape Studios Development <dev@escapestudios.com>
+Author: Chris Aumann <me@chr4.org>
 Copyright: 2012-2013, Escape Studios
 
 Unless otherwise noted, all files are released under the MIT license,
