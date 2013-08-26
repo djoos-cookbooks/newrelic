@@ -162,34 +162,32 @@ user - The name of the user/process that triggered this deployment
 Usage
 =====
 
-1)
-include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:repository]` and `recipe[newrelic::server-monitor]`
-- OR -
-include the bits and pieces explicitly in a run list:
-`recipe[newrelic::repository]`
-`recipe[newrelic::server-monitor]`
-`recipe[newrelic::php-agent]`
-`recipe[newrelic::python-agent]`
-`recipe[newrelic::dotnet]`
-`recipe[newrelic::plugin-agent]`
-
-2)
-	change the `node['newrelic']['license']` attribute to your New Relic license key
-	--- OR ---
-	override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+1. Add one of the recipes to your run list:
+    * include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:repository]` and `recipe[newrelic::server-monitor]`
+    * include one or more recipes explicitly in a run list:
+        * `recipe[newrelic::repository]`
+        * `recipe[newrelic::server-monitor]`
+        * `recipe[newrelic::php-agent]`
+        * `recipe[newrelic::python-agent]`
+        * `recipe[newrelic::dotnet]`
+        * `recipe[newrelic::plugin-agent]`
+2. Set the necessary attribute:
+    * change the `node['newrelic']['license']` attribute to your New Relic license key
+    * override the attribute, e.g. in a wrapper cookbook (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 References
 ==========
 
-* [New Relic home page] (http://newrelic.com/)
-* [New Relic for Server Monitoring] (https://newrelic.com/docs/server/new-relic-for-server-monitoring)
-* [New Relic for PHP] (https://newrelic.com/docs/php/new-relic-for-php)
-* [newrelic-daemon startup modes] (https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
-* [New Relic for Python] (https://newrelic.com/docs/python/new-relic-for-python)
-* [New Relic for .NET] (https://newrelic.com/docs/dotnet/new-relic-for-net)
-* ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
-* ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
-* ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
+* [New Relic home page](http://newrelic.com/)
+* [New Relic for Server Monitoring](https://newrelic.com/docs/server/new-relic-for-server-monitoring)
+* [New Relic for PHP](https://newrelic.com/docs/php/new-relic-for-php)
+* [newrelic-daemon startup modes](https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
+* [New Relic for Python](https://newrelic.com/docs/python/new-relic-for-python)
+* [New Relic for .NET](https://newrelic.com/docs/dotnet/new-relic-for-net)
+* [New Relic Plugin Agent](https://github.com/MeetMe/newrelic-plugin-agent)
+* ["newrelic" cookbook by heavywater on GitHub](https://github.com/heavywater/chef-newrelic)
+* ["newrelic_monitoring" cookbook on community.opscode.com](http://community.opscode.com/cookbooks/newrelic_monitoring)
+* ["newrelic_monitoring" cookbook on GitHub](https://github.com/8thBridge/chef-newrelic-monitoring)
 * ["newrelic-ng" cookbook on GitHub](https://github.com/flinc-chef/newrelic-ng)
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
 
