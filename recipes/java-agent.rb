@@ -1,6 +1,9 @@
 
 #Create the directory to install the jar into
 directory node['newrelic']['java']['install_dir'] do
+  owner node['newrelic']['java']['app_user']
+  group node['newrelic']['java']['app_group']
+  mode 0774
   action :create
 end
 
@@ -9,7 +12,7 @@ remote_file local_file do
   source   node['newrelic']['java']['https_download_url']
   owner node['newrelic']['java']['app_user']
   group node['newrelic']['java']['app_group']
-  mode 0644
+  mode 0664
 end
 
 if node['newrelic']['application_monitoring']['appname'].nil?
