@@ -175,6 +175,116 @@ Usage
     * change the `node['newrelic']['license']` attribute to your New Relic license key
     * override the attribute, e.g. in a wrapper cookbook (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
+For configuring your Plugin Agent services, you need to insert a YAML string into the `service_config` attribute
+
+```ruby
+node['newrelic-ng']['plugin-agent']['service_config'] = <<-EOS
+postgresql:
+  host: localhost
+  port: 5432
+  user: postgres
+  dbname: postgres
+EOS
+```
+
+Recipes
+=======
+
+To use the recipes, add the following to your metadata.rb:
+
+    depends 'newrelic'
+
+### default
+
+* Includes newrelic::repository
+* Includes newrelic::server-monitor
+
+### dotnet-agent
+
+* Install Microsort .NET Framework 4.0 (`msdotnet4`)
+* Install & configure the New Relic .NET Agent
+
+### php-agent
+
+* Install PHP, newrelic-php5
+* Run New Relic install script
+* Set up New Relic daemon according to `startup_mode` attribute:
+    * Agent mode (i.e., no daemon)
+    * External (i.e., daemon mode)
+
+### plugin-agent
+
+* Includes newrelic-ng::plugin-agent-install
+* Configures and starts newrelic-plugin-agent according to the attributes
+
+### plugin-agent-install
+
+* Install python, python-pip and python-psycopg2
+* Install newrelic-plugin-agent using pip
+* Install newrelic-plugin-agent initscript (Debian, Ubuntu only)
+* Create run/log directories
+
+### python-agent
+
+* Install python-pip
+* Install newrelic using pip
+* Configure Python Agent & set license key
+
+### repository
+
+* Set up the New Relic apt/yum repository
+
+### server-monitor
+
+* Install the platform-appropriate New Relic Server Monitor package
+* Configure the license key
+* Start the Server Monitor service
+
+## Providers
+
+To use the providers, add the following to your metadata.rb
+
+    depends 'newrelic'
+
+### newrelic_plugin_agent
+
+When the plugin-agent is installed (e.g. using the `newrelic::plugin-agent-install` recipe), you can configure it using the LWRP.
+
+    newrelic_plugin_agent 'YOUR_LICENSE_KEY'
+
+For more sophisticated setups, you can specify the following additional attributes (they default to the node attributes)
+
+```ruby
+newrelic_plugin_agent 'custom' do
+  license_key 'MY_PRODUCTION_KEY' if node.chef_environment == 'production'
+  license_key 'MY_STAGING_KEY'    if node.chef_environment == 'staging'
+
+  # additional plugin-agent configuration options
+  poll_interval  20
+  logfile        '/tmp/plugin-agent.log'
+  pidfile        '/tmp/plugin-agent.pid'
+
+  # set your service configuration
+  service_config <<-EOS
+postgresql:
+  host: localhost
+  port: 5432
+  user: postgres
+  dbname: postgres
+EOS
+
+  # path and attributes of nrsysmon
+  owner       'root'
+  group       'root'
+  mode        00600
+  config_file '/etc/plugin-agent.cfg'
+
+  # you can also specify your own configuration template
+  cookbook    'yourcookbook'
+  source      'yoursourcefile'
+end
+```
+
 References
 ==========
 
