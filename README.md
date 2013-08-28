@@ -162,7 +162,7 @@ user - The name of the user/process that triggered this deployment
 Usage
 =====
 
-1. Add one of the recipes to your run list:
+1. Add one or more of the recipes to your run list:
     * include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:repository]` and `recipe[newrelic::server-monitor]`
     * include one or more recipes explicitly in a run list:
         * `recipe[newrelic::repository]`
@@ -171,9 +171,9 @@ Usage
         * `recipe[newrelic::python-agent]`
         * `recipe[newrelic::dotnet]`
         * `recipe[newrelic::plugin-agent]`
-2. Set the necessary attribute:
-    * change the `node['newrelic']['license']` attribute to your New Relic license key
-    * override the attribute, e.g. in a wrapper cookbook (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+2. Set the necessary attribute(s):
+    * change the `node['newrelic']['server_monitoring']['license']` and (if needed) `node['newrelic']['application_monitoring']['license']` attribute to your New Relic license key
+    * override the attribute(s), e.g. in a wrapper cookbook (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 For configuring your Plugin Agent services, you need to insert a YAML string into the `service_config` attribute
 
