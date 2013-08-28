@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: newrelic
-# Test:: plugin-agent-default
+# Test:: plugin-agent
 #
 # Copyright 2012, Chris Aumann
 #
