@@ -39,4 +39,4 @@ suites:
 - name: plugin-agent
   run_list:
   - recipe[minitest-handler]
-  - recipe[newrelic::plugin-agent-default]
+  - recipe[newrelic::plugin-agent]
