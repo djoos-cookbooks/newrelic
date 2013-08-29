@@ -24,11 +24,19 @@ describe 'newrelic::repository' do
   include Helpers::TestHelper
 
   it 'adds the New Relic gpg key' do
-    newrelic_key = shell_out("apt-key list")
-    assert newrelic_key.stdout.include?(node['newrelic']['repository_key'])
+    case node[:platform]
+      when "debian", "ubuntu"
+        newrelic_key = shell_out("apt-key list")
+        assert newrelic_key.stdout.include?(node['newrelic']['repository_key'])
+    end
   end
 
   it 'installs the New Relic repository' do
-    file('/etc/apt/sources.list.d/newrelic.list').must_exist
+    case node[:platform]
+      when "debian", "ubuntu"
+        file("/etc/apt/sources.list.d/newrelic.list").must_exist
+      when "redhat", "centos", "fedora", "scientific", "amazon"
+        package("newrelic-repo").must_be_installed
+    end
   end
 end
