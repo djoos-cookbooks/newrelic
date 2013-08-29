@@ -28,10 +28,6 @@ suites:
   - recipe[minitest-handler]
   - recipe[newrelic::repository]
   - recipe[newrelic::server-monitor]
-  attributes:
-    newrelic:
-      server_monitoring:
-        license: 'TESTKEY_SERVER_MONITOR'
 
 - name: php-agent
   run_list:
@@ -39,16 +35,8 @@ suites:
   - recipe[apache2]
   - recipe[newrelic::repository]
   - recipe[newrelic::php-agent]
-  attributes:
-    newrelic:
-      application_monitoring:
-        license: 'TESTKEY_PHP_AGENT'
 
 - name: plugin-agent
   run_list:
   - recipe[minitest-handler]
   - recipe[newrelic::plugin-agent-default]
-  attributes:
-    newrelic:
-      application_monitoring:
-        license: 'TESTKEY_PLUGIN_AGENT'

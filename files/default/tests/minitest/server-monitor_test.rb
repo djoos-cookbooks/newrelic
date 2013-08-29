@@ -32,7 +32,7 @@ describe 'newrelic::server-monitor' do
   end
 
   it 'must set license key' do
-    file("#{node['newrelic']['config_path']}/nrsysmond.cfg").must_include('TESTKEY_SERVER_MONITOR')
+    file("#{node['newrelic']['config_path']}/nrsysmond.cfg").must_include(node['newrelic']['server_monitoring']['license'])
   end
 
   it 'starts the New Relic system monitor' do

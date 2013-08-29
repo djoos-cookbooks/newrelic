@@ -28,7 +28,7 @@ describe 'newrelic::plugin-agent-default' do
   end
 
   it 'must set license key ' do
-    file(node['newrelic']['plugin-agent']['config_file']).must_include('TESTKEY_PLUGIN_AGENT')
+    file(node['newrelic']['plugin-agent']['config_file']).must_include(node['newrelic']['application_monitoring']['license'])
   end
 
   it 'service newrelic-plugin-agent must be enabled' do
