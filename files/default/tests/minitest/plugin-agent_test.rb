@@ -20,7 +20,7 @@
 
 require File.expand_path('../support/helpers', __FILE__)
 
-describe 'newrelic::plugin-agent-default' do
+describe 'newrelic::plugin-agent' do
   include Helpers::TestHelper
 
   it 'installs plugin-agent' do
