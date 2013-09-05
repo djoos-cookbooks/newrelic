@@ -3,6 +3,8 @@ Description
 
 This cookbook provides an easy way to install the New Relic PHP agent and the New Relic server monitor.
 
+This cookbook requires Chef 11 or later.
+
 More information?
 * https://newrelic.com/docs/server/new-relic-for-server-monitoring
 * https://newrelic.com/docs/php/new-relic-for-php
