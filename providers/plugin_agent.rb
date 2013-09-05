@@ -19,12 +19,6 @@
 #
 
 action :create do
-
-  service 'newrelic-plugin-agent' do
-    supports status: true, restart: true
-    action   :enable
-  end
-
   r = template new_resource.config_file do
     cookbook  new_resource.cookbook
     source    new_resource.source
@@ -38,9 +32,13 @@ action :create do
               pidfile:        new_resource.pidfile,
               logfile:        new_resource.logfile,
               service_config: new_resource.service_config
-
-    notifies  :restart, 'service[newrelic-plugin-agent]'
   end
 
   new_resource.updated_by_last_action(true) if r.updated_by_last_action?
+
+  service 'newrelic-plugin-agent' do
+    supports   status: true, restart: true
+    subscribes :restart, "template[#{new_resource.config_file}]"
+    action   [ :enable, :start ]
+  end
 end
