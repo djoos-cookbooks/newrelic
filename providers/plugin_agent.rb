@@ -21,7 +21,7 @@
 action :create do
 
   service 'newrelic-plugin-agent' do
-    supports :status => true, :restart => true
+    supports status: true, restart: true
     action   :enable
   end
 
@@ -32,12 +32,12 @@ action :create do
     group     new_resource.group
     mode      new_resource.mode
 
-    variables :license_key    => new_resource.license_key,
-              :poll_interval  => new_resource.poll_interval,
-              :user           => new_resource.owner,
-              :pidfile        => new_resource.pidfile,
-              :logfile        => new_resource.logfile,
-              :service_config => new_resource.service_config
+    variables license_key:    new_resource.license_key,
+              poll_interval:  new_resource.poll_interval,
+              user:           new_resource.owner,
+              pidfile:        new_resource.pidfile,
+              logfile:        new_resource.logfile,
+              service_config: new_resource.service_config
 
     notifies  :restart, 'service[newrelic-plugin-agent]'
   end

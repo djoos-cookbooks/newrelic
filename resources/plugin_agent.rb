@@ -21,16 +21,16 @@
 actions        :create
 default_action :create
 
-attribute :license_key,    :kind_of => String, :name_attribute => true
-attribute :poll_interval,  :kind_of => Integer, :default => node['newrelic']['plugin-agent']['poll_interval']
-attribute :pidfile,        :kind_of => String,  :default => node['newrelic']['plugin-agent']['pidfile']
-attribute :logfile,        :kind_of => String,  :default => node['newrelic']['plugin-agent']['logfile']
-attribute :service_config, :kind_of => String,  :default => node['newrelic']['plugin-agent']['service_config']
+attribute :license_key,    kind_of: String,  name_attribute: true
+attribute :poll_interval,  kind_of: Integer, default: node['newrelic']['plugin-agent']['poll_interval']
+attribute :pidfile,        kind_of: String,  default: node['newrelic']['plugin-agent']['pidfile']
+attribute :logfile,        kind_of: String,  default: node['newrelic']['plugin-agent']['logfile']
+attribute :service_config, kind_of: String,  default: node['newrelic']['plugin-agent']['service_config']
 
-attribute :owner,       :kind_of => String, :default => node['newrelic']['plugin-agent']['owner']
-attribute :group,       :kind_of => String, :default => node['newrelic']['plugin-agent']['group']
-attribute :mode,        :kind_of => String, :default => node['newrelic']['plugin-agent']['mode']
-attribute :config_file, :kind_of => String, :default => node['newrelic']['plugin-agent']['config_file']
+attribute :owner,          kind_of: String,  default: node['newrelic']['plugin-agent']['owner']
+attribute :group,          kind_of: String,  default: node['newrelic']['plugin-agent']['group']
+attribute :mode,           kind_of: String,  default: node['newrelic']['plugin-agent']['mode']
+attribute :config_file,    kind_of: String,  default: node['newrelic']['plugin-agent']['config_file']
 
-attribute :cookbook, :kind_of => String, :default => 'newrelic'
-attribute :source,   :kind_of => String, :default => 'plugin-agent.yaml.erb'
+attribute :cookbook,       kind_of: String,  default: 'newrelic'
+attribute :source,         kind_of: String,  default: 'plugin-agent.yaml.erb'
