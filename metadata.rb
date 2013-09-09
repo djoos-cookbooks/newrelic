@@ -11,6 +11,7 @@ version          "0.5.5"
 end
 
 depends "php"
+depends "build-essential"
 depends "python"
 depends "ms_dotnet4"
 depends "curl"

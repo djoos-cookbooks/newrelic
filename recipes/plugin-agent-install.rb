@@ -18,9 +18,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-package 'python'
-package 'python-pip'
-package 'python-psycopg2'
+# a compiler is required for building some of the python modules the agent requires
+include_recipe 'build-essential'
+include_recipe 'python'
 
 python_pip 'newrelic-plugin-agent' do
   package_name node['newrelic']['plugin-agent']['pip_package']
