@@ -30,7 +30,7 @@ case node['platform']
                 :collector_host => node['newrelic']['server_monitoring']['collector_host'],
                 :timeout => node['newrelic']['server_monitoring']['timeout']
             )
-            notifies :restart, "service[#{node['newrelic']['service_name']}]"
+            notifies :restart, "service[newrelic-sysmond]"
         end
   when "windows"
     include_recipe "ms_dotnet4"
