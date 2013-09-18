@@ -6,6 +6,11 @@
 #
 
 #install the server monitor
+service node['newrelic']['service_name'] do
+    supports :status => true, :start => true, :stop => true, :restart => true
+    action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
+end
+
 case node['platform']
     when "debian", "ubuntu", "redhat", "centos", "fedora", "scientific", "amazon", "smartos"
         package node['newrelic']['service_name'] do
@@ -52,9 +57,4 @@ case node['platform']
             checksum node['newrelic']['server_monitoring']['windows32_checksum']
         end
     end
-end
-
-service node['newrelic']['service_name'] do
-    supports :status => true, :start => true, :stop => true, :restart => true
-    action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
 end
