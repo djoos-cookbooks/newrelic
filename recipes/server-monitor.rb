@@ -5,16 +5,15 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-#install the server monitor
-service node['newrelic']['service_name'] do
-    supports :status => true, :start => true, :stop => true, :restart => true
-    action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
-end
-
 case node['platform']
     when "debian", "ubuntu", "redhat", "centos", "fedora", "scientific", "amazon", "smartos"
         package node['newrelic']['service_name'] do
             action :install
+        end
+
+        service "#{node['newrelic']['service_name']}" do
+            supports :status => true, :start => true, :stop => true, :restart => true
+            action :nothing # we delay startup until after the configuration is done
         end
 
         #configure your New Relic license key
@@ -38,8 +37,7 @@ case node['platform']
             notifies :restart, "service[#{node['newrelic']['service_name']}]"
         end
 
-        service node['newrelic']['service_name'] do
-            supports :status => true, :start => true, :stop => true, :restart => true
+        service "#{node['newrelic']['service_name']}" do
             action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
         end
 
