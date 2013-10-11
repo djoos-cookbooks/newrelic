@@ -110,9 +110,9 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::python-agent]`
 
 2)
-	change the `node['newrelic']['license']` attribute to your New Relic license key
+	change the `node['newrelic']['server_monitoring']['license']` and `node['newrelic']['application_monitoring']['license']` attributes to your New Relic license keys
 	--- OR ---
-	override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+	override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 References
 ==========
