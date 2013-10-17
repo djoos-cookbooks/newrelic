@@ -13,13 +13,13 @@ Requirements
 
 ## Cookbooks:
 
-This cookbook has recommends on the following cookbooks:
+This cookbook recommends on the following cookbooks:
 
 * php
 * python::pip
 * ms_dotnet4
 
-Depending on your environment, these recommended cookbooks are actual dependencies (depends):
+### Depending on your environment, these recommended cookbooks are actual dependencies (depends):
 * Installing the PHP agent? You'll need the php cookbook to be available.
 * Installing the Python agent? You'll need the python cookbook to be available.
 * Installing the DotNet agent? You'll need the ms_dotnet4 cookbook to be available.
@@ -126,9 +126,9 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::dotnet]`
 
 2)
-	change the `node['newrelic']['license']` attribute to your New Relic license key
+	change the `node['newrelic']['server_monitoring']['license']` and `node['newrelic']['application_monitoring']['license']` attributes to your New Relic license keys
 	--- OR ---
-	override the attribute on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+	override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 References
 ==========
