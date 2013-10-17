@@ -10,9 +10,9 @@ version          "0.5.3"
 supports os
 end
 
-depends "php"
-depends "python"
-depends "ms_dotnet4"
+recommends "php"
+recommends "python"
+recommends "ms_dotnet4"
 
 recipe "newrelic", "Adds the New Relic repository, installs & configures the New Relic server monitor package."
 recipe "newrelic::repository", "Adds the New Relic repository."

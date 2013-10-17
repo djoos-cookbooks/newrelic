@@ -11,11 +11,6 @@ case node['platform']
             action :install
         end
 
-        service "#{node['newrelic']['service_name']}" do
-            supports :status => true, :start => true, :stop => true, :restart => true
-            action :nothing # we delay startup until after the configuration is done
-        end
-
         #configure your New Relic license key
         template "#{node['newrelic']['config_path']}/nrsysmond.cfg" do
             source "nrsysmond.cfg.erb"
@@ -37,10 +32,10 @@ case node['platform']
             notifies :restart, "service[#{node['newrelic']['service_name']}]"
         end
 
-        service "#{node['newrelic']['service_name']}" do
+        service node['newrelic']['service_name'] do
+            supports :status => true, :start => true, :stop => true, :restart => true
             action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
         end
-
     when "windows"
         include_recipe "ms_dotnet4"
         
@@ -62,6 +57,5 @@ case node['platform']
             end
         end
 
-        # on Windows service creation/startup is done by the installer.
-
+        #on Windows service creation/startup is done by the installer
 end

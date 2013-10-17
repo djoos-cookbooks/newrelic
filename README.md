@@ -13,11 +13,16 @@ Requirements
 
 ## Cookbooks:
 
-This cookbook has dependencies on the following cookbooks:
+This cookbook has recommends on the following cookbooks:
 
 * php
 * python::pip
 * ms_dotnet4
+
+Depending on your environment, these recommended cookbooks are actual dependencies (depends):
+* Installing the PHP agent? You'll need the php cookbook to be available.
+* Installing the Python agent? You'll need the python cookbook to be available.
+* Installing the DotNet agent? You'll need the ms_dotnet4 cookbook to be available.
 
 ## Platforms:
 
