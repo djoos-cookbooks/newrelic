@@ -11,6 +11,10 @@ More information?
 Requirements
 ============
 
+## Chef version:
+
+Make sure you run Chef >= 0.10.0.
+
 ## Cookbooks:
 
 This cookbook recommends on the following cookbooks:
