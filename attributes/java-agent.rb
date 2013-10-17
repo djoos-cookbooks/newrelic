@@ -5,7 +5,7 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-default['newrelic']['https_download_url'] = 'https://download.newrelic.com/newrelic/java-agent/newrelic-agent/2.21.3/newrelic-agent-2.21.3.jar'
+default['newrelic']['https_download'] = 'https://download.newrelic.com/newrelic/java-agent/newrelic-agent/2.21.3/newrelic-agent-2.21.3.jar'
 default['newrelic']['jar_file'] = 'newrelic-agent-2.21.3.jar'
 default['newrelic']['install_dir'] = ''
 default['newrelic']['app_user'] = 'newrelic'

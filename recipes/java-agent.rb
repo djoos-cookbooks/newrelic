@@ -16,7 +16,7 @@ end
 local_file = node['newrelic']['install_dir'] + '/newrelic.jar'
 
 remote_file local_file do
-    source node['newrelic']['https_download_url']
+    source node['newrelic']['https_download']
     owner node['newrelic']['app_user']
     group node['newrelic']['app_group']
     mode 0664

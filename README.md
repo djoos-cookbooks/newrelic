@@ -107,7 +107,7 @@ Attributes
 ## python-agent.rb:
 * `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
 
-## dotnet.rb:
+## dotnet-agent.rb:
 * `node['newrelic']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
 * `node['newrelic']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 
@@ -117,7 +117,7 @@ Attributes
 * `node['newrelic']['config_file_group']` - The New Relic server monitoring config file group, defaults to "newrelic"
 
 ## java-agent.rb:
-* `node['newrelic']['https_download_url']` - The url to download the jar vor the NewRelic java agent
+* `node['newrelic']['https_download']` - The url to download the jar vor the NewRelic java agent
 * `node['newrelic']['jar_file']` - The name of the newrelic jar file
 * `node['newrelic']['install_dir']` - The directory to install the newrelic jar and config file
 * `node['newrelic']['app_user']` - The user that runs the java application that will use the New Relic java agent
