@@ -112,6 +112,17 @@ Attributes
 * `node['newrelic']['config_path']` - The New Relic server monitoring config path, defaults to "/etc/newrelic"
 * `node['newrelic']['config_file_group']` - The New Relic server monitoring config file group, defaults to "newrelic"
 
+## java-agent.rb:
+* `node['newrelic']['https_download_url']` - The url to download the jar vor the NewRelic java agent
+* `node['newrelic']['jar_file']` - The name of the newrelic jar file
+* `node['newrelic']['install_dir']` - The directory to install the newrelic jar and config file
+* `node['newrelic']['app_user']` - The user that runs the java application that will use the New Relic java agent
+* `node['newrelic']['app_group']` - The group for the app_user
+* `node['newrelic']['audit_mode']` - Boolean, Log all data to and from New Relic in plain text
+* `node['newrelic']['log_file_count']` - The number of log files to use
+* `node['newrelic']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
+* `node['newrelic']['log_daily']` - Override other log rolling configuration and roll the logs daily
+
 Usage
 =====
 
