@@ -5,18 +5,22 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-#install the server monitor
 case node['platform']
-    when "debian", "ubuntu", "redhat", "centos", "fedora", "scientific", "amazon"
-        package "newrelic-sysmond" do
+    when "debian", "ubuntu", "redhat", "centos", "fedora", "scientific", "amazon", "smartos"
+        package node['newrelic']['service_name'] do
             action :install
         end
 
+        service "#{node['newrelic']['service_name']}" do
+            supports :status => true, :start => true, :stop => true, :restart => true
+            action :nothing # we delay startup until after the configuration is done
+        end
+
         #configure your New Relic license key
-        template "/etc/newrelic/nrsysmond.cfg" do
+        template "#{node['newrelic']['config_path']}/nrsysmond.cfg" do
             source "nrsysmond.cfg.erb"
             owner "root"
-            group "newrelic"
+            group node['newrelic']['config_file_group']
             mode "640"
             variables(
                 :license => node['newrelic']['server_monitoring']['license'],
@@ -30,31 +34,34 @@ case node['platform']
                 :collector_host => node['newrelic']['server_monitoring']['collector_host'],
                 :timeout => node['newrelic']['server_monitoring']['timeout']
             )
-            notifies :restart, "service[newrelic-sysmond]"
+            notifies :restart, "service[#{node['newrelic']['service_name']}]"
         end
-  when "windows"
-    include_recipe "ms_dotnet4"
 
-    if node['kernel']['machine'] == "x86_64"
-        windows_package "New Relic Server Monitor" do
-            source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x64_#{node['newrelic']['server_monitoring']['windows_version']}.msi"
-            options "/L*v install.log /qn NR_LICENSE_KEY=#{node['newrelic']['server_monitoring']['license']}"
-            action :install
-            version node['newrelic']['server_monitoring']['windows_version']
-            checksum node['newrelic']['server_monitoring']['windows64_checksum']
+        service "#{node['newrelic']['service_name']}" do
+            action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
         end
-    else
-        windows_package "New Relic Server Monitor" do
-            source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x86_#{node['newrelic']['server_monitoring']['windows_version']}.msi"
-            options "/L*v install.log /qn NR_LICENSE_KEY=#{node['newrelic']['server_monitoring']['license']}"
-            action :install
-            version node['newrelic']['server_monitoring']['windows_version']
-            checksum node['newrelic']['server_monitoring']['windows32_checksum']
-        end
-    end
-end
 
-service "newrelic-sysmond" do
-    supports :status => true, :start => true, :stop => true, :restart => true
-    action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
+    when "windows"
+        include_recipe "ms_dotnet4"
+        
+        if node['kernel']['machine'] == "x86_64"
+                windows_package "New Relic Server Monitor" do
+                source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x64_#{node['newrelic']['server_monitoring']['windows_version']}.msi"
+                options "/L*v install.log /qn NR_LICENSE_KEY=#{node['newrelic']['server_monitoring']['license']}"
+                action :install
+                version node['newrelic']['server_monitoring']['windows_version']
+                checksum node['newrelic']['server_monitoring']['windows64_checksum']
+            end
+        else
+            windows_package "New Relic Server Monitor" do
+                source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x86_#{node['newrelic']['server_monitoring']['windows_version']}.msi"
+                options "/L*v install.log /qn NR_LICENSE_KEY=#{node['newrelic']['server_monitoring']['license']}"
+                action :install
+                version node['newrelic']['server_monitoring']['windows_version']
+                checksum node['newrelic']['server_monitoring']['windows32_checksum']
+            end
+        end
+
+        # on Windows service creation/startup is done by the installer.
+
 end
