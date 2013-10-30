@@ -5,47 +5,44 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-require 'curl'
-
 def whyrun_supported?
     true
 end
 
 action :notify do
-    if url && api_key && (app_name || application_id)
+    if new_resource.url && new_resource.api_key && (new_resource.application_name || new_resource.application_id)
         Chef::Log.debug "notify New Relic of deployment"
 
         data_array = Array.new
 
-        unless app_name.nil?
-            data_array << "-d deployment[app_name]=#{app_name}"
+        unless new_resource.application_name.nil?
+            data_array << "-d deployment[app_name]=#{new_resource.application_name}"
         end
 
-        unless application_id.nil?
-            data_array << "-d deployment[application_id]=#{application_id}"
+        unless new_resource.application_id.nil?
+            data_array << "-d deployment[application_id]=#{new_resource.application_id}"
         end
 
-        unless description.nil?
-            data_array << "-d deployment[description]=#{description}"
+        unless new_resource.description.nil?
+            data_array << "-d deployment[description]=#{new_resource.description}"
         end
 
-        unless revision.nil?
-            data_array << "-d deployment[revision]=#{revision}"
+        unless new_resource.revision.nil?
+            data_array << "-d deployment[revision]=#{new_resource.revision}"
         end
 
-        unless changelog.nil?
-            data_array << "-d deployment[changelog]=#{changelog}"
+        unless new_resource.changelog.nil?
+            data_array << "-d deployment[changelog]=#{new_resource.changelog}"
         end
 
-        unless user.nil?
-            data_array << "-d deployment[user]=#{user}"
+        unless new_resource.user.nil?
+            data_array << "-d deployment[user]=#{new_resource.user}"
         end
 
         data_string = data_array.join(' ')
 
         execute "newrelic-deployment-notify" do
-            command "curl -H 'x-api-key:#{api_key}' #{data_string} #{url}"
-            creates "/var/lib/slapd/uid.bdb"
+            command "curl -H 'x-api-key:#{api_key}' #{data_string} #{new_resource.url}"
             action :run
         end
     end
