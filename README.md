@@ -20,13 +20,16 @@ Make sure you run Chef >= 0.10.0.
 This cookbook recommends on the following cookbooks:
 
 * php
-* python::pip
+* python
 * ms_dotnet4
+* curl
 
 ### Depending on your environment, these recommended cookbooks are actual dependencies (depends):
 * Installing the PHP agent? You'll need the php cookbook to be available.
 * Installing the Python agent? You'll need the python cookbook to be available.
 * Installing the DotNet agent? You'll need the ms_dotnet4 cookbook to be available.
+
+* Want to make use of deployments? You'll need the curl cookbook to be available.
 
 ## Platforms:
 
@@ -126,6 +129,23 @@ Attributes
 * `node['newrelic']['log_file_count']` - The number of log files to use
 * `node['newrelic']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
 * `node['newrelic']['log_daily']` - Override other log rolling configuration and roll the logs daily
+
+Resources / Providers
+=====================
+
+The deployment LWRP sends deployment information to New Relic.
+
+## Actions
+:notify - Notify New Relic of a deployment
+
+## Attribute parameters
+api_key - Your New Relic API key
+app_name - The name of the application, found in the newrelic.yml file
+app_id - The ID # of the application
+description - Text annotation for the deployment — notes for you
+revision - The revision number from your source control system (SVN, git, etc.)
+changelog - A list of changes for this deployment
+user - The name of the user/process that triggered this deployment
 
 Usage
 =====
