@@ -161,3 +161,7 @@ collector_host=<%= @collector_host %>
 <% else %>
 timeout=<%= @timeout %>
 <% end %>
+
+# Explicitly set hostname to fqdn to match hostname reported by java agent
+hostname=<%= @hostname %>
+

@@ -13,6 +13,14 @@ directory node['newrelic']['install_dir'] do
     action :create
 end
 
+#create the directory to install the conf into
+directory node['newrelic']['conf_dir'] do
+    owner node['newrelic']['app_user']
+    group node['newrelic']['app_group']
+    mode 0775
+    action :create
+end
+
 local_file = node['newrelic']['install_dir'] + '/newrelic.jar'
 
 remote_file local_file do
@@ -24,10 +32,10 @@ end
 
 if node['newrelic']['application_monitoring']['appname'].nil?
     node.set['newrelic']['application_monitoring']['appname'] = node['hostname']
-end   
+end
 
 #configure your New Relic license key
-conf_file = node['newrelic']['install_dir'] + '/newrelic.yml'
+conf_file = node['newrelic']['conf_dir'] + '/newrelic.yml'
 template conf_file do
     source "newrelic.yml.java.erb"
     owner node['newrelic']['app_user']
@@ -38,11 +46,11 @@ template conf_file do
         :appname => node['newrelic']['application_monitoring']['appname'],
         :logfile => node['newrelic']['application_monitoring']['logfile'],
         :loglevel => node['newrelic']['application_monitoring']['loglevel'],
-        :audit_mode => node['newrelic']['audit_mode'], 
+        :audit_mode => node['newrelic']['audit_mode'],
         :log_file_count => node['newrelic']['log_file_count'],
         :log_limit_in_kbytes => node['newrelic']['log_limit_in_kbytes'],
-        :log_daily => node['newrelic']['log_daily'], 
-        :daemon_ssl => node['newrelic']['application_monitoring']['daemon']['ssl'],        
+        :log_daily => node['newrelic']['log_daily'],
+        :daemon_ssl => node['newrelic']['application_monitoring']['daemon']['ssl'],
         :capture_params => node['newrelic']['application_monitoring']['capture_params'],
         :ignored_params => node['newrelic']['application_monitoring']['ignored_params'],
         :transaction_tracer_enable => node['newrelic']['application_monitoring']['transaction_tracer']['enable'],

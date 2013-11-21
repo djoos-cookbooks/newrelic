@@ -27,7 +27,8 @@ case node['platform']
                 :ssl_ca_bundle => node['newrelic']['server_monitoring']['ssl_ca_bundle'],
                 :pidfile => node['newrelic']['server_monitoring']['pidfile'],
                 :collector_host => node['newrelic']['server_monitoring']['collector_host'],
-                :timeout => node['newrelic']['server_monitoring']['timeout']
+                :timeout => node['newrelic']['server_monitoring']['timeout'],
+                :hostname => node['fqdn']
             )
             notifies :restart, "service[#{node['newrelic']['service_name']}]"
         end
@@ -38,7 +39,7 @@ case node['platform']
         end
     when "windows"
         include_recipe "ms_dotnet4"
-        
+
         if node['kernel']['machine'] == "x86_64"
                 windows_package "New Relic Server Monitor" do
                 source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x64_#{node['newrelic']['server_monitoring']['windows_version']}.msi"
