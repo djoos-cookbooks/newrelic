@@ -111,7 +111,7 @@ Attributes
 * `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
 
 ## dotnet-agent.rb:
-* `node['newrelic']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
+* `node['newrelic']['https_download']['dotnet-agent']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
 * `node['newrelic']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 
 ## server-monitor.rb:

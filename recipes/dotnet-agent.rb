@@ -5,10 +5,12 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-include_recipe "ms_dotnet4"
+if !File.exists?("C:/Windows/Microsoft.NET/Framework/v4.0.30319")
+	include_recipe "ms_dotnet4"
+end
 
 windows_package "Install New Relic .NET Agent" do
-    source node['newrelic']['https_download']
+    source node['newrelic']['https_download']['dotnet-agent']
     options "/qb NR_LICENSE_KEY=#{node['newrelic']['application_monitoring']['license']} INSTALLLEVEL=#{node['newrelic']['install_level']}"
     installer_type :msi
     action :install
