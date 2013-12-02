@@ -10,7 +10,7 @@ if !File.exists?("C:/Windows/Microsoft.NET/Framework/v4.0.30319")
 end
 
 windows_package "Install New Relic .NET Agent" do
-    source node['newrelic']['https_download']['dotnet-agent']
+    source node['newrelic']['dotnet-agent']['https_download']
     options "/qb NR_LICENSE_KEY=#{node['newrelic']['application_monitoring']['license']} INSTALLLEVEL=#{node['newrelic']['install_level']}"
     installer_type :msi
     action :install
