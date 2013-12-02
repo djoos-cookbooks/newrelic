@@ -37,7 +37,7 @@ case node['platform']
             action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
         end
     when "windows"
-        include_recipe "ms_dotnet4"
+            include_recipe "ms_dotnet4"
         
         if node['kernel']['machine'] == "x86_64"
                 windows_package "New Relic Server Monitor" do

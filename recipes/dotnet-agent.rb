@@ -5,11 +5,11 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-include_recipe "ms_dotnet4"
+	include_recipe "ms_dotnet4"
 
 windows_package "Install New Relic .NET Agent" do
-    source node['newrelic']['https_download']
-    options "/qb NR_LICENSE_KEY=#{node['newrelic']['application_monitoring']['license']} INSTALLLEVEL=#{node['newrelic']['install_level']}"
+    source node['newrelic']['dotnet-agent']['https_download']
+    options "/qb NR_LICENSE_KEY=#{node['newrelic']['application_monitoring']['license']} INSTALLLEVEL=#{node['newrelic']['dotnet-agent']['install_level']}"
     installer_type :msi
     action :install
     not_if{File.exists?("C:\\Program Files\\New Relic\\.NET Agent")}
