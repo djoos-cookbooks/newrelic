@@ -6,4 +6,4 @@
 #
 
 default['newrelic']['dotnet-agent']['https_download'] = 'https://download.newrelic.com/dot_net_agent/release/x64'
-default['newrelic']['install_level'] = '1'
+default['newrelic']['dotnet-agent']['install_level'] = '1'
