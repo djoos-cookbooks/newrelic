@@ -45,6 +45,7 @@ template conf_file do
         :license => node['newrelic']['application_monitoring']['license'],
         :appname => node['newrelic']['application_monitoring']['appname'],
         :logfile => node['newrelic']['application_monitoring']['logfile'],
+        :logfile_path => node['newrelic']['application_monitoring']['logfile_path'],
         :loglevel => node['newrelic']['application_monitoring']['loglevel'],
         :audit_mode => node['newrelic']['audit_mode'],
         :log_file_count => node['newrelic']['log_file_count'],

@@ -107,7 +107,11 @@ common: &default_settings
 
   # The log file directory.
   # Default is the logs directory in the newrelic.jar parent directory.
+  <% if @logfile_path.nil? %>
   #log_file_path:
+  <% else %>
+  log_file_path: <%= @logfile_path %>
+  <% end %>
 
   # The agent communicates with New Relic via https by
   # default.  If you want to communicate with newrelic via http,
