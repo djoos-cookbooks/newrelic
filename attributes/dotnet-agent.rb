@@ -7,3 +7,4 @@
 
 default['newrelic']['https_download'] = 'https://download.newrelic.com/dot_net_agent/release/x64'
 default['newrelic']['install_level'] = '1'
+default['newrelic']['dotnet_recipe'] = 'ms_dotnet4'

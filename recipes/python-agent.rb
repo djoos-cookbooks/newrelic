@@ -5,7 +5,7 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-include_recipe "python::pip"
+include_recipe node['newrelic']['python_recipe']
 
 #install latest python agent
 python_pip "newrelic" do
