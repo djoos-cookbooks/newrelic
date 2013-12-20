@@ -106,13 +106,16 @@ Attributes
 ## php-agent.rb:
 * `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
 * `node['newrelic']['web_server']['service_name']` - The web server service name, defaults to "apache2"
+* `node['newrelic']['php_recipe']` - The php recipe to include for the php agent, defaults to "php::default"
 
 ## python-agent.rb:
 * `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
+* `node['newrelic']['python_recipe']` - The python recipe to include for the python agent, defaults to "python::pip"
 
 ## dotnet-agent.rb:
 * `node['newrelic']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
 * `node['newrelic']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
+* `node['newrelic']['dotnet_recipe']` - The dotnet recipe to include for the php agent, defaults to "ms_dotnet4"
 
 ## server-monitor.rb:
 * `node['newrelic']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"

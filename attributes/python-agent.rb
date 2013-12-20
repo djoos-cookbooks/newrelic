@@ -6,3 +6,4 @@
 #
 
 default['newrelic']['python_version'] = "latest"
+default['newrelic']['python_recipe'] = "python::pip"

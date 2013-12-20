@@ -5,7 +5,7 @@
 # Copyright 2012-2013, Escape Studios
 #
 
-include_recipe "ms_dotnet4"
+include_recipe node['newrelic']['dotnet_recipe']
 
 windows_package "Install New Relic .NET Agent" do
     source node['newrelic']['https_download']
