@@ -7,25 +7,92 @@
 
 include_recipe node['newrelic']['php_recipe']
 
-#the older version (3.0) had a bug in the init scripts that when it shut down the daemon it would also kill dpkg as it was trying to upgrade
-#let's remove the old packages before continuing
-package "newrelic-php5" do
+case node['platform']
+when "suse"
+  # Handle generic installation with the tar.gz installer
+  # Only tested under SLES/Suse but should work with other distributions
+  # Other OS (BSD, mac) might work with similar actions
+
+  # Handle generic installation with the tar.gz installer
+  # Only tested under SLES/Suse but should work with other distributions
+  # Other OS (BSD, mac) might work with similar actions
+  tarname = 'newrelic-php5.tar.gz'
+  phpagent_tar = "#{Chef::Config[:file_cache_path]}/#{tarname}"
+  untardir = "#{Chef::Config[:file_cache_path]}/newrelic-php5-latest"
+
+  osname = case node['os']
+           when "darwin"
+             "osx"
+           when "solaris2"
+             # Not tested: I don't have access to a solaris box, but quick reading
+             # of ohai code makes me understand that it will return solaris2 for the os
+             "solaris"
+           else
+             node['os']
+           end
+  tarurl = [node['newrelic']['php_tar_baseurl'], node['newrelic']['php_tar_version'], "#{osname}.tar.gz"].join '-'
+  #pkgname = node['newrelic']['phpagent']['pkg_tar_linux'].gsub /.tar.gz/, ''
+  pkgname = tarurl.split('/')[-1].gsub /.tar.gz/, ''
+
+  remote_file phpagent_tar do
+    source tarurl
+    owner "root"
+    group "root"
+    mode 0644
+    notifies :run, "execute[newrelic-cleanup-phpagent]", :immediately
+    notifies :run, "execute[newrelic-untar-phpagent]", :immediately
+    action :create_if_missing
+  end
+
+  directory untardir do
+    mode 0755
+    action :create
+  end
+
+  execute "newrelic-cleanup-phpagent" do
+    command "rm -rf #{untardir}"
+    action :nothing
+    notifies :create, "directory[#{untardir}]", :immediately
+  end
+
+  execute "newrelic-untar-phpagent" do
+    command "tar xfz #{phpagent_tar} -C #{untardir}"
+    action :nothing
+    notifies :run, "execute[newrelic-install-phpagent]", :immediately
+  end
+
+  # Installer needs more options to run silently in manual mode
+  execute "newrelic-install-phpagent" do
+    not_if {File.exist? '/usr/bin/newrelic-daemon' }
+    # Make sure we find the correct PHP path
+    #environment ({ "PATH" => "#{ENV['PATH']}:#{node['newrelic']['php_path']}" })
+    cwd "#{untardir}/#{pkgname}"
+    command "export NR_INSTALL_SILENT=1 NR_INSTALL_KEY=#{node['newrelic']['application_monitoring']['license']}; ./newrelic-install install"
+    notifies :restart, "service[#{node['newrelic']['web_server']['service_name']}]", :delayed
+  end
+
+else
+  #the older version (3.0) had a bug in the init scripts that when it shut down the daemon it would also kill dpkg as it was trying to upgrade
+  #let's remove the old packages before continuing
+  package "newrelic-php5" do
     action :remove
     version "3.0.5.95"
-end
+  end
 
-#install/update latest php agent
-package "newrelic-php5" do
+  #install/update latest php agent
+  package "newrelic-php5" do
     action :upgrade
     notifies :run, "execute[newrelic-install]", :immediately
-end
+  end
 
-#run newrelic-install
-execute "newrelic-install" do
+  #run newrelic-install
+  execute "newrelic-install" do
     command "newrelic-install install"
     action :nothing
     notifies :restart, "service[#{node['newrelic']['web_server']['service_name']}]", :delayed
+  end
 end
+
 
 service "newrelic-daemon" do
     supports :status => true, :start => true, :stop => true, :restart => true
