@@ -40,6 +40,7 @@ This cookbook recommends on the following cookbooks:
 * Fedora
 * Scientific
 * Amazon
+* Suse
 * Windows
 * SmartOS
 
@@ -107,6 +108,8 @@ Attributes
 * `node['newrelic']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
 * `node['newrelic']['web_server']['service_name']` - The web server service name, defaults to "apache2"
 * `node['newrelic']['php_recipe']` - The php recipe to include for the php agent, defaults to "php::default"
+* `node['newrelic']['php_tar_version']` - the version number of the PHP agent to install from tar.gz
+* `node['newrelic']['php_tar_baseurl']` - base URL to download the tar.gz version (defaults to "https://download.newrelic.com/php_agent/release/newrelic-php5")
 
 ## python-agent.rb:
 * `node['newrelic']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
@@ -121,6 +124,8 @@ Attributes
 * `node['newrelic']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
 * `node['newrelic']['config_path']` - The New Relic server monitoring config path, defaults to "/etc/newrelic"
 * `node['newrelic']['config_file_group']` - The New Relic server monitoring config file group, defaults to "newrelic"
+* `node['newrelic']['sysmond_tar_version']` - the version number of the tar.gz Server Monitor package
+* `node['newrelic']['sysmond_tar_baseurl']` - base URL to download the tar.gz version (defaults to "https://download.newrelic.com/server_monitor/release/newrelic-sysmond")
 
 ## java-agent.rb:
 * `node['newrelic']['https_download']` - The url to download the jar vor the NewRelic java agent
