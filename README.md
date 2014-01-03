@@ -1,12 +1,13 @@
 Description
 ===========
 
-This cookbook provides an easy way to install the New Relic PHP agent and the New Relic server monitor.
+This cookbook provides an easy way to install various New Relic agent and the New Relic server monitor.
 
 More information?
 * https://newrelic.com/docs/server/new-relic-for-server-monitoring
 * https://newrelic.com/docs/php/new-relic-for-php
 * https://newrelic.com/docs/python/new-relic-for-python
+* https://docs.newrelic.com/docs/nodejs/installing-and-maintaining-nodejs
 
 Requirements
 ============
@@ -23,11 +24,13 @@ This cookbook recommends on the following cookbooks:
 * python
 * ms_dotnet4
 * curl
+* nodejs
 
 ### Depending on your environment, these recommended cookbooks are actual dependencies (depends):
 * Installing the PHP agent? You'll need the php cookbook to be available.
 * Installing the Python agent? You'll need the python cookbook to be available.
 * Installing the DotNet agent? You'll need the ms_dotnet4 cookbook to be available.
+* Installing the nodejs agent? You'll need the nodejs cookbook to be available.
 
 * Want to make use of deployments? You'll need the curl cookbook to be available.
 
@@ -133,6 +136,14 @@ Attributes
 * `node['newrelic']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
 * `node['newrelic']['log_daily']` - Override other log rolling configuration and roll the logs daily
 
+## nodejs-agent.rb
+* node['newrelic']['nodejs']['apps'] - Array of Hash describing the apps to monitor:
+```
+[ 
+   { 'app_name' => 'My Application', 'app_path' => "/path/to/app/root" }
+   ]
+```
+
 Resources / Providers
 =====================
 
@@ -162,6 +173,7 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::php-agent]`
 `recipe[newrelic::python-agent]`
 `recipe[newrelic::dotnet]`
+`recipe[newrelic::nodejs]`
 
 2)
 	change the `node['newrelic']['server_monitoring']['license']` and `node['newrelic']['application_monitoring']['license']` attributes to your New Relic license keys

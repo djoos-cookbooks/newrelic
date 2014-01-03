@@ -14,6 +14,7 @@ recommends "php"
 recommends "python"
 recommends "ms_dotnet4"
 recommends "curl"
+recommends "nodejs"
 
 recipe "newrelic", "Adds the New Relic repository, installs & configures the New Relic server monitor package."
 recipe "newrelic::repository", "Adds the New Relic repository."
@@ -21,3 +22,4 @@ recipe "newrelic::server-monitor", "Installs & configures the New Relic server m
 recipe "newrelic::php-agent", "Installs the New Relic PHP agent."
 recipe "newrelic::python-agent", "Installs the New Relic Python agent."
 recipe "newrelic::dotnet", "Installs New Relic .NET Agent"
+recipe "newrelic::nodejs", "Installs New Relic Node.js Agent"
