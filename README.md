@@ -144,6 +144,13 @@ Attributes
    ]
 ```
 
+You then need to modify your application "main" file to add the following on the first line:
+
+```javascript
+require('newrelic');
+```
+
+
 Resources / Providers
 =====================
 
