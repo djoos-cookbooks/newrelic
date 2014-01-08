@@ -136,12 +136,14 @@ Attributes
 Resources / Providers
 =====================
 
+## deployment
+
 The deployment LWRP sends deployment information to New Relic.
 
-## Actions
+### Actions
 :notify - Notify New Relic of a deployment
 
-## Attribute parameters
+### Attribute parameters
 api_key - Your New Relic API key
 app_name - The name of the application, found in the newrelic.yml file
 app_id - The ID # of the application
@@ -149,6 +151,46 @@ description - Text annotation for the deployment — notes for you
 revision - The revision number from your source control system (SVN, git, etc.)
 changelog - A list of changes for this deployment
 user - The name of the user/process that triggered this deployment
+
+## yml
+
+The yml LWRP generate the newrelic.yml configuration file in a specific path, which can be used to generate multiples configurations when
+deploying multiples differents applications.
+
+### Actions
+:generate - Generate the newrelic.yml config file (unique and default action)
+
+### Attributes parameters
+
+* name attribute - path to your newrelic.yml config file
+* app_name - Application name for New Relic dashboard
+* agent_type - NewRelic Agent type. From (java|ruby|nodejs|dotnet). (Only java working at the moment)
+* owner - Owner of the config file
+* group - Group of the config file
+* license - Your license. default => node['newrelic']['application_monitoring']['license']
+* _others_ - Look at the LWRP resource and/or the temlate for the other configurations
+ 
+
+### Exemple usage - Java agent
+
+1. Install the Java Agent: add the newrelic::java-agent recipe to your run list. A newrelic.yml will be generated but not linked to anything.
+
+2. In your application cookbook, generate the newrelic.yml for this application:
+
+```ruby
+newrelicyml="#{my_app_path}/newrelic.yml"
+newrelic_yml newrelicyml do
+  agent_type "java"
+  app_name "my-super-duper-application"
+end
+```
+
+3. Configure your app for newrelic using your config file and newrelic.jar:
+
+```bash
+ java -Dnewrelic.config.file=#{newrelicyml}  -javaagent:#{node['newrelic']['install_dir']}/newrelic.jar [rest of your args]
+```
+
 
 Usage
 =====
