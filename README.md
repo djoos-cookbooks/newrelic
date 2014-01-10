@@ -150,6 +150,21 @@ revision - The revision number from your source control system (SVN, git, etc.)
 changelog - A list of changes for this deployment
 user - The name of the user/process that triggered this deployment
 
+## Example
+
+```
+newrelic_deployment "my-application" do
+    api_key "abcdef"
+    #app_name "my-application"
+    app_id 1234567
+    description "some description"
+    revision "some revision"
+    changelog "some changelog"
+    user "chef-client"
+    action :notify
+end
+```
+
 Usage
 =====
 
