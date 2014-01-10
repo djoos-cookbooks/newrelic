@@ -47,6 +47,7 @@ action :notify do
             command command_curl
             action :run
         end
+        new_resource.updated_by_last_action(true)
     end
 end
 
