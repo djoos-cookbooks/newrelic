@@ -44,7 +44,7 @@ action :notify do
         Chef::Log.debug "curl command: #{command_curl}"
 
         execute "newrelic-deployment-notify" do
-            command "#{command_curl}"
+            command command_curl
             action :run
         end
     end
