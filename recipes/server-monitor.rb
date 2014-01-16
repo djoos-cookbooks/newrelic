@@ -27,7 +27,8 @@ case node['platform']
                 :ssl_ca_bundle => node['newrelic']['server_monitoring']['ssl_ca_bundle'],
                 :pidfile => node['newrelic']['server_monitoring']['pidfile'],
                 :collector_host => node['newrelic']['server_monitoring']['collector_host'],
-                :timeout => node['newrelic']['server_monitoring']['timeout']
+                :timeout => node['newrelic']['server_monitoring']['timeout'],
+                :hostname => node['newrelic']['server_monitoring']['hostname']
             )
             notifies :restart, "service[#{node['newrelic']['service_name']}]"
         end
