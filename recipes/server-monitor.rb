@@ -23,8 +23,9 @@ case node['platform']
                 :loglevel => node['newrelic']['server_monitoring']['loglevel'],
                 :proxy => node['newrelic']['server_monitoring']['proxy'],
                 :ssl => node['newrelic']['server_monitoring']['ssl'],
-                :ssl_ca_path => node['newrelic']['server_monitoring']['ssl_ca_path'],
                 :ssl_ca_bundle => node['newrelic']['server_monitoring']['ssl_ca_bundle'],
+                :ssl_ca_path => node['newrelic']['server_monitoring']['ssl_ca_path'],
+                :hostname => node['newrelic']['server_monitoring']['hostname'],
                 :pidfile => node['newrelic']['server_monitoring']['pidfile'],
                 :collector_host => node['newrelic']['server_monitoring']['collector_host'],
                 :timeout => node['newrelic']['server_monitoring']['timeout']

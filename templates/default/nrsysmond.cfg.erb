@@ -115,6 +115,22 @@ ssl_ca_path=<%= @ssl_ca_path %>
 <% end %>
 
 #
+# Option : hostname
+# Value  : A meaningful host name to be displayed in the user interface. On
+#          many cloud based nodes the host name is incomprehensible and makes
+#          finding a specific host problematic. Using this option will allow
+#          you to assign a more meaningful name to a host. You must ensure
+#          that all your host names are unique.
+# Default: Whatever the system calls the host.
+# Note   : Can also be set with the -n command line option.
+#
+<% if @hostname.nil? %>
+#hostname=
+<% else %>
+hostname=<%= @hostname %>
+<% end %>
+
+#
 # Option : pidfile
 # Value  : Name of a file where the server monitoring daemon will store it's
 #          process ID (PID). This is used by the startup and shutdown script

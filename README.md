@@ -59,6 +59,7 @@ Attributes
 * `node['newrelic']['server_monitoring']['ssl']`
 * `node['newrelic']['server_monitoring']['ssl_ca_bundle']`
 * `node['newrelic']['server_monitoring']['ssl_ca_path']`
+* `node['newrelic']['server_monitoring']['hostname']`
 * `node['newrelic']['server_monitoring']['pidfile']`
 * `node['newrelic']['server_monitoring']['collector_host']`
 * `node['newrelic']['server_monitoring']['timeout']`

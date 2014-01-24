@@ -22,6 +22,7 @@ default['newrelic']['server_monitoring']['proxy'] = nil
 default['newrelic']['server_monitoring']['ssl'] = nil
 default['newrelic']['server_monitoring']['ssl_ca_bundle'] = nil
 default['newrelic']['server_monitoring']['ssl_ca_path'] = nil
+default['newrelic']['server_monitoring']['hostname'] = nil
 default['newrelic']['server_monitoring']['pidfile'] = nil
 default['newrelic']['server_monitoring']['collector_host'] = nil
 default['newrelic']['server_monitoring']['timeout'] = nil
