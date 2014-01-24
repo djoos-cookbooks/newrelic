@@ -24,6 +24,8 @@ template "/etc/newrelic/newrelic.ini" do
     variables(
         :license => node['newrelic']['application_monitoring']['license'],
         :appname => node['newrelic']['application_monitoring']['appname'],
+        :appname_prefix => node['newrelic']['application_monitoring']['appname_prefix'].to_s,
+        :appname_suffix => node['newrelic']['application_monitoring']['appname_suffix'].to_s,
         :enabled => node['newrelic']['application_monitoring']['enabled'],
         :logfile => node['newrelic']['application_monitoring']['logfile'],
         :loglevel => node['newrelic']['application_monitoring']['loglevel'],

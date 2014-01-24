@@ -40,7 +40,7 @@ license_key = <%= @license %>
 <% if @appname.nil? %>
 app_name = Python Application
 <% else %>
-app_name = <%= @appname %>
+app_name = <%= @appname_prefix + @appname + @appname_suffix %>
 <% end %>
 
 # When "true", the agent collects performance data about your

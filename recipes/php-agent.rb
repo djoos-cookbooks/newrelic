@@ -44,6 +44,8 @@ template "#{node['php']['ext_conf_dir']}/newrelic.ini" do
         :logfile => node['newrelic']['application_monitoring']['logfile'],
         :loglevel => node['newrelic']['application_monitoring']['loglevel'],
         :appname => node['newrelic']['application_monitoring']['appname'],
+        :appname_prefix => node['newrelic']['application_monitoring']['appname_prefix'].to_s,
+        :appname_suffix => node['newrelic']['application_monitoring']['appname_suffix'].to_s,
         :daemon_logfile => node['newrelic']['application_monitoring']['daemon']['logfile'],
         :daemon_loglevel => node['newrelic']['application_monitoring']['daemon']['loglevel'],
         :daemon_port => node['newrelic']['application_monitoring']['daemon']['port'],
