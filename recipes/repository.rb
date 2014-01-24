@@ -16,11 +16,19 @@ case node['platform']
         #this step is required to tell apt that you trust the integrity of New Relic's apt repository
         gpg_key_id = node['newrelic']['repository_key']
         gpg_key_url = "http://download.newrelic.com/#{gpg_key_id}.gpg"
+        gpg_key_file = "#{Chef::Config['file_cache_path']}/newrelic-gpg-key"
 
-        execute "newrelic-add-gpg-key" do
-            command "wget -O - #{gpg_key_url} | apt-key add -"
-            notifies :run, "execute[newrelic-apt-get-update]", :immediately
+        remote_file gpg_key_file do
+            action :create_if_missing
             not_if "apt-key list | grep #{gpg_key_id}"
+            source gpg_key_url
+            notifies :run, "execute[newrelic-add-apt-key]", :immediately
+        end
+
+        execute "newrelic-add-apt-key" do
+            command "apt-key add #{gpg_key_file}"
+            action :nothing
+            notifies :run, "execute[newrelic-apt-get-update]", :immediately
         end
 
         #configure the New Relic apt repository
