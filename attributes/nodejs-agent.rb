@@ -1,11 +1,9 @@
+#
 # Cookbook Name:: newrelic
 # Attributes:: nodejs-agent
 #
-# MIT Licensed
+# Copyright 2012-2013, Escape Studios
+#
 
-# Array of Hash describing the apps to monitor:
-#   [ 
-#   { 'app_name' => 'My Application', 'app_path' => "/path/to/app/root" }
-#   ]
 default['newrelic']['nodejs']['apps'] = []
-
+default['newrelic']['nodejs_recipe'] = "nodejs::npm"

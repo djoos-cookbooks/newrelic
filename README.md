@@ -1,7 +1,7 @@
 Description
 ===========
 
-This cookbook provides an easy way to install various New Relic agent and the New Relic server monitor.
+This cookbook provides an easy way to install various New Relic agents and the New Relic server monitor.
 
 More information?
 * https://newrelic.com/docs/server/new-relic-for-server-monitoring
@@ -138,19 +138,21 @@ Attributes
 * `node['newrelic']['log_daily']` - Override other log rolling configuration and roll the logs daily
 
 ## nodejs-agent.rb
-* node['newrelic']['nodejs']['apps'] - Array of Hash describing the apps to monitor:
+* node['newrelic']['nodejs']['apps'] - Array of Hash describing the apps to monitor
+
+eg.
 ```
 [ 
    { 'app_name' => 'My Application', 'app_path' => "/path/to/app/root" }
-   ]
+]
 ```
 
 You then need to modify your application "main" file to add the following on the first line:
 
-```javascript
+```
+javascript
 require('newrelic');
 ```
-
 
 Resources / Providers
 =====================
