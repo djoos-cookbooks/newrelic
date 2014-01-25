@@ -19,12 +19,12 @@ case node['platform']
         gpg_key_file = "#{Chef::Config['file_cache_path']}/newrelic-gpg-key"
 
         remote_file gpg_key_file do
-            action :create_if_missing
-            not_if "apt-key list | grep #{gpg_key_id}"
             source gpg_key_url
             notifies :run, "execute[newrelic-add-apt-key]", :immediately
+            action :create_if_missing
+            not_if "apt-key list | grep #{gpg_key_id}"
         end
-
+ 
         execute "newrelic-add-apt-key" do
             command "apt-key add #{gpg_key_file}"
             action :nothing
