@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: java-agent
 #
-# Copyright 2012-2013, Escape Studios
+# Copyright 2012-2014, Escape Studios
 #
 
 #create the directory to install the jar into

@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: nodejs-agent
 #
-# Copyright 2012-2013, Escape Studios
+# Copyright 2012-2014, Escape Studios
 #
 
 include_recipe node['newrelic']['nodejs_recipe']

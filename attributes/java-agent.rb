@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Attributes:: java-agent
 #
-# Copyright 2012-2013, Escape Studios
+# Copyright 2012-2014, Escape Studios
 #
 
 default['newrelic']['https_download'] = 'https://download.newrelic.com/newrelic/java-agent/newrelic-agent/2.21.3/newrelic-agent-2.21.3.jar'

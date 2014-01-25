@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Attributes:: server-monitor
 #
-# Copyright 2012-2013, Escape Studios
+# Copyright 2012-2014, Escape Studios
 #
 
 default['newrelic']['service_name'] = "newrelic-sysmond"

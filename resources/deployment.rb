@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Resource:: deployment
 #
-# Copyright 2012-2013, Escape Studios
+# Copyright 2012-2014, Escape Studios
 #
 
 actions :notify
