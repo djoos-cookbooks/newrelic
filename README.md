@@ -3,6 +3,8 @@ Description
 
 This cookbook provides an easy way to install the New Relic PHP agent and the New Relic server monitor.
 
+This cookbook requires Chef 11 or later.
+
 More information?
 * https://newrelic.com/docs/server/new-relic-for-server-monitoring
 * https://newrelic.com/docs/php/new-relic-for-php
@@ -20,7 +22,7 @@ Make sure you run Chef >= 0.10.0.
 This cookbook recommends on the following cookbooks:
 
 * php
-* python
+* python::pip
 * ms_dotnet4
 * curl
 
@@ -51,6 +53,7 @@ Attributes
 ### BASIC
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as application monitoring license)
 * `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (usually same license key as server monitoring license)
+* `node['newrelic']['config_path']` - The New Relic config path, defaults to "/etc/newrelic"
 
 ### ADVANCED
 * `node['newrelic']['server_monitoring']['logfile']`
@@ -134,6 +137,17 @@ Attributes
 * `node['newrelic']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
 * `node['newrelic']['log_daily']` - Override other log rolling configuration and roll the logs daily
 
+## plugin-agent.rb
+* `node['newrelic']['plugin-agent']['poll_interval']`
+* `node['newrelic']['plugin-agent']['pidfile']`
+* `node['newrelic']['plugin-agent']['logfile']`
+* `node['newrelic']['plugin-agent']['service_config']`
+* `node['newrelic']['plugin-agent']['config_file']`
+* `node['newrelic']['plugin-agent']['owner']`
+* `node['newrelic']['plugin-agent']['group']`
+* `node['newrelic']['plugin-agent']['mode']`
+* `node['newrelic']['plugin-agent']['pip_package']`
+
 Resources / Providers
 =====================
 
@@ -169,33 +183,143 @@ end
 Usage
 =====
 
-1)
-include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:repository]` and `recipe[newrelic::server-monitor]`
-- OR -
-include the bits and pieces explicitly in a run list:
-`recipe[newrelic::repository]`
-`recipe[newrelic::server-monitor]`
-`recipe[newrelic::php-agent]`
-`recipe[newrelic::python-agent]`
-`recipe[newrelic::dotnet]`
+1. Add one or more of the recipes to your run list:
+    * include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:repository]` and `recipe[newrelic::server-monitor]`
+    * include one or more recipes explicitly in a run list:
+        * `recipe[newrelic::repository]`
+        * `recipe[newrelic::server-monitor]`
+        * `recipe[newrelic::php-agent]`
+        * `recipe[newrelic::python-agent]`
+        * `recipe[newrelic::dotnet]`
+        * `recipe[newrelic::plugin-agent]`
+2. Set the necessary attribute(s):
+    * change the `node['newrelic']['server_monitoring']['license']` and (if needed) `node['newrelic']['application_monitoring']['license']` attribute to your New Relic license key
+    * override the attribute(s), e.g. in a wrapper cookbook (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
-2)
-	change the `node['newrelic']['server_monitoring']['license']` and `node['newrelic']['application_monitoring']['license']` attributes to your New Relic license keys
-	--- OR ---
-	override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+For configuring your Plugin Agent services, you need to insert a YAML string into the `service_config` attribute
+
+```ruby
+node['newrelic-ng']['plugin-agent']['service_config'] = <<-EOS
+postgresql:
+  host: localhost
+  port: 5432
+  user: postgres
+  dbname: postgres
+EOS
+```
+
+Recipes
+=======
+
+To use the recipes, add the following to your metadata.rb:
+
+    depends 'newrelic'
+
+### default
+
+* Includes newrelic::repository
+* Includes newrelic::server-monitor
+
+### dotnet-agent
+
+* Install Microsort .NET Framework 4.0 (`msdotnet4`)
+* Install & configure the New Relic .NET Agent
+
+### php-agent
+
+* Install PHP, newrelic-php5
+* Run New Relic install script
+* Set up New Relic daemon according to `startup_mode` attribute:
+    * Agent mode (i.e., no daemon)
+    * External (i.e., daemon mode)
+
+### plugin-agent
+
+* Includes newrelic-ng::plugin-agent-install
+* Configures and starts newrelic-plugin-agent according to the attributes
+
+### plugin-agent-install
+
+* Install python, python-pip and python-psycopg2
+* Install newrelic-plugin-agent using pip
+* Install newrelic-plugin-agent initscript (Debian, Ubuntu only)
+* Create run/log directories
+
+### python-agent
+
+* Install python-pip
+* Install newrelic using pip
+* Configure Python Agent & set license key
+
+### repository
+
+* Set up the New Relic apt/yum repository
+
+### server-monitor
+
+* Install the platform-appropriate New Relic Server Monitor package
+* Configure the license key
+* Start the Server Monitor service
+
+## Providers
+
+To use the providers, add the following to your metadata.rb
+
+    depends 'newrelic'
+
+### newrelic_plugin_agent
+
+When the plugin-agent is installed (e.g. using the `newrelic::plugin-agent-install` recipe), you can configure it using the LWRP.
+
+    newrelic_plugin_agent 'YOUR_LICENSE_KEY'
+
+For more sophisticated setups, you can specify the following additional attributes (they default to the node attributes)
+
+```ruby
+newrelic_plugin_agent 'custom' do
+  license_key 'MY_PRODUCTION_KEY' if node.chef_environment == 'production'
+  license_key 'MY_STAGING_KEY'    if node.chef_environment == 'staging'
+
+  # additional plugin-agent configuration options
+  poll_interval  20
+  logfile        '/tmp/plugin-agent.log'
+  pidfile        '/tmp/plugin-agent.pid'
+
+  # set your service configuration
+  service_config <<-EOS
+postgresql:
+  host: localhost
+  port: 5432
+  user: postgres
+  dbname: postgres
+EOS
+
+  # path and attributes of nrsysmon
+  owner       'root'
+  group       'root'
+  mode        00600
+  config_file '/etc/plugin-agent.cfg'
+
+  # you can also specify your own configuration template
+  cookbook    'yourcookbook'
+  source      'yoursourcefile'
+end
+```
 
 References
 ==========
 
-* [New Relic home page] (http://newrelic.com/)
-* [New Relic for Server Monitoring] (https://newrelic.com/docs/server/new-relic-for-server-monitoring)
-* [New Relic for PHP] (https://newrelic.com/docs/php/new-relic-for-php)
-* [newrelic-daemon startup modes] (https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
-* [New Relic for Python] (https://newrelic.com/docs/python/new-relic-for-python)
-* [New Relic for .NET] (https://newrelic.com/docs/dotnet/new-relic-for-net)
-* ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
-* ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
-* ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
+* [New Relic home page](http://newrelic.com/)
+* [New Relic for Server Monitoring](https://newrelic.com/docs/server/new-relic-for-server-monitoring)
+* [New Relic for PHP](https://newrelic.com/docs/php/new-relic-for-php)
+* [newrelic-daemon startup modes](https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
+* [New Relic for Python](https://newrelic.com/docs/python/new-relic-for-python)
+* [New Relic for .NET](https://newrelic.com/docs/dotnet/new-relic-for-net)
+* [New Relic Plugin Agent](https://github.com/MeetMe/newrelic-plugin-agent)
+* ["newrelic" cookbook by heavywater on GitHub](https://github.com/heavywater/chef-newrelic)
+* ["newrelic_monitoring" cookbook on community.opscode.com](http://community.opscode.com/cookbooks/newrelic_monitoring)
+* ["newrelic_monitoring" cookbook on GitHub](https://github.com/8thBridge/chef-newrelic-monitoring)
+* ["newrelic-ng" cookbook on GitHub](https://github.com/flinc-chef/newrelic-ng)
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
 
 License and Authors
@@ -203,6 +327,7 @@ License and Authors
 
 Author: David Joos <david@escapestudios.com>
 Author: Escape Studios Development <dev@escapestudios.com>
+Author: Chris Aumann <me@chr4.org>
 Copyright: 2012-2013, Escape Studios
 
 Unless otherwise noted, all files are released under the MIT license,

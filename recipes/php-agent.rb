@@ -7,7 +7,8 @@
 
 include_recipe node['newrelic']['php_recipe']
 
-#the older version (3.0) had a bug in the init scripts that when it shut down the daemon it would also kill dpkg as it was trying to upgrade
+#the older version (3.0) had a bug in the init scripts that when it
+#shut down the daemon it would also kill dpkg as it was trying to upgrade
 #let's remove the old packages before continuing
 package "newrelic-php5" do
     action :remove
@@ -106,7 +107,7 @@ case node['newrelic']['startup_mode']
         #external startup mode
 
         #configure proxy daemon settings
-        template "/etc/newrelic/newrelic.cfg" do
+        template "#{node['newrelic']['config_path']}/newrelic.cfg" do
             source "newrelic.cfg.erb"
             owner "root"
             group "root"
