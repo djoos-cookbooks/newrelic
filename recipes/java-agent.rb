@@ -36,6 +36,8 @@ template conf_file do
     variables(
         :license => node['newrelic']['application_monitoring']['license'],
         :appname => node['newrelic']['application_monitoring']['appname'],
+        :appname_prefix => node['newrelic']['application_monitoring']['appname_prefix'].to_s,
+        :appname_suffix => node['newrelic']['application_monitoring']['appname_suffix'].to_s,
         :logfile => node['newrelic']['application_monitoring']['logfile'],
         :loglevel => node['newrelic']['application_monitoring']['loglevel'],
         :audit_mode => node['newrelic']['audit_mode'], 

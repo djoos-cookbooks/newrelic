@@ -102,7 +102,7 @@ newrelic.loglevel = "<%= @loglevel %>"
 <% if @appname.nil? %>
 ;newrelic.appname = "PHP Application"
 <% else %>
-newrelic.appname = "<%= @appname %>"
+newrelic.appname = "<%= @appname_prefix + @appname + @appname_suffix %>"
 <% end %>
 
 ;
