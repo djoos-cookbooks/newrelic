@@ -5,6 +5,15 @@
 # Copyright 2012-2014, Escape Studios
 #
 
+if node['newrelic']['use_vault']
+    include_recipe 'chef-vault'
+
+    license = chef_vault_item(node['newrelic']['data_bag'], node['newrelic']['data_bag_item'])['license']
+else
+    license = node['newrelic']['server_monitoring']['license']
+end
+
+
 case node['platform']
     when "debian", "ubuntu", "redhat", "centos", "fedora", "scientific", "amazon", "smartos"
         package node['newrelic']['service_name'] do
@@ -18,7 +27,7 @@ case node['platform']
             group node['newrelic']['config_file_group']
             mode "640"
             variables(
-                :license => node['newrelic']['server_monitoring']['license'],
+                :license => license,
                 :logfile => node['newrelic']['server_monitoring']['logfile'],
                 :loglevel => node['newrelic']['server_monitoring']['loglevel'],
                 :proxy => node['newrelic']['server_monitoring']['proxy'],
@@ -43,7 +52,7 @@ case node['platform']
         if node['kernel']['machine'] == "x86_64"
                 windows_package "New Relic Server Monitor" do
                 source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x64_#{node['newrelic']['server_monitoring']['windows_version']}.msi"
-                options "/L*v install.log /qn NR_LICENSE_KEY=#{node['newrelic']['server_monitoring']['license']}"
+                options "/L*v install.log /qn NR_LICENSE_KEY=#{license}"
                 action :install
                 version node['newrelic']['server_monitoring']['windows_version']
                 checksum node['newrelic']['server_monitoring']['windows64_checksum']
@@ -51,7 +60,7 @@ case node['platform']
         else
             windows_package "New Relic Server Monitor" do
                 source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x86_#{node['newrelic']['server_monitoring']['windows_version']}.msi"
-                options "/L*v install.log /qn NR_LICENSE_KEY=#{node['newrelic']['server_monitoring']['license']}"
+                options "/L*v install.log /qn NR_LICENSE_KEY=#{license}"
                 action :install
                 version node['newrelic']['server_monitoring']['windows_version']
                 checksum node['newrelic']['server_monitoring']['windows32_checksum']
