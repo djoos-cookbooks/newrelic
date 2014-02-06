@@ -1,30 +1,18 @@
 #
 # Cookbook Name:: newrelic
-# Recipe:: java-agent
+# Recipe:: ruby-agent
 #
 # Copyright 2012-2014, Escape Studios
 #
 
-#create the directory to install the jar into
-directory node['newrelic']['install_dir'] do
-    owner node['newrelic']['app_user']
-    group node['newrelic']['app_group']
-    mode 0775
-    action :create
-end
-
-local_file = node['newrelic']['install_dir'] + '/newrelic.jar'
-
-remote_file local_file do
-    source node['newrelic']['https_download']
-    owner node['newrelic']['app_user']
-    group node['newrelic']['app_group']
-    mode 0664
+package 'newrelic_rpm' do
+    provider Chef::Provider::Package::RubyGem
+    action :install
 end
 
 if node['newrelic']['application_monitoring']['appname'].nil?
     node.set['newrelic']['application_monitoring']['appname'] = node['hostname']
-end   
+end
 
 #configure your New Relic license key
 conf_file = node['newrelic']['install_dir'] + '/newrelic.yml'
