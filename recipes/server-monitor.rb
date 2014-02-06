@@ -5,14 +5,7 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-if node['newrelic']['use_vault']
-    include_recipe 'chef-vault'
-
-    license = chef_vault_item(node['newrelic']['data_bag'], node['newrelic']['data_bag_item'])['license']
-else
-    license = node['newrelic']['server_monitoring']['license']
-end
-
+license = get_newrelic_license('server_monitoring')
 
 case node['platform']
     when "debian", "ubuntu", "redhat", "centos", "fedora", "scientific", "amazon", "smartos"

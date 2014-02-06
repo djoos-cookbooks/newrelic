@@ -1,0 +1,5 @@
+{
+  "id": "license",
+  "server_monitoring": "dummy_license",
+  "application_monitoring": "dummy_license"
+}

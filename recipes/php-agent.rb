@@ -6,6 +6,7 @@
 #
 
 include_recipe node['newrelic']['php_recipe']
+license = get_newrelic_license('application_monitoring')
 
 #the older version (3.0) had a bug in the init scripts that when it shut down the daemon it would also kill dpkg as it was trying to upgrade
 #let's remove the old packages before continuing
@@ -40,7 +41,7 @@ template "#{node['php']['ext_conf_dir']}/newrelic.ini" do
     mode "0644"
     variables(
         :enabled => node['newrelic']['application_monitoring']['enabled'],
-        :license => node['newrelic']['application_monitoring']['license'],
+        :license => license,
         :logfile => node['newrelic']['application_monitoring']['logfile'],
         :loglevel => node['newrelic']['application_monitoring']['loglevel'],
         :appname => node['newrelic']['application_monitoring']['appname'],

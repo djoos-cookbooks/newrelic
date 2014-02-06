@@ -18,6 +18,10 @@ Make sure you run Chef >= 0.10.0.
 
 ## Cookbooks:
 
+This cookbook requires the following cookbooks:
+
+* chef-vault
+
 This cookbook recommends on the following cookbooks:
 
 * php
@@ -54,6 +58,12 @@ Attributes
 ### BASIC
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as application monitoring license)
 * `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (usually same license key as server monitoring license)
+
+__NOTE:__ If you're using ChefVault to securely store your license, use the following:
+
+* `node['newrelic']['use_vault']` - Whether or not to use ChefVault.  Default is `false`.
+* `node['newrelic']['data_bag']`  - Name of vault to use.  Default is `nil`.
+* `node['newrelic']['data_bag_item']` - Name of vault item.  Default is `nil`.
 
 ### ADVANCED
 * `node['newrelic']['server_monitoring']['logfile']`
