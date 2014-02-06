@@ -6,6 +6,7 @@
 #
 
 include_recipe node['newrelic']['python_recipe']
+license = get_newrelic_license('application_monitoring')
 
 #install latest python agent
 python_pip "newrelic" do
@@ -22,7 +23,7 @@ template "/etc/newrelic/newrelic.ini" do
     group "root"
     mode "0644"
     variables(
-        :license => node['newrelic']['application_monitoring']['license'],
+        :license => license,
         :appname => node['newrelic']['application_monitoring']['appname'],
         :enabled => node['newrelic']['application_monitoring']['enabled'],
         :logfile => node['newrelic']['application_monitoring']['logfile'],

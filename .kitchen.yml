@@ -1,0 +1,32 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-12.04
+  - name: centos-6.4
+
+suites:
+  - name: default
+    run_list:
+      - recipe[newrelic::default]
+    attributes:
+      newrelic:
+        use_vault: true
+        data_bag: newrelic
+        data_bag_item: license
+      dev_mode: true
+  - name: java-agent
+    run_list:
+      - recipe[newrelic::default]
+      - recipe[newrelic::java-agent]
+    attributes:
+      newrelic:
+        use_vault: true
+        data_bag: newrelic
+        data_bag_item: license
+        install_dir: /tmp/newrelic
+      dev_mode: true     

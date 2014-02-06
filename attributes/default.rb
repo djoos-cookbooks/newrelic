@@ -9,6 +9,10 @@
 #BASIC CONFIG
 #############
 #license(s)
+default['newrelic']['use_vault'] = false
+default['newrelic']['data_bag']  = nil
+default['newrelic']['data_bag_item'] = nil
+
 default['newrelic']['server_monitoring']['license'] = "CHANGE_ME"
 default['newrelic']['application_monitoring']['license'] = "CHANGE_ME"
 
