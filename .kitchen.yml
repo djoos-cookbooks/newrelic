@@ -38,9 +38,9 @@ suites:
       chef-vault:
         version:
       newrelic:
-#        service_notify_action: nothing
-#        service_actions:
-#          - nothing
+        service_notify_action: nothing
+        service_actions:
+          - nothing
         use_vault: true
         data_bag: newrelic
         data_bag_item: license
