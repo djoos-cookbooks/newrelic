@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/escapestudios-cookbooks/newrelic.png)](https://travis-ci.org/escapestudios-cookbooks/newrelic)
+
 Description
 ===========
 
@@ -18,13 +20,15 @@ Make sure you run Chef >= 0.10.0.
 
 ## Cookbooks:
 
+* chef-vault
+
 This cookbook recommends on the following cookbooks:
 
 * php
 * python
 * ms_dotnet4
-* curl
 * nodejs
+* curl
 
 ### Depending on your environment, these recommended cookbooks are actual dependencies (depends):
 * Installing the PHP agent? You'll need the php cookbook to be available.
@@ -52,8 +56,14 @@ Attributes
 ## default.rb:
 
 ### BASIC
-* `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (usually same license key as application monitoring license)
-* `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (usually same license key as server monitoring license)
+* `node['newrelic']['license']` - Your New Relic license key
+* `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (defaults to value of node['newrelic']['license'])
+* `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (defaults to value of node['newrelic']['license'])
+
+__NOTE:__ If you're using ChefVault to securely store your license, use the following:
+* `node['newrelic']['use_vault']` - Whether or not to use ChefVault.  Default is `false`
+* `node['newrelic']['data_bag']` - Name of vault to use.  Default is `nil`
+* `node['newrelic']['data_bag_item']` - Name of vault item.  Default is `nil`
 
 ### ADVANCED
 * `node['newrelic']['server_monitoring']['logfile']`
@@ -192,19 +202,21 @@ Usage
 
 1)
 include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:repository]` and `recipe[newrelic::server-monitor]`
-- OR -
+--- OR ---
 include the bits and pieces explicitly in a run list:
+```ruby
 `recipe[newrelic::repository]`
 `recipe[newrelic::server-monitor]`
 `recipe[newrelic::php-agent]`
 `recipe[newrelic::python-agent]`
 `recipe[newrelic::dotnet]`
 `recipe[newrelic::nodejs]`
+```
 
 2)
-	change the `node['newrelic']['server_monitoring']['license']` and `node['newrelic']['application_monitoring']['license']` attributes to your New Relic license keys
-	--- OR ---
-	override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+change the `node['newrelic']['server_monitoring']['license']` and `node['newrelic']['application_monitoring']['license']` attributes to your New Relic license keys
+--- OR ---
+override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 References
 ==========

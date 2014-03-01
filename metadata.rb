@@ -10,6 +10,8 @@ version          "0.5.8"
 supports os
 end
 
+depends "chef-vault"
+
 recommends "php"
 recommends "python"
 recommends "ms_dotnet4"

@@ -1,0 +1,66 @@
+---
+driver_plugin: vagrant
+driver_config:
+  require_chef_omnibus: true
+
+platforms:
+  - name: ubuntu-12.04
+    driver_config:
+        box: opscode-ubuntu-12.04
+        box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+#  - name: ubuntu-13.04
+#    driver_config:
+#      box: opscode-ubuntu-13.04
+#      box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-13.04_provisionerless.box
+#  - name: centos-6.3
+#    driver_config:
+#        box: opscode-centos-6.3
+#        box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-6.3_provisionerless.box
+  - name: centos-6.4
+    driver_config:
+        box: opscode-centos-6.4
+        box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box
+
+suites:
+#  - name: default
+#    run_list:
+#      - recipe[newrelic::default]
+#    attributes:
+#      newrelic:
+#        service_notify_action: nothing
+#        service_actions:
+#          - nothing
+  - name: default-vault
+    run_list:
+      - recipe[newrelic::default]
+    attributes:
+      dev_mode: true #If this is true, chef_vault_item will attempt to load the specified item as a regular Data Bag Item with Chef::DataBagItem.load. This is intended to be used only for testing, and not as a fall back to avoid issues loading encrypted items.
+      chef-vault:
+        version:
+      newrelic:
+#        service_notify_action: nothing
+#        service_actions:
+#          - nothing
+        use_vault: true
+        data_bag: newrelic
+        data_bag_item: license
+#  - name: dotnet-agent
+#    run_list:
+#      - recipe[newrelic::default]
+#      - recipe[newrelic::dotnet-agent]
+#  - name: java-agent
+#    run_list:
+#      - recipe[newrelic::default]
+#      - recipe[newrelic::java-agent]
+#  - name: nodejs-agent
+#    run_list:
+#      - recipe[newrelic::default]
+#      - recipe[newrelic::nodejs-agent]
+#  - name: php-agent
+#    run_list:
+#      - recipe[newrelic::default]
+#      - recipe[newrelic::php-agent]
+#  - name: python-agent
+#    run_list:
+#      - recipe[newrelic::default]
+#      - recipe[newrelic::python-agent]

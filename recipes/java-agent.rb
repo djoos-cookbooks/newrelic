@@ -5,6 +5,8 @@
 # Copyright 2012-2014, Escape Studios
 #
 
+license = get_newrelic_license('application_monitoring')
+
 #create the directory to install the jar into
 directory node['newrelic']['install_dir'] do
     owner node['newrelic']['app_user']
@@ -34,7 +36,7 @@ template conf_file do
     group node['newrelic']['app_group']
     mode 0644
     variables(
-        :license => node['newrelic']['application_monitoring']['license'],
+        :license => license,
         :appname => node['newrelic']['application_monitoring']['appname'],
         :logfile => node['newrelic']['application_monitoring']['logfile'],
         :loglevel => node['newrelic']['application_monitoring']['loglevel'],
