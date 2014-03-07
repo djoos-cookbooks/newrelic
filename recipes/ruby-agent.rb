@@ -1,48 +1,36 @@
 #
 # Cookbook Name:: newrelic
-# Recipe:: java-agent
+# Recipe:: ruby-agent
 #
 # Copyright 2012-2014, Escape Studios
 #
 
 license = get_newrelic_license('application_monitoring')
 
-#create the directory to install the jar into
-directory node['newrelic']['java-agent']['install_dir'] do
-    owner node['newrelic']['java-agent']['app_user']
-    group node['newrelic']['java-agent']['app_group']
-    mode 0775
-    action :create
-end
-
-local_file = "#{node['newrelic']['java-agent']['install_dir']}/newrelic.jar"
-
-remote_file local_file do
-    source node['newrelic']['java-agent']['https_download']
-    owner node['newrelic']['java-agent']['app_user']
-    group node['newrelic']['java-agent']['app_group']
-    mode 0664
+package 'newrelic_rpm' do
+    provider Chef::Provider::Package::RubyGem
+    action :install
 end
 
 if node['newrelic']['application_monitoring']['appname'].nil?
     node.set['newrelic']['application_monitoring']['appname'] = node['hostname']
-end   
+end
 
 #configure your New Relic license key
-template "#{node['newrelic']['java-agent']['install_dir']}/newrelic.yml" do
-    source "newrelic.yml.java.erb"
-    owner node['newrelic']['java-agent']['app_user']
-    group node['newrelic']['java-agent']['app_group']
+template "#{node['newrelic']['ruby-agent']['install_dir']}/newrelic.yml" do
+    source "newrelic.yml.ruby.erb"
+    owner node['newrelic']['ruby-agent']['app_user']
+    group node['newrelic']['ruby-agent']['app_group']
     mode 0644
     variables(
         :license => license,
         :appname => node['newrelic']['application_monitoring']['appname'],
         :logfile => node['newrelic']['application_monitoring']['logfile'],
         :loglevel => node['newrelic']['application_monitoring']['loglevel'],
-        :audit_mode => node['newrelic']['java-agent']['audit_mode'], 
-        :log_file_count => node['newrelic']['java-agent']['log_file_count'],
-        :log_limit_in_kbytes => node['newrelic']['java-agent']['log_limit_in_kbytes'],
-        :log_daily => node['newrelic']['java-agent']['log_daily'], 
+        :audit_mode => node['newrelic']['ruby-agent']['audit_mode'], 
+        :log_file_count => node['newrelic']['ruby-agent']['log_file_count'],
+        :log_limit_in_kbytes => node['newrelic']['ruby-agent']['log_limit_in_kbytes'],
+        :log_daily => node['newrelic']['ruby-agent']['log_daily'], 
         :daemon_ssl => node['newrelic']['application_monitoring']['daemon']['ssl'],        
         :capture_params => node['newrelic']['application_monitoring']['capture_params'],
         :ignored_params => node['newrelic']['application_monitoring']['ignored_params'],
@@ -56,9 +44,4 @@ template "#{node['newrelic']['java-agent']['install_dir']}/newrelic.yml" do
         :browser_monitoring_auto_instrument => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
     )
     action :create
-end
-
-#execution of the install
-execute "newrelic-install" do
-    command "sudo java -jar #{node['newrelic']['install_dir']}/newrelic.jar install"
 end

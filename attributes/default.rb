@@ -9,12 +9,19 @@
 #BASIC CONFIG
 #############
 #license(s)
-default['newrelic']['server_monitoring']['license'] = "CHANGE_ME"
-default['newrelic']['application_monitoring']['license'] = "CHANGE_ME"
+default['newrelic']['license'] = "REPLACE_WITH_REAL_KEY"
+default['newrelic']['server_monitoring']['license'] = node['newrelic']['license']
+default['newrelic']['application_monitoring']['license'] = node['newrelic']['license']
+default['newrelic']['plugin_monitoring']['license'] = node['newrelic']['license']
 
 ################
 #ADVANCED CONFIG
 ################
+#Chef vault
+default['newrelic']['use_vault'] = false
+default['newrelic']['data_bag']  = nil
+default['newrelic']['data_bag_item'] = nil
+
 #server monitoring
 default['newrelic']['server_monitoring']['logfile'] = nil
 default['newrelic']['server_monitoring']['loglevel'] = nil
