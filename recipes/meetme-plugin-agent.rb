@@ -10,7 +10,7 @@ include_recipe node['newrelic']['meetme_plugin_agent']['python_recipe']
 license = get_newrelic_license('meetme_plugin_agent')
 
 #install latest plugin agent
-python_pip "#{node['newrelic']['meetme_plugin_agent']['service_name']}" do
+python_pip node['newrelic']['meetme_plugin_agent']['service_name'] do
     action :upgrade
 end
 
@@ -24,8 +24,8 @@ files = [
 
 files.each do |file|
     directory ::File.dirname(file) do
-        owner "#{node['newrelic']['meetme_plugin_agent']['user']}"
-        group "#{node['newrelic']['meetme_plugin_agent']['user']}"
+        owner node['newrelic']['meetme_plugin_agent']['user']
+        group node['newrelic']['meetme_plugin_agent']['user']
         mode "0755"
     end
 end
@@ -42,7 +42,7 @@ unless services.nil?
 end
 
 #configuration file
-template "#{node['newrelic']['meetme_plugin_agent']['config_file']}" do
+template node['newrelic']['meetme_plugin_agent']['config_file'] do
     source "meetme_plugin_agent.cfg.erb"
     owner "root"
     group "root"
@@ -68,21 +68,26 @@ node['newrelic']['meetme_plugin_agent']['additional_requirements'].each do |addi
 end
 
 #init script
+variables = {
+    :config_file => node['newrelic']['meetme_plugin_agent']['config_file'],
+    :pid_file => node['newrelic']['meetme_plugin_agent']['pid_file']
+}
+
 case node['platform']
-    when "debian", "ubuntu", "redhat", "centos", "fedora", "scientific", "amazon", "smartos"        
-        template "/etc/init.d/newrelic-plugin-agent" do
-        	source "meetme_plugin_agent_init.erb"
-            mode "0755"
-            variables(
-                :config_file => node['newrelic']['meetme_plugin_agent']['config_file'],
-                :pid_file => node['newrelic']['meetme_plugin_agent']['pid_file'],
-                :user => node['newrelic']['meetme_plugin_agent']['user'],
-                :group => node['newrelic']['meetme_plugin_agent']['user']
-            )
-        end
+    when "debian", "ubuntu"
+        variables[:user] = node['newrelic']['meetme_plugin_agent']['user']
+        variables[:group] = node['newrelic']['meetme_plugin_agent']['user']
 end
 
-service "#{node['newrelic']['meetme_plugin_agent']['service_name']}" do
+template "/etc/init.d/newrelic-plugin-agent" do
+    source "meetme_plugin_agent_init.erb"
+    mode "0755"
+    variables(
+        variables
+    )
+end
+
+service node['newrelic']['meetme_plugin_agent']['service_name'] do
     supports :status => true, :start => true, :stop => true, :restart => true
     action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
 end
