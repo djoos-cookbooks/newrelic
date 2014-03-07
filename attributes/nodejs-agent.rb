@@ -5,5 +5,5 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-default['newrelic']['nodejs']['apps'] = []
-default['newrelic']['nodejs_recipe'] = "nodejs::npm"
+default['newrelic']['nodejs-agent']['apps'] = []
+default['newrelic']['nodejs-agent']['nodejs_recipe'] = "nodejs::npm"

@@ -5,7 +5,7 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-include_recipe node['newrelic']['php_recipe']
+include_recipe node['newrelic']['php-agent']['php_recipe']
 
 license = get_newrelic_license('application_monitoring')
 
@@ -26,7 +26,7 @@ end
 execute "newrelic-install" do
     command "newrelic-install install"
     action :nothing
-    notifies :restart, "service[#{node['newrelic']['web_server']['service_name']}]", :delayed
+    notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
 end
 
 service "newrelic-daemon" do
@@ -78,13 +78,13 @@ template "#{node['php']['ext_conf_dir']}/newrelic.ini" do
         :webtransaction_name_files => node['newrelic']['application_monitoring']['webtransaction']['name']['files']
     )
     action :create
-    notifies :restart, "service[#{node['newrelic']['web_server']['service_name']}]", :delayed
+    notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
 end
 
 #https://newrelic.com/docs/php/newrelic-daemon-startup-modes
-Chef::Log.info("newrelic-daemon startup mode: #{node['newrelic']['startup_mode']}")
+Chef::Log.info("newrelic-daemon startup mode: #{node['newrelic']['php-agent']['startup_mode']}")
 
-case node['newrelic']['startup_mode']
+case node['newrelic']['php-agent']['startup_mode']
     when "agent"
         #agent startup mode
 
@@ -127,12 +127,12 @@ case node['newrelic']['startup_mode']
             )
             action :create
             notifies :restart, "service[newrelic-daemon]", :immediately
-            notifies :restart, "service[#{node['newrelic']['web_server']['service_name']}]", :delayed
+            notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
         end
 
         service "newrelic-daemon" do
             action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
         end
     else
-        Chef::Application.fatal!("#{node['newrelic']['startup_mode']} is not a valid newrelic-daemon startup mode.")
+        Chef::Application.fatal!("#{node['newrelic']['php-agent']['startup_mode']} is not a valid newrelic-daemon startup mode.")
 end

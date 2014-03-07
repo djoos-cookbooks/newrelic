@@ -5,15 +5,15 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-include_recipe node['newrelic']['python_recipe']
+include_recipe node['newrelic']['python-agent']['python_recipe']
 
 license = get_newrelic_license('application_monitoring')
 
 #install latest python agent
 python_pip "newrelic" do
     action :install
-    if node['newrelic']['python_version'] != "latest"
-        version node['newrelic']['python_version']
+    if node['newrelic']['python-agent']['python_version'] != "latest"
+        version node['newrelic']['python-agent']['python_version']
     end
 end
 

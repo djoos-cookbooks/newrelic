@@ -3,7 +3,7 @@
 ###################
 #
 # This file configures the New Relic Agent.  New Relic monitors
-# Java applications with deep visibility and low overhead.  For more
+# Ruby applications with deep visibility and low overhead.  For more
 # information, visit www.newrelic.com.
 #
 # This configuration file is custom generated for NewRelic Administration
@@ -45,7 +45,7 @@ common: &default_settings
   # app_name: My Application;My Application 2
   # This setting is required.
   <% if @appname.nil? %>
-  app_name: Java Application
+  app_name: Ruby Application
   <% else %>
   app_name: <%= @appname %>
   <% end %>
