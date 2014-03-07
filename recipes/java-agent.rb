@@ -57,3 +57,8 @@ template "#{node['newrelic']['java-agent']['install_dir']}/newrelic.yml" do
     )
     action :create
 end
+
+#execution of the install
+execute "Run New Relic java agent installer" do
+    command "sudo java -jar #{node['newrelic']['install_dir']}/newrelic.jar install"
+end
