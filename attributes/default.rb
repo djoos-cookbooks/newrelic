@@ -12,6 +12,7 @@
 default['newrelic']['license'] = "REPLACE_WITH_REAL_KEY"
 default['newrelic']['server_monitoring']['license'] = node['newrelic']['license']
 default['newrelic']['application_monitoring']['license'] = node['newrelic']['license']
+default['newrelic']['meetme_plugin_agent']['license'] = node['newrelic']['license']
 
 #Chef vault
 default['newrelic']['use_vault'] = false

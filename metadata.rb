@@ -11,9 +11,9 @@ supports os
 end
 
 depends "chef-vault"
+depends "python"
 
 recommends "php"
-recommends "python"
 recommends "ms_dotnet4"
 recommends "curl"
 recommends "nodejs"
@@ -24,4 +24,6 @@ recipe "newrelic::server-monitor", "Installs & configures the New Relic server m
 recipe "newrelic::php-agent", "Installs the New Relic PHP agent."
 recipe "newrelic::python-agent", "Installs the New Relic Python agent."
 recipe "newrelic::dotnet", "Installs New Relic .NET Agent"
+recipe "newrelic::java-agent", "Installs the New Relic Java agent."
 recipe "newrelic::nodejs", "Installs New Relic Node.js Agent"
+recipe "newrelic::plugin-agent", "Installs the New Relic plugin agent."

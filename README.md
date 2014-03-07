@@ -6,10 +6,15 @@ Description
 This cookbook provides an easy way to install various New Relic agents and the New Relic server monitor.
 
 More information?
-* https://newrelic.com/docs/server/new-relic-for-server-monitoring
-* https://newrelic.com/docs/php/new-relic-for-php
-* https://newrelic.com/docs/python/new-relic-for-python
+* https://docs.newrelic.com/docs/server/new-relic-for-server-monitoring
+* https://docs.newrelic.com/docs/php/new-relic-for-php
+* https://docs.newrelic.com/docs/python/new-relic-for-python
+* https://docs.newrelic.com/docs/dotnet/new-relic-for-net
+* https://docs.newrelic.com/docs/java/new-relic-for-java
 * https://docs.newrelic.com/docs/nodejs/installing-and-maintaining-nodejs
+
+https://pypi.python.org/pypi/newrelic_plugin_agent
+https://github.com/MeetMe/newrelic-plugin-agent#installation-instructions
 
 Requirements
 ============
@@ -21,22 +26,21 @@ Make sure you run Chef >= 0.10.0.
 ## Cookbooks:
 
 * chef-vault
+* python
 
 This cookbook recommends on the following cookbooks:
 
 * php
-* python
 * ms_dotnet4
 * nodejs
 * curl
 
 ### Depending on your environment, these recommended cookbooks are actual dependencies (depends):
 * Installing the PHP agent? You'll need the php cookbook to be available.
-* Installing the Python agent? You'll need the python cookbook to be available.
 * Installing the DotNet agent? You'll need the ms_dotnet4 cookbook to be available.
-* Installing the nodejs agent? You'll need the nodejs cookbook to be available.
+* Installing the Nodejs agent? You'll need the nodejs cookbook to be available.
 
-* Want to make use of deployments? You'll need the curl cookbook to be available.
+* Making use of the deployment LWRP? You'll need the curl cookbook to be available.
 
 ## Platforms:
 
@@ -59,6 +63,7 @@ Attributes
 * `node['newrelic']['license']` - Your New Relic license key
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (defaults to value of node['newrelic']['license'])
 * `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (defaults to value of node['newrelic']['license'])
+* `node['newrelic']['meetme_plugin_agent']['license']` - Your New Relic license key for plugin agent purposes (usually same license key as server monitoring and application monitoring license)
 
 __NOTE:__ If you're using ChefVault to securely store your license, use the following:
 * `node['newrelic']['use_vault']` - Whether or not to use ChefVault.  Default is `false`
@@ -164,6 +169,44 @@ javascript
 require('newrelic');
 ```
 
+## meetme-plugin-agent.rb:
+* `node['newrelic']['meetme_plugin_agent']['service_name']` - The New Relic plugin agent service name, defaults to "newrelic-plugin-agent"
+* `node['newrelic']['meetme_plugin_agent']['services']` - A hash of New Relic plugin agent services, defaults to nil
+
+eg.
+```
+{
+  "memcached" => {
+    "name" => "localhost",
+    "host" => "host",
+    "port" => 11211
+  },
+  "redis" => [
+    {
+      "name" => "localhost",
+      "host" => "localhost",
+      "port" => 6379,
+      "db_count" => 16,
+      "password" => "foobar"
+    },
+    {
+      "name" => "localhost",
+      "host" => "localhost",
+      "port" => 6380,
+      "db_count" => 16,
+      "password" => "foobar"
+    }
+  ]
+}
+```
+
+* `node['newrelic']['meetme_plugin_agent']['wake_interval']` - The New Relic plugin agent wake interval, defaults to 60
+* `node['newrelic']['meetme_plugin_agent']['config_file']` - The New Relic plugin agent config file name, defaults to "/etc/newrelic/newrelic_plugin_agent.cfg"
+* `node['newrelic']['meetme_plugin_agent']['pid_file']` - The New Relic plugin agent PID file name, defaults to "/var/run/newrelic/newrelic_plugin_agent.pid"
+* `node['newrelic']['meetme_plugin_agent']['log_file']` - The New Relic plugin agent log file name, defaults to "/var/log/newrelic/newrelic_plugin_agent.log"
+* `node['newrelic']['meetme_plugin_agent']['user']` - The New Relic plugin agent user, defaults to "newrelic"
+* `node['newrelic']['meetme_plugin_agent']['additional_requirements']` - The New Relic plugin agent's additional requirements, eg. {"mongodb", "pgbouncer", "postgresql"} - defaults to {}
+
 Resources / Providers
 =====================
 
@@ -207,14 +250,16 @@ include the bits and pieces explicitly in a run list:
 ```ruby
 `recipe[newrelic::repository]`
 `recipe[newrelic::server-monitor]`
+`recipe[newrelic::dotnet-agent]`
+`recipe[newrelic::java-agent]`
+`recipe[newrelic::meetme-plugin-agent]`
+`recipe[newrelic::nodejs-agent]`
 `recipe[newrelic::php-agent]`
 `recipe[newrelic::python-agent]`
-`recipe[newrelic::dotnet]`
-`recipe[newrelic::nodejs]`
 ```
 
 2)
-change the `node['newrelic']['server_monitoring']['license']` and `node['newrelic']['application_monitoring']['license']` attributes to your New Relic license keys
+change the `node['newrelic']['license']` attribute to your New Relic license keys
 --- OR ---
 override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
@@ -222,11 +267,12 @@ References
 ==========
 
 * [New Relic home page] (http://newrelic.com/)
-* [New Relic for Server Monitoring] (https://newrelic.com/docs/server/new-relic-for-server-monitoring)
-* [New Relic for PHP] (https://newrelic.com/docs/php/new-relic-for-php)
+* [New Relic for Server Monitoring] (https://docs.newrelic.com/docs/server/new-relic-for-server-monitoring)
+* [New Relic for PHP] (https://docs.newrelic.com/docs/php/new-relic-for-php)
 * [newrelic-daemon startup modes] (https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
-* [New Relic for Python] (https://newrelic.com/docs/python/new-relic-for-python)
-* [New Relic for .NET] (https://newrelic.com/docs/dotnet/new-relic-for-net)
+* [New Relic for Python] (https://docs.newrelic.com/docs/python/new-relic-for-python)
+* [New Relic for .NET] (https://docs.newrelic.com/docs/dotnet/new-relic-for-net)
+* [New Relic for Java] (https://docs.newrelic.com/docs/java/new-relic-for-java)
 * ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
 * ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
 * ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
