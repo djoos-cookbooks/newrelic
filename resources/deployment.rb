@@ -8,7 +8,7 @@
 actions :notify
 default_action :notify
 
-attribute :url, :kind_of => String, :default => "https://rpm.newrelic.com/deployments.xml"
+attribute :url, :kind_of => String, :default => "https://api.newrelic.com/deployments.xml"
 attribute :api_key, :name_attribute => true, :kind_of => String, :default => nil
 
 attribute :app_name, :kind_of => String, :name_attribute => true, :default => nil #required when app_id is not set
