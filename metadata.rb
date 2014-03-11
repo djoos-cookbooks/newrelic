@@ -12,6 +12,8 @@ end
 
 depends "chef-vault"
 depends "python"
+depends "apt", "~> 1.0"
+depends "yum", "~> 3.0"
 
 recommends "php"
 recommends "ms_dotnet4"
