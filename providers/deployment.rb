@@ -5,6 +5,8 @@
 # Copyright 2012-2014, Escape Studios
 #
 
+use_inline_resources if defined?(use_inline_resources)
+
 def whyrun_supported?
     true
 end
@@ -47,6 +49,7 @@ action :notify do
             command command_curl
             action :run
         end
+
         new_resource.updated_by_last_action(true)
     end
 end
