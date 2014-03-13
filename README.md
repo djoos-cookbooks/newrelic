@@ -61,15 +61,15 @@ Attributes
 ## default.rb:
 
 ### BASIC
-* `node['newrelic']['license']` - Your New Relic license key
+* `node['newrelic']['license']` - Your New Relic license key. Default is `nil`
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (defaults to value of node['newrelic']['license'])
 * `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (defaults to value of node['newrelic']['license'])
 * `node['newrelic']['plugin_monitoring']['license']` - Your New Relic license key for plugin purposes (defaults to value of node['newrelic']['license'])
 
 __NOTE:__ If you're using ChefVault to securely store your license, use the following:
-* `node['newrelic']['use_vault']` - Whether or not to use ChefVault.  Default is `false`
-* `node['newrelic']['data_bag']` - Name of vault to use.  Default is `nil`
-* `node['newrelic']['data_bag_item']` - Name of vault item.  Default is `nil`
+* `node['newrelic']['use_vault']` - Whether or not to use ChefVault. Default is `false`
+* `node['newrelic']['data_bag']` - Name of vault to use. Default is `nil`
+* `node['newrelic']['data_bag_item']` - Name of vault item. Default is `nil`
 
 ### ADVANCED
 * `node['newrelic']['server_monitoring']['logfile']`

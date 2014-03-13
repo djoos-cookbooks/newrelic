@@ -9,7 +9,7 @@
 #BASIC CONFIG
 #############
 #license(s)
-default['newrelic']['license'] = "REPLACE_WITH_REAL_KEY"
+default['newrelic']['license'] = nil
 default['newrelic']['server_monitoring']['license'] = node['newrelic']['license']
 default['newrelic']['application_monitoring']['license'] = node['newrelic']['license']
 default['newrelic']['plugin_monitoring']['license'] = node['newrelic']['license']
