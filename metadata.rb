@@ -12,7 +12,7 @@ end
 
 depends "chef-vault"
 depends "python"
-depends "apt", "~> 1.0"
+depends "apt"
 depends "yum", "~> 3.0"
 
 recommends "php"
