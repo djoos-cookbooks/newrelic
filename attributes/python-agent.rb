@@ -7,3 +7,4 @@
 
 default['newrelic']['python-agent']['python_version'] = "latest"
 default['newrelic']['python-agent']['python_recipe'] = "python::pip"
+default['newrelic']['python-agent']['python_venv'] = ''
