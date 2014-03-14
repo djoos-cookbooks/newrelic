@@ -28,6 +28,8 @@ Make sure you run Chef >= 0.10.0.
 
 * chef-vault
 * python
+* apt
+* yum
 
 This cookbook recommends on the following cookbooks:
 
