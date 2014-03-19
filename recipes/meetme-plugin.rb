@@ -11,6 +11,9 @@ license = node['newrelic']['plugin_monitoring']['license']
 
 #install latest plugin agent
 python_pip node['newrelic']['meetme-plugin']['service_name'] do
+    if node['newrelic']['python-agent']['python_venv']
+        virtualenv node['newrelic']['python-agent']['python_venv']
+    end
     action :upgrade
 end
 
