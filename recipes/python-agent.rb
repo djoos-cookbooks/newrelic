@@ -11,6 +11,9 @@ license = node['newrelic']['application_monitoring']['license']
 
 #install latest python agent
 python_pip "newrelic" do
+    if node['newrelic']['python-agent']['python_venv']
+        virtualenv node['newrelic']['python-agent']['python_venv']
+    end
     action :install
     if node['newrelic']['python-agent']['python_version'] != "latest"
         version node['newrelic']['python-agent']['python_version']
