@@ -13,6 +13,12 @@ case node['platform']
             action :install
         end
 
+        hostname = if node['opsworks']
+          "#{node['opsworks']['stack']['name'].downcase}-#{node['opsworks']['instance']['hostname']}"
+        else
+          node['newrelic']['server_monitoring']['hostname']
+        end
+
         #configure your New Relic license key
         template "#{node['newrelic']['server-monitor']['config_path']}/nrsysmond.cfg" do
             source "nrsysmond.cfg.erb"
@@ -27,7 +33,7 @@ case node['platform']
                 :ssl => node['newrelic']['server_monitoring']['ssl'],
                 :ssl_ca_bundle => node['newrelic']['server_monitoring']['ssl_ca_bundle'],
                 :ssl_ca_path => node['newrelic']['server_monitoring']['ssl_ca_path'],
-                :hostname => node['newrelic']['server_monitoring']['hostname'],
+                :hostname => hostname,
                 :pidfile => node['newrelic']['server_monitoring']['pidfile'],
                 :collector_host => node['newrelic']['server_monitoring']['collector_host'],
                 :timeout => node['newrelic']['server_monitoring']['timeout']
