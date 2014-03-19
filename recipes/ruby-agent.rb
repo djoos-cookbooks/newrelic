@@ -5,7 +5,7 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-license = get_newrelic_license('application_monitoring')
+license = node['newrelic']['application_monitoring']['license']
 
 package 'newrelic_rpm' do
     provider Chef::Provider::Package::RubyGem

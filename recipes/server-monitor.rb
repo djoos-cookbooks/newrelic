@@ -5,7 +5,7 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-license = get_newrelic_license('server_monitoring')
+license = node['newrelic']['server_monitoring']['license']
 
 case node['platform']
     when "debian", "ubuntu", "redhat", "centos", "fedora", "scientific", "amazon", "smartos"
