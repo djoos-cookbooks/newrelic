@@ -7,7 +7,7 @@
 
 include_recipe node['newrelic']['python-agent']['python_recipe']
 
-license = get_newrelic_license('application_monitoring')
+license = node['newrelic']['application_monitoring']['license']
 
 #install latest python agent
 python_pip "newrelic" do

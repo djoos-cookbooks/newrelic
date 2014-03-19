@@ -5,7 +5,7 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-license = get_newrelic_license('application_monitoring')
+license = node['newrelic']['application_monitoring']['license']
 
 #create the directory to install the jar into
 directory node['newrelic']['java-agent']['install_dir'] do

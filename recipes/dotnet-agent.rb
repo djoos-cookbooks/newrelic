@@ -7,7 +7,7 @@
 
 include_recipe node['newrelic']['dotnet-agent']['dotnet_recipe']
 
-license = get_newrelic_license('application_monitoring')
+license = node['newrelic']['application_monitoring']['license']
 
 windows_package "Install New Relic .NET Agent" do
     source node['newrelic']['dotnet-agent']['https_download']

@@ -26,7 +26,6 @@ Make sure you run Chef >= 0.10.0.
 
 ## Cookbooks:
 
-* chef-vault
 * python
 
 This cookbook recommends on the following cookbooks:
@@ -40,6 +39,7 @@ This cookbook recommends on the following cookbooks:
 * Installing the PHP agent? You'll need the php cookbook to be available.
 * Installing the DotNet agent? You'll need the ms_dotnet4 cookbook to be available.
 * Installing the Nodejs agent? You'll need the nodejs cookbook to be available.
+* Installing the MeetMe plugin? You'll need the python cookbook to be available.
 
 * Making use of the deployment LWRP? You'll need the curl cookbook to be available.
 
@@ -65,11 +65,6 @@ Attributes
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (defaults to value of node['newrelic']['license'])
 * `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (defaults to value of node['newrelic']['license'])
 * `node['newrelic']['plugin_monitoring']['license']` - Your New Relic license key for plugin purposes (defaults to value of node['newrelic']['license'])
-
-__NOTE:__ If you're using ChefVault to securely store your license, use the following:
-* `node['newrelic']['use_vault']` - Whether or not to use ChefVault. Default is `false`
-* `node['newrelic']['data_bag']` - Name of vault to use. Default is `nil`
-* `node['newrelic']['data_bag_item']` - Name of vault item. Default is `nil`
 
 ### ADVANCED
 * `node['newrelic']['server_monitoring']['logfile']`
@@ -181,9 +176,9 @@ require('newrelic');
 * `node['newrelic']['ruby-agent']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
 * `node['newrelic']['ruby-agent']['log_daily']` - Override other log rolling configuration and roll the logs daily
 
-## meetme-plugin-agent.rb:
-* `node['newrelic']['meetme-plugin-agent']['service_name']` - The New Relic plugin agent service name, defaults to "newrelic-plugin-agent"
-* `node['newrelic']['meetme-plugin-agent']['services']` - A hash of New Relic plugin agent services, defaults to nil
+## meetme-plugin.rb:
+* `node['newrelic']['meetme-plugin']['service_name']` - The New Relic MeetMe plugin service name, defaults to "newrelic-plugin-agent"
+* `node['newrelic']['meetme-plugin']['services']` - A hash of New Relic MeetMe plugin services, defaults to nil
 
 eg.
 ```
@@ -212,12 +207,12 @@ eg.
 }
 ```
 
-* `node['newrelic']['meetme-plugin-agent']['wake_interval']` - The New Relic plugin agent wake interval, defaults to 60
-* `node['newrelic']['meetme-plugin-agent']['config_file']` - The New Relic plugin agent config file name, defaults to "/etc/newrelic/newrelic_plugin_agent.cfg"
-* `node['newrelic']['meetme-plugin-agent']['pid_file']` - The New Relic plugin agent PID file name, defaults to "/var/run/newrelic/newrelic_plugin_agent.pid"
-* `node['newrelic']['meetme-plugin-agent']['log_file']` - The New Relic plugin agent log file name, defaults to "/var/log/newrelic/newrelic_plugin_agent.log"
-* `node['newrelic']['meetme-plugin-agent']['user']` - The New Relic plugin agent user, defaults to "newrelic"
-* `node['newrelic']['meetme-plugin-agent']['additional_requirements']` - The New Relic plugin agent's additional requirements, eg. {"mongodb", "pgbouncer", "postgresql"} - defaults to {}
+* `node['newrelic']['meetme-plugin']['wake_interval']` - The New Relic plugin agent wake interval, defaults to 60
+* `node['newrelic']['meetme-plugin']['config_file']` - The New Relic plugin agent config file name, defaults to "/etc/newrelic/newrelic_plugin_agent.cfg"
+* `node['newrelic']['meetme-plugin']['pid_file']` - The New Relic plugin agent PID file name, defaults to "/var/run/newrelic/newrelic_plugin_agent.pid"
+* `node['newrelic']['meetme-plugin']['log_file']` - The New Relic plugin agent log file name, defaults to "/var/log/newrelic/newrelic_plugin_agent.log"
+* `node['newrelic']['meetme-plugin']['user']` - The New Relic plugin agent user, defaults to "newrelic"
+* `node['newrelic']['meetme-plugin']['additional_requirements']` - The New Relic plugin agent's additional requirements, eg. {"mongodb", "pgbouncer", "postgresql"} - defaults to {}
 
 Resources / Providers
 =====================
@@ -264,7 +259,7 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::server-monitor]`
 `recipe[newrelic::dotnet-agent]`
 `recipe[newrelic::java-agent]`
-`recipe[newrelic::meetme-plugin-agent]`
+`recipe[newrelic::meetme-plugin]`
 `recipe[newrelic::nodejs-agent]`
 `recipe[newrelic::php-agent]`
 `recipe[newrelic::python-agent]`
