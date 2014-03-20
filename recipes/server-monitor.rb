@@ -39,6 +39,16 @@ case node['platform']
             supports :status => true, :start => true, :stop => true, :restart => true
             action node['newrelic']['server-monitor']['service_actions']
         end
+
+        log = node['newrelic']['server_monitoring']['logfile'] ? node['newrelic']['server_monitoring']['logfile'] : "/var/log/newrelic/nrsysmond.log"
+
+        logrotate_app "newrelic-sysmond" do
+          cookbook "logrotate"
+          path "#{log}"
+          rotate 7
+          frequency "daily"
+          create "644 root root"
+        end
     when "windows"
         include_recipe node['newrelic']['dotnet-agent']['dotnet_recipe']
         
