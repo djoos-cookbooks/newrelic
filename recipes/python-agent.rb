@@ -18,7 +18,7 @@ python_pip "newrelic" do
 end
 
 #configure your New Relic license key
-template "/etc/newrelic/newrelic.ini" do
+template node['newrelic']['python-agent']['python_config_file'] do
     source "newrelic.ini.python.erb"
     owner "root"
     group "root"
@@ -29,7 +29,7 @@ template "/etc/newrelic/newrelic.ini" do
         :enabled => node['newrelic']['application_monitoring']['enabled'],
         :logfile => node['newrelic']['application_monitoring']['logfile'],
         :loglevel => node['newrelic']['application_monitoring']['loglevel'],
-        :daemon_ssl => node['newrelic']['application_monitoring']['daemon']['ssl'],        
+        :daemon_ssl => node['newrelic']['application_monitoring']['daemon']['ssl'],
         :capture_params => node['newrelic']['application_monitoring']['capture_params'],
         :ignored_params => node['newrelic']['application_monitoring']['ignored_params'],
         :transaction_tracer_enable => node['newrelic']['application_monitoring']['transaction_tracer']['enable'],
