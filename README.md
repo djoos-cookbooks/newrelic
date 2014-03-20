@@ -126,6 +126,7 @@ Attributes
 ## python-agent.rb:
 * `node['newrelic']['python-agent']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
 * `node['newrelic']['python-agent']['python_recipe']` - The python recipe to include for the python agent, defaults to "python::pip"
+* `node['newrelic']['python-agent']['python_config_file']` - Location of the configuration file, defaults to "/etc/newrelic/newrelic.ini"
 
 ## dotnet-agent.rb:
 * `node['newrelic']['dotnet-agent']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
@@ -153,7 +154,7 @@ Attributes
 
 eg.
 ```
-[ 
+[
    { 'app_name' => 'My Application', 'app_path' => "/path/to/app/root" }
 ]
 ```
