@@ -43,7 +43,7 @@ end
 
 #configuration file
 template node['newrelic']['meetme-plugin']['config_file'] do
-    source "meetme_plugin_agent.cfg.erb"
+    source "plugin/meetme/newrelic_plugin_agent.cfg.erb"
     owner "root"
     group "root"
     mode "0644"
@@ -80,7 +80,7 @@ case node['platform']
 end
 
 template "/etc/init.d/newrelic-plugin-agent" do
-    source "meetme_plugin_agent_init.erb"
+    source "plugin/meetme/newrelic-plugin-agent.erb"
     mode "0755"
     variables(
         variables

@@ -37,7 +37,7 @@ end
 #configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
 #and restart the web server in order to pick up the new settings
 template "#{node['php']['ext_conf_dir']}/newrelic.ini" do
-    source "newrelic.ini.php.erb"
+    source "agent/php/newrelic.ini.erb"
     owner "root"
     group "root"
     mode "0644"
@@ -110,7 +110,7 @@ case node['newrelic']['php-agent']['startup_mode']
 
         #configure proxy daemon settings
         template "/etc/newrelic/newrelic.cfg" do
-            source "newrelic.cfg.erb"
+            source "agent/php/newrelic.cfg.erb"
             owner "root"
             group "root"
             mode "0644"

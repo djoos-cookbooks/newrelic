@@ -5,4 +5,4 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-include_recipe "newrelic::server-monitor"
+include_recipe "newrelic::server-monitor-agent"

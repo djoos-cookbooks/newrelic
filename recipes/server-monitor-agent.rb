@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: newrelic
-# Recipe:: server-monitor
+# Recipe:: server-monitor-agent
 #
 # Copyright 2012-2014, Escape Studios
 #
@@ -11,15 +11,15 @@ license = node['newrelic']['server_monitoring']['license']
 
 case node['platform']
     when "debian", "ubuntu", "redhat", "centos", "fedora", "scientific", "amazon", "smartos"
-        package node['newrelic']['server-monitor']['service_name'] do
+        package node['newrelic']['server-monitor-agent']['service_name'] do
             action :install
         end
 
         #configure your New Relic license key
-        template "#{node['newrelic']['server-monitor']['config_path']}/nrsysmond.cfg" do
-            source "nrsysmond.cfg.erb"
+        template "#{node['newrelic']['server-monitor-agent']['config_path']}/nrsysmond.cfg" do
+            source "agent/server-monitor/nrsysmond.cfg.erb"
             owner "root"
-            group node['newrelic']['server-monitor']['config_file_group']
+            group node['newrelic']['server-monitor-agent']['config_file_group']
             mode "640"
             variables(
                 :license => license,
@@ -34,31 +34,31 @@ case node['platform']
                 :collector_host => node['newrelic']['server_monitoring']['collector_host'],
                 :timeout => node['newrelic']['server_monitoring']['timeout']
             )
-            notifies node['newrelic']['server-monitor']['service_notify_action'], "service[#{node['newrelic']['server-monitor']['service_name']}]"
+            notifies node['newrelic']['server-monitor-agent']['service_notify_action'], "service[#{node['newrelic']['server-monitor-agent']['service_name']}]"
         end
 
-        service node['newrelic']['server-monitor']['service_name'] do
+        service node['newrelic']['server-monitor-agent']['service_name'] do
             supports :status => true, :start => true, :stop => true, :restart => true
-            action node['newrelic']['server-monitor']['service_actions']
+            action node['newrelic']['server-monitor-agent']['service_actions']
         end
     when "windows"
         include_recipe node['newrelic']['dotnet-agent']['dotnet_recipe']
         
         if node['kernel']['machine'] == "x86_64"
                 windows_package "New Relic Server Monitor" do
-                source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x64_#{node['newrelic']['server_monitoring']['windows_version']}.msi"
+                source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x64_#{node['newrelic']['server-monitor-agent']['windows_version']}.msi"
                 options "/L*v install.log /qn NR_LICENSE_KEY=#{license}"
                 action :install
-                version node['newrelic']['server_monitoring']['windows_version']
-                checksum node['newrelic']['server_monitoring']['windows64_checksum']
+                version node['newrelic']['server-monitor-agent']['windows_version']
+                checksum node['newrelic']['server-monitor-agent']['windows64_checksum']
             end
         else
             windows_package "New Relic Server Monitor" do
-                source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x86_#{node['newrelic']['server_monitoring']['windows_version']}.msi"
+                source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x86_#{node['newrelic']['server-monitor-agent']['windows_version']}.msi"
                 options "/L*v install.log /qn NR_LICENSE_KEY=#{license}"
                 action :install
-                version node['newrelic']['server_monitoring']['windows_version']
-                checksum node['newrelic']['server_monitoring']['windows32_checksum']
+                version node['newrelic']['server-monitor-agent']['windows_version']
+                checksum node['newrelic']['server-monitor-agent']['windows32_checksum']
             end
         end
 

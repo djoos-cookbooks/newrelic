@@ -20,7 +20,7 @@ end
 
 #configure your New Relic license key
 template "#{node['newrelic']['ruby-agent']['install_dir']}/newrelic.yml" do
-    source "newrelic.yml.ruby.erb"
+    source "agent/ruby/newrelic.yml.erb"
     owner node['newrelic']['ruby-agent']['app_user']
     group node['newrelic']['ruby-agent']['app_group']
     mode 0644

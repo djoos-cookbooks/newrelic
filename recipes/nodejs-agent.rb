@@ -18,7 +18,7 @@ node['newrelic']['nodejs-agent']['apps'].each do |nodeapp|
     end
 
     template "#{nodeapp['app_path']}/newrelic.js" do
-        source "newrelic.js.erb"
+        source "agent/nodejs/newrelic.js.erb"
         variables(
             :license => license,
             :app_name => nodeapp['app_name'],

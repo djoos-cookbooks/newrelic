@@ -32,7 +32,7 @@ end
 
 #configure your New Relic license key
 template "#{node['newrelic']['java-agent']['install_dir']}/newrelic.yml" do
-    source "newrelic.yml.java.erb"
+    source "agent/java/newrelic.yml.erb"
     owner node['newrelic']['java-agent']['app_user']
     group node['newrelic']['java-agent']['app_group']
     mode 0644

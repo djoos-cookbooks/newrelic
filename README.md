@@ -77,9 +77,7 @@ Attributes
 * `node['newrelic']['server_monitoring']['pidfile']`
 * `node['newrelic']['server_monitoring']['collector_host']`
 * `node['newrelic']['server_monitoring']['timeout']`
-* `node['newrelic']['server_monitoring']['windows_version']` - the Windows version to install
-* `node['newrelic']['server_monitoring']['windows64_checksum']` - checksum of the 64-bit Windows version
-* `node['newrelic']['server_monitoring']['windows32_checksum']` - checksum of the 32-bit Windows version
+
 * `node['newrelic']['application_monitoring']['enabled']`
 * `node['newrelic']['application_monitoring']['logfile']`
 * `node['newrelic']['application_monitoring']['loglevel']`
@@ -132,10 +130,15 @@ Attributes
 * `node['newrelic']['dotnet-agent']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 * `node['newrelic']['dotnet-agent']['dotnet_recipe']` - The dotnet recipe to include for the php agent, defaults to "ms_dotnet4"
 
-## server-monitor.rb:
-* `node['newrelic']['server-monitor']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
-* `node['newrelic']['server-monitor']['config_path']` - The New Relic server monitoring config path, defaults to "/etc/newrelic"
-* `node['newrelic']['server-monitor']['config_file_group']` - The New Relic server monitoring config file group, defaults to "newrelic"
+## server-monitor-agent.rb:
+* `node['newrelic']['server-monitor-agent']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
+* `node['newrelic']['server-monitor-agent']['service_notify_action']` - The New Relic server monitoring notify action, defaults to ":restart"
+* `node['newrelic']['server-monitor-agent']['service_actions']` - The New Relic server monitoring service actions, defaults to "[:enable, :start]" (#starts the service if it's not running and enables it to start at system boot time)
+* `node['newrelic']['server-monitor-agent']['config_path']` - The New Relic server monitoring config path, defaults to "/etc/newrelic"
+* `node['newrelic']['server-monitor-agent']['config_file_group']` - The New Relic server monitoring config file group, defaults to "newrelic"
+* `node['newrelic']['server-monitor-agent']['windows_version']` - the Windows version to install, defaults to "2.0.0.198"
+* `node['newrelic']['server-monitor-agent']['windows64_checksum']` - checksum of the 64-bit Windows version, defaults to "5a8f3f5e8f15997463430401756d377c321c8899c2790ca85e5587a5b643651e"
+* `node['newrelic']['server-monitor-agent']['windows32_checksum']` - checksum of the 32-bit Windows version, defaults to "ac2b65eecaad461fdd2e4386e3e4c9f96ea940b35bdf7a8c532c21dbd1c99ff0"
 
 ## java-agent.rb:
 * `node['newrelic']['java-agent']['https_download']` - The url to download the jar vor the New Relic Java agent
@@ -251,12 +254,12 @@ Usage
 =====
 
 1)
-include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:repository]` and `recipe[newrelic::server-monitor]`
+include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:repository]` and `recipe[newrelic::server-monitor-agent]`
 --- OR ---
 include the bits and pieces explicitly in a run list:
 ```ruby
 `recipe[newrelic::repository]`
-`recipe[newrelic::server-monitor]`
+`recipe[newrelic::server-monitor-agent]`
 `recipe[newrelic::dotnet-agent]`
 `recipe[newrelic::java-agent]`
 `recipe[newrelic::meetme-plugin]`
