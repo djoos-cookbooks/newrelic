@@ -120,6 +120,7 @@ Attributes
 * `node['newrelic']['php-agent']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
 * `node['newrelic']['php-agent']['web_server']['service_name']` - The web server service name, defaults to "apache2"
 * `node['newrelic']['php-agent']['php_recipe']` - The php recipe to include for the php agent, defaults to "php::default"
+* `node['newrelic']['php-agent']['php']['ext_conf_dir']` - The path to the php ext_conf_dir, defaults to "node['php']['ext_conf_dir']" (Opscode PHP cookbook's ext_conf_dir)
 
 ## python-agent.rb:
 * `node['newrelic']['python-agent']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
