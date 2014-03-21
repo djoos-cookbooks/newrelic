@@ -125,6 +125,7 @@ Attributes
 ## python-agent.rb:
 * `node['newrelic']['python-agent']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
 * `node['newrelic']['python-agent']['python_recipe']` - The python recipe to include for the python agent, defaults to "python::pip"
+* `node['newrelic']['python-agent']['config_file']` - The New Relic python agent config file, defaults to "/etc/newrelic/newrelic.ini"
 
 ## dotnet-agent.rb:
 * `node['newrelic']['dotnet-agent']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
@@ -157,7 +158,7 @@ Attributes
 
 eg.
 ```
-[ 
+[
    { 'app_name' => 'My Application', 'app_path' => "/path/to/app/root" }
 ]
 ```
@@ -212,7 +213,7 @@ eg.
 ```
 
 * `node['newrelic']['meetme-plugin']['wake_interval']` - The New Relic plugin agent wake interval, defaults to 60
-* `node['newrelic']['meetme-plugin']['config_file']` - The New Relic plugin agent config file name, defaults to "/etc/newrelic/newrelic_plugin_agent.cfg"
+* `node['newrelic']['meetme-plugin']['config_file']` - The New Relic plugin agent config file, defaults to "/etc/newrelic/newrelic_plugin_agent.cfg"
 * `node['newrelic']['meetme-plugin']['pid_file']` - The New Relic plugin agent PID file name, defaults to "/var/run/newrelic/newrelic_plugin_agent.pid"
 * `node['newrelic']['meetme-plugin']['log_file']` - The New Relic plugin agent log file name, defaults to "/var/log/newrelic/newrelic_plugin_agent.log"
 * `node['newrelic']['meetme-plugin']['user']` - The New Relic plugin agent user, defaults to "newrelic"
