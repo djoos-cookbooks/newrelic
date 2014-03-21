@@ -5,6 +5,8 @@
 # Copyright 2012-2014, Escape Studios
 #
 
+include_recipe "newrelic::repository"
+
 license = node['newrelic']['application_monitoring']['license']
 
 package 'newrelic_rpm' do

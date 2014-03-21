@@ -5,6 +5,8 @@
 # Copyright 2012-2014, Escape Studios
 #
 
+include_recipe "newrelic::repository"
+
 license = node['newrelic']['server_monitoring']['license']
 
 case node['platform']
