@@ -27,7 +27,9 @@ end
 execute "newrelic-install" do
     command "newrelic-install install"
     action :nothing
-    notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
+    if node['newrelic']['php-agent']['web_server']['service_name']
+        notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
+    end
 end
 
 service "newrelic-daemon" do
@@ -79,7 +81,9 @@ template node['newrelic']['php-agent']['config_file'] do
         :webtransaction_name_files => node['newrelic']['application_monitoring']['webtransaction']['name']['files']
     )
     action :create
-    notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
+    if node['newrelic']['php-agent']['web_server']['service_name']
+        notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
+    end
 end
 
 #https://newrelic.com/docs/php/newrelic-daemon-startup-modes
