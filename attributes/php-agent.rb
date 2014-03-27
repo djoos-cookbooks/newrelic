@@ -8,7 +8,7 @@
 php_ext_conf_dir = nil
 
 if node.attribute?('php')
-	if node.attribute?('ext_conf_dir')
+	if node['php'].attribute?('ext_conf_dir')
 		php_ext_conf_dir = node['php']['ext_conf_dir']
   	end
 end
