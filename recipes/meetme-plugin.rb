@@ -40,8 +40,7 @@ services = {
 
 unless services.nil?
   require 'yaml'
-  # Ruby YAML adds !ruby/hash:Chef::Node::ImmutableMash and !ruby/array:Chef::Node::ImmutableArray, lets remove them...
-  services_yml = services.to_yaml(:indentation => 2).gsub("! '#services':", '#services:').gsub('---', '').gsub('!ruby/hash:Chef::Node::ImmutableMash', '').gsub('!ruby/array:Chef::Node::ImmutableArray', '')
+  services_yml = services.to_yaml(:indentation => 2).gsub("! '#services':", '#services:').gsub('---','').gsub(/!ruby\/[a-zA-Z:]*/,'')
 end
 
 # configuration file
@@ -91,6 +90,11 @@ template '/etc/init.d/newrelic-plugin-agent' do
 end
 
 service node['newrelic']['meetme-plugin']['service_name'] do
+<<<<<<< HEAD
   supports :status => true, :start => true, :stop => true, :restart => true
   action [:enable, :start] # starts the service if it's not running and enables it to start at system boot time
+=======
+    supports :status => true, :start => true, :stop => true, :restart => true
+    action [:enable, :start] #starts the service if it's not running and enables it to start at system boot time
+>>>>>>> 5f0aed254f8b3708a3b5d055a85f77999f440521
 end
