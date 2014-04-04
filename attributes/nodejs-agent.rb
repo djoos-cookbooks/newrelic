@@ -6,4 +6,4 @@
 #
 
 default['newrelic']['nodejs-agent']['apps'] = []
-default['newrelic']['nodejs-agent']['nodejs_recipe'] = "nodejs::npm"
+default['newrelic']['nodejs-agent']['nodejs_recipe'] = 'nodejs::npm'

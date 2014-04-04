@@ -5,19 +5,19 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-#############
-#BASIC CONFIG
-#############
-#license(s)
+##############
+# BASIC CONFIG
+##############
+# license(s)
 default['newrelic']['license'] = nil
 default['newrelic']['server_monitoring']['license'] = node['newrelic']['license']
 default['newrelic']['application_monitoring']['license'] = node['newrelic']['license']
 default['newrelic']['plugin_monitoring']['license'] = node['newrelic']['license']
 
-################
-#ADVANCED CONFIG
-################
-#server monitoring
+#################
+# ADVANCED CONFIG
+#################
+# server monitoring
 default['newrelic']['server_monitoring']['logfile'] = nil
 default['newrelic']['server_monitoring']['loglevel'] = nil
 default['newrelic']['server_monitoring']['proxy'] = nil
@@ -29,12 +29,12 @@ default['newrelic']['server_monitoring']['pidfile'] = nil
 default['newrelic']['server_monitoring']['collector_host'] = nil
 default['newrelic']['server_monitoring']['timeout'] = nil
 
-#application monitoring
+# application monitoring
 default['newrelic']['application_monitoring']['enabled'] = nil
 default['newrelic']['application_monitoring']['logfile'] = nil
 default['newrelic']['application_monitoring']['loglevel'] = nil
 default['newrelic']['application_monitoring']['appname'] = nil
-default['newrelic']['application_monitoring']['daemon']['logfile'] = "/var/log/newrelic/newrelic-daemon.log"
+default['newrelic']['application_monitoring']['daemon']['logfile'] = '/var/log/newrelic/newrelic-daemon.log'
 default['newrelic']['application_monitoring']['daemon']['loglevel'] = nil
 default['newrelic']['application_monitoring']['daemon']['port'] = nil
 default['newrelic']['application_monitoring']['daemon']['max_threads'] = nil
