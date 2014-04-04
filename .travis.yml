@@ -8,7 +8,11 @@ before_script:
   - bundle exec berks install
 
 script:
-  - bundle exec foodcritic -f any .
+  - bundle exec rake travis
+
+branches:
+  only:
+    - master
 
 notifications:
   email:
