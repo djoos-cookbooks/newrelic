@@ -55,7 +55,7 @@ when 'redhat', 'centos', 'fedora', 'scientific', 'amazon'
   end
 
   remote_file "#{Chef::Config['file_cache_path'] || '/tmp'}/newrelic-repo-5-3.noarch.rpm" do
-    source 'http://download.newrelic.com/pub/newrelic/el5/#{machine}/newrelic-repo-5-3.noarch.rpm'
+    source "http://download.newrelic.com/pub/newrelic/el5/#{machine}/newrelic-repo-5-3.noarch.rpm"
     action :create_if_missing
   end
 
