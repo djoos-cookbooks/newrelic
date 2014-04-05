@@ -27,7 +27,10 @@ suites:
       - recipe[newrelic::default]
     attributes:
       newrelic:
-        license: 78defba8b120b1f16f269f6f53bac7234fe83ee9
+        server-monitor-agent:
+          service_notify_action: nothing
+          service_actions:
+            - nothing
 #        server-monitor-agent:
 #          service_notify_action: nothing
 #          service_actions:
@@ -50,18 +53,18 @@ suites:
 #  - name: python-agent
 #    run_list:
 #      - recipe[newrelic::python-agent]
-  - name: repository
-    run_list:
-      - recipe[newrelic::repository]
+#  - name: repository
+#    run_list:
+#      - recipe[newrelic::repository]
 #  - name: ruby-agent
 #    run_list:
 #      - recipe[newrelic::ruby-agent]
-  - name: server-monitor-agent
-    run_list:
-      - recipe[newrelic::server-monitor-agent]
-    attributes:
-      newrelic:
-        server-monitor-agent:
-          service_notify_action: nothing
-          service_actions:
-            - nothing
+#  - name: server-monitor-agent
+#    run_list:
+#      - recipe[newrelic::server-monitor-agent]
+#    attributes:
+#      newrelic:
+#        server-monitor-agent:
+#          service_notify_action: nothing
+#          service_actions:
+#            - nothing
