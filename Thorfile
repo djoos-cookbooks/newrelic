@@ -29,7 +29,7 @@ class Default < Thor
   desc "release", "Create a tag from metadata version and push to the community site."
   def release
     unless clean?
-      say "Sorry, there are files that need to be committed first...", :red
+      say "Sorry, there are files that need to be committed first.", :red
       exit 1
     end
 
@@ -62,6 +62,7 @@ class Default < Thor
       cmd = "knife cookbook site share #{cookbook_name} \"#{cookbook_category}\" -o #{source_root.join("..")} -c #{options[:knife_config]}"
       cmd << " -V" if options[:verbose]
       sh cmd
+      say "Version #{current_version} of the #{cookbook_name} cookbook has been uploaded to the Opscode community site.", :green
     end
 
     def source_root
