@@ -5,15 +5,11 @@
 .*.sw[a-z]
 *.un~
 
-cookbooks
-.coverage
-spec
-
 Berksfile.lock
 Gemfile.lock
 .vagrant
 Vagrantfile
-bin/*
-.bundle/*
+.bundle
+.coverage
 .kitchen
 .kitchen.local.yml
