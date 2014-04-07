@@ -2,6 +2,7 @@
 
 require 'bundler'
 require 'bundler/setup'
+require 'berkshelf/thor'
 
 class Default < Thor
 
