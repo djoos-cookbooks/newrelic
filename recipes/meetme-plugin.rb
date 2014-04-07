@@ -81,7 +81,7 @@ when 'debian', 'ubuntu'
   variables[:group] = node['newrelic']['meetme-plugin']['user']
 end
 
-template '/etc/init.d/newrelic-plugin-agent' do
+template "/etc/init.d/#{node['newrelic']['meetme-plugin']['service_name']}" do
   source 'plugin/meetme/newrelic-plugin-agent.erb'
   mode 0755
   variables(
