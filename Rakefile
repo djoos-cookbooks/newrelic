@@ -9,9 +9,11 @@ namespace :lint do
     Rubocop::RakeTask.new(:ruby)
 
     desc 'Run Chef syntax/lint checks'
-    FoodCritic::Rake::LintTask.new(:chef) { |task| 
-        task.options = { fail_tags: ['any'] }
-    }
+    FoodCritic::Rake::LintTask.new(:chef) do |task|
+      task.options = {
+        fail_tags: ['any']
+      }
+    end
 end
 
 desc 'Run all syntax/lint checks'

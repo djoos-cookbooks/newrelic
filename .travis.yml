@@ -5,11 +5,6 @@ rvm:
   - 2.0.0
   - 2.1.0
 
-#@todo take out this temp workaround
-#https://www.ruby-lang.org/en/news/2014/03/29/heap-overflow-in-yaml-uri-escape-parsing-cve-2014-2525/
-before_install:
-  - rvm get stable
-
 bundler_args: --without integration
 
 before_script:
