@@ -5,6 +5,15 @@ require 'bundler/setup'
 require 'berkshelf/thor'
 
 class Default < Thor
+  attr_reader :cookbook_name
+  attr_reader :cookbook_category
+
+  def initialize(*args)
+    @cookbook_name = "newrelic"
+    @cookbook_category = "Monitoring & Trending"
+
+    super(*args)
+  end
 
   desc "release", "Create a tag from metadata version and push to the community site."
   def release
