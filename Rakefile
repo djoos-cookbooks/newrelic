@@ -1,10 +1,10 @@
 require 'rspec/core/rake_task'
-require 'rubocop/rake_task'
-require 'foodcritic'
-require 'kitchen'
 
-#syntax/lint checks
+#syntax/lint checks: RuboCop & Foodcritic
 namespace :lint do
+    require 'rubocop/rake_task'
+    require 'foodcritic'
+
     desc 'Run Ruby syntax/lint checks'
     Rubocop::RakeTask.new(:ruby)
 
@@ -23,6 +23,8 @@ RSpec::Core::RakeTask.new(:unit)
 
 #integration testing: Test Kitchen
 namespace :integration do
+    require 'kitchen'
+
     desc 'Run Test Kitchen integration tests with Vagrant'
     task :vagrant do
         Kitchen.logger = Kitchen.default_file_logger
@@ -30,27 +32,9 @@ namespace :integration do
             instance.test(:always)
         end
     end
-  
-#    desc 'Run Test Kitchen integration tests with cloud plugins'
-#    task :cloud do
-#        run_kitchen = true
-#        if ENV['TRAVIS'] == 'true' && ENV['TRAVIS_PULL_REQUEST'] != 'false'
-#            run_kitchen = false
-#        end
-#    
-#        if run_kitchen
-#            Kitchen.logger = Kitchen.default_file_logger
-#            @loader = Kitchen::Loader::YAML.new(project_config: './.kitchen.cloud.yml')
-#            config = Kitchen::Config.new( loader: @loader)
-#            config.instances.each do |instance|
-#                instance.test(:always)
-#            end
-#        end
-#    end
 end
 
 desc 'Run all integration tests'
-#task integration: ['integration:vagrant', 'integration:cloud']
 task integration: ['integration:vagrant']
 
 #Travic CI
