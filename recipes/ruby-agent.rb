@@ -27,6 +27,7 @@ template "#{node['newrelic']['ruby-agent']['install_dir']}/newrelic.yml" do
   variables(
     :license => license,
     :appname => node['newrelic']['application_monitoring']['appname'],
+    :enabled => node['newrelic']['application_monitoring']['enabled'],
     :logfile => node['newrelic']['application_monitoring']['logfile'],
     :loglevel => node['newrelic']['application_monitoring']['loglevel'],
     :audit_mode => node['newrelic']['ruby-agent']['audit_mode'],
