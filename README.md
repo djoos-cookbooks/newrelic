@@ -112,6 +112,7 @@ Attributes
 * `node['newrelic']['application_monitoring']['webtransaction']['name']['remove_trailing_path']`
 * `node['newrelic']['application_monitoring']['webtransaction']['name']['functions']`
 * `node['newrelic']['application_monitoring']['webtransaction']['name']['files']`
+* `node['newrelic']['application_monitoring']['cross_application_tracer']['enable']` - Implemented for Java, PHP, Python and Ruby
 
 ## repository.rb:
 * `node['newrelic']['repository']['repository_key']` - The New Relic repository key, defaults to "548C16BF"

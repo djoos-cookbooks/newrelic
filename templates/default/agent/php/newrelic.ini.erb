@@ -619,3 +619,19 @@ newrelic.webtransaction.name.functions = "<%= @webtransaction_name_functions %>"
 <% else %>
 newrelic.webtransaction.name.files = "<%= @webtransaction_name_files %>"
 <% end %>
+
+;
+; Setting: newrelic.cross_application_tracer.enabled
+; Type   : Boolean
+; Scope  : per-directory
+; Default: true
+; Info   : Enable or disable the cross application tracer.
+;          The cross application tracer inserts HTTP headers into outbound requests
+;          and the response in order to link together web transaction metrics and
+;          transaction traces between applications.
+;
+<% if @cross_application_tracer_enable.nil? %>
+;newrelic.cross_application_tracer.enabled = true
+<% else %>
+newrelic.cross_application_tracer.enabled = <%= @cross_application_tracer_enable %>
+<% end %>

@@ -230,6 +230,16 @@ browser_monitoring.auto_instrument = <%= @browser_monitoring_auto_instrument %>
 # call tree.
 thread_profiler.enabled = true
 
+# Enable or disable the cross application tracer.
+# The cross application tracer inserts HTTP headers into outbound requests
+# and the response in order to link together web transaction metrics and
+# transaction traces between applications.
+<% if @cross_application_tracer_enable.nil? %>
+# cross_application_tracer.enabled = true
+<% else %>
+cross_application_tracer.enabled = <%= @cross_application_tracer_enable %>
+<% end %>
+
 # ---------------------------------------------------------------------------
 
 #
