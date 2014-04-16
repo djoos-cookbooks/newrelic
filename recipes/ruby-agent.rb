@@ -9,8 +9,7 @@ include_recipe 'newrelic::repository'
 
 license = node['newrelic']['application_monitoring']['license']
 
-package 'newrelic_rpm' do
-  provider Chef::Provider::Package::RubyGem
+gem_package 'newrelic_rpm' do
   action :install
 end
 
