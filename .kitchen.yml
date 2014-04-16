@@ -27,30 +27,44 @@ suites:
       - recipe[newrelic::default]
     attributes:
       newrelic:
-        service_notify_action: nothing
-        service_actions:
-          - nothing
+        server-monitor-agent:
+          service_notify_action: nothing
+          service_actions:
+            - nothing
+#        server-monitor-agent:
+#          service_notify_action: nothing
+#          service_actions:
+#            - nothing
 #  - name: dotnet-agent
 #    run_list:
-#      - recipe[newrelic::default]
 #      - recipe[newrelic::dotnet-agent]
 #  - name: java-agent
 #    run_list:
-#      - recipe[newrelic::default]
 #      - recipe[newrelic::java-agent]
+#  - name: meetme-plugin
+#    run_list:
+#      - recipe[newrelic::meetme-plugin]
 #  - name: nodejs-agent
 #    run_list:
-#      - recipe[newrelic::default]
 #      - recipe[newrelic::nodejs-agent]
 #  - name: php-agent
 #    run_list:
-#      - recipe[newrelic::default]
 #      - recipe[newrelic::php-agent]
 #  - name: python-agent
 #    run_list:
-#      - recipe[newrelic::default]
 #      - recipe[newrelic::python-agent]
-#  - name: meetme-plugin
+#  - name: repository
 #    run_list:
-#      - recipe[newrelic::default]
-#      - recipe[newrelic::meetme-plugin]
+#      - recipe[newrelic::repository]
+#  - name: ruby-agent
+#    run_list:
+#      - recipe[newrelic::ruby-agent]
+#  - name: server-monitor-agent
+#    run_list:
+#      - recipe[newrelic::server-monitor-agent]
+#    attributes:
+#      newrelic:
+#        server-monitor-agent:
+#          service_notify_action: nothing
+#          service_actions:
+#            - nothing
