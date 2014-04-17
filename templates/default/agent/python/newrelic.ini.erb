@@ -230,27 +230,3 @@ browser_monitoring.auto_instrument = <%= @browser_monitoring_auto_instrument %>
 # call tree.
 thread_profiler.enabled = true
 
-# ---------------------------------------------------------------------------
-
-#
-# The application environments. These are specific settings which
-# override the common environment settings. The settings related to a
-# specific environment will be used when the environment argument to the
-# newrelic.agent.initialize() function has been defined to be either
-# "development", "test", "staging" or "production".
-#
-
-[newrelic:development]
-monitor_mode = false
-
-[newrelic:test]
-monitor_mode = false
-
-[newrelic:staging]
-app_name = Python Application (Staging)
-monitor_mode = true
-
-[newrelic:production]
-monitor_mode = true
-
-# ---------------------------------------------------------------------------
