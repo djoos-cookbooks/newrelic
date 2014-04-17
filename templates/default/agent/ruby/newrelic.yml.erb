@@ -272,7 +272,11 @@ common: &default_settings
   cross_application_tracer:
     # Set to true to enable cross application tracing.
     # Default is true.
+    <% if @cross_application_tracer_enable.nil? %>
     enabled: true
+    <% else %>
+    enabled: <%= @cross_application_tracer_enable %>
+    <% end %>
 
   # Thread profiler measures wall clock time, CPU time, and method call counts
   # in your application's threads as they run.

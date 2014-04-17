@@ -76,7 +76,8 @@ template node['newrelic']['php-agent']['config_file'] do
     :framework => node['newrelic']['application_monitoring']['framework'],
     :webtransaction_name_remove_trailing_path => node['newrelic']['application_monitoring']['webtransaction']['name']['remove_trailing_path'],
     :webtransaction_name_functions => node['newrelic']['application_monitoring']['webtransaction']['name']['functions'],
-    :webtransaction_name_files => node['newrelic']['application_monitoring']['webtransaction']['name']['files']
+    :webtransaction_name_files => node['newrelic']['application_monitoring']['webtransaction']['name']['files'],
+    :cross_application_tracer_enable => node['newrelic']['application_monitoring']['cross_application_tracer']['enable']
   )
   action :create
   notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
