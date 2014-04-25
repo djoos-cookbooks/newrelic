@@ -40,6 +40,7 @@ template "#{node['newrelic']['java-agent']['install_dir']}/newrelic.yml" do
     :license => license,
     :appname => node['newrelic']['application_monitoring']['appname'],
     :logfile => node['newrelic']['application_monitoring']['logfile'],
+    :logfile_path => node['newrelic']['application_monitoring']['logfile_path'],
     :loglevel => node['newrelic']['application_monitoring']['loglevel'],
     :audit_mode => node['newrelic']['java-agent']['audit_mode'],
     :log_file_count => node['newrelic']['java-agent']['log_file_count'],
