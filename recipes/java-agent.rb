@@ -62,6 +62,21 @@ template "#{node['newrelic']['java-agent']['install_dir']}/newrelic.yml" do
   action :create
 end
 
+# Allow app_group to write log_file_path
+if ! node['newrelic']['application_monitoring']['logfile_path'].nil? && node['newrelic']['application_monitoring']['logfile_path'] != ''
+  path = node['newrelic']['application_monitoring']['logfile_path']
+
+  while path != '/'
+    directory path do
+      group node['newrelic']['java-agent']['app_group']
+      mode 0775
+      action :create
+    end
+
+    path = File.dirname(path)
+  end
+end
+
 # execution of the install
 execute 'newrelic-install' do
   command "sudo java -jar #{node['newrelic']['java-agent']['install_dir']}/newrelic.jar install"
