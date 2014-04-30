@@ -18,13 +18,14 @@ directory node['newrelic']['java-agent']['install_dir'] do
   action :create
 end
 
-local_file = "#{node['newrelic']['java-agent']['install_dir']}/newrelic.jar"
+local_file = "#{node['newrelic']['java-agent']['install_dir']}/#{node['newrelic']['java-agent']['jar_file']}"
 
 remote_file local_file do
   source node['newrelic']['java-agent']['https_download']
   owner node['newrelic']['java-agent']['app_user']
   group node['newrelic']['java-agent']['app_group']
   mode 0664
+  not_if { File.exist?(local_file) }
 end
 
 if node['newrelic']['application_monitoring']['appname'].nil?
