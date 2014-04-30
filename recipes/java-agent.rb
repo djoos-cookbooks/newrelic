@@ -13,6 +13,7 @@ license = node['newrelic']['application_monitoring']['license']
 directory node['newrelic']['java-agent']['install_dir'] do
   owner node['newrelic']['java-agent']['app_user']
   group node['newrelic']['java-agent']['app_group']
+  recursive true
   mode 0775
   action :create
 end
