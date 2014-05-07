@@ -26,6 +26,7 @@ end
 # run newrelic-install
 execute 'newrelic-install' do
   command 'newrelic-install install'
+  environment {"NR_INSTALL_SILENT" => 1}
   action :nothing
   notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
 end
