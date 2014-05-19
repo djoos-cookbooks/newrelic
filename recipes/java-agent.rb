@@ -64,11 +64,11 @@ template "#{node['newrelic']['java-agent']['install_dir']}/newrelic.yml" do
   action :create
 end
 
-# Allow app_group to write log_file_path
-if ! node['newrelic']['application_monitoring']['logfile_path'].nil? && node['newrelic']['application_monitoring']['logfile_path'] != ''
-  path = node['newrelic']['application_monitoring']['logfile_path']
+# allow app_group to write to log_file_path
+path = node['newrelic']['application_monitoring']['logfile_path']
 
-  while path != '/'
+unless path.nil? || path.empty?
+  while path != File::SEPARATOR
     directory path do
       group node['newrelic']['java-agent']['app_group']
       mode 0775
