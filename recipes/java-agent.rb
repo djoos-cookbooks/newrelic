@@ -67,16 +67,14 @@ end
 # allow app_group to write to log_file_path
 path = node['newrelic']['application_monitoring']['logfile_path']
 
-unless path.nil? || path.empty?
-  while path != File::SEPARATOR
-    directory path do
-      group node['newrelic']['java-agent']['app_group']
-      mode 0775
-      action :create
-    end
-
-    path = File.dirname(path)
+until path.nil? || path.empty? || path == File::SEPARATOR
+  directory path do
+    group node['newrelic']['java-agent']['app_group']
+    mode 0775
+    action :create
   end
+
+  path = File.dirname(path)
 end
 
 # execution of the install
