@@ -27,7 +27,9 @@ end
 execute 'newrelic-install' do
   command 'newrelic-install install'
   action :nothing
-  notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
+  if node['newrelic']['php-agent']['web_server']['service_name']
+    notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
+  end
 end
 
 service 'newrelic-daemon' do
@@ -80,7 +82,9 @@ template node['newrelic']['php-agent']['config_file'] do
     :cross_application_tracer_enable => node['newrelic']['application_monitoring']['cross_application_tracer']['enable']
   )
   action :create
-  notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
+  if node['newrelic']['php-agent']['web_server']['service_name']
+    notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
+  end
 end
 
 # https://newrelic.com/docs/php/newrelic-daemon-startup-modes
