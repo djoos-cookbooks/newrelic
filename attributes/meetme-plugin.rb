@@ -7,6 +7,7 @@
 
 default['newrelic']['meetme-plugin']['python_recipe'] = 'python::pip'
 default['newrelic']['meetme-plugin']['service_name'] = 'newrelic-meetme-plugin'
+default['newrelic']['meetme-plugin']['bin_file'] = '/usr/local/bin/newrelic-plugin-agent'
 default['newrelic']['meetme-plugin']['wake_interval'] = 60
 default['newrelic']['meetme-plugin']['proxy'] = nil
 default['newrelic']['meetme-plugin']['services'] = {}

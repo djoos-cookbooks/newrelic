@@ -72,7 +72,8 @@ end
 # init script
 variables = {
   :config_file => node['newrelic']['meetme-plugin']['config_file'],
-  :pid_file => node['newrelic']['meetme-plugin']['pid_file']
+  :pid_file => node['newrelic']['meetme-plugin']['pid_file'],
+  :bin_file => node['newrelic']['meetme-plugin']['bin_file']
 }
 
 case node['platform']
