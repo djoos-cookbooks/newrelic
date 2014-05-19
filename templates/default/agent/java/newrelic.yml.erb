@@ -18,12 +18,12 @@ common: &default_settings
   # account.  This key binds your Agent's data to your account in the
   # New Relic service.
   license_key: '<%= @license %>'
-  
+
   # Agent Enabled
   # Use this setting to force the agent to run or not run.
   # Default is true.
   # agent_enabled: true
-  
+
   # Set to true to enable support for auto app naming.
   # The name of each web app is detected automatically
   # and the agent reports data separately for each one.
@@ -31,12 +31,12 @@ common: &default_settings
   # web apps in New Relic.
   # Default is false.
   enable_auto_app_naming: false
-  
+
   # Set to true to enable component-based transaction naming.
   # Set to false to use the URI of a web request as the name of the transaction.
   # Default is true.
   enable_auto_transaction_naming: true
- 
+
   # Set the name of your application as you'd like it show up in New Relic.
   # if enable_auto_app_naming is false, the agent reports all data to this application.
   # Otherwise, the agent reports only background tasks (transactions for non-web applications) to this application.
@@ -60,7 +60,7 @@ common: &default_settings
   <% else %>
   log_level: <%= @loglevel %>
   <% end %>
-  
+
   # Log all data to and from New Relic in plain text.
   # This setting is dynamic, so changes do not require restarting your application.
   # Default is false.
@@ -104,11 +104,11 @@ common: &default_settings
   <% else %>
   log_file: <%= @logfile %>
   <% end %>
-  
+
   # The log file directory.
   # Default is the logs directory in the newrelic.jar parent directory.
   #log_file_path:
-  
+
   # The agent communicates with New Relic via https by
   # default.  If you want to communicate with newrelic via http,
   # then turn off SSL by setting this value to false.
@@ -121,7 +121,7 @@ common: &default_settings
   <% else %>
   ssl: <%= @daemon_ssl %>
   <% end %>
-  
+
   # Proxy settings for connecting to the New Relic server.
   #
   # If a proxy is used, the host setting is required.  Other settings
@@ -143,9 +143,9 @@ common: &default_settings
   <% else %>
   capture_params: <%= @capture_params %>
   <% end %>
-  
+
   # Tells transaction tracer and error collector to not to collect
-  # specific http request parameters.  
+  # specific http request parameters.
   <% if @ignored_params.nil? %>
   # ignored_params: credit_card, ssn, password
   <% else %>
@@ -157,7 +157,7 @@ common: &default_settings
   # minute. Included in the transaction is the exact call sequence of
   # the transactions including any SQL statements issued.
   transaction_tracer:
-  
+
     # Transaction tracer is enabled by default. Set this to false to
     # turn it off. This feature is only available at the higher product levels.
     # Default is true.
@@ -166,7 +166,7 @@ common: &default_settings
     <% else %>
     enabled: <%= @transaction_tracer_enable %>
     <% end %>
-    
+
     # Threshold in seconds for when to collect a transaction
     # trace. When the response time of a controller action exceeds
     # this threshold, a transaction trace will be recorded and sent to
@@ -179,7 +179,7 @@ common: &default_settings
     <% else %>
     transaction_threshold: "<%= @transaction_tracer_threshold %>"
     <% end %>
- 
+
     # When transaction tracer is on, SQL statements can optionally be
     # recorded. The recorder has three modes, "off" which sends no
     # SQL, "raw" which sends the SQL statement in its original form,
@@ -190,7 +190,7 @@ common: &default_settings
     <% else %>
     record_sql: <%= @transaction_tracer_record_sql %>
     <% end %>
-    
+
     # Obfuscate only occurrences of specific SQL fields names.
     # This setting only applies if "record_sql" is set to "raw".
     #obfuscated_sql_fields: credit_card, ssn, password
@@ -220,7 +220,7 @@ common: &default_settings
     explain_enabled: <%= @transaction_tracer_slow_sql %>
     <% end %>
 
-    # Threshold for query execution time below which query plans will not 
+    # Threshold for query execution time below which query plans will not
     # not be captured.  Relevant only when `explain_enabled` is true.
     # Default is 0.5 seconds.
     <% if @transaction_tracer_explain_threshold.nil? %>
@@ -228,18 +228,18 @@ common: &default_settings
     <% else %>
     explain_threshold: <%= @transaction_tracer_explain_threshold %>
     <% end %>
-    
+
     # Use this setting to control the variety of transaction traces.
     # The higher the setting, the greater the variety.
     # Set this to 0 to always report the slowest transaction trace.
     # Default is 20.
     top_n: 20
-    
-  
+
+
   # Error collector captures information about uncaught exceptions and
   # sends them to New Relic for viewing
   error_collector:
-    
+
     # Error collector is enabled by default. Set this to false to turn
     # it off. This feature is only available at the higher product levels.
     # Default is true.
@@ -248,13 +248,13 @@ common: &default_settings
     <% else %>
     enabled: <%= @error_collector_enable %>
     <% end %>
-        
+
     # To stop specific exceptions from reporting to New Relic, set this property
     # to a comma separated list of full class names.
     #
     # ignore_errors:
 
-    # To stop specific http status codes from being reporting to New Relic as errors, 
+    # To stop specific http status codes from being reporting to New Relic as errors,
     # set this property to a comma separated list of status codes to ignore.
     # When this property is commented out it defaults to ignoring 404s.
     #
@@ -267,7 +267,11 @@ common: &default_settings
   cross_application_tracer:
     # Set to true to enable cross application tracing.
     # Default is true.
+    <%if @cross_application_tracer_enable.nil? %>
     enabled: true
+    <% else %>
+    enabled: <%= @cross_application_tracer_enable %>
+    <% end %>
 
   # Thread profiler measures wall clock time, CPU time, and method call counts
   # in your application's threads as they run.
@@ -276,12 +280,12 @@ common: &default_settings
     # Set to false to disable the thread profiler.
     # Default is true.
     enabled: true
-  
+
   #============================== Browser Monitoring ===============================
   # New Relic Real User Monitoring gives you insight into the performance real users are
   # experiencing with your website. This is accomplished by measuring the time it takes for
   # your users' browsers to download and render your web pages by injecting a small amount
-  # of JavaScript code into the header and footer of each page. 
+  # of JavaScript code into the header and footer of each page.
   browser_monitoring:
     # By default the agent automatically inserts API calls in compiled JSPs to
     # inject the monitoring JavaScript into web pages.
@@ -294,7 +298,7 @@ common: &default_settings
     # Set this attribute to false to prevent injection of the monitoring JavaScript.
     # Default is true.
     enabled: true
-    
+
 # Application Environments
 # ------------------------------------------
 # Environment specific settings are in this section.

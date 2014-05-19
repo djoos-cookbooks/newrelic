@@ -9,8 +9,7 @@ include_recipe 'newrelic::repository'
 
 license = node['newrelic']['application_monitoring']['license']
 
-package 'newrelic_rpm' do
-  provider Chef::Provider::Package::RubyGem
+gem_package 'newrelic_rpm' do
   action :install
 end
 
@@ -44,7 +43,8 @@ template "#{node['newrelic']['ruby-agent']['install_dir']}/newrelic.yml" do
     :transaction_tracer_slow_sql => node['newrelic']['application_monitoring']['transaction_tracer']['slow_sql'],
     :transaction_tracer_explain_threshold => node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold'],
     :error_collector_enable => node['newrelic']['application_monitoring']['error_collector']['enable'],
-    :browser_monitoring_auto_instrument => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
+    :browser_monitoring_auto_instrument => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'],
+    :cross_application_tracer_enable => node['newrelic']['application_monitoring']['cross_application_tracer']['enable']
   )
   action :create
 end
