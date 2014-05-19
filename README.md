@@ -119,6 +119,7 @@ Attributes
 * `node['newrelic']['repository']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 
 ## php-agent.rb:
+* `node['newrelic']['php-agent']['install_silently']` - Determine whether to run the install in silent mode, defaults to false
 * `node['newrelic']['php-agent']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
 * `node['newrelic']['php-agent']['web_server']['service_name']` - The web server service name, defaults to "apache2"
 * `node['newrelic']['php-agent']['php_recipe']` - The php recipe to include for the php agent, defaults to "php::default"
