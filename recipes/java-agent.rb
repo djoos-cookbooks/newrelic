@@ -42,6 +42,7 @@ template "#{node['newrelic']['java-agent']['install_dir']}/newrelic.yml" do
     :license => license,
     :appname => node['newrelic']['application_monitoring']['appname'],
     :logfile => node['newrelic']['application_monitoring']['logfile'],
+    :logfile_path => node['newrelic']['application_monitoring']['logfile_path'],
     :loglevel => node['newrelic']['application_monitoring']['loglevel'],
     :audit_mode => node['newrelic']['java-agent']['audit_mode'],
     :log_file_count => node['newrelic']['java-agent']['log_file_count'],
@@ -63,8 +64,23 @@ template "#{node['newrelic']['java-agent']['install_dir']}/newrelic.yml" do
   action :create
 end
 
+# Allow app_group to write log_file_path
+if ! node['newrelic']['application_monitoring']['logfile_path'].nil? && node['newrelic']['application_monitoring']['logfile_path'] != ''
+  path = node['newrelic']['application_monitoring']['logfile_path']
+
+  while path != '/'
+    directory path do
+      group node['newrelic']['java-agent']['app_group']
+      mode 0775
+      action :create
+    end
+
+    path = File.dirname(path)
+  end
+end
+
 # execution of the install
 execute 'newrelic-install' do
   command "sudo java -jar #{node['newrelic']['java-agent']['install_dir']}/newrelic.jar install"
-  only_if { node['newrelic']['java-agent']['perform_self_install'] }
+  only_if { node['newrelic']['java-agent']['execute_install'] }
 end

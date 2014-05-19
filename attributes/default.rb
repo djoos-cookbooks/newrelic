@@ -32,6 +32,7 @@ default['newrelic']['server_monitoring']['timeout'] = nil
 # application monitoring
 default['newrelic']['application_monitoring']['enabled'] = nil
 default['newrelic']['application_monitoring']['logfile'] = nil
+default['newrelic']['application_monitoring']['logfile_path'] = nil
 default['newrelic']['application_monitoring']['loglevel'] = nil
 default['newrelic']['application_monitoring']['appname'] = nil
 default['newrelic']['application_monitoring']['daemon']['logfile'] = '/var/log/newrelic/newrelic-daemon.log'

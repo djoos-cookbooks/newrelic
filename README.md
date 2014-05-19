@@ -80,6 +80,7 @@ Attributes
 
 * `node['newrelic']['application_monitoring']['enabled']`
 * `node['newrelic']['application_monitoring']['logfile']`
+* `node['newrelic']['application_monitoring']['logfile_path']`
 * `node['newrelic']['application_monitoring']['loglevel']`
 * `node['newrelic']['application_monitoring']['appname']`
 * `node['newrelic']['application_monitoring']['daemon']['logfile']`
@@ -153,6 +154,7 @@ Attributes
 * `node['newrelic']['java-agent']['log_file_count']` - The number of log files to use
 * `node['newrelic']['java-agent']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
 * `node['newrelic']['java-agent']['log_daily']` - Override other log rolling configuration and roll the logs daily
+* `node['newrelic']['java-agent']['execute_install']` - Execute install or not, defaults to true
 
 ## nodejs-agent.rb
 * `node['newrelic']['nodejs-agent']['apps']` - Array of Hash describing the apps to monitor
