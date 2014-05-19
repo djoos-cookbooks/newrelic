@@ -27,7 +27,9 @@ end
 execute 'newrelic-install' do
   command 'newrelic-install install'
   if node['newrelic']['php-agent']['install_silently']
-    environment { 'NR_INSTALL_SILENT' => 1 }
+    environment(
+      'NR_INSTALL_SILENT' => '1'
+    )
   end
   action :nothing
   if node['newrelic']['php-agent']['web_server']['service_name']
