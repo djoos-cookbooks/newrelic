@@ -68,6 +68,7 @@ Attributes
 
 ### ADVANCED
 * `node['newrelic']['server_monitoring']['logfile']`
+* `node['newrelic']['server_monitoring']['logfile_path']`
 * `node['newrelic']['server_monitoring']['loglevel']`
 * `node['newrelic']['server_monitoring']['proxy']`
 * `node['newrelic']['server_monitoring']['ssl']`

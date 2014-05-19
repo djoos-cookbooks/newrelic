@@ -14,4 +14,4 @@ default['newrelic']['java-agent']['audit_mode'] = false
 default['newrelic']['java-agent']['log_file_count'] = 1
 default['newrelic']['java-agent']['log_limit_in_kbytes'] = 0
 default['newrelic']['java-agent']['log_daily'] = true
-default['newrelic']['java-agent']['perform_self_install'] = true
+default['newrelic']['java-agent']['execute_install'] = true
