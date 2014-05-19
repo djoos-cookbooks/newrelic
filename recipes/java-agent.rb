@@ -13,17 +13,19 @@ license = node['newrelic']['application_monitoring']['license']
 directory node['newrelic']['java-agent']['install_dir'] do
   owner node['newrelic']['java-agent']['app_user']
   group node['newrelic']['java-agent']['app_group']
+  recursive true
   mode 0775
   action :create
 end
 
-local_file = "#{node['newrelic']['java-agent']['install_dir']}/newrelic.jar"
+local_file = "#{node['newrelic']['java-agent']['install_dir']}/#{node['newrelic']['java-agent']['jar_file']}"
 
 remote_file local_file do
   source node['newrelic']['java-agent']['https_download']
   owner node['newrelic']['java-agent']['app_user']
   group node['newrelic']['java-agent']['app_group']
   mode 0664
+  not_if { File.exist?(local_file) }
 end
 
 if node['newrelic']['application_monitoring']['appname'].nil?
@@ -64,4 +66,5 @@ end
 # execution of the install
 execute 'newrelic-install' do
   command "sudo java -jar #{node['newrelic']['java-agent']['install_dir']}/newrelic.jar install"
+  only_if { node['newrelic']['java-agent']['perform_self_install'] }
 end
