@@ -45,7 +45,7 @@ end
 
 # configuration file
 template node['newrelic']['meetme-plugin']['config_file'] do
-  source 'plugin/meetme/newrelic_plugin_agent.cfg.erb'
+  source 'plugin/meetme/newrelic-plugin-agent.cfg.erb'
   owner 'root'
   group 'root'
   mode 0644
@@ -64,7 +64,7 @@ end
 
 # installing additional requirement(s)
 node['newrelic']['meetme-plugin']['additional_requirements'].each do |additional_requirement|
-  python_pip "newrelic_plugin_agent[#{additional_requirement}]" do
+  python_pip "newrelic-plugin-agent[#{additional_requirement}]" do
     action :upgrade
   end
 end
