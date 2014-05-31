@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Attributes:: meetme-plugin
 #
-# Copyright 2012-2013, Escape Studios
+# Copyright 2012-2014, Escape Studios
 #
 
 default['newrelic']['meetme-plugin']['python_recipe'] = 'python::pip'
