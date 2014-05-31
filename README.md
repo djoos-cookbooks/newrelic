@@ -14,7 +14,7 @@ More information?
 * https://docs.newrelic.com/docs/nodejs/installing-and-maintaining-nodejs
 * https://docs.newrelic.com/docs/ruby/new-relic-for-ruby
 
-* https://pypi.python.org/pypi/newrelic_plugin_agent
+* https://pypi.python.org/pypi/newrelic-plugin-agent
 * https://github.com/MeetMe/newrelic-plugin-agent#installation-instructions
 
 Requirements
@@ -217,9 +217,9 @@ eg.
 ```
 
 * `node['newrelic']['meetme-plugin']['wake_interval']` - The New Relic plugin agent wake interval, defaults to 60
-* `node['newrelic']['meetme-plugin']['config_file']` - The New Relic plugin agent config file, defaults to "/etc/newrelic/newrelic_plugin_agent.cfg"
-* `node['newrelic']['meetme-plugin']['pid_file']` - The New Relic plugin agent PID file name, defaults to "/var/run/newrelic/newrelic_plugin_agent.pid"
-* `node['newrelic']['meetme-plugin']['log_file']` - The New Relic plugin agent log file name, defaults to "/var/log/newrelic/newrelic_plugin_agent.log"
+* `node['newrelic']['meetme-plugin']['config_file']` - The New Relic plugin agent config file, defaults to "/etc/newrelic/newrelic-plugin-agent.cfg"
+* `node['newrelic']['meetme-plugin']['pid_file']` - The New Relic plugin agent PID file name, defaults to "/var/run/newrelic/newrelic-plugin-agent.pid"
+* `node['newrelic']['meetme-plugin']['log_file']` - The New Relic plugin agent log file name, defaults to "/var/log/newrelic/newrelic-plugin-agent.log"
 * `node['newrelic']['meetme-plugin']['user']` - The New Relic plugin agent user, defaults to "newrelic"
 * `node['newrelic']['meetme-plugin']['additional_requirements']` - The New Relic plugin agent's additional requirements, eg. {"mongodb", "pgbouncer", "postgresql"} - defaults to {}
 
