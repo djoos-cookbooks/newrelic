@@ -25,7 +25,7 @@ remote_file remote_file do
   source node['newrelic']['java-agent']['https_download']
   owner node['newrelic']['java-agent']['app_user']
   group node['newrelic']['java-agent']['app_group']
-  path  local_file
+  path local_file
   mode 0664
   not_if { File.exist?(local_file) }
 end
