@@ -7,7 +7,7 @@ Application:
   license_key: <%= @license_key %>
   wake_interval: <%= @wake_interval %>
   <% unless @proxy.nil? %>
-  proxy = <%= @proxy %>
+  proxy: <%= @proxy %>
   <% end %>
   <%= @services_yml %>
 
