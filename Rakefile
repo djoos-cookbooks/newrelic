@@ -6,7 +6,7 @@ namespace :lint do
   require 'foodcritic'
 
   desc 'Run Ruby syntax/lint checks'
-  Rubocop::RakeTask.new(:ruby)
+  RuboCop::RakeTask.new(:ruby)
 
   desc 'Run Chef syntax/lint checks'
   FoodCritic::Rake::LintTask.new(:chef) do |task|
