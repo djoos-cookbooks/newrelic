@@ -15,3 +15,4 @@ default['newrelic']['java-agent']['log_file_count'] = 1
 default['newrelic']['java-agent']['log_limit_in_kbytes'] = 0
 default['newrelic']['java-agent']['log_daily'] = true
 default['newrelic']['java-agent']['execute_install'] = true
+default['newrelic']['java-agent']['app_location'] = node['newrelic']['java-agent']['install_dir']
