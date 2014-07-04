@@ -40,7 +40,7 @@ services = {
 
 unless services.nil?
   require 'yaml'
-  services_yml = services.to_yaml(:indentation => 2).gsub(/(! )?['"]#services['"]:/, '#services:').gsub('---', '').gsub(/!(ruby\/|map)[a-zA-Z:]*/, '')
+  services_yml = services.to_yaml(:indentation => 2).gsub(/(! )?['"]#services['"]:/, '#services:').gsub('---', '').gsub(/!(ruby\/|map|seq)[a-zA-Z:]*/, '')
 end
 
 # configuration file
