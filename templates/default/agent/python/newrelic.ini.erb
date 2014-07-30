@@ -211,7 +211,11 @@ error_collector.enabled = <%= @error_collector_enable %>
 # To stop specific errors from reporting to the UI, set this to
 # a space separated list of the Python exception type names to
 # ignore. The exception name should be of the form 'module:class'.
+<% if @error_collector_ignore_errors.nil? %>
 error_collector.ignore_errors =
+<% else %>
+error_collector.ignore_errors = <%= @error_collector_ignore_errors %>
+<% end %>
 
 # Browser monitoring is the Real User Monitoring feature of the UI.
 # For those Python web frameworks that are supported, this
