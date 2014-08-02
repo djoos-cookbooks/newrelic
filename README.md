@@ -242,7 +242,7 @@ This cookbook includes an LWRP for notifying New Relic of a deployment
 - changelog: A list of changes for this deployment
 - user: The name of the user/process that triggered this deployment
 
-#### Examples
+#### Example(s)
 ```
 newrelic_deployment "my-application" do
     api_key "abcdef"
@@ -254,6 +254,32 @@ newrelic_deployment "my-application" do
     user "chef-client"
     action :notify
 end
+```
+
+This cookbook includes an LWRP for generating the newrelic.yml configuration file in a specific path, which can be used to generate multiple configurations when deploying multiple different applications
+
+### `newrelic_yml`
+
+### Actions
+- :generate - Generate the newrelic.yml config file (unique and default action)
+
+### Example usage - Java agent
+
+1. Install the Java Agent: add the newrelic::java-agent recipe to your run list. A newrelic.yml will be generated but not linked to anything.
+2. In your application cookbook, generate the newrelic.yml for this application:
+
+```ruby
+newrelicyml="#{my_app_path}/newrelic.yml"
+newrelic_yml newrelicyml do
+  agent_type 'java'
+  app_name 'my-super-duper-application'
+end
+```
+
+3. Configure your app for newrelic using your config file and newrelic.jar:
+
+```bash
+ java -Dnewrelic.config.file=#{newrelicyml}  -javaagent:#{node['newrelic']['install_dir']}/newrelic.jar [rest of your args]
 ```
 
 Usage
