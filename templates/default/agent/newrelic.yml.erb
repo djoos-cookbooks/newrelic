@@ -262,6 +262,9 @@ common: &default_settings
     # to a comma separated list of full class names.
     #
     # ignore_errors:
+    <% unless @error_collector_ignore_errors.nil? %>
+      ignore_errors: <%= @error_collector_ignore_errors %>
+    <% end %>
 
     # To stop specific http status codes from being reporting to New Relic as errors,
     # set this property to a comma separated list of status codes to ignore.
