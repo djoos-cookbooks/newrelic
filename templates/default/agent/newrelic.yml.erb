@@ -3,7 +3,7 @@
 ###################
 #
 # This file configures the New Relic Agent.  New Relic monitors
-# Ruby applications with deep visibility and low overhead.  For more
+# <%= @agent_type %> applications with deep visibility and low overhead.  For more
 # information, visit www.newrelic.com.
 #
 # This configuration file is custom generated for NewRelic Administration
@@ -50,7 +50,7 @@ common: &default_settings
   # app_name: My Application;My Application 2
   # This setting is required.
   <% if @appname.nil? %>
-  app_name: Ruby Application
+  app_name: <%= @agent_type %> Application
   <% else %>
   app_name: <%= @appname %>
   <% end %>
@@ -112,7 +112,11 @@ common: &default_settings
 
   # The log file directory.
   # Default is the logs directory in the newrelic.jar parent directory.
+  <% if @logfile_path.nil? %>
   #log_file_path:
+  <% else %>
+  log_file_path: <%= @logfile_path %>
+  <% end %>
 
   # The agent communicates with New Relic via https by
   # default.  If you want to communicate with newrelic via http,
@@ -272,7 +276,7 @@ common: &default_settings
   cross_application_tracer:
     # Set to true to enable cross application tracing.
     # Default is true.
-    <% if @cross_application_tracer_enable.nil? %>
+    <%if @cross_application_tracer_enable.nil? %>
     enabled: true
     <% else %>
     enabled: <%= @cross_application_tracer_enable %>
