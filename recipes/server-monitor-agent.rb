@@ -12,7 +12,7 @@ license = node['newrelic']['server_monitoring']['license']
 case node['platform']
 when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', 'smartos'
   package node['newrelic']['server-monitor-agent']['service_name'] do
-    action :install
+    action node['newrelic']['server-monitor-agent']['agent_action']
   end
 
   # configure your New Relic license key
@@ -48,7 +48,7 @@ when 'windows'
     windows_package 'New Relic Server Monitor' do
       source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x64_#{node['newrelic']['server-monitor-agent']['windows_version']}.msi"
       options "/L*v install.log /qn NR_LICENSE_KEY=#{license}"
-      action :install
+      action node['newrelic']['server-monitor-agent']['agent_action']
       version node['newrelic']['server-monitor-agent']['windows_version']
       checksum node['newrelic']['server-monitor-agent']['windows64_checksum']
     end
@@ -56,7 +56,7 @@ when 'windows'
     windows_package 'New Relic Server Monitor' do
       source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x86_#{node['newrelic']['server-monitor-agent']['windows_version']}.msi"
       options "/L*v install.log /qn NR_LICENSE_KEY=#{license}"
-      action :install
+      action node['newrelic']['server-monitor-agent']['agent_action']
       version node['newrelic']['server-monitor-agent']['windows_version']
       checksum node['newrelic']['server-monitor-agent']['windows32_checksum']
     end

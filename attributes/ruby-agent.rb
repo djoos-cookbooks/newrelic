@@ -5,6 +5,7 @@
 # Copyright 2012-2014, Escape Studios
 #
 
+default['newrelic']['ruby-agent']['agent_action'] = :install
 default['newrelic']['ruby-agent']['install_dir'] = ''
 default['newrelic']['ruby-agent']['app_user'] = 'newrelic'
 default['newrelic']['ruby-agent']['app_group'] = 'newrelic'
