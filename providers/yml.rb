@@ -1,20 +1,22 @@
 #
 # Cookbook Name:: newrelic
-# Provider:: yml 
+# Provider:: yml
 #
 # Copyright 2012-2014, Escape Studios
 #
 
 action :generate do
-  t = template new_resource.name do
+  t = template new_resource.yml_path do
     cookbook 'newrelic'
-    source "agent/#{new_resource.agent_type}/newrelic.yml.erb"
+    source 'agent/newrelic.yml.erb'
     owner new_resource.owner
     group new_resource.group
     mode 0644
     variables(
+      :agent_type => new_resource.agent_type,
+      :enabled => new_resource.enabled,
       :license => new_resource.license,
-      :appname => new_resource.app_name,
+      :app_name => new_resource.app_name,
       :logfile => new_resource.logfile,
       :logfile_path => new_resource.logfile_path,
       :loglevel => new_resource.loglevel,

@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: newrelic
-# Resource:: yml 
+# Resource:: yml
 #
 # Copyright 2012-2014, Escape Studios
 #
@@ -9,12 +9,11 @@ actions :generate
 default_action :generate
 
 attribute :yml_path, :kind_of => String, :name_attribute => true
-
-attribute :app_name, :kind_of => String, :default => nil 
-attribute :agent_type, :kind_of => String, :required => true, :regex => /^(java|ruby|nodejs|dotnet)$/
+attribute :app_name, :kind_of => String, :default => nil
+attribute :agent_type, :kind_of => String, :required => true, :regex => /^(java|ruby)$/
+attribute :enabled, :kind_of => [TrueClass, FalseClass, String], :default => nil
 attribute :owner, :kind_of => String, :default => nil
 attribute :group, :kind_of => String, :default => nil
-
 attribute :license, :kind_of => String, :default => node['newrelic']['application_monitoring']['license']
 attribute :logfile, :kind_of => String, :default => node['newrelic']['application_monitoring']['logfile']
 attribute :logfile_path, :kind_of => String, :default => node['newrelic']['application_monitoring']['logfile']
