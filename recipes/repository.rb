@@ -56,6 +56,6 @@ when 'redhat', 'centos', 'fedora', 'scientific', 'amazon'
   package 'newrelic-repo' do
     source "#{Chef::Config[:file_cache_path]}/newrelic-repo-5-3.noarch.rpm"
     provider Chef::Provider::Package::Rpm
-    action ['newrelic']['repository']['repository_action']
+    action node['newrelic']['repository']['repository_action']
   end
 end
