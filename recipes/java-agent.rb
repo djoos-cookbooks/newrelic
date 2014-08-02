@@ -81,6 +81,6 @@ end
 
 # execution of the install
 execute 'newrelic-install' do
-  command "sudo java -jar #{local_file} install"
-  only_if { node['newrelic']['java-agent']['execute_install'] }
+  command "sudo java -jar #{local_file} #{node['newrelic']['java-agent']['agent_action']}"
+  only_if { node['newrelic']['java-agent']['execute_agent_action'] }
 end

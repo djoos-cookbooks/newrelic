@@ -10,12 +10,11 @@ include_recipe node['newrelic']['python-agent']['python_recipe']
 
 license = node['newrelic']['application_monitoring']['license']
 
-# install latest python agent
 python_pip 'newrelic' do
   if node['newrelic']['python-agent']['python_venv']
     virtualenv node['newrelic']['python-agent']['python_venv']
   end
-  action :install
+  action node['newrelic']['python-agent']['agent_action']
   if node['newrelic']['python-agent']['python_version'] != 'latest'
     version node['newrelic']['python-agent']['python_version']
   end

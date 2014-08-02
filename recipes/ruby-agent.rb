@@ -10,7 +10,7 @@ include_recipe 'newrelic::repository'
 license = node['newrelic']['application_monitoring']['license']
 
 gem_package 'newrelic_rpm' do
-  action :install
+  action node['newrelic']['ruby-agent']['agent_action']
 end
 
 if node['newrelic']['application_monitoring']['appname'].nil?

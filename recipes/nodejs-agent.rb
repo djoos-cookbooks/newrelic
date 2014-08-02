@@ -14,7 +14,7 @@ license = node['newrelic']['application_monitoring']['license']
 node['newrelic']['nodejs-agent']['apps'].each do |nodeapp|
   execute 'npm-install-nodejs-agent' do
     cwd nodeapp['app_path']
-    command 'npm install newrelic'
+    command "npm #{node['newrelic']['nodejs-agent']['agent_action']} newrelic"
   end
 
   template "#{nodeapp['app_path']}/newrelic.js" do

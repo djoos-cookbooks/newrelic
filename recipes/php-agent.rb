@@ -19,7 +19,7 @@ end
 
 # install/update latest php agent
 package 'newrelic-php5' do
-  action :upgrade
+  action node['newrelic']['php-agent']['agent_action']
   notifies :run, 'execute[newrelic-install]', :immediately
 end
 
