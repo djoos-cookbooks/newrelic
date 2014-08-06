@@ -6,8 +6,9 @@
 #
 
 default['newrelic']['java-agent']['version'] = '3.9.0'
-default['newrelic']['java-agent']['https_download'] = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{node['newrelic']['java-agent']['version']}/newrelic-agent-#{node['newrelic']['java-agent']['version']}.jar"
-default['newrelic']['java-agent']['jar_file'] = "newrelic-agent-#{node['newrelic']['java-agent']['version']}.jar"
+version = node['newrelic']['java-agent']['version']
+default['newrelic']['java-agent']['https_download'] = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/newrelic-agent-#{version}.jar"
+default['newrelic']['java-agent']['jar_file'] = "newrelic-agent-#{version}.jar"
 default['newrelic']['java-agent']['install_dir'] = '/opt/newrelic/java'
 default['newrelic']['java-agent']['app_user'] = 'newrelic'
 default['newrelic']['java-agent']['app_group'] = 'newrelic'
