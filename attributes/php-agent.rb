@@ -13,7 +13,7 @@ if node.attribute?('php')
   end
 end
 
-default['newrelic']['agent_type'] = "php"
+default['newrelic']['agent_type'] = 'php'
 default['newrelic']['php-agent']['agent_action'] = :install
 default['newrelic']['php-agent']['install_silently'] = false
 default['newrelic']['php-agent']['startup_mode'] = 'agent'

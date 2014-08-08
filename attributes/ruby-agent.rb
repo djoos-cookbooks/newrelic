@@ -5,7 +5,7 @@
 # Copyright 2012-2014, Escape Studios
 #
 
-default['newrelic']['agent_type'] = "ruby"
+default['newrelic']['agent_type'] = 'ruby'
 default['newrelic']['ruby-agent']['agent_action'] = :install
 default['newrelic']['ruby-agent']['install_dir'] = ''
 default['newrelic']['ruby-agent']['app_user'] = 'newrelic'
