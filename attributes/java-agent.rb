@@ -5,6 +5,7 @@
 # Copyright 2012-2014, Escape Studios
 #
 
+default['newrelic']['agent_type'] = 'java'
 default['newrelic']['java-agent']['version'] = '3.9.0'
 version = node['newrelic']['java-agent']['version']
 default['newrelic']['java-agent']['https_download'] = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/newrelic-agent-#{version}.jar"

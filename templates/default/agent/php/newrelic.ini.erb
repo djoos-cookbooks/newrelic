@@ -99,11 +99,7 @@ newrelic.loglevel = "<%= @loglevel %>"
 ;          list is considered the 'primary' application name and must be unique
 ;          for each account / license key.
 ;
-<% if @appname.nil? %>
-;newrelic.appname = "PHP Application"
-<% else %>
-newrelic.appname = "<%= @appname %>"
-<% end %>
+newrelic.appname = "<%= node['newrelic']['application_monitoring']['appname'] %>"
 
 ;
 ; Beginning with version 3.0 of the agent, the daemon can be automatically

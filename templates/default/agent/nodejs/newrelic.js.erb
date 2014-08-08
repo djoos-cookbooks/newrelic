@@ -12,7 +12,7 @@ exports.config = {
     /**
      * Array of application names.
      */
-    app_name: ['<%= @app_name %>'],
+    app_name: ['<%= node['newrelic']['application_monitoring']['app_name'] %>'],
     /**
      * Your New Relic license key.
      */

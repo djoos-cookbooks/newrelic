@@ -49,11 +49,7 @@ common: &default_settings
   # For example, to report data to"My Application" and "My Application 2" use this:
   # app_name: My Application;My Application 2
   # This setting is required.
-  <% if @appname.nil? %>
-  app_name: <%= @agent_type %> Application
-  <% else %>
-  app_name: <%= @appname %>
-  <% end %>
+  app_name: <%= node['newrelic']['application_monitoring']['appname'] %>
 
   # The agent uses its own log file to keep its logging
   # separate from that of your application.  Specify the log level here.
