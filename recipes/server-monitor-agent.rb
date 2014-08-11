@@ -12,6 +12,7 @@ license = node['newrelic']['server_monitoring']['license']
 case node['platform']
 when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', 'smartos'
   package node['newrelic']['server-monitor-agent']['service_name'] do
+    version node['newrelic']['server-monitor-agent']['linux_service_version']
     action node['newrelic']['server-monitor-agent']['agent_action']
   end
 
