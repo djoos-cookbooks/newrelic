@@ -41,13 +41,13 @@ if platform_family?('debian')
   end
 elsif platform_family?('rhel')
   if node['yum']['newrelic']['managed']
-      yum_repository node['yum']['newrelic']['name'] do
-        description node['yum']['newrelic']['description']
-        baseurl node['yum']['newrelic']['baseurl']
-        gpgcheck node['yum']['newrelic']['gpgcheck']
-        gpgkey node['yum']['newrelic']['gpgkey']
-        enabled node['yum']['newrelic']['enabled']
-        action :create
-      end
+    yum_repository node['yum']['newrelic']['name'] do
+      description node['yum']['newrelic']['description']
+      baseurl node['yum']['newrelic']['baseurl']
+      gpgcheck node['yum']['newrelic']['gpgcheck']
+      gpgkey node['yum']['newrelic']['gpgkey']
+      enabled node['yum']['newrelic']['enabled']
+      action :create
+    end
   end
 end
