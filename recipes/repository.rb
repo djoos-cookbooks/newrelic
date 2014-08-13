@@ -10,8 +10,7 @@ when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon'
   package 'wget'
 end
 
-case node['platform']
-when 'debian', 'ubuntu'
+if platform_family?("debian")
   # trust the New Relic GPG Key
   # this step is required to tell apt that you trust the integrity of New Relic's apt repository
   gpg_key_url = "http://download.newrelic.com/#{node['newrelic']['repository']['repository_key']}.gpg"
@@ -40,7 +39,7 @@ when 'debian', 'ubuntu'
     command 'apt-get update'
     action :nothing
   end
-when 'redhat', 'centos', 'fedora', 'scientific', 'amazon'
+elsif platform_family?("rhel")
   # install the newrelic-repo package, which configures a new package repository for yum
   if node['kernel']['machine'] == 'x86_64'
     machine = 'x86_64'
