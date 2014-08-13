@@ -10,7 +10,7 @@ when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon'
   package 'wget'
 end
 
-if platform_family?("debian")
+if platform_family?('debian')
   # trust the New Relic GPG Key
   # this step is required to tell apt that you trust the integrity of New Relic's apt repository
   gpg_key_url = "http://download.newrelic.com/#{node['newrelic']['repository']['repository_key']}.gpg"
@@ -39,15 +39,15 @@ if platform_family?("debian")
     command 'apt-get update'
     action :nothing
   end
-elsif platform_family?("rhel")
-    if node['yum']['newrelic']['managed']
-        yum_repository node['yum']['newrelic']['name'] do
-          description node['yum']['newrelic']['description']
-          baseurl node['yum']['newrelic']['baseurl']
-          gpgcheck node['yum']['newrelic']['gpgcheck']
-          gpgkey node['yum']['newrelic']['gpgkey']
-          enabled node['yum']['newrelic']['enabled']
-          action :create
-        end
-    end
+elsif platform_family?('rhel')
+  if node['yum']['newrelic']['managed']
+      yum_repository node['yum']['newrelic']['name'] do
+        description node['yum']['newrelic']['description']
+        baseurl node['yum']['newrelic']['baseurl']
+        gpgcheck node['yum']['newrelic']['gpgcheck']
+        gpgkey node['yum']['newrelic']['gpgkey']
+        enabled node['yum']['newrelic']['enabled']
+        action :create
+      end
+  end
 end
