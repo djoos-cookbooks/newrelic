@@ -11,6 +11,7 @@ version '1.2.1'
 end
 
 depends 'python'
+depends 'yum', '>= 3.0'
 
 recommends 'php'
 recommends 'ms_dotnet4'
