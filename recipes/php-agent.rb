@@ -55,7 +55,7 @@ template node['newrelic']['php-agent']['config_file'] do
     :license => license,
     :logfile => node['newrelic']['application_monitoring']['logfile'],
     :loglevel => node['newrelic']['application_monitoring']['loglevel'],
-    :appname => node['newrelic']['application_monitoring']['appname'],
+    :app_name => node['newrelic']['application_monitoring']['app_name'],
     :daemon_logfile => node['newrelic']['application_monitoring']['daemon']['logfile'],
     :daemon_loglevel => node['newrelic']['application_monitoring']['daemon']['loglevel'],
     :daemon_port => node['newrelic']['application_monitoring']['daemon']['port'],

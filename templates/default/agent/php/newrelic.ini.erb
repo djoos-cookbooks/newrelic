@@ -99,10 +99,10 @@ newrelic.loglevel = "<%= @loglevel %>"
 ;          list is considered the 'primary' application name and must be unique
 ;          for each account / license key.
 ;
-<% if @appname.nil? %>
+<% if @app_name.nil? %>
 ;newrelic.appname = "PHP Application"
 <% else %>
-newrelic.appname = "<%= @appname %>"
+newrelic.appname = "<%= @app_name %>"
 <% end %>
 
 ;

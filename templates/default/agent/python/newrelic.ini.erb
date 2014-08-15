@@ -37,10 +37,10 @@ license_key = <%= @license %>
 # application as you would like it to show up in New Relic UI.
 # The UI will then auto-map instances of your application into a
 # entry on your home dashboard page.
-<% if @appname.nil? %>
+<% if @app_name.nil? %>
 app_name = Python Application
 <% else %>
-app_name = <%= @appname %>
+app_name = <%= @app_name %>
 <% end %>
 
 # When "true", the agent collects performance data about your

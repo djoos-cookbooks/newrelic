@@ -30,15 +30,15 @@ remote_file remote_file do
   not_if { File.exist?(local_file) }
 end
 
-if node['newrelic']['application_monitoring']['appname'].nil?
-  node.set['newrelic']['application_monitoring']['appname'] = node['hostname']
+if node['newrelic']['application_monitoring']['app_name'].nil?
+  node.set['newrelic']['application_monitoring']['app_name'] = node['hostname']
 end
 
 # configure your New Relic license key
 newrelic_yml "#{node['newrelic']['java-agent']['install_dir']}/newrelic.yml" do
   agent_type 'java'
   enabled node['newrelic']['application_monitoring']['enabled']
-  app_name node['newrelic']['application_monitoring']['appname']
+  app_name node['newrelic']['application_monitoring']['app_name']
   owner node['newrelic']['java-agent']['app_user']
   group node['newrelic']['java-agent']['app_group']
   license license

@@ -28,7 +28,7 @@ template node['newrelic']['python-agent']['config_file'] do
   mode 0644
   variables(
     :license => license,
-    :appname => node['newrelic']['application_monitoring']['appname'],
+    :app_name => node['newrelic']['application_monitoring']['app_name'],
     :enabled => node['newrelic']['application_monitoring']['enabled'],
     :logfile => node['newrelic']['application_monitoring']['logfile'],
     :loglevel => node['newrelic']['application_monitoring']['loglevel'],

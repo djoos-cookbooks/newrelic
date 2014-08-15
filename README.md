@@ -82,7 +82,7 @@ Attributes
 * `node['newrelic']['application_monitoring']['logfile']`
 * `node['newrelic']['application_monitoring']['logfile_path']`
 * `node['newrelic']['application_monitoring']['loglevel']`
-* `node['newrelic']['application_monitoring']['appname']`
+* `node['newrelic']['application_monitoring']['app_name']`
 * `node['newrelic']['application_monitoring']['daemon']['logfile']`
 * `node['newrelic']['application_monitoring']['daemon']['loglevel']`
 * `node['newrelic']['application_monitoring']['daemon']['port']`
