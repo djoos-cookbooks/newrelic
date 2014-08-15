@@ -49,10 +49,10 @@ common: &default_settings
   # For example, to report data to"My Application" and "My Application 2" use this:
   # app_name: My Application;My Application 2
   # This setting is required.
-  <% if @appname.nil? %>
+  <% if @app_name.nil? %>
   app_name: <%= @agent_type %> Application
   <% else %>
-  app_name: <%= @appname %>
+  app_name: <%= @app_name %>
   <% end %>
 
   # The agent uses its own log file to keep its logging
@@ -325,15 +325,15 @@ common: &default_settings
 
 development:
   <<: *default_settings
-  app_name: <%= @appname %> (Development)
+  app_name: <%= @app_name %> (Development)
 
 test:
   <<: *default_settings
-  app_name: <%= @appname %> (Test)
+  app_name: <%= @app_name %> (Test)
 
 production:
   <<: *default_settings
 
 staging:
   <<: *default_settings
-  app_name: <%= @appname %> (Staging)
+  app_name: <%= @app_name %> (Staging)
