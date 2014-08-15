@@ -13,7 +13,7 @@ if node.attribute?('php')
   end
 end
 
-default['newrelic']['php-agent']['agent_action'] = :install
+default['newrelic']['php-agent']['agent_action'] = :upgrade
 default['newrelic']['php-agent']['install_silently'] = false
 default['newrelic']['php-agent']['startup_mode'] = 'agent'
 default['newrelic']['php-agent']['web_server']['service_name'] = 'apache2'
