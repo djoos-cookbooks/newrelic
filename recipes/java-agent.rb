@@ -38,7 +38,7 @@ end
 newrelic_yml "#{node['newrelic']['java-agent']['install_dir']}/newrelic.yml" do
   agent_type 'java'
   enabled node['newrelic']['application_monitoring']['enabled']
-  app_name node['newrelic']['application_monitoring']['appname']
+  appname node['newrelic']['application_monitoring']['appname']
   owner node['newrelic']['java-agent']['app_user']
   group node['newrelic']['java-agent']['app_group']
   license license
