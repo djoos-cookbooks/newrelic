@@ -137,6 +137,7 @@ Attributes
 
 ## server-monitor-agent.rb:
 * `node['newrelic']['server-monitor-agent']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
+* `node['newrelic']['server-monitor-agent']['linux_service_version']` - The New Relic Linux Server package (rpm) version to install, defaults to (nil) the most recent available version
 * `node['newrelic']['server-monitor-agent']['service_notify_action']` - The New Relic server monitoring notify action, defaults to ":restart"
 * `node['newrelic']['server-monitor-agent']['service_actions']` - The New Relic server monitoring service actions, defaults to "[:enable, :start]" (#starts the service if it's not running and enables it to start at system boot time)
 * `node['newrelic']['server-monitor-agent']['config_path']` - The New Relic server monitoring config path, defaults to "/etc/newrelic"
