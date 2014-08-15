@@ -11,7 +11,7 @@ license = node['newrelic']['application_monitoring']['license']
 
 # the older version (3.0) had a bug in the init scripts that when it shut down the daemon
 # it would also kill dpkg as it was trying to upgrade let's remove the old package before continuing
-package 'remove_newrelic-php5' do
+package 'newrelic-php5-broken' do
   # set package_name attribute explicitly as the name attribute is *not* the correct package name
   # so not to clash with the package resource block below... (see issue #109 for more information)
   package_name 'newrelic-php5'
