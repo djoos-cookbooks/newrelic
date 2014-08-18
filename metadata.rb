@@ -4,16 +4,16 @@ maintainer_email 'dev@escapestudios.com'
 license 'MIT'
 description 'Installs/Configures New Relic'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '1.3.0'
+version '1.3.1'
 
 %w( debian ubuntu redhat centos fedora scientific amazon windows smartos ).each do |os|
   supports os
+  depends 'ms_dotnet4' if os == 'windows'
 end
 
 depends 'python'
 
 recommends 'php'
-recommends 'ms_dotnet4'
 recommends 'curl'
 recommends 'nodejs'
 
