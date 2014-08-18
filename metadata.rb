@@ -8,10 +8,10 @@ version '1.3.1'
 
 %w( debian ubuntu redhat centos fedora scientific amazon windows smartos ).each do |os|
   supports os
+  depends 'ms_dotnet4' if os == 'windows'
 end
 
 depends 'python'
-depends 'ms_dotnet4'
 
 recommends 'php'
 recommends 'curl'
