@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rake'
 
-group :lint do   
+group :lint do
   gem 'rubocop', '~> 0.18'
   gem 'foodcritic', '~> 3.0'
 end
