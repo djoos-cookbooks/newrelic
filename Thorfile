@@ -3,6 +3,7 @@
 require 'bundler'
 require 'bundler/setup'
 require 'berkshelf/thor'
+require 'English'
 
 # Thor (http://whatisthor.com/)
 class Default < Thor
