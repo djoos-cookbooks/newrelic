@@ -118,6 +118,18 @@ Attributes
 ## repository.rb:
 * `node['newrelic']['repository']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 
+The following attributes are set by default (see Opscode [yum cookbook](https://github.com/opscode-cookbooks/yum) for more information)
+```ruby
+default['yum']['newrelic']['managed'] = true
+default['yum']['newrelic']['name'] = 'newrelic'
+default['yum']['newrelic']['description'] = 'New Relic packages for Enterprise Linux'
+default['yum']['newrelic']['baseurl'] = "http://yum.newrelic.com/pub/newrelic/el5/#{node['kernel']['machine']}"
+default['yum']['newrelic']['gpgcheck'] = true
+default['yum']['newrelic']['gpgkey'] = 'https://raw.githubusercontent.com/escapestudios-cookbooks/newrelic/master/files/default/RPM-GPG-KEY-NewRelic.asc'
+default['yum']['newrelic']['enabled'] = true
+```
+
+
 ## php-agent.rb:
 * `node['newrelic']['php-agent']['install_silently']` - Determine whether to run the install in silent mode, defaults to false
 * `node['newrelic']['php-agent']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
