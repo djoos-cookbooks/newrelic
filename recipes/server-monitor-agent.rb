@@ -42,8 +42,7 @@ when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', '
     action node['newrelic']['server-monitor-agent']['service_actions']
   end
 when 'windows'
-  include_recipe node['newrelic']['dotnet-agent']['dotnet_recipe']
-
+ 
   if node['kernel']['machine'] == 'x86_64'
     windows_package 'New Relic Server Monitor' do
       source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x64_#{node['newrelic']['server-monitor-agent']['windows_version']}.msi"
