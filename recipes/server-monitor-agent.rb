@@ -42,7 +42,6 @@ when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', '
     action node['newrelic']['server-monitor-agent']['service_actions']
   end
 when 'windows'
-  include_recipe node['newrelic']['dotnet-agent']['dotnet_recipe']
 
   if node['kernel']['machine'] == 'x86_64'
     windows_package 'New Relic Server Monitor' do
