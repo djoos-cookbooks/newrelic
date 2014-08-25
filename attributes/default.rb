@@ -12,7 +12,6 @@
 default['newrelic']['license'] = nil
 default['newrelic']['server_monitoring']['license'] = node['newrelic']['license']
 default['newrelic']['application_monitoring']['license'] = node['newrelic']['license']
-default['newrelic']['plugin_monitoring']['license'] = node['newrelic']['license']
 
 #################
 # ADVANCED CONFIG

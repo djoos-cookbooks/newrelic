@@ -14,9 +14,6 @@ More information?
 * https://docs.newrelic.com/docs/nodejs/installing-and-maintaining-nodejs
 * https://docs.newrelic.com/docs/ruby/new-relic-for-ruby
 
-* https://pypi.python.org/pypi/newrelic-plugin-agent
-* https://github.com/MeetMe/newrelic-plugin-agent#installation-instructions
-
 Requirements
 ============
 
@@ -26,22 +23,9 @@ Make sure you run Chef >= 0.10.0.
 
 ## Cookbooks:
 
-* python
-
 This cookbook recommends on the following cookbooks:
 
-* php
-* ms_dotnet4
-* nodejs
-* curl
-
-### Depending on your environment, these recommended cookbooks are actual dependencies (depends):
-* Installing the PHP agent? You'll need the php cookbook to be available.
-* Installing the DotNet agent? You'll need the ms_dotnet4 cookbook to be available.
-* Installing the Nodejs agent? You'll need the nodejs cookbook to be available.
-* Installing the MeetMe plugin? You'll need the python cookbook to be available.
-
-* Making use of the deployment LWRP? You'll need the curl cookbook to be available.
+* curl (when making use of the deployment LWRP)
 
 ## Platforms:
 
@@ -64,7 +48,6 @@ Attributes
 * `node['newrelic']['license']` - Your New Relic license key. Default is `nil`
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (defaults to value of node['newrelic']['license'])
 * `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (defaults to value of node['newrelic']['license'])
-* `node['newrelic']['plugin_monitoring']['license']` - Your New Relic license key for plugin purposes (defaults to value of node['newrelic']['license'])
 
 ### ADVANCED
 * `node['newrelic']['server_monitoring']['logfile']`
@@ -118,47 +101,44 @@ Attributes
 ## repository.rb:
 * `node['newrelic']['repository']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 
-## php-agent.rb:
-* `node['newrelic']['php-agent']['install_silently']` - Determine whether to run the install in silent mode, defaults to false
-* `node['newrelic']['php-agent']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
-* `node['newrelic']['php-agent']['web_server']['service_name']` - The web server service name, defaults to "apache2"
-* `node['newrelic']['php-agent']['php_recipe']` - The php recipe to include for the php agent, defaults to "php::default"
-* `node['newrelic']['php-agent']['config_file']` - The New Relic php agent config file, defaults to "#{node['php']['ext_conf_dir']}/newrelic.ini" (FYI: Opscode PHP cookbook's ext_conf_dir)
+## php_agent.rb:
+* `node['newrelic']['php_agent']['install_silently']` - Determine whether to run the install in silent mode, defaults to false
+* `node['newrelic']['php_agent']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
+* `node['newrelic']['php_agent']['web_server']['service_name']` - The web server service name, defaults to "apache2"
+* `node['newrelic']['php_agent']['config_file']` - The New Relic php agent config file, depends on your php external configuration directory; eg. /etc/php5/conf.d/newrelic.ini
 
-## python-agent.rb:
-* `node['newrelic']['python-agent']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
-* `node['newrelic']['python-agent']['python_recipe']` - The python recipe to include for the python agent, defaults to "python::pip"
-* `node['newrelic']['python-agent']['config_file']` - The New Relic python agent config file, defaults to "/etc/newrelic/newrelic.ini"
+## python_agent.rb:
+* `node['newrelic']['python_agent']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
+* `node['newrelic']['python_agent']['config_file']` - The New Relic python agent config file, defaults to "/etc/newrelic/newrelic.ini"
 
-## dotnet-agent.rb:
-* `node['newrelic']['dotnet-agent']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
-* `node['newrelic']['dotnet-agent']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
-* `node['newrelic']['dotnet-agent']['dotnet_recipe']` - The dotnet recipe to include for the php agent, defaults to "ms_dotnet4"
+## dotnet_agent.rb:
+* `node['newrelic']['dotnet_agent']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
+* `node['newrelic']['dotnet_agent']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 
-## server-monitor-agent.rb:
-* `node['newrelic']['server-monitor-agent']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
-* `node['newrelic']['server-monitor-agent']['service_notify_action']` - The New Relic server monitoring notify action, defaults to ":restart"
-* `node['newrelic']['server-monitor-agent']['service_actions']` - The New Relic server monitoring service actions, defaults to "[:enable, :start]" (#starts the service if it's not running and enables it to start at system boot time)
-* `node['newrelic']['server-monitor-agent']['config_path']` - The New Relic server monitoring config path, defaults to "/etc/newrelic"
-* `node['newrelic']['server-monitor-agent']['config_file_group']` - The New Relic server monitoring config file group, defaults to "newrelic"
-* `node['newrelic']['server-monitor-agent']['windows_version']` - the Windows version to install, defaults to "2.0.0.198"
-* `node['newrelic']['server-monitor-agent']['windows64_checksum']` - checksum of the 64-bit Windows version, defaults to "5a8f3f5e8f15997463430401756d377c321c8899c2790ca85e5587a5b643651e"
-* `node['newrelic']['server-monitor-agent']['windows32_checksum']` - checksum of the 32-bit Windows version, defaults to "ac2b65eecaad461fdd2e4386e3e4c9f96ea940b35bdf7a8c532c21dbd1c99ff0"
+## server_monitor_agent.rb:
+* `node['newrelic']['server_monitor_agent']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
+* `node['newrelic']['server_monitor_agent']['service_notify_action']` - The New Relic server monitoring notify action, defaults to ":restart"
+* `node['newrelic']['server_monitor_agent']['service_actions']` - The New Relic server monitoring service actions, defaults to "[:enable, :start]" (#starts the service if it's not running and enables it to start at system boot time)
+* `node['newrelic']['server_monitor_agent']['config_path']` - The New Relic server monitoring config path, defaults to "/etc/newrelic"
+* `node['newrelic']['server_monitor_agent']['config_file_group']` - The New Relic server monitoring config file group, defaults to "newrelic"
+* `node['newrelic']['server_monitor_agent']['windows_version']` - the Windows version to install, defaults to "2.0.0.198"
+* `node['newrelic']['server_monitor_agent']['windows64_checksum']` - checksum of the 64-bit Windows version, defaults to "5a8f3f5e8f15997463430401756d377c321c8899c2790ca85e5587a5b643651e"
+* `node['newrelic']['server_monitor_agent']['windows32_checksum']` - checksum of the 32-bit Windows version, defaults to "ac2b65eecaad461fdd2e4386e3e4c9f96ea940b35bdf7a8c532c21dbd1c99ff0"
 
-## java-agent.rb:
-* `node['newrelic']['java-agent']['https_download']` - The url to download the jar vor the New Relic Java agent
-* `node['newrelic']['java-agent']['jar_file']` - The name of the newrelic jar file
-* `node['newrelic']['java-agent']['install_dir']` - The directory to install the newrelic jar and config file
-* `node['newrelic']['java-agent']['app_user']` - The user that runs the Java application that will use the New Relic Java agent
-* `node['newrelic']['java-agent']['app_group']` - The group for the app_user
-* `node['newrelic']['java-agent']['audit_mode']` - Boolean, log all data to and from New Relic in plain text
-* `node['newrelic']['java-agent']['log_file_count']` - The number of log files to use
-* `node['newrelic']['java-agent']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
-* `node['newrelic']['java-agent']['log_daily']` - Override other log rolling configuration and roll the logs daily
-* `node['newrelic']['java-agent']['execute_install']` - Execute install or not, defaults to true
+## java_agent.rb:
+* `node['newrelic']['java_agent']['https_download']` - The url to download the jar vor the New Relic Java agent
+* `node['newrelic']['java_agent']['jar_file']` - The name of the newrelic jar file
+* `node['newrelic']['java_agent']['install_dir']` - The directory to install the newrelic jar and config file
+* `node['newrelic']['java_agent']['app_user']` - The user that runs the Java application that will use the New Relic Java agent
+* `node['newrelic']['java_agent']['app_group']` - The group for the app_user
+* `node['newrelic']['java_agent']['audit_mode']` - Boolean, log all data to and from New Relic in plain text
+* `node['newrelic']['java_agent']['log_file_count']` - The number of log files to use
+* `node['newrelic']['java_agent']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
+* `node['newrelic']['java_agent']['log_daily']` - Override other log rolling configuration and roll the logs daily
+* `node['newrelic']['java_agent']['execute_install']` - Execute install or not, defaults to true
 
-## nodejs-agent.rb
-* `node['newrelic']['nodejs-agent']['apps']` - Array of Hash describing the apps to monitor
+## nodejs_agent.rb
+* `node['newrelic']['nodejs_agent']['apps']` - Array of Hash describing the apps to monitor
 
 eg.
 ```
@@ -174,54 +154,20 @@ javascript
 require('newrelic');
 ```
 
-* `node['newrelic']['nodejs-agent']['nodejs_recipe']` - The nodejs recipe to include for the nodejs agent, defaults to "nodejs::npm"
+## ruby_agent.rb:
+* `node['newrelic']['ruby_agent']['install_dir']` - The directory to for the config file
+* `node['newrelic']['ruby_agent']['app_user']` - The user that runs the Ruby application that will use the New Relic Ruby agent
+* `node['newrelic']['ruby_agent']['app_group']` - The group for the app_user
+* `node['newrelic']['ruby_agent']['audit_mode']` - Boolean, log all data to and from New Relic in plain text
+* `node['newrelic']['ruby_agent']['log_file_count']` - The number of log files to use
+* `node['newrelic']['ruby_agent']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
+* `node['newrelic']['ruby_agent']['log_daily']` - Override other log rolling configuration and roll the logs daily
 
-## ruby-agent.rb:
-* `node['newrelic']['ruby-agent']['install_dir']` - The directory to for the config file
-* `node['newrelic']['ruby-agent']['app_user']` - The user that runs the Ruby application that will use the New Relic Ruby agent
-* `node['newrelic']['ruby-agent']['app_group']` - The group for the app_user
-* `node['newrelic']['ruby-agent']['audit_mode']` - Boolean, log all data to and from New Relic in plain text
-* `node['newrelic']['ruby-agent']['log_file_count']` - The number of log files to use
-* `node['newrelic']['ruby-agent']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
-* `node['newrelic']['ruby-agent']['log_daily']` - Override other log rolling configuration and roll the logs daily
+MeetMe plugin
+=============
 
-## meetme-plugin.rb:
-* `node['newrelic']['meetme-plugin']['service_name']` - The New Relic MeetMe plugin service name, defaults to "newrelic-plugin-agent"
-* `node['newrelic']['meetme-plugin']['services']` - A hash of New Relic MeetMe plugin services, defaults to nil
-
-eg.
-```
-{
-  "memcached" => {
-    "name" => "localhost",
-    "host" => "host",
-    "port" => 11211
-  },
-  "redis" => [
-    {
-      "name" => "localhost",
-      "host" => "localhost",
-      "port" => 6379,
-      "db_count" => 16,
-      "password" => "foobar"
-    },
-    {
-      "name" => "localhost",
-      "host" => "localhost",
-      "port" => 6380,
-      "db_count" => 16,
-      "password" => "foobar"
-    }
-  ]
-}
-```
-
-* `node['newrelic']['meetme-plugin']['wake_interval']` - The New Relic plugin agent wake interval, defaults to 60
-* `node['newrelic']['meetme-plugin']['config_file']` - The New Relic plugin agent config file, defaults to "/etc/newrelic/newrelic-plugin-agent.cfg"
-* `node['newrelic']['meetme-plugin']['pid_file']` - The New Relic plugin agent PID file name, defaults to "/var/run/newrelic/newrelic-plugin-agent.pid"
-* `node['newrelic']['meetme-plugin']['log_file']` - The New Relic plugin agent log file name, defaults to "/var/log/newrelic/newrelic-plugin-agent.log"
-* `node['newrelic']['meetme-plugin']['user']` - The New Relic plugin agent user, defaults to "newrelic"
-* `node['newrelic']['meetme-plugin']['additional_requirements']` - The New Relic plugin agent's additional requirements, eg. {"mongodb", "pgbouncer", "postgresql"} - defaults to {}
+To make sure the cookbook is focussed on getting New Relic server and application monitoring, no plugin logic is provided here.
+The New Relic MeetMe plugin-logic is still available, in a separate cookbook: (newrelic_meetme_plugin)[https://github.com/escapestudios-cookbooks/newrelic_meetme_plugin].
 
 Resources / Providers
 =====================
@@ -265,7 +211,7 @@ This cookbook includes an LWRP for generating the newrelic.yml configuration fil
 
 ### Example usage - Java agent
 
-1. Install the Java Agent: add the newrelic::java-agent recipe to your run list. A newrelic.yml will be generated but not linked to anything.
+1. Install the Java Agent: add the newrelic::java_agent recipe to your run list. A newrelic.yml will be generated but not linked to anything.
 2. In your application cookbook, generate the newrelic.yml for this application:
 
 ```ruby
@@ -285,24 +231,21 @@ end
 Usage
 =====
 
-1)
-include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic:repository]` and `recipe[newrelic::server-monitor-agent]`
+1. include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::server_monitor_agent]`
 --- OR ---
 include the bits and pieces explicitly in a run list:
 ```ruby
 `recipe[newrelic::repository]`
-`recipe[newrelic::server-monitor-agent]`
-`recipe[newrelic::dotnet-agent]`
-`recipe[newrelic::java-agent]`
-`recipe[newrelic::meetme-plugin]`
-`recipe[newrelic::nodejs-agent]`
-`recipe[newrelic::php-agent]`
-`recipe[newrelic::python-agent]`
-`recipe[newrelic::ruby-agent]`
+`recipe[newrelic::server_monitor_agent]`
+`recipe[newrelic::dotnet_agent]`
+`recipe[newrelic::java_agent]`
+`recipe[newrelic::nodejs_agent]`
+`recipe[newrelic::php_agent]`
+`recipe[newrelic::python_agent]`
+`recipe[newrelic::ruby_agent]`
 ```
 
-2)
-change the `node['newrelic']['license']` attribute to your New Relic license keys
+2. change the `node['newrelic']['license']` attribute to your New Relic license keys
 --- OR ---
 override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 

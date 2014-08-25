@@ -1,20 +1,19 @@
 #
 # Cookbook Name:: newrelic
-# Recipe:: nodejs-agent
+# Recipe:: nodejs_agent
 #
 # Copyright 2012-2014, Escape Studios
 #
 
 include_recipe 'newrelic::repository'
-include_recipe node['newrelic']['nodejs-agent']['nodejs_recipe']
 
 license = node['newrelic']['application_monitoring']['license']
 
 # install the newrelic.js file into each projects
-node['newrelic']['nodejs-agent']['apps'].each do |nodeapp|
-  execute 'npm-install-nodejs-agent' do
+node['newrelic']['nodejs_agent']['apps'].each do |nodeapp|
+  execute 'npm-install-nodejs_agent' do
     cwd nodeapp['app_path']
-    command "npm #{node['newrelic']['nodejs-agent']['agent_action']} newrelic"
+    command "npm #{node['newrelic']['nodejs_agent']['agent_action']} newrelic"
   end
 
   template "#{nodeapp['app_path']}/newrelic.js" do

@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: newrelic
-# Recipe:: php-agent
+# Recipe:: php_agent
 #
 # Copyright 2012-2014, Escape Studios
 #
@@ -21,21 +21,21 @@ end
 
 # install/update latest php agent
 package 'newrelic-php5' do
-  action node['newrelic']['php-agent']['agent_action']
+  action node['newrelic']['php_agent']['agent_action']
   notifies :run, 'execute[newrelic-install]', :immediately
 end
 
 # run newrelic-install
 execute 'newrelic-install' do
   command 'newrelic-install install'
-  if node['newrelic']['php-agent']['install_silently']
+  if node['newrelic']['php_agent']['install_silently']
     environment(
       'NR_INSTALL_SILENT' => '1'
     )
   end
   action :nothing
-  if node['newrelic']['php-agent']['web_server']['service_name']
-    notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
+  if node['newrelic']['php_agent']['web_server']['service_name']
+    notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
   end
 end
 
@@ -45,7 +45,7 @@ end
 
 # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
 # and restart the web server in order to pick up the new settings
-template node['newrelic']['php-agent']['config_file'] do
+template node['newrelic']['php_agent']['config_file'] do
   source 'agent/php/newrelic.ini.erb'
   owner 'root'
   group 'root'
@@ -89,15 +89,15 @@ template node['newrelic']['php-agent']['config_file'] do
     :cross_application_tracer_enable => node['newrelic']['application_monitoring']['cross_application_tracer']['enable']
   )
   action :create
-  if node['newrelic']['php-agent']['web_server']['service_name']
-    notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
+  if node['newrelic']['php_agent']['web_server']['service_name']
+    notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
   end
 end
 
 # https://newrelic.com/docs/php/newrelic-daemon-startup-modes
-Chef::Log.info("newrelic-daemon startup mode: #{node['newrelic']['php-agent']['startup_mode']}")
+Chef::Log.info("newrelic-daemon startup mode: #{node['newrelic']['php_agent']['startup_mode']}")
 
-case node['newrelic']['php-agent']['startup_mode']
+case node['newrelic']['php_agent']['startup_mode']
 when 'agent'
   # agent startup mode
 
@@ -140,12 +140,12 @@ when 'external'
     )
     action :create
     notifies :restart, 'service[newrelic-daemon]', :immediately
-    notifies :restart, "service[#{node['newrelic']['php-agent']['web_server']['service_name']}]", :delayed
+    notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
   end
 
   service 'newrelic-daemon' do
     action [:enable, :start] # starts the service if it's not running and enables it to start at system boot time
   end
 else
-  Chef::Application.fatal!("#{node['newrelic']['php-agent']['startup_mode']} is not a valid newrelic-daemon startup mode.")
+  Chef::Application.fatal!("#{node['newrelic']['php_agent']['startup_mode']} is not a valid newrelic-daemon startup mode.")
 end
