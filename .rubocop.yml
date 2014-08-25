@@ -1,9 +1,6 @@
 AlignParameters:
   Enabled: false
 
-FileName:
-  Enabled: false
-
 Encoding:
   Enabled: false
 
