@@ -1,27 +1,26 @@
 #
 # Cookbook Name:: newrelic
-# Recipe:: python-agent
+# Recipe:: python_agent
 #
 # Copyright 2012-2014, Escape Studios
 #
 
 include_recipe 'newrelic::repository'
-include_recipe node['newrelic']['python-agent']['python_recipe']
 
 license = node['newrelic']['application_monitoring']['license']
 
 python_pip 'newrelic' do
-  if node['newrelic']['python-agent']['python_venv']
-    virtualenv node['newrelic']['python-agent']['python_venv']
+  if node['newrelic']['python_agent']['python_venv']
+    virtualenv node['newrelic']['python_agent']['python_venv']
   end
-  action node['newrelic']['python-agent']['agent_action']
-  if node['newrelic']['python-agent']['python_version'] != 'latest'
-    version node['newrelic']['python-agent']['python_version']
+  action node['newrelic']['python_agent']['agent_action']
+  if node['newrelic']['python_agent']['python_version'] != 'latest'
+    version node['newrelic']['python_agent']['python_version']
   end
 end
 
 # configure your New Relic license key
-template node['newrelic']['python-agent']['config_file'] do
+template node['newrelic']['python_agent']['config_file'] do
   source 'agent/python/newrelic.ini.erb'
   owner 'root'
   group 'root'

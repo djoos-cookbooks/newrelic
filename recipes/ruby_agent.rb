@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: newrelic
-# Recipe:: ruby-agent
+# Recipe:: ruby_agent
 #
 # Copyright 2012-2014, Escape Studios
 #
@@ -10,7 +10,7 @@ include_recipe 'newrelic::repository'
 license = node['newrelic']['application_monitoring']['license']
 
 gem_package 'newrelic_rpm' do
-  action node['newrelic']['ruby-agent']['agent_action']
+  action node['newrelic']['ruby_agent']['agent_action']
 end
 
 if node['newrelic']['application_monitoring']['app_name'].nil?
@@ -18,20 +18,20 @@ if node['newrelic']['application_monitoring']['app_name'].nil?
 end
 
 # configure your New Relic license key
-newrelic_yml "#{node['newrelic']['ruby-agent']['install_dir']}/newrelic.yml" do
+newrelic_yml "#{node['newrelic']['ruby_agent']['install_dir']}/newrelic.yml" do
   agent_type 'ruby'
   enabled node['newrelic']['application_monitoring']['enabled']
   app_name node['newrelic']['application_monitoring']['app_name']
-  owner node['newrelic']['ruby-agent']['app_user']
-  group node['newrelic']['ruby-agent']['app_group']
+  owner node['newrelic']['ruby_agent']['app_user']
+  group node['newrelic']['ruby_agent']['app_group']
   license license
   logfile node['newrelic']['application_monitoring']['logfile']
   logfile_path node['newrelic']['application_monitoring']['logfile_path']
   loglevel node['newrelic']['application_monitoring']['loglevel']
-  audit_mode node['newrelic']['ruby-agent']['audit_mode']
-  log_file_count node['newrelic']['ruby-agent']['log_file_count']
-  log_limit_in_kbytes node['newrelic']['ruby-agent']['log_limit_in_kbytes']
-  log_daily node['newrelic']['ruby-agent']['log_daily']
+  audit_mode node['newrelic']['ruby_agent']['audit_mode']
+  log_file_count node['newrelic']['ruby_agent']['log_file_count']
+  log_limit_in_kbytes node['newrelic']['ruby_agent']['log_limit_in_kbytes']
+  log_daily node['newrelic']['ruby_agent']['log_daily']
   daemon_ssl node['newrelic']['application_monitoring']['daemon']['ssl']
   capture_params node['newrelic']['application_monitoring']['capture_params']
   ignored_params node['newrelic']['application_monitoring']['ignored_params']
