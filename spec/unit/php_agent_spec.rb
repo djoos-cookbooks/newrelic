@@ -15,7 +15,7 @@ describe 'newrelic::php_agent' do
     end
 
     it 'removes newrelic-php5-broken ' do
-      expect(chef_run).to remove_package('newrelic-php5-broken').with(version: '3.0.5.95')
+      expect(chef_run).to remove_package('newrelic-php5-broken').with(:version => '3.0.5.95')
     end
 
     it 'installs newrelic-php5' do
@@ -28,7 +28,7 @@ describe 'newrelic::php_agent' do
 
     it 'defines newrelic-install execute block' do
       pending('not yet supported by chefspec')
-      #expect(chef_run).to define_execute('newrelic-install install').with(action: :nothing)
+      # expect(chef_run).to define_execute('newrelic-install install')
     end
 
     it 'creates newrelic ini config template from newrelic.ini.erb' do

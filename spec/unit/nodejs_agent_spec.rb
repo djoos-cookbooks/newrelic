@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe 'newrelic::nodejs_agent' do
   context 'Any OS' do
-    let(:chef_run) do ChefSpec::Runner.new do |node|
-      node.set['newrelic']['nodejs_agent']['apps'] = [ { 'app_name' => 'My Application', 'app_path' => "/tmp/" } ]
+    let(:chef_run) do
+      ChefSpec::Runner.new do |node|
+        node.set['newrelic']['nodejs_agent']['apps'] = [{ 'app_name' => 'My Application', 'app_path' => '/tmp/' }]
       end.converge(described_recipe)
     end
 
