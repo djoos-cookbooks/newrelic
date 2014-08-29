@@ -26,7 +26,7 @@ describe 'newrelic::php_agent' do
       expect(chef_run.package('newrelic-php5')).to notify('execute[newrelic-install]').immediately
     end
 
-    it 'defines newrelic-install exexecute block' do
+    it 'defines newrelic-install execute block' do
       pending('not yet supported by chefspec')
       #expect(chef_run).to define_execute('newrelic-install install').with(action: :nothing)
     end
