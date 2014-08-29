@@ -46,7 +46,8 @@ end
 # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
 # and restart the web server in order to pick up the new settings
 template node['newrelic']['php_agent']['config_file'] do
-  source 'agent/php/newrelic.ini.erb'
+  cookbook node['newrelic']['php_agent']['template']['cookbook_ini']
+  source node['newrelic']['php_agent']['template']['source_ini']
   owner 'root'
   group 'root'
   mode 0644
@@ -122,7 +123,8 @@ when 'external'
 
   # configure proxy daemon settings
   template '/etc/newrelic/newrelic.cfg' do
-    source 'agent/php/newrelic.cfg.erb'
+    cookbook node['newrelic']['php_agent']['template']['cookbook']
+    source node['newrelic']['php_agent']['template']['source']
     owner 'root'
     group 'root'
     mode 0644

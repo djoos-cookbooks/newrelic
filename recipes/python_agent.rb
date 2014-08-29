@@ -21,7 +21,8 @@ end
 
 # configure your New Relic license key
 template node['newrelic']['python_agent']['config_file'] do
-  source 'agent/python/newrelic.ini.erb'
+  cookbook node['newrelic']['python_agent']['template']['cookbook']
+  source node['newrelic']['python_agent']['template']['source']
   owner 'root'
   group 'root'
   mode 0644

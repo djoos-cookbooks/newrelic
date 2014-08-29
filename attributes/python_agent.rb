@@ -9,3 +9,5 @@ default['newrelic']['python_agent']['agent_action'] = :install
 default['newrelic']['python_agent']['python_version'] = 'latest'
 default['newrelic']['python_agent']['python_venv'] = nil
 default['newrelic']['python_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
+default['newrelic']['python_agent']['template']['cookbook'] = 'newrelic'
+default['newrelic']['python_agent']['template']['source'] = 'agent/python/newrelic.ini.erb'
