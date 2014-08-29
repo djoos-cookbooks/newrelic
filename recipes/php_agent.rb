@@ -142,7 +142,7 @@ when 'external'
     )
     action :create
     notifies :restart, 'service[newrelic-daemon]', :immediately
-    notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
+    notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed if node['newrelic']['php_agent']['web_server']['service_name']
   end
 
   service 'newrelic-daemon' do
