@@ -10,6 +10,8 @@ version '2.0.0'
   supports os
 end
 
+depends 'python'
+
 recommends 'curl'
 
 recipe 'newrelic', 'Adds the New Relic repository, installs & configures the New Relic server monitor agent.'
