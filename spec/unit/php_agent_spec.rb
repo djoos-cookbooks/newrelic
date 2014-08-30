@@ -34,8 +34,17 @@ describe 'newrelic::php_agent' do
       expect(chef_run).to render_file("#{chef_run.node['newrelic']['php_agent']['config_file']}")
     end
 
+    it 'logs the startup mode' do
+      expect(chef_run).to write_log('newrelic-daemon startup mode: external').with(level: :info)
+    end
+
     it 'creates newrelic config template from newrelic.conf.erb' do
       expect(chef_run).to render_file('/etc/newrelic/newrelic.cfg')
+    end
+
+    it 'starts and enable newrelic-daemon' do
+      expect(chef_run).to enable_service('newrelic-daemon')
+      expect(chef_run).to start_service('newrelic-daemon')
     end
 
   end
