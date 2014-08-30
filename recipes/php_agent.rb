@@ -9,6 +9,11 @@ include_recipe 'newrelic::repository'
 
 license = node['newrelic']['application_monitoring']['license']
 
+service node['newrelic']['php_agent']['web_server']['service_name'] do
+  action :nothing
+  only_if { node['newrelic']['php_agent']['web_server']['service_name'] }
+end
+
 # the older version (3.0) had a bug in the init scripts that when it shut down the daemon
 # it would also kill dpkg as it was trying to upgrade let's remove the old package before continuing
 package 'newrelic-php5-broken' do
