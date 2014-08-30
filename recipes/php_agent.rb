@@ -96,7 +96,9 @@ template node['newrelic']['php_agent']['config_file'] do
 end
 
 # https://newrelic.com/docs/php/newrelic-daemon-startup-modes
-Chef::Log.info("newrelic-daemon startup mode: #{node['newrelic']['php_agent']['startup_mode']}")
+log "newrelic-daemon startup mode: #{node['newrelic']['php_agent']['startup_mode']}" do
+  level :info
+end
 
 case node['newrelic']['php_agent']['startup_mode']
 when 'agent'
