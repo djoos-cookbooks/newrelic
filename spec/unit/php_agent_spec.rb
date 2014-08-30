@@ -6,7 +6,6 @@ describe 'newrelic::php_agent' do
       ChefSpec::Runner.new do |node|
         node.set['newrelic']['php_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
         node.set['newrelic']['php_agent']['web_server']['service_name'] = false
-        node.set['newrelic']['php_agent']['startup_mode'] = 'external'
       end.converge(described_recipe)
     end
 
@@ -35,17 +34,56 @@ describe 'newrelic::php_agent' do
     end
 
     it 'logs the startup mode' do
-      expect(chef_run).to write_log('newrelic-daemon startup mode: external').with(level: :info)
+      expect(chef_run).to write_log("newrelic-daemon startup mode: #{chef_run.node['newrelic']['php_agent']['startup_mode']}").with(level: :info)
     end
 
-    it 'creates newrelic config template from newrelic.conf.erb' do
-      expect(chef_run).to render_file('/etc/newrelic/newrelic.cfg')
+    context 'with an external startup mode' do
+      let(:chef_run) do
+        ChefSpec::Runner.new do |node|
+          node.set['newrelic']['php_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
+          node.set['newrelic']['php_agent']['web_server']['service_name'] = false
+          node.set['newrelic']['php_agent']['startup_mode'] = 'external'
+        end.converge(described_recipe)
+      end
+
+      it 'creates newrelic config template from newrelic.conf.erb' do
+        expect(chef_run).to render_file('/etc/newrelic/newrelic.cfg')
+      end
+
+      it 'starts and enables newrelic-daemon' do
+        expect(chef_run).to enable_service('newrelic-daemon')
+        expect(chef_run).to start_service('newrelic-daemon')
+      end
+
+    end
+    context 'with an agent startup mode' do
+      let(:chef_run) do
+        ChefSpec::Runner.new do |node|
+          node.set['newrelic']['php_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
+          node.set['newrelic']['php_agent']['web_server']['service_name'] = false
+          node.set['newrelic']['php_agent']['startup_mode'] = 'agent'
+        end.converge(described_recipe)
+      end
+
+      it 'stops and disables newrelic-daemon' do
+        expect(chef_run).to disable_service('newrelic-daemon')
+        expect(chef_run).to stop_service('newrelic-daemon')
+      end
+
+      it 'ensure that the file /etc/newrelic/newrelic.cfg does not exist' do
+        pending('we cannot test it because we can\'t stub File::exist?')
+        # https://github.com/sethvargo/chefspec/issues/250
+        # expect(chef_run).to run_execute('mv /etc/newrelic/newrelic.cfg /etc/newrelic/newrelic.cfg.external')
+      end
+
+      it 'ensure that the file /etc/newrelic/upgrade_please.key does not exist' do
+        pending('we cannot test it because we can\'t stub File::exist?')
+        # https://github.com/sethvargo/chefspec/issues/250
+        # expect(chef_run).to run_execute('mv /etc/newrelic/upgrade_please.key /etc/newrelic/upgrade_please.key.external')
+      end
+
     end
 
-    it 'starts and enable newrelic-daemon' do
-      expect(chef_run).to enable_service('newrelic-daemon')
-      expect(chef_run).to start_service('newrelic-daemon')
-    end
 
   end
   context 'Ubuntu 12.04' do
