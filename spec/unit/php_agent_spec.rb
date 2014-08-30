@@ -27,8 +27,7 @@ describe 'newrelic::php_agent' do
     end
 
     it 'defines newrelic-install execute block' do
-      pending('not yet supported by chefspec')
-      # expect(chef_run).to define_execute('newrelic-install install')
+      expect(chef_run.execute('newrelic-install')).to do_nothing
     end
 
     it 'creates newrelic ini config template from newrelic.ini.erb' do
