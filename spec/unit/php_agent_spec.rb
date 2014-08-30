@@ -5,7 +5,6 @@ describe 'newrelic::php_agent' do
     let(:chef_run) do
       ChefSpec::Runner.new do |node|
         node.set['newrelic']['php_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
-        node.set['newrelic']['php_agent']['web_server']['service_name'] = false
       end.converge(described_recipe)
     end
 
@@ -41,7 +40,6 @@ describe 'newrelic::php_agent' do
       let(:chef_run) do
         ChefSpec::Runner.new do |node|
           node.set['newrelic']['php_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
-          node.set['newrelic']['php_agent']['web_server']['service_name'] = false
           node.set['newrelic']['php_agent']['startup_mode'] = 'external'
         end.converge(described_recipe)
       end
@@ -60,7 +58,6 @@ describe 'newrelic::php_agent' do
       let(:chef_run) do
         ChefSpec::Runner.new do |node|
           node.set['newrelic']['php_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
-          node.set['newrelic']['php_agent']['web_server']['service_name'] = false
           node.set['newrelic']['php_agent']['startup_mode'] = 'agent'
         end.converge(described_recipe)
       end
