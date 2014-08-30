@@ -28,12 +28,20 @@ describe 'newrelic::php_agent' do
       expect(chef_run.execute('newrelic-install')).to do_nothing
     end
 
+    it 'restarts the webserver at the end of the chef run when running newrelic-install' do
+      expect(chef_run.execute('newrelic-install')).to notify("service[#{chef_run.node['newrelic']['php_agent']['web_server']['service_name']}]").delayed
+    end
+
     it 'creates newrelic ini config template from newrelic.ini.erb' do
       expect(chef_run).to render_file("#{chef_run.node['newrelic']['php_agent']['config_file']}")
     end
 
+    it 'restarts the webserver at the end of the chef run when changing the config file' do
+      expect(chef_run.template("#{chef_run.node['newrelic']['php_agent']['config_file']}")).to notify("service[#{chef_run.node['newrelic']['php_agent']['web_server']['service_name']}]").delayed
+    end
+
     it 'logs the startup mode' do
-      expect(chef_run).to write_log("newrelic-daemon startup mode: #{chef_run.node['newrelic']['php_agent']['startup_mode']}").with(level: :info)
+      expect(chef_run).to write_log("newrelic-daemon startup mode: #{chef_run.node['newrelic']['php_agent']['startup_mode']}").with(:level => :info)
     end
 
     context 'with an external startup mode' do
@@ -46,6 +54,14 @@ describe 'newrelic::php_agent' do
 
       it 'creates newrelic config template from newrelic.conf.erb' do
         expect(chef_run).to render_file('/etc/newrelic/newrelic.cfg')
+      end
+
+      it 'restarts the webserver at the end of the chef run when changing /etc/newrelic/newrelic.cfg config file' do
+        expect(chef_run.template('/etc/newrelic/newrelic.cfg')).to notify("service[#{chef_run.node['newrelic']['php_agent']['web_server']['service_name']}]").delayed
+      end
+
+      it 'restarts the newrelic-daemon when changing /etc/newrelic/newrelic.cfg config file' do
+        expect(chef_run.template('/etc/newrelic/newrelic.cfg')).to notify("service[#{chef_run.node['newrelic']['php_agent']['web_server']['service_name']}]").delayed
       end
 
       it 'starts and enables newrelic-daemon' do
@@ -80,7 +96,6 @@ describe 'newrelic::php_agent' do
       end
 
     end
-
 
   end
   context 'Ubuntu 12.04' do
