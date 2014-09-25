@@ -47,8 +47,8 @@ config_path = ""
 
 if ::File.exists?("/etc/php5/mods-available")
     config_path = "/etc/php5/mods-available/newrelic.ini"
-elsif ::File.exists?(node['newrelic']['php-agent']['config_file'])
-    config_path = node['newrelic']['php-agent']['config_file']
+elsif ::File.exists?(node['newrelic']['php_agent']['config_file'])
+    config_path = node['newrelic']['php_agent']['config_file']
 else
   script "mkdir /etc/php5/mods-available" do
       interpreter "bash"
