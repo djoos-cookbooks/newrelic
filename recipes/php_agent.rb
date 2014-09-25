@@ -43,9 +43,26 @@ service 'newrelic-daemon' do
   supports :status => true, :start => true, :stop => true, :restart => true
 end
 
+config_path = ""
+
+if ::File.exists?("/etc/php5/mods-available")
+    config_path = "/etc/php5/mods-available/newrelic.ini"
+elsif ::File.exists?(node['newrelic']['php-agent']['config_file'])
+    config_path = node['newrelic']['php-agent']['config_file']
+else
+  script "mkdir /etc/php5/mods-available" do
+      interpreter "bash"
+      user "root"
+      code <<-EOH
+      mkdir -p /etc/php5/mods-available
+      EOH
+  end
+  config_path = "/etc/php5/mods-available/newrelic.ini"
+end
+
 # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
 # and restart the web server in order to pick up the new settings
-template node['newrelic']['php_agent']['config_file'] do
+template config_path do
   source 'agent/php/newrelic.ini.erb'
   owner 'root'
   group 'root'
@@ -92,6 +109,16 @@ template node['newrelic']['php_agent']['config_file'] do
   if node['newrelic']['php_agent']['web_server']['service_name']
     notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
   end
+end
+
+if ::File.exists?("/etc/php5/mods-available")
+    script "assets" do
+         interpreter "bash"
+         user "root"
+         code <<-EOH
+         php5enmod newrelic
+         EOH
+    end
 end
 
 # https://newrelic.com/docs/php/newrelic-daemon-startup-modes
