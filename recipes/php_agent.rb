@@ -50,6 +50,12 @@ bash 'php5enmod_newrelic' do
   only_if { node['newrelic']['php_agent']['enable_php5_mod'] }
 end
 
+# Needs to define the service_name
+service node['newrelic']['php_agent']['web_server']['service_name'] do
+  action :nothing
+  only_if { node['newrelic']['php_agent']['web_server']['service_name'] }
+end
+
 # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
 # and restart the web server in order to pick up the new settings
 template node['newrelic']['php_agent']['config_file'] do
