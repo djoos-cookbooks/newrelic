@@ -9,6 +9,11 @@ include_recipe 'newrelic::repository'
 
 license = node['newrelic']['application_monitoring']['license']
 
+service node['newrelic']['php_agent']['web_server']['service_name'] do
+  action :nothing
+  only_if { node['newrelic']['php_agent']['web_server']['service_name'] }
+end
+
 # the older version (3.0) had a bug in the init scripts that when it shut down the daemon
 # it would also kill dpkg as it was trying to upgrade let's remove the old package before continuing
 package 'newrelic-php5-broken' do
@@ -46,7 +51,8 @@ end
 # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
 # and restart the web server in order to pick up the new settings
 template node['newrelic']['php_agent']['config_file'] do
-  source 'agent/php/newrelic.ini.erb'
+  cookbook node['newrelic']['php_agent']['template']['cookbook_ini']
+  source node['newrelic']['php_agent']['template']['source_ini']
   owner 'root'
   group 'root'
   mode 0644
@@ -95,7 +101,9 @@ template node['newrelic']['php_agent']['config_file'] do
 end
 
 # https://newrelic.com/docs/php/newrelic-daemon-startup-modes
-Chef::Log.info("newrelic-daemon startup mode: #{node['newrelic']['php_agent']['startup_mode']}")
+log "newrelic-daemon startup mode: #{node['newrelic']['php_agent']['startup_mode']}" do
+  level :info
+end
 
 case node['newrelic']['php_agent']['startup_mode']
 when 'agent'
@@ -122,7 +130,8 @@ when 'external'
 
   # configure proxy daemon settings
   template '/etc/newrelic/newrelic.cfg' do
-    source 'agent/php/newrelic.cfg.erb'
+    cookbook node['newrelic']['php_agent']['template']['cookbook']
+    source node['newrelic']['php_agent']['template']['source']
     owner 'root'
     group 'root'
     mode 0644
@@ -140,7 +149,7 @@ when 'external'
     )
     action :create
     notifies :restart, 'service[newrelic-daemon]', :immediately
-    notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
+    notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed if node['newrelic']['php_agent']['web_server']['service_name']
   end
 
   service 'newrelic-daemon' do

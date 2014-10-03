@@ -17,7 +17,8 @@ when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', '
 
   # configure your New Relic license key
   template "#{node['newrelic']['server_monitor_agent']['config_path']}/nrsysmond.cfg" do
-    source 'agent/server_monitor/nrsysmond.cfg.erb'
+    cookbook node['newrelic']['server_monitor_agent']['template']['cookbook']
+    source node['newrelic']['server_monitor_agent']['template']['source']
     owner 'root'
     group node['newrelic']['server_monitor_agent']['config_file_group']
     mode 0640
