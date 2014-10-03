@@ -43,6 +43,13 @@ service 'newrelic-daemon' do
   supports :status => true, :start => true, :stop => true, :restart => true
 end
 
+# run php5enmod newrelic
+execute 'newrelic-php5enmod' do
+  command 'php5enmod newrelic'
+  action :nothing
+  only_if { node['newrelic']['php_agent']['execute_php5enmod'] }
+end
+
 # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
 # and restart the web server in order to pick up the new settings
 template node['newrelic']['php_agent']['config_file'] do
@@ -90,6 +97,9 @@ template node['newrelic']['php_agent']['config_file'] do
     :cross_application_tracer_enable => node['newrelic']['application_monitoring']['cross_application_tracer']['enable']
   )
   action :create
+  if node['newrelic']['php_agent']['execute_php5enmod']
+    notifies :run, 'execute[newrelic-php5enmod]', :immediately
+  end
   if node['newrelic']['php_agent']['web_server']['service_name']
     notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
   end

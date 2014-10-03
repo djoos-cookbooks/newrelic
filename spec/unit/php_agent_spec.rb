@@ -74,8 +74,8 @@ describe 'newrelic::php_agent' do
         expect(chef_run).to enable_service('newrelic-daemon')
         expect(chef_run).to start_service('newrelic-daemon')
       end
-
     end
+
     context 'with an agent startup mode' do
       let(:chef_run) do
         ChefSpec::Runner.new do |node|
@@ -103,7 +103,27 @@ describe 'newrelic::php_agent' do
         # https://github.com/sethvargo/chefspec/issues/250
         # expect(chef_run).to run_execute('mv /etc/newrelic/upgrade_please.key /etc/newrelic/upgrade_please.key.external')
       end
+    end
 
+    it 'defines newrelic-php5enmod execute block' do
+      expect(chef_run.execute('newrelic-php5enmod')).to do_nothing
+    end
+
+    context 'with execute php5enmod' do
+      let(:chef_run) do
+        ChefSpec::Runner.new do |node|
+          node.set['newrelic']['php_agent']['config_file'] = '/etc/php5/mods-available/newrelic.ini'
+          node.set['newrelic']['php_agent']['execute_php5enmod'] = true
+
+          # see stub_service in php_agent-recipe for more information
+          node.set['newrelic']['php_agent']['web_server']['service_name'] = 'stub_service'
+        end.converge described_recipe
+      end
+
+      it 'notifies newrelic-phpenmod' do
+        template = chef_run.template chef_run.node['newrelic']['php_agent']['config_file']
+        expect(template).to notify('execute[newrelic-php5enmod]').to(:run).immediately
+      end
     end
 
   end
