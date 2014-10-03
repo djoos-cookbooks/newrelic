@@ -5,6 +5,9 @@ describe 'newrelic::php_agent' do
     let(:chef_run) do
       ChefSpec::Runner.new do |node|
         node.set['newrelic']['php_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
+
+        # see stub_service in php_agent-recipe for more information
+        node.set['newrelic']['php_agent']['web_server']['service_name'] = 'stub_service'
       end.converge(described_recipe)
     end
 
@@ -20,7 +23,7 @@ describe 'newrelic::php_agent' do
       expect(chef_run).to install_package('newrelic-php5')
     end
 
-    it 'sends a notification  to newrelic-install after installing newrelic-php5' do
+    it 'sends a notification to newrelic-install after installing newrelic-php5' do
       expect(chef_run.package('newrelic-php5')).to notify('execute[newrelic-install]').immediately
     end
 
@@ -49,6 +52,9 @@ describe 'newrelic::php_agent' do
         ChefSpec::Runner.new do |node|
           node.set['newrelic']['php_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
           node.set['newrelic']['php_agent']['startup_mode'] = 'external'
+
+          # see stub_service in php_agent-recipe for more information
+          node.set['newrelic']['php_agent']['web_server']['service_name'] = 'stub_service'
         end.converge(described_recipe)
       end
 
@@ -75,6 +81,9 @@ describe 'newrelic::php_agent' do
         ChefSpec::Runner.new do |node|
           node.set['newrelic']['php_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
           node.set['newrelic']['php_agent']['startup_mode'] = 'agent'
+
+          # see stub_service in php_agent-recipe for more information
+          node.set['newrelic']['php_agent']['web_server']['service_name'] = 'stub_service'
         end.converge(described_recipe)
       end
 

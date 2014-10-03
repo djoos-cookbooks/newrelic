@@ -23,6 +23,8 @@ Make sure you run Chef >= 0.10.0.
 
 ## Cookbooks:
 
+* python
+
 This cookbook recommends on the following cookbooks:
 
 * curl (when making use of the deployment LWRP)

@@ -9,11 +9,6 @@ include_recipe 'newrelic::repository'
 
 license = node['newrelic']['application_monitoring']['license']
 
-service node['newrelic']['php_agent']['web_server']['service_name'] do
-  action :nothing
-  only_if { node['newrelic']['php_agent']['web_server']['service_name'] }
-end
-
 # the older version (3.0) had a bug in the init scripts that when it shut down the daemon
 # it would also kill dpkg as it was trying to upgrade let's remove the old package before continuing
 package 'newrelic-php5-broken' do
@@ -149,7 +144,9 @@ when 'external'
     )
     action :create
     notifies :restart, 'service[newrelic-daemon]', :immediately
-    notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed if node['newrelic']['php_agent']['web_server']['service_name']
+    if node['newrelic']['php_agent']['web_server']['service_name']
+      notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
+    end
   end
 
   service 'newrelic-daemon' do
@@ -157,4 +154,11 @@ when 'external'
   end
 else
   Chef::Application.fatal!("#{node['newrelic']['php_agent']['startup_mode']} is not a valid newrelic-daemon startup mode.")
+end
+
+# only used for ChefSpec-purposes
+# we don't want to redeclare node['newrelic']['php_agent']['web_server']['service_name'] (eg. apache2)
+# so decided to add a 'stub_service' to the resource collection which can then be used in the unit test(s)
+service 'stub_service' do
+  action :nothing
 end
