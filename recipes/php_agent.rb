@@ -149,6 +149,15 @@ when 'external'
     end
   end
 
+  # need to define php service
+  service "#{node['newrelic']['php_agent']['web_server']['service_name']}" do
+    supports :status => true, :restart => true, :reload => true, :start => true, :stop => true
+    restart_command "service #{node['newrelic']['php_agent']['web_server']['service_name']} restart"
+    reload_command "service #{node['newrelic']['php_agent']['web_server']['service_name']} reload"
+    start_command "service #{node['newrelic']['php_agent']['web_server']['service_name']} start"
+    stop_command "service #{node['newrelic']['php_agent']['web_server']['service_name']} stop"
+  end
+
   service 'newrelic-daemon' do
     action [:enable, :start] # starts the service if it's not running and enables it to start at system boot time
   end
