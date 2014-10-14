@@ -19,7 +19,7 @@ when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', '
   template "#{node['newrelic']['server_monitor_agent']['config_path']}/nrsysmond.cfg" do
     cookbook node['newrelic']['server_monitor_agent']['template']['cookbook']
     source node['newrelic']['server_monitor_agent']['template']['source']
-    owner 'root'
+    owner node['newrelic']['server_monitor_agent']['config_file_user']
     group node['newrelic']['server_monitor_agent']['config_file_group']
     mode 0640
     variables(
