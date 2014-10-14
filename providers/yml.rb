@@ -7,8 +7,8 @@
 
 action :generate do
   t = template new_resource.yml_path do
-    cookbook 'newrelic'
-    source 'agent/newrelic.yml.erb'
+    cookbook new_resource.template_cookbook
+    source new_resource.template_source
     owner new_resource.owner
     group new_resource.group
     mode 0644
