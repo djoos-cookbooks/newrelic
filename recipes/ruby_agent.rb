@@ -20,6 +20,8 @@ end
 # configure your New Relic license key
 newrelic_yml "#{node['newrelic']['ruby_agent']['install_dir']}/newrelic.yml" do
   agent_type 'ruby'
+  template_cookbook node['newrelic']['ruby_agent']['template_cookbook']
+  template_source node['newrelic']['ruby_agent']['template_source']
   enabled node['newrelic']['application_monitoring']['enabled']
   app_name node['newrelic']['application_monitoring']['app_name']
   owner node['newrelic']['ruby_agent']['app_user']

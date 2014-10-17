@@ -102,21 +102,32 @@ Attributes
 
 ## repository.rb:
 * `node['newrelic']['repository']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
+* `node['newrelic']['repository']['repository_action']` - Repository action, defaults to :install
 
 ## php_agent.rb:
+* `node['newrelic']['php_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['php_agent']['install_silently']` - Determine whether to run the install in silent mode, defaults to false
 * `node['newrelic']['php_agent']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
 * `node['newrelic']['php_agent']['web_server']['service_name']` - The web server service name, defaults to "apache2"
 * `node['newrelic']['php_agent']['config_file']` - The New Relic php agent config file, depends on your php external configuration directory; eg. /etc/php5/conf.d/newrelic.ini or /etc/php5/mods-available/newrelic.ini
 * `node['newrelic']['php_agent']['execute_php5enmod']` - Executes "php5enmod newrelic" if true. Needed if you use the mods-available directory, defaults to false
+* `node['newrelic']['php_agent']['template']['cookbook_ini']` - Sets cookbook for .ini template, defaults to 'newrelic'
+* `node['newrelic']['php_agent']['template']['source_ini']` - Sets source for .ini template, defaults to 'agent/php/newrelic.ini.erb'
+* `node['newrelic']['php_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
+* `node['newrelic']['php_agent']['template']['source']` - Sets source for template, defaults to 'agent/php/newrelic.cfg.erb'
 
 ## python_agent.rb:
+* `node['newrelic']['python_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['python_agent']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
+* `node['newrelic']['python_agent']['python_venv']` - Virtual environment, default to nil
 * `node['newrelic']['python_agent']['config_file']` - The New Relic python agent config file, defaults to "/etc/newrelic/newrelic.ini"
+* `node['newrelic']['python_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
+* `node['newrelic']['python_agent']['template']['source']` - Sets source for template, defaults to 'agent/python/newrelic.ini.erb'
 
 ## dotnet_agent.rb:
 * `node['newrelic']['dotnet_agent']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
 * `node['newrelic']['dotnet_agent']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
+* `node['newrelic']['dotnet_agent']['agent_action']` - Agent action, defaults to :install
 
 ## server_monitor_agent.rb:
 * `node['newrelic']['server_monitor_agent']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
@@ -127,6 +138,8 @@ Attributes
 * `node['newrelic']['server_monitor_agent']['windows_version']` - the Windows version to install, defaults to "2.0.0.198"
 * `node['newrelic']['server_monitor_agent']['windows64_checksum']` - checksum of the 64-bit Windows version, defaults to "5a8f3f5e8f15997463430401756d377c321c8899c2790ca85e5587a5b643651e"
 * `node['newrelic']['server_monitor_agent']['windows32_checksum']` - checksum of the 32-bit Windows version, defaults to "ac2b65eecaad461fdd2e4386e3e4c9f96ea940b35bdf7a8c532c21dbd1c99ff0"
+* `node['newrelic']['server_monitor_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
+* `node['newrelic']['server_monitor_agent']['template']['source']` - Sets source for template, defaults to 'agent/server_monitor/nrsysmond.cfg.erb'
 
 ## java_agent.rb:
 * `node['newrelic']['java_agent']['https_download']` - The url to download the jar vor the New Relic Java agent
@@ -138,9 +151,14 @@ Attributes
 * `node['newrelic']['java_agent']['log_file_count']` - The number of log files to use
 * `node['newrelic']['java_agent']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
 * `node['newrelic']['java_agent']['log_daily']` - Override other log rolling configuration and roll the logs daily
-* `node['newrelic']['java_agent']['execute_install']` - Execute install or not, defaults to true
+* `node['newrelic']['java_agent']['agent_action']` - Agent action, defaults to :install
+* `node['newrelic']['java_agent']['execute_agent_action']` - Execute the agent action or not, defaults to true
+* `node['newrelic']['java_agent']['app_location']` - Application's location, defaults to `node['newrelic']['java_agent']['install_dir']`
+* `node['newrelic']['java_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
+* `node['newrelic']['java_agent']['template']['source']` - Sets source for template, defaults to 'agent/newrelic.yml.erb'
 
 ## nodejs_agent.rb
+* `node['newrelic']['nodejs_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['nodejs_agent']['apps']` - Array of Hash describing the apps to monitor
 
 eg.
@@ -157,7 +175,11 @@ javascript
 require('newrelic');
 ```
 
+* `node['newrelic']['nodejs_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
+* `node['newrelic']['nodejs_agent']['template']['source']` - Sets source for template, defaults to 'agent/nodejs/newrelic.js.erb'
+
 ## ruby_agent.rb:
+* `node['newrelic']['ruby_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['ruby_agent']['install_dir']` - The directory to for the config file
 * `node['newrelic']['ruby_agent']['app_user']` - The user that runs the Ruby application that will use the New Relic Ruby agent
 * `node['newrelic']['ruby_agent']['app_group']` - The group for the app_user
@@ -165,6 +187,8 @@ require('newrelic');
 * `node['newrelic']['ruby_agent']['log_file_count']` - The number of log files to use
 * `node['newrelic']['ruby_agent']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
 * `node['newrelic']['ruby_agent']['log_daily']` - Override other log rolling configuration and roll the logs daily
+* `node['newrelic']['ruby_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
+* `node['newrelic']['ruby_agent']['template']['source']` - Sets source for template, defaults to 'agent/newrelic.yml.erb'
 
 MeetMe plugin
 =============
