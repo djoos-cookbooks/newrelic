@@ -35,6 +35,7 @@ newrelic_yml "#{node['newrelic']['ruby_agent']['install_dir']}/newrelic.yml" do
   log_limit_in_kbytes node['newrelic']['ruby_agent']['log_limit_in_kbytes']
   log_daily node['newrelic']['ruby_agent']['log_daily']
   daemon_ssl node['newrelic']['application_monitoring']['daemon']['ssl']
+  daemon_proxy node['newrelic']['application_monitoring']['daemon']['proxy']
   capture_params node['newrelic']['application_monitoring']['capture_params']
   ignored_params node['newrelic']['application_monitoring']['ignored_params']
   transaction_tracer_enable node['newrelic']['application_monitoring']['transaction_tracer']['enable']
