@@ -8,7 +8,6 @@
 actions :generate
 default_action :generate
 
-
 attribute :yml_path, :kind_of => String, :name_attribute => true
 attribute :template_cookbook, :kind_of => String, :default => 'newrelic'
 attribute :template_source, :kind_of => String, :default => 'agent/newrelic.yml.erb'
