@@ -19,3 +19,6 @@ default['newrelic']['java_agent']['log_daily'] = true
 default['newrelic']['java_agent']['agent_action'] = :install
 default['newrelic']['java_agent']['execute_agent_action'] = true
 default['newrelic']['java_agent']['app_location'] = node['newrelic']['java_agent']['install_dir']
+default['newrelic']['java_agent']['template']['cookbook'] = 'newrelic'
+default['newrelic']['java_agent']['template']['source'] = 'agent/newrelic.yml.erb'
+

@@ -37,6 +37,8 @@ end
 # configure your New Relic license key
 newrelic_yml "#{node['newrelic']['java_agent']['install_dir']}/newrelic.yml" do
   agent_type 'java'
+  template_cookbook node['newrelic']['java_agent']['template_cookbook']
+  template_source node['newrelic']['java_agent']['template_source']
   enabled node['newrelic']['application_monitoring']['enabled']
   app_name node['newrelic']['application_monitoring']['app_name']
   owner node['newrelic']['java_agent']['app_user']

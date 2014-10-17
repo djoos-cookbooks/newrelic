@@ -10,6 +10,7 @@ default['newrelic']['server_monitor_agent']['service_name'] = 'newrelic-sysmond'
 default['newrelic']['server_monitor_agent']['service_notify_action'] = :restart
 default['newrelic']['server_monitor_agent']['service_actions'] = [:enable, :start] # starts the service if it's not running and enables it to start at system boot time
 default['newrelic']['server_monitor_agent']['config_path'] = '/etc/newrelic'
+default['newrelic']['server_monitor_agent']['config_file_user'] = 'root'
 default['newrelic']['server_monitor_agent']['config_file_group'] = 'newrelic'
 default['newrelic']['server_monitor_agent']['windows_version'] = '2.0.0.198'
 default['newrelic']['server_monitor_agent']['windows64_checksum'] = '5a8f3f5e8f15997463430401756d377c321c8899c2790ca85e5587a5b643651e'
