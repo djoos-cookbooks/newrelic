@@ -207,7 +207,8 @@ This cookbook includes an LWRP for notifying New Relic of a deployment
 - :notify: Notify New Relic of a deployment
 
 #### Attribute parameters
-- api_key: Your New Relic API key
+- key_type: Your New Relic API key type (api_key or license_key, defaults to api_key currently for backwards compatibility)
+- key: Your New Relic key (see key_type for more information on what value to provide here exactly)
 - app_name: The name of the application, found in the newrelic.yml file
 - app_id: The ID # of the application
 - description: Text annotation for the deployment (notes for you)
