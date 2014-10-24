@@ -27,7 +27,7 @@ when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', '
       :logfile => node['newrelic']['server_monitoring']['logfile'],
       :loglevel => node['newrelic']['server_monitoring']['loglevel'],
       :proxy => node['newrelic']['server_monitoring']['proxy'],
-      :ssl => node['newrelic']['server_monitoring']['ssl'],
+      :ssl => node['newrelic']['server_monitoring']['ssl'] = 'true'
       :ssl_ca_bundle => node['newrelic']['server_monitoring']['ssl_ca_bundle'],
       :ssl_ca_path => node['newrelic']['server_monitoring']['ssl_ca_path'],
       :hostname => node['newrelic']['server_monitoring']['hostname'],
