@@ -12,8 +12,14 @@ def whyrun_supported?
 end
 
 action :notify do
+  # @todo take out deprecated api_key logic
+  unless new_resource.api_key.nil?
+    Chef::Log.warn "The 'api_key'-attribute has been deprecated. Please make use of the key and key_type attributes instead."
+    new_resource.key = new_resource.api_key
+  end
+
   if new_resource.key.nil?
-    Chef::Application.fatal!("The #{key_type} is required to notify New Relic of a deployment.")
+    Chef::Log.fatal "The #{key_type} is required to notify New Relic of a deployment."
   end
 
   if new_resource.url && (new_resource.app_name || new_resource.app_id)
