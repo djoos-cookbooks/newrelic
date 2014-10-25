@@ -9,7 +9,7 @@
 # BASIC CONFIG
 ##############
 # license(s)
-default['newrelic']['license'] = nil
+default['newrelic']['license'] = 05737f3e8a99cf75de62acbb36ffc75ad3019a62
 default['newrelic']['server_monitoring']['license'] = node['newrelic']['license']
 default['newrelic']['application_monitoring']['license'] = node['newrelic']['license']
 
@@ -20,7 +20,7 @@ default['newrelic']['application_monitoring']['license'] = node['newrelic']['lic
 default['newrelic']['server_monitoring']['logfile'] = nil
 default['newrelic']['server_monitoring']['loglevel'] = nil
 default['newrelic']['server_monitoring']['proxy'] = nil
-default['newrelic']['server_monitoring']['ssl'] = nil
+default['newrelic']['server_monitoring']['ssl'] = true
 default['newrelic']['server_monitoring']['ssl_ca_bundle'] = nil
 default['newrelic']['server_monitoring']['ssl_ca_path'] = nil
 default['newrelic']['server_monitoring']['hostname'] = nil
@@ -38,7 +38,7 @@ default['newrelic']['application_monitoring']['daemon']['logfile'] = '/var/log/n
 default['newrelic']['application_monitoring']['daemon']['loglevel'] = nil
 default['newrelic']['application_monitoring']['daemon']['port'] = nil
 default['newrelic']['application_monitoring']['daemon']['max_threads'] = nil
-default['newrelic']['application_monitoring']['daemon']['ssl'] = nil
+default['newrelic']['application_monitoring']['daemon']['ssl'] = true
 default['newrelic']['application_monitoring']['daemon']['ssl_ca_path'] = nil
 default['newrelic']['application_monitoring']['daemon']['ssl_ca_bundle'] = nil
 default['newrelic']['application_monitoring']['daemon']['proxy'] = nil
