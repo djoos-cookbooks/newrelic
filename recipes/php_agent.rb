@@ -63,7 +63,7 @@ template node['newrelic']['php_agent']['config_file'] do
   mode 0644
   variables(
     :enabled => node['newrelic']['application_monitoring']['enabled'],
-    :license => license,
+    :license => node['newrelic']['license'],
     :logfile => node['newrelic']['application_monitoring']['logfile'],
     :loglevel => node['newrelic']['application_monitoring']['loglevel'],
     :app_name => node['newrelic']['application_monitoring']['app_name'],
