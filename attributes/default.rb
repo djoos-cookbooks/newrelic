@@ -29,7 +29,7 @@ default['newrelic']['server_monitoring']['collector_host'] = nil
 default['newrelic']['server_monitoring']['timeout'] = nil
 
 # application monitoring
-default['newrelic']['application_monitoring']['enabled'] = nil
+default['newrelic']['application_monitoring']['enabled'] = true
 default['newrelic']['application_monitoring']['logfile'] = nil
 default['newrelic']['application_monitoring']['logfile_path'] = nil
 default['newrelic']['application_monitoring']['loglevel'] = nil
