@@ -17,7 +17,7 @@ default['newrelic']['application_monitoring']['license'] = node['newrelic']['lic
 # ADVANCED CONFIG
 #################
 # server monitoring
-default['newrelic']['server_monitoring']['logfile'] = nil
+default['newrelic']['server_monitoring']['logfile'] = true
 default['newrelic']['server_monitoring']['loglevel'] = nil
 default['newrelic']['server_monitoring']['proxy'] = nil
 default['newrelic']['server_monitoring']['ssl'] = true
