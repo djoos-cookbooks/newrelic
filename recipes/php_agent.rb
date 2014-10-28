@@ -7,7 +7,10 @@
 
 include_recipe 'newrelic::repository'
 
-license = node['newrelic']['application_monitoring']['license']
+include_recipe 'apache2::service'
+
+
+#license = node['newrelic']['application_monitoring']['license']
 
 # the older version (3.0) had a bug in the init scripts that when it shut down the daemon
 # it would also kill dpkg as it was trying to upgrade let's remove the old package before continuing
@@ -60,7 +63,7 @@ template node['newrelic']['php_agent']['config_file'] do
   mode 0644
   variables(
     :enabled => node['newrelic']['application_monitoring']['enabled'],
-    :license => license,
+    :license => node['newrelic']['license'],
     :logfile => node['newrelic']['application_monitoring']['logfile'],
     :loglevel => node['newrelic']['application_monitoring']['loglevel'],
     :app_name => node['newrelic']['application_monitoring']['app_name'],
