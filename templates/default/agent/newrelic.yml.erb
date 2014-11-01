@@ -142,6 +142,18 @@ common: &default_settings
   # proxy_port: 8080
   # proxy_user: username
   # proxy_password: password
+  <% unless @daemon_proxy_host.nil? %>
+  proxy_host: <%= @daemon_proxy_host %>
+  <% end %>
+  <% unless @daemon_proxy_port.nil? %>
+  proxy_port: <%= @daemon_proxy_port %>
+  <% end %>
+  <% unless @daemon_proxy_user.nil? %>
+  proxy_user: <%= @daemon_proxy_user %>
+  <% end %>
+  <% unless @daemon_proxy_password.nil? %>
+  proxy_password: <%= @daemon_proxy_password %>
+  <% end %>
 
   # Tells transaction tracer and error collector (when enabled)
   # whether or not to capture HTTP params.  When true, frameworks can

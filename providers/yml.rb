@@ -5,7 +5,29 @@
 # Copyright 2012-2014, Escape Studios
 #
 
+require 'uri'
+
+use_inline_resources if defined?(use_inline_resources)
+
+def whyrun_supported?
+  true
+end
+
 action :generate do
+  if new_resource.daemon_proxy.nil?
+    daemon_proxy_host = nil
+    daemon_proxy_port = nil
+    daemon_proxy_user = nil
+    daemon_proxy_password = nil
+  else
+    proxy = URI(new_resource.daemon_proxy)
+
+    daemon_proxy_host = proxy.host
+    daemon_proxy_port = proxy.port
+    daemon_proxy_user = proxy.user
+    daemon_proxy_password = proxy.password
+  end
+
   t = template new_resource.yml_path do
     cookbook new_resource.template_cookbook
     source new_resource.template_source
@@ -25,6 +47,10 @@ action :generate do
       :log_limit_in_kbytes => new_resource.log_limit_in_kbytes,
       :log_daily => new_resource.log_daily,
       :daemon_ssl => new_resource.daemon_ssl,
+      :daemon_proxy_host => daemon_proxy_host,
+      :daemon_proxy_port => daemon_proxy_port,
+      :daemon_proxy_user => daemon_proxy_user,
+      :daemon_proxy_password => daemon_proxy_password,
       :capture_params => new_resource.capture_params,
       :ignored_params => new_resource.ignored_params,
       :transaction_tracer_enable => new_resource.transaction_tracer_enable,
