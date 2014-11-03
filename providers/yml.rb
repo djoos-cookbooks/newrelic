@@ -62,6 +62,7 @@ action :generate do
       :error_collector_enable => new_resource.error_collector_enable,
       :error_collector_ignore_errors => new_resource.error_collector_ignore_errors,
       :browser_monitoring_auto_instrument => new_resource.browser_monitoring_auto_instrument,
+      :browser_monitoring_capture_attributes => new_resource.browser_monitoring_capture_attributes,
       :cross_application_tracer_enable => new_resource.cross_application_tracer_enable
     )
     action :create

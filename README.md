@@ -86,6 +86,7 @@ Attributes
 * `node['newrelic']['application_monitoring']['error_collector']['record_database_errors']`
 * `node['newrelic']['application_monitoring']['error_collector']['prioritize_api_errors']`
 * `node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']`
+* `node['newrelic']['application_monitoring']['browser_monitoring']['capture_attributes']`
 * `node['newrelic']['application_monitoring']['transaction_tracer']['enable']`
 * `node['newrelic']['application_monitoring']['transaction_tracer']['threshold']`
 * `node['newrelic']['application_monitoring']['transaction_tracer']['detail']`
