@@ -7,7 +7,7 @@
 
 include_recipe 'newrelic::repository'
 
-license = node['newrelic']['application_monitoring']['license']
+license = Newrelic.application_monitoring_license(node)
 
 # install the newrelic.js file into each projects
 node['newrelic']['nodejs_agent']['apps'].each do |nodeapp|
