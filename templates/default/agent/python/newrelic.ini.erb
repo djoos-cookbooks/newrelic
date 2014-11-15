@@ -243,3 +243,10 @@ thread_profiler.enabled = true
 <% else %>
 cross_application_tracer.enabled = <%= @cross_application_tracer_enable %>
 <% end %>
+
+<% unless @feature_flag.nil? %>
+# Feature flag
+# eg. use for improved Tornado instrumentation
+# (https://docs.newrelic.com/docs/release-notes/agent-release-notes/python-release-notes/python-agent-232028)
+feature_flag = @feature_flag
+<% end %>
