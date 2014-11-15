@@ -7,7 +7,7 @@
 
 include_recipe 'newrelic::repository'
 
-license = Newrelic.server_monitoring_license(node)
+license = NewRelic.server_monitoring_license(node)
 
 case node['platform']
 when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', 'smartos'

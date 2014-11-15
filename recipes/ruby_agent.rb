@@ -7,7 +7,7 @@
 
 include_recipe 'newrelic::repository'
 
-license = Newrelic.application_monitoring_license(node)
+license = NewRelic.application_monitoring_license(node)
 
 gem_package 'newrelic_rpm' do
   action node['newrelic']['ruby_agent']['agent_action']

@@ -7,7 +7,7 @@
 
 include_recipe 'newrelic::repository'
 
-license = Newrelic.application_monitoring_license(node)
+license = NewRelic.application_monitoring_license(node)
 
 python_pip 'newrelic' do
   if node['newrelic']['python_agent']['python_venv']

@@ -1,5 +1,5 @@
-module Newrelic
-
+# NewRelic module
+module NewRelic
   def self.license(node)
     node['newrelic']['license']
   end
@@ -11,5 +11,4 @@ module Newrelic
   def self.application_monitoring_license(node)
     node['newrelic']['application_monitoring']['license'] || license(node)
   end
-
 end

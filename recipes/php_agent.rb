@@ -7,7 +7,7 @@
 
 include_recipe 'newrelic::repository'
 
-license = Newrelic.application_monitoring_license(node)
+license = NewRelic.application_monitoring_license(node)
 
 # the older version (3.0) had a bug in the init scripts that when it shut down the daemon
 # it would also kill dpkg as it was trying to upgrade let's remove the old package before continuing
