@@ -47,5 +47,6 @@ newrelic_yml "#{node['newrelic']['ruby_agent']['install_dir']}/newrelic.yml" do
   error_collector_enable node['newrelic']['application_monitoring']['error_collector']['enable']
   error_collector_ignore_errors node['newrelic']['application_monitoring']['error_collector']['ignore_errors']
   browser_monitoring_auto_instrument node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
+  browser_monitoring_capture_attributes node['newrelic']['application_monitoring']['browser_monitoring']['capture_attributes']
   cross_application_tracer_enable node['newrelic']['application_monitoring']['cross_application_tracer']['enable']
 end
