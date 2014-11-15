@@ -16,13 +16,13 @@ node['newrelic']['nodejs_agent']['apps'].each do |nodeapp|
     command "npm #{node['newrelic']['nodejs_agent']['agent_action']} newrelic"
   end
 
-  if nodeapp.has_key?('app_log_level')
+  if nodeapp.key?('app_log_level')
     app_log_level = nodeapp['app_log_level']
   else
     app_log_level = node['newrelic']['nodejs_agent']['default_app_log_level']
   end
 
-  if nodeapp.has_key?('app_log_filepath')
+  if nodeapp.key?('app_log_filepath')
     app_log_filepath = nodeapp['app_log_filepath']
   end
 
