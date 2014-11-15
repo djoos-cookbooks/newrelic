@@ -16,7 +16,7 @@ attribute :agent_type, :kind_of => String, :required => true, :regex => /^(java|
 attribute :enabled, :kind_of => [TrueClass, FalseClass, String], :default => nil
 attribute :owner, :kind_of => String, :default => nil
 attribute :group, :kind_of => String, :default => nil
-attribute :license, :kind_of => String, :default => node['newrelic']['application_monitoring']['license']
+attribute :license, :kind_of => String, :default => Newrelic.application_monitoring_license(node)
 attribute :logfile, :kind_of => String, :default => node['newrelic']['application_monitoring']['logfile']
 attribute :logfile_path, :kind_of => String, :default => node['newrelic']['application_monitoring']['logfile']
 attribute :loglevel, :kind_of => String, :default => node['newrelic']['application_monitoring']['loglevel']

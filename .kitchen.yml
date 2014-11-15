@@ -27,6 +27,7 @@ suites:
       - recipe[newrelic::default]
     attributes:
       newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
         server_monitor_agent:
           service_notify_action: nothing
           service_actions:

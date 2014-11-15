@@ -7,7 +7,7 @@
 
 include_recipe 'newrelic::repository'
 
-license = node['newrelic']['application_monitoring']['license']
+license = Newrelic.application_monitoring_license(node)
 
 # create the directory to install the jar into
 directory node['newrelic']['java_agent']['install_dir'] do
