@@ -61,6 +61,7 @@ action :generate do
       :transaction_tracer_explain_threshold => new_resource.transaction_tracer_explain_threshold,
       :error_collector_enable => new_resource.error_collector_enable,
       :error_collector_ignore_errors => new_resource.error_collector_ignore_errors,
+      :error_collector_ignore_status_codes => new_resource.error_collector_ignore_status_codes,
       :browser_monitoring_auto_instrument => new_resource.browser_monitoring_auto_instrument,
       :cross_application_tracer_enable => new_resource.cross_application_tracer_enable
     )
