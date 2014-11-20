@@ -283,6 +283,9 @@ common: &default_settings
     # When this property is commented out it defaults to ignoring 404s.
     #
     # ignore_status_codes: 404
+    <% unless @error_collector_ignore_status_codes.nil? %>
+      ignore_status_codes: <%= @error_collector_ignore_status_codes %>
+    <% end %>
 
   # Cross Application Tracing adds request and response headers to
   # external calls using the Apache HttpClient libraries to provided better
