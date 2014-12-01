@@ -54,6 +54,7 @@ default['newrelic']['application_monitoring']['cross_application_tracer']['enabl
 default['newrelic']['application_monitoring']['ignored_params'] = nil
 default['newrelic']['application_monitoring']['error_collector']['enable'] = nil
 default['newrelic']['application_monitoring']['error_collector']['ignore_errors'] = nil
+default['newrelic']['application_monitoring']['error_collector']['ignore_status_codes'] = nil
 default['newrelic']['application_monitoring']['error_collector']['record_database_errors'] = nil
 default['newrelic']['application_monitoring']['error_collector']['prioritize_api_errors'] = nil
 default['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'] = nil

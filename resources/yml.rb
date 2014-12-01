@@ -36,5 +36,6 @@ attribute :transaction_tracer_slow_sql, :default => node['newrelic']['applicatio
 attribute :transaction_tracer_explain_threshold, :default => node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold']
 attribute :error_collector_enable, :default => node['newrelic']['application_monitoring']['error_collector']['enable']
 attribute :error_collector_ignore_errors, :default => node['newrelic']['application_monitoring']['error_collector']['ignore_errors']
+attribute :error_collector_ignore_status_codes, :default => node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes']
 attribute :browser_monitoring_auto_instrument, :default => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
 attribute :cross_application_tracer_enable, :default => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
