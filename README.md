@@ -83,6 +83,8 @@ Attributes
 * `node['newrelic']['application_monitoring']['capture_params']`
 * `node['newrelic']['application_monitoring']['ignored_params']`
 * `node['newrelic']['application_monitoring']['error_collector']['enable']`
+* `node['newrelic']['application_monitoring']['error_collector']['ignore_errors']`
+* `node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes']`
 * `node['newrelic']['application_monitoring']['error_collector']['record_database_errors']`
 * `node['newrelic']['application_monitoring']['error_collector']['prioritize_api_errors']`
 * `node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']`
