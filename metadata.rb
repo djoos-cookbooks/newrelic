@@ -10,6 +10,7 @@ version '2.4.0'
   supports os
 end
 
+depends 'apt'
 depends 'python'
 
 recommends 'curl'
