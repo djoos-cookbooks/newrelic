@@ -8,9 +8,7 @@ describe 'libraries/newrelic.rb' do
     node = {}
     node['newrelic'] = {}
 
-    if lic
-      node['newrelic']['license'] = lic
-    end
+    node['newrelic']['license'] = lic if lic
 
     if server
       node['newrelic']['server_monitoring'] = {}
