@@ -50,6 +50,11 @@ execute 'newrelic-php5enmod' do
   only_if { node['newrelic']['php_agent']['execute_php5enmod'] }
 end
 
+# check config_file attribute value
+if node['newrelic']['php_agent']['config_file'].nil?
+  Chef::Log.fatal 'Please specify the path to your New Relic php agent config file (node[\'newrelic\'][\'php_agent\'][\'config_file\'])'
+end
+
 # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
 # and restart the web server in order to pick up the new settings
 template node['newrelic']['php_agent']['config_file'] do
@@ -105,12 +110,14 @@ template node['newrelic']['php_agent']['config_file'] do
   end
 end
 
-# delete the config file the New Relic PHP agent auto-generated
-# see issues #119 and #143
-file 'newrelic-config_file_to_be_deleted' do
-  path node['newrelic']['php_agent']['config_file_to_be_deleted']
-  action :delete
-  only_if { node['newrelic']['php_agent']['config_file_to_be_deleted'] }
+if node['newrelic']['php_agent']['config_file_to_be_deleted']
+  # delete the New Relic PHP agent-generated config file
+  # see issues #119 and #143
+  file node['newrelic']['php_agent']['config_file_to_be_deleted'] do
+    action :delete
+  end
+else
+  Chef::Log.warn 'You\'ve opted not to delete any PHP agent-generated config file.'
 end
 
 # https://newrelic.com/docs/php/newrelic-daemon-startup-modes
