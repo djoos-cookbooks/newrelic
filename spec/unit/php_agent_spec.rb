@@ -5,6 +5,7 @@ describe 'newrelic::php_agent' do
     let(:chef_run) do
       ChefSpec::Runner.new do |node|
         node.set['newrelic']['php_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
+        node.set['newrelic']['php_agent']['config_file_to_be_deleted'] = '/etc/php5/cli/conf.d/newrelic.ini'
 
         # see stub_service in php_agent-recipe for more information
         node.set['newrelic']['php_agent']['web_server']['service_name'] = 'stub_service'
@@ -37,6 +38,10 @@ describe 'newrelic::php_agent' do
 
     it 'creates newrelic ini config template from newrelic.ini.erb' do
       expect(chef_run).to render_file("#{chef_run.node['newrelic']['php_agent']['config_file']}")
+    end
+
+    it 'deletes PHP Agent-generated newrelic ini config' do
+      expect(chef_run).to delete_file("#{chef_run.node['newrelic']['php_agent']['config_file_to_be_deleted']}")
     end
 
     it 'restarts the webserver at the end of the chef run when changing the config file' do

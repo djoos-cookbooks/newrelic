@@ -111,7 +111,8 @@ Attributes
 * `node['newrelic']['php_agent']['install_silently']` - Determine whether to run the install in silent mode, defaults to false
 * `node['newrelic']['php_agent']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
 * `node['newrelic']['php_agent']['web_server']['service_name']` - The web server service name, defaults to "apache2"
-* `node['newrelic']['php_agent']['config_file']` - The New Relic php agent config file, depends on your php external configuration directory; eg. /etc/php5/conf.d/newrelic.ini or /etc/php5/mods-available/newrelic.ini
+* `node['newrelic']['php_agent']['config_file']` - The New Relic php agent config file, depends on your php external configuration directory; eg. /etc/php5/conf.d/newrelic.ini or /etc/php5/mods-available/newrelic.ini, defaults to nil
+* `node['newrelic']['php_agent']['config_file_to_be_deleted']` - The New Relic php agent config file the agent auto-generated, eg. /etc/php5/cli/conf.d/newrelic.ini. If set, this file will get deleted on the Chef run as we want the Chef-generated config file to be used instead (`node['newrelic']['php_agent']['config_file']`), defaults to nil
 * `node['newrelic']['php_agent']['execute_php5enmod']` - Executes "php5enmod newrelic" if true. Needed if you use the mods-available directory, defaults to false
 * `node['newrelic']['php_agent']['template']['cookbook_ini']` - Sets cookbook for .ini template, defaults to 'newrelic'
 * `node['newrelic']['php_agent']['template']['source_ini']` - Sets source for .ini template, defaults to 'agent/php/newrelic.ini.erb'

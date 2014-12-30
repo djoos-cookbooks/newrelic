@@ -105,6 +105,14 @@ template node['newrelic']['php_agent']['config_file'] do
   end
 end
 
+# delete the config file the New Relic PHP agent auto-generated
+# see issues #119 and #143
+file 'newrelic-config_file_to_be_deleted' do
+  path node['newrelic']['php_agent']['config_file_to_be_deleted']
+  action :delete
+  only_if { node['newrelic']['php_agent']['config_file_to_be_deleted'] }
+end
+
 # https://newrelic.com/docs/php/newrelic-daemon-startup-modes
 log "newrelic-daemon startup mode: #{node['newrelic']['php_agent']['startup_mode']}" do
   level :info
