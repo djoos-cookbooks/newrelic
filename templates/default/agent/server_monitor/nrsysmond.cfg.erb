@@ -131,6 +131,20 @@ hostname=<%= @hostname %>
 <% end %>
 
 #
+# Option : labels
+#
+# Value  : A dictionary of label names and values for categories that will be
+#          applied to the data sent from this agent. May also be expressed as
+#          a semicolon delimited string of colon-separated pairs;
+#          for example, labels=Server:One;Data Center:Primary;.
+# Default: nil
+<% if @labels.nil? %>
+#labels=
+<% else %>
+labels=<%= @labels %>
+<% end %>
+
+#
 # Option : pidfile
 # Value  : Name of a file where the server monitoring daemon will store it's
 #          process ID (PID). This is used by the startup and shutdown script
