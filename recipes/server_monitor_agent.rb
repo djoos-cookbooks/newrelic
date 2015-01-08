@@ -31,6 +31,7 @@ when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', '
       :ssl_ca_bundle => node['newrelic']['server_monitoring']['ssl_ca_bundle'],
       :ssl_ca_path => node['newrelic']['server_monitoring']['ssl_ca_path'],
       :hostname => node['newrelic']['server_monitoring']['hostname'],
+      :labels => node['newrelic']['server_monitoring']['labels'],
       :pidfile => node['newrelic']['server_monitoring']['pidfile'],
       :collector_host => node['newrelic']['server_monitoring']['collector_host'],
       :timeout => node['newrelic']['server_monitoring']['timeout']
