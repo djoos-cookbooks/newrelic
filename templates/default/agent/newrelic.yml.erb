@@ -275,7 +275,7 @@ common: &default_settings
     #
     # ignore_errors:
     <% unless @error_collector_ignore_errors.nil? %>
-      ignore_errors: <%= @error_collector_ignore_errors %>
+    ignore_errors: <%= @error_collector_ignore_errors %>
     <% end %>
 
     # To stop specific http status codes from being reporting to New Relic as errors,
@@ -284,7 +284,7 @@ common: &default_settings
     #
     # ignore_status_codes: 404
     <% unless @error_collector_ignore_status_codes.nil? %>
-      ignore_status_codes: <%= @error_collector_ignore_status_codes %>
+    ignore_status_codes: <%= @error_collector_ignore_status_codes %>
     <% end %>
 
   # Cross Application Tracing adds request and response headers to
