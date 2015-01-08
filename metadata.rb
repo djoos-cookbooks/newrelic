@@ -11,8 +11,7 @@ version '2.5.3'
 end
 
 depends 'python'
-
-recommends 'curl'
+depends 'curl'
 
 recipe 'newrelic', 'Adds the New Relic repository, installs & configures the New Relic server monitor agent.'
 recipe 'newrelic::repository', 'Adds the New Relic repository.'
