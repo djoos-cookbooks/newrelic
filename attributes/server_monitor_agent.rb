@@ -6,7 +6,9 @@
 #
 
 default['newrelic']['server_monitor_agent']['agent_action'] = :install
-when "smartos"
+
+case node['platform']
+when 'smartos'
   default['newrelic']['server_monitor_agent']['service_name'] = 'nrsysmond'
   default['newrelic']['server_monitor_agent']['config_file_group'] = 'root'
   default['newrelic']['server_monitor_agent']['config_path'] = '/opt/local/etc'
@@ -15,6 +17,7 @@ else
   default['newrelic']['server_monitor_agent']['config_path'] = '/etc/newrelic'
   default['newrelic']['server_monitor_agent']['config_file_group'] = 'newrelic'
 end
+
 default['newrelic']['server_monitor_agent']['service_notify_action'] = :restart
 default['newrelic']['server_monitor_agent']['service_actions'] = [:enable, :start] # starts the service if it's not running and enables it to start at system boot time
 default['newrelic']['server_monitor_agent']['config_file_user'] = 'root'
