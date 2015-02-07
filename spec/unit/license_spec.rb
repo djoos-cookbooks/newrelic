@@ -2,7 +2,6 @@ require 'spec_helper'
 require_relative '../../libraries/newrelic'
 
 describe 'libraries/newrelic.rb' do
-
   # helper to build different kinds of node objects
   def build_node(lic = nil, server = nil, app = nil)
     node = {}
@@ -60,5 +59,4 @@ describe 'libraries/newrelic.rb' do
     expect(NewRelic.server_monitoring_license(node)).to eq('b')
     expect(NewRelic.application_monitoring_license(node)).to eq('c')
   end
-
 end

@@ -19,8 +19,8 @@ describe 'newrelic::nodejs_agent' do
     it 'creates newrelic javascript config template from newrelic.js' do
       expect(chef_run).to render_file("#{chef_run.node['newrelic']['nodejs_agent']['apps'].first['app_path']}/newrelic.js")
     end
-
   end
+
   context 'Ubuntu 12.04' do
     # Expected on Ubuntu 12.04 only
     # let(:chef_run) { ChefSpec::Runner.new(:platform => 'ubuntu', :version => '12.04').converge(described_recipe) }

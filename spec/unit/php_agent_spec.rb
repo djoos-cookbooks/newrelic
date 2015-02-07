@@ -130,7 +130,6 @@ describe 'newrelic::php_agent' do
         expect(template).to notify('execute[newrelic-php5enmod]').to(:run).immediately
       end
     end
-
   end
   context 'Ubuntu 12.04' do
     # Expected on Ubuntu 12.04 only

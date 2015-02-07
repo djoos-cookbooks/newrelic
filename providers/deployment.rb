@@ -27,7 +27,7 @@ action :notify do
   if new_resource.url && (new_resource.app_name || new_resource.app_id)
     Chef::Log.debug 'notify New Relic of deployment'
 
-    data = Array.new
+    data = []
 
     if new_resource.key_type == 'license_key'
       data << '"x-license-key:' + key + '"'

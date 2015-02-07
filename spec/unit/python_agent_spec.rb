@@ -15,8 +15,8 @@ describe 'newrelic::python_agent' do
     it 'creates newrelic ini config template from newrelic.ini.erb' do
       expect(chef_run).to render_file("#{chef_run.node['newrelic']['python_agent']['config_file']}")
     end
-
   end
+
   context 'Ubuntu 12.04' do
     # Expected on Ubuntu 12.04 only
     # let(:chef_run) { ChefSpec::Runner.new(:platform => 'ubuntu', :version => '12.04').converge(described_recipe) }
