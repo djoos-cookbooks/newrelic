@@ -51,6 +51,7 @@ default['newrelic']['application_monitoring']['daemon']['collector_host'] = nil
 default['newrelic']['application_monitoring']['daemon']['dont_launch'] = nil
 default['newrelic']['application_monitoring']['capture_params'] = nil
 default['newrelic']['application_monitoring']['cross_application_tracer']['enable'] = nil
+default['newrelic']['application_monitoring']['thread_profiler']['enable'] = nil
 default['newrelic']['application_monitoring']['ignored_params'] = nil
 default['newrelic']['application_monitoring']['error_collector']['enable'] = nil
 default['newrelic']['application_monitoring']['error_collector']['ignore_errors'] = nil
