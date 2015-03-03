@@ -66,6 +66,7 @@ newrelic_yml "#{node['newrelic']['java_agent']['install_dir']}/newrelic.yml" do
   error_collector_ignore_status_codes node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes']
   browser_monitoring_auto_instrument node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
   cross_application_tracer_enable node['newrelic']['application_monitoring']['cross_application_tracer']['enable']
+  thread_profiler_enable node['newrelic']['application_monitoring']['thread_profiler']['enable']
 end
 
 # allow app_group to write to log_file_path
