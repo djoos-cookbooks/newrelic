@@ -306,7 +306,11 @@ common: &default_settings
 
     # Set to false to disable the thread profiler.
     # Default is true.
+    <% if @thread_profiler_enable.nil? %>
     enabled: true
+    <% else %>
+    enabled: <%= @thread_profiler_enable %>
+    <% end %>
 
   #============================== Browser Monitoring ===============================
   # New Relic Real User Monitoring gives you insight into the performance real users are
