@@ -8,14 +8,17 @@ platforms:
     driver_config:
         box: opscode-ubuntu-12.04
         box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
-#  - name: ubuntu-13.04
-#    driver_config:
-#      box: opscode-ubuntu-13.04
-#      box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-13.04_provisionerless.box
-#  - name: centos-6.3
-#    driver_config:
-#        box: opscode-centos-6.3
-#        box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-6.3_provisionerless.box
+
+  - name: ubuntu-14.04
+    driver_config:
+        box: opscode-ubuntu-14.04
+        box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-14.04_provisionerless.box
+
+  - name: centos-6.5
+    driver_config:
+        box: opscode-centos-6.5
+        box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-6.5_provisionerless.box
+
   - name: centos-6.4
     driver_config:
         box: opscode-centos-6.4
@@ -32,37 +35,14 @@ suites:
           service_notify_action: nothing
           service_actions:
             - nothing
-#        server_monitor_agent:
-#          service_notify_action: nothing
-#          service_actions:
-#            - nothing
-#  - name: dotnet_agent
-#    run_list:
-#      - recipe[newrelic::dotnet_agent]
-#  - name: java_agent
-#    run_list:
-#      - recipe[newrelic::java_agent]
-#  - name: nodejs_agent
-#    run_list:
-#      - recipe[newrelic::nodejs_agent]
-#  - name: php_agent
-#    run_list:
-#      - recipe[newrelic::php_agent]
-#  - name: python_agent
-#    run_list:
-#      - recipe[newrelic::python_agent]
-#  - name: repository
-#    run_list:
-#      - recipe[newrelic::repository]
-#  - name: ruby_agent
-#    run_list:
-#      - recipe[newrelic::ruby_agent]
-#  - name: server_monitor_agent
-#    run_list:
-#      - recipe[newrelic::server_monitor_agent]
-#    attributes:
-#      newrelic:
-#        server_monitor_agent:
-#          service_notify_action: nothing
-#          service_actions:
-#            - nothing
+  - name: php-agent
+    run_list: 
+      - "recipe[newrelic_lwrp_test::agent_php]"
+    attributes: 
+      newrelic: 
+        license: 0000ffff0000ffff0000ffff0000ffff0000ffff
+  - name: agent
+    run_list: "recipe[newrelic_lwrp_test::agent]"
+    attributes: 
+      newrelic: 
+        license: 0000ffff0000ffff0000ffff0000ffff0000ffff
