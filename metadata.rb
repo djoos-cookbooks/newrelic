@@ -10,6 +10,7 @@ version '2.8.0'
   supports os
 end
 
+depends 'apt'
 depends 'python'
 depends 'curl'
 
