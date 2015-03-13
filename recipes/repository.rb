@@ -20,10 +20,12 @@ when 'debian', 'ubuntu'
   remote_file gpg_key_file do
     source gpg_key_url
     action :create
+    notifies :run, 'execute[newrelic-add-apt-key]', :immediately
   end
 
   execute 'newrelic-add-apt-key' do
     command "apt-key add #{gpg_key_file}"
+    action :nothing
   end
 
   # configure the New Relic apt repository
