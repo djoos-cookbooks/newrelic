@@ -12,10 +12,6 @@ describe 'newrelic::repository' do
       expect(chef_run).to create_remote_file("#{Chef::Config[:file_cache_path]}/#{chef_run.node['newrelic']['repository']['repository_key']}.gpg")
     end
 
-    it 'runs "apt-key add"' do
-      expect(chef_run).to run_execute("apt-key add #{Chef::Config[:file_cache_path]}/#{chef_run.node['newrelic']['repository']['repository_key']}.gpg")
-    end
-
     it 'downloads the newrelic sources file' do
       expect(chef_run).to create_remote_file_if_missing('/etc/apt/sources.list.d/newrelic.list')
     end
@@ -31,10 +27,6 @@ describe 'newrelic::repository' do
 
     it 'downloads the gpg key file' do
       expect(chef_run).to create_remote_file("#{Chef::Config[:file_cache_path]}/#{chef_run.node['newrelic']['repository']['repository_key']}.gpg")
-    end
-
-    it 'runs "apt-key add"' do
-      expect(chef_run).to run_execute("apt-key add #{Chef::Config[:file_cache_path]}/#{chef_run.node['newrelic']['repository']['repository_key']}.gpg")
     end
 
     it 'downloads the newrelic sources file' do
