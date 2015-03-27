@@ -55,6 +55,13 @@ common: &default_settings
   app_name: <%= @app_name %>
   <% end %>
 
+  # In order for high security to be enabled, this property must be set to true and the high security property in the New Relic user
+  # interface must be enabled. Enabling high security means SSL is turned on, request and message queue parameters are not collected, and
+  # SQL cannot be sent to New Relic in its raw form.
+  <% unless @high_security.nil? %>
+  high_security: <%= @high_security %>
+  <% end %>
+
   # The agent uses its own log file to keep its logging
   # separate from that of your application.  Specify the log level here.
   # This setting is dynamic, so changes do not require restarting your application.

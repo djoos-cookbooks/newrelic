@@ -43,6 +43,13 @@ app_name = Python Application
 app_name = <%= @app_name %>
 <% end %>
 
+# In order for high security to be enabled, this property must be set to true and the high security property in the New Relic user
+# interface must be enabled. Enabling high security means SSL is turned on, request and message queue parameters are not collected, and
+# SQL cannot be sent to New Relic in its raw form.
+<% unless @high_security.nil? %>
+high_security: <%= @high_security %>
+<% end %>
+
 # When "true", the agent collects performance data about your
 # application and reports this data to the New Relic UI at
 # newrelic.com. This global switch is normally overridden for

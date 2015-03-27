@@ -652,7 +652,7 @@ newrelic.cross_application_tracer.enabled = <%= @cross_application_tracer_enable
 ;    If the two settings do not match, then no data will be collected. For more information, see https://docs.newrelic.com/docs/subscriptions/high-security
 ;
 <% if @high_security.nil? %>
-; newrelic.high_security = false
+;newrelic.high_security = false
 <% else %>
 newrelic.high_security = <%= @high_security %>
 <% end %>

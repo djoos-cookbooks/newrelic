@@ -41,6 +41,7 @@ newrelic_yml "#{node['newrelic']['java_agent']['install_dir']}/newrelic.yml" do
   template_source node['newrelic']['java_agent']['template_source']
   enabled node['newrelic']['application_monitoring']['enabled']
   app_name node['newrelic']['application_monitoring']['app_name']
+  high_security node['newrelic']['application_monitoring']['high_security']
   owner node['newrelic']['java_agent']['app_user']
   group node['newrelic']['java_agent']['app_group']
   license license
