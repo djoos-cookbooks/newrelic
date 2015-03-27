@@ -6,7 +6,7 @@
 #
 
 case node['platform']
-when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon'
+when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', 'oracle'
   package 'wget'
 end
 
@@ -40,7 +40,7 @@ when 'debian', 'ubuntu'
     command 'apt-get update'
     action :nothing
   end
-when 'redhat', 'centos', 'fedora', 'scientific', 'amazon'
+when 'redhat', 'centos', 'fedora', 'scientific', 'amazon', 'oracle'
   # install the newrelic-repo package, which configures a new package repository for yum
   if node['kernel']['machine'] == 'x86_64'
     machine = 'x86_64'
