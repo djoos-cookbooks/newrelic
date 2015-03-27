@@ -39,6 +39,7 @@ action :generate do
       :enabled => new_resource.enabled,
       :license => new_resource.license,
       :app_name => new_resource.app_name,
+      :high_security => new_resource.high_security,
       :logfile => new_resource.logfile,
       :logfile_path => new_resource.logfile_path,
       :loglevel => new_resource.loglevel,

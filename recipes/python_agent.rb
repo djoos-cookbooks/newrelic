@@ -29,6 +29,7 @@ template node['newrelic']['python_agent']['config_file'] do
   variables(
     :license => license,
     :app_name => node['newrelic']['application_monitoring']['app_name'],
+    :high_security => node['newrelic']['application_monitoring']['high_security'],
     :enabled => node['newrelic']['application_monitoring']['enabled'],
     :logfile => node['newrelic']['application_monitoring']['logfile'],
     :loglevel => node['newrelic']['application_monitoring']['loglevel'],
