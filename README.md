@@ -40,6 +40,7 @@ This cookbook recommends on the following cookbooks:
 * Amazon
 * Windows
 * SmartOS
+* Oracle
 
 Attributes
 ==========
