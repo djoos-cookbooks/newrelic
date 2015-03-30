@@ -5,6 +5,7 @@
 This cookbook provides an easy way to install various New Relic agents and the New Relic server monitor.
 
 More information?
+
 * https://docs.newrelic.com/docs/server/new-relic-for-server-monitoring
 * https://docs.newrelic.com/docs/php/new-relic-for-php
 * https://docs.newrelic.com/docs/python/new-relic-for-python
@@ -45,11 +46,13 @@ This cookbook recommends on the following cookbooks:
 ## default.rb:
 
 ### BASIC
+
 * `node['newrelic']['license']` - Your New Relic license key. Default is `nil`
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (defaults to value of node['newrelic']['license'])
 * `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (defaults to value of node['newrelic']['license'])
 
 ### ADVANCED
+
 * `node['newrelic']['server_monitoring']['logfile']`
 * `node['newrelic']['server_monitoring']['loglevel']`
 * `node['newrelic']['server_monitoring']['proxy']`
@@ -103,10 +106,12 @@ This cookbook recommends on the following cookbooks:
 * `node['newrelic']['application_monitoring']['thread_profiler']['enable']` - Implemented for Java, Python and Ruby
 
 ## repository.rb:
+
 * `node['newrelic']['repository']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 * `node['newrelic']['repository']['repository_action']` - Repository action, defaults to :install
 
 ## php_agent.rb:
+
 * `node['newrelic']['php_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['php_agent']['install_silently']` - Determine whether to run the install in silent mode, defaults to false
 * `node['newrelic']['php_agent']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
@@ -120,6 +125,7 @@ This cookbook recommends on the following cookbooks:
 * `node['newrelic']['php_agent']['template']['source']` - Sets source for template, defaults to 'agent/php/newrelic.cfg.erb'
 
 ## python_agent.rb:
+
 * `node['newrelic']['python_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['python_agent']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
 * `node['newrelic']['python_agent']['python_venv']` - Virtual environment, default to nil
@@ -129,11 +135,13 @@ This cookbook recommends on the following cookbooks:
 * `node['newrelic']['python_agent']['feature_flag']` - Sets feature_flag, defaults to nil
 
 ## dotnet_agent.rb:
+
 * `node['newrelic']['dotnet_agent']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
 * `node['newrelic']['dotnet_agent']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 * `node['newrelic']['dotnet_agent']['agent_action']` - Agent action, defaults to :install
 
 ## server_monitor_agent.rb:
+
 * `node['newrelic']['server_monitor_agent']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
 * `node['newrelic']['server_monitor_agent']['service_notify_action']` - The New Relic server monitoring notify action, defaults to ":restart"
 * `node['newrelic']['server_monitor_agent']['service_actions']` - The New Relic server monitoring service actions, defaults to "[:enable, :start]" (#starts the service if it's not running and enables it to start at system boot time)
@@ -146,6 +154,7 @@ This cookbook recommends on the following cookbooks:
 * `node['newrelic']['server_monitor_agent']['template']['source']` - Sets source for template, defaults to 'agent/server_monitor/nrsysmond.cfg.erb'
 
 ## java_agent.rb:
+
 * `node['newrelic']['java_agent']['version']` - New Relic Java Agent version to use. To find the current version, check [New Relic repo](https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/)
 * `node['newrelic']['java_agent']['https_download']` - The url to download the jar for the New Relic Java agent. If you override `version` parameter, you must also update this.
 * `node['newrelic']['java_agent']['jar_file']` - The name of the newrelic jar file that will be used locally, defaults to `newrelic-agent-version.jar`
@@ -163,10 +172,12 @@ This cookbook recommends on the following cookbooks:
 * `node['newrelic']['java_agent']['template']['source']` - Sets source for template, defaults to 'agent/newrelic.yml.erb'
 
 ## nodejs_agent.rb
+
 * `node['newrelic']['nodejs_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['nodejs_agent']['apps']` - Array of Hash describing the apps to monitor
 
 eg.
+
 ```
 [
    { 'app_name' => 'My Application', 'app_path' => "/path/to/app/root" }
@@ -184,6 +195,7 @@ require('newrelic');
 * `node['newrelic']['nodejs_agent']['template']['source']` - Sets source for template, defaults to 'agent/nodejs/newrelic.js.erb'
 
 ## ruby_agent.rb:
+
 * `node['newrelic']['ruby_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['ruby_agent']['install_dir']` - The directory to for the config file
 * `node['newrelic']['ruby_agent']['app_user']` - The user that runs the Ruby application that will use the New Relic Ruby agent
@@ -207,9 +219,11 @@ This cookbook includes an LWRP for notifying New Relic of a deployment
 ### `newrelic_deployment`
 
 #### Actions
+
 - :notify: Notify New Relic of a deployment
 
 #### Attribute parameters
+
 - key_type: Your New Relic API key type (api_key or license_key, defaults to api_key currently for backwards compatibility)
 - key: Your New Relic key (see key_type for more information on what value to provide here exactly)
 - app_name: The name of the application, found in the newrelic.yml file
@@ -220,7 +234,9 @@ This cookbook includes an LWRP for notifying New Relic of a deployment
 - user: The name of the user/process that triggered this deployment
 
 #### Example(s)
+
 ```
+
 newrelic_deployment "my-application" do
     api_key "abcdef"
     #app_name "my-application"
@@ -238,6 +254,7 @@ This cookbook includes an LWRP for generating the newrelic.yml configuration fil
 ### `newrelic_yml`
 
 ### Actions
+
 - :generate - Generate the newrelic.yml config file (unique and default action)
 
 ### Example usage - Java agent
