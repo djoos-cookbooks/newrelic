@@ -296,16 +296,16 @@ override the attributes on a higher level (http://wiki.opscode.com/display/chef/
 
 # References
 
-* [New Relic home page] (http://newrelic.com/)
-* [New Relic for Server Monitoring] (https://docs.newrelic.com/docs/server/new-relic-for-server-monitoring)
-* [New Relic for PHP] (https://docs.newrelic.com/docs/php/new-relic-for-php)
-* [newrelic-daemon startup modes] (https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
-* [New Relic for Python] (https://docs.newrelic.com/docs/python/new-relic-for-python)
-* [New Relic for .NET] (https://docs.newrelic.com/docs/dotnet/new-relic-for-net)
-* [New Relic for Java] (https://docs.newrelic.com/docs/java/new-relic-for-java)
-* ["newrelic" cookbook by heavywater on github] (https://github.com/heavywater/chef-newrelic)
-* ["newrelic_monitoring" cookbook on community.opscode.com] (http://community.opscode.com/cookbooks/newrelic_monitoring)
-* ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
+* [New Relic home page](http://newrelic.com/)
+* [New Relic for Server Monitoring](https://docs.newrelic.com/docs/server/new-relic-for-server-monitoring)
+* [New Relic for PHP](https://docs.newrelic.com/docs/php/new-relic-for-php)
+* [newrelic-daemon startup modes](https://newrelic.com/docs/php/newrelic-daemon-startup-modes)
+* [New Relic for Python](https://docs.newrelic.com/docs/python/new-relic-for-python)
+* [New Relic for .NET](https://docs.newrelic.com/docs/dotnet/new-relic-for-net)
+* [New Relic for Java](https://docs.newrelic.com/docs/java/new-relic-for-java)
+* ["newrelic" cookbook by heavywater on github](https://github.com/heavywater/chef-newrelic)
+* ["newrelic_monitoring" cookbook on community.opscode.com](http://community.opscode.com/cookbooks/newrelic_monitoring)
+* ["newrelic_monitoring" cookbook on github](https://github.com/8thBridge/chef-newrelic-monitoring)
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
 
 # License and Authors
