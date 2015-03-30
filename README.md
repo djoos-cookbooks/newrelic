@@ -252,11 +252,11 @@ This cookbook includes an LWRP for generating the newrelic.yml configuration fil
 
 ### `newrelic_yml`
 
-### Actions
+#### Actions
 
 - :generate - Generate the newrelic.yml config file (unique and default action)
 
-### Example usage - Java agent
+#### Example usage - Java agent
 
 1. Install the Java Agent: add the newrelic::java_agent recipe to your run list. A newrelic.yml will be generated but not linked to anything.
 2. In your application cookbook, generate the newrelic.yml for this application:
