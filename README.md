@@ -210,7 +210,7 @@ require('newrelic');
 # MeetMe plugin
 
 To make sure the cookbook is focussed on getting New Relic server and application monitoring, no plugin logic is provided here.
-The New Relic MeetMe plugin-logic is still available, in a separate cookbook: (newrelic_meetme_plugin)[https://github.com/escapestudios-cookbooks/newrelic_meetme_plugin].
+The New Relic MeetMe plugin-logic is still available, in a separate cookbook: [newrelic_meetme_plugin](https://github.com/escapestudios-cookbooks/newrelic_meetme_plugin).
 
 # Resources / Providers
 
