@@ -178,7 +178,7 @@ This cookbook recommends on the following cookbooks:
 
 e.g.,
 
-```
+```ruby
 [
    { 'app_name' => 'My Application', 'app_path' => "/path/to/app/root" }
 ]
@@ -186,7 +186,7 @@ e.g.,
 
 You then need to modify your application "main" file to add the following on the first line:
 
-```
+```ruby
 javascript
 require('newrelic');
 ```
@@ -235,8 +235,7 @@ This cookbook includes an LWRP for notifying New Relic of a deployment
 
 #### Example(s)
 
-```
-
+```ruby
 newrelic_deployment "my-application" do
     api_key "abcdef"
     #app_name "my-application"
