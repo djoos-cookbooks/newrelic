@@ -1,7 +1,6 @@
 [![Build Status](https://travis-ci.org/escapestudios-cookbooks/newrelic.png)](https://travis-ci.org/escapestudios-cookbooks/newrelic)
 
-Description
-===========
+# Description
 
 This cookbook provides an easy way to install various New Relic agents and the New Relic server monitor.
 
@@ -14,8 +13,7 @@ More information?
 * https://docs.newrelic.com/docs/nodejs/installing-and-maintaining-nodejs
 * https://docs.newrelic.com/docs/ruby/new-relic-for-ruby
 
-Requirements
-============
+# Requirements
 
 ## Chef version:
 
@@ -42,8 +40,7 @@ This cookbook recommends on the following cookbooks:
 * SmartOS
 * Oracle
 
-Attributes
-==========
+# Attributes
 
 ## default.rb:
 
@@ -198,14 +195,12 @@ require('newrelic');
 * `node['newrelic']['ruby_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
 * `node['newrelic']['ruby_agent']['template']['source']` - Sets source for template, defaults to 'agent/newrelic.yml.erb'
 
-MeetMe plugin
-=============
+# MeetMe plugin
 
 To make sure the cookbook is focussed on getting New Relic server and application monitoring, no plugin logic is provided here.
 The New Relic MeetMe plugin-logic is still available, in a separate cookbook: (newrelic_meetme_plugin)[https://github.com/escapestudios-cookbooks/newrelic_meetme_plugin].
 
-Resources / Providers
-=====================
+# Resources / Providers
 
 This cookbook includes an LWRP for notifying New Relic of a deployment
 
@@ -264,8 +259,7 @@ end
  java -Dnewrelic.config.file=#{newrelicyml}  -javaagent:#{node['newrelic']['install_dir']}/newrelic.jar [rest of your args]
 ```
 
-Usage
-=====
+# Usage
 
 1. include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::server_monitor_agent]`
 --- OR ---
@@ -285,8 +279,7 @@ include the bits and pieces explicitly in a run list:
 --- OR ---
 override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
-References
-==========
+# References
 
 * [New Relic home page] (http://newrelic.com/)
 * [New Relic for Server Monitoring] (https://docs.newrelic.com/docs/server/new-relic-for-server-monitoring)
@@ -300,8 +293,7 @@ References
 * ["newrelic_monitoring" cookbook on github] (https://github.com/8thBridge/chef-newrelic-monitoring)
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
 
-License and Authors
-===================
+# License and Authors
 
 Author: David Joos <david.joos@escapestudios.com>
 Author: Escape Studios Development <dev@escapestudios.com>
