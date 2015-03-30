@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/escapestudios-cookbooks/newrelic.png)](https://travis-ci.org/escapestudios-cookbooks/newrelic)
 
-# Description
+# newrelic cookbook
+
+## Description
 
 This cookbook provides an easy way to install various New Relic agents and the New Relic server monitor.
 
@@ -14,18 +16,18 @@ More information?
 * https://docs.newrelic.com/docs/nodejs/installing-and-maintaining-nodejs
 * https://docs.newrelic.com/docs/ruby/new-relic-for-ruby
 
-# Requirements
+## Requirements
 
-## Chef version:
+### Chef version:
 
 Make sure you run Chef >= 0.10.0.
 
-## Cookbooks:
+### Cookbooks:
 
 * python
 * curl
 
-## Platforms:
+### Platforms:
 
 * Debian
 * Ubuntu
@@ -38,17 +40,17 @@ Make sure you run Chef >= 0.10.0.
 * SmartOS
 * Oracle
 
-# Attributes
+## Attributes
 
-## default.rb:
+### default.rb:
 
-### BASIC
+#### BASIC
 
 * `node['newrelic']['license']` - Your New Relic license key. Default is `nil`
 * `node['newrelic']['server_monitoring']['license']` - Your New Relic license key for server monitoring purposes (defaults to value of node['newrelic']['license'])
 * `node['newrelic']['application_monitoring']['license']` - Your New Relic license key for application monitoring purposes (defaults to value of node['newrelic']['license'])
 
-### ADVANCED
+#### ADVANCED
 
 * `node['newrelic']['server_monitoring']['logfile']`
 * `node['newrelic']['server_monitoring']['loglevel']`
@@ -102,12 +104,12 @@ Make sure you run Chef >= 0.10.0.
 * `node['newrelic']['application_monitoring']['cross_application_tracer']['enable']` - Implemented for Java, PHP, Python and Ruby
 * `node['newrelic']['application_monitoring']['thread_profiler']['enable']` - Implemented for Java, Python and Ruby
 
-## repository.rb:
+### repository.rb:
 
 * `node['newrelic']['repository']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
 * `node['newrelic']['repository']['repository_action']` - Repository action, defaults to :install
 
-## php_agent.rb:
+### php_agent.rb:
 
 * `node['newrelic']['php_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['php_agent']['install_silently']` - Determine whether to run the install in silent mode, defaults to false
@@ -121,7 +123,7 @@ Make sure you run Chef >= 0.10.0.
 * `node['newrelic']['php_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
 * `node['newrelic']['php_agent']['template']['source']` - Sets source for template, defaults to 'agent/php/newrelic.cfg.erb'
 
-## python_agent.rb:
+### python_agent.rb:
 
 * `node['newrelic']['python_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['python_agent']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
@@ -131,13 +133,13 @@ Make sure you run Chef >= 0.10.0.
 * `node['newrelic']['python_agent']['template']['source']` - Sets source for template, defaults to 'agent/python/newrelic.ini.erb'
 * `node['newrelic']['python_agent']['feature_flag']` - Sets feature_flag, defaults to nil
 
-## dotnet_agent.rb:
+### dotnet_agent.rb:
 
 * `node['newrelic']['dotnet_agent']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
 * `node['newrelic']['dotnet_agent']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 * `node['newrelic']['dotnet_agent']['agent_action']` - Agent action, defaults to :install
 
-## server_monitor_agent.rb:
+### server_monitor_agent.rb:
 
 * `node['newrelic']['server_monitor_agent']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
 * `node['newrelic']['server_monitor_agent']['service_notify_action']` - The New Relic server monitoring notify action, defaults to ":restart"
@@ -150,7 +152,7 @@ Make sure you run Chef >= 0.10.0.
 * `node['newrelic']['server_monitor_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
 * `node['newrelic']['server_monitor_agent']['template']['source']` - Sets source for template, defaults to 'agent/server_monitor/nrsysmond.cfg.erb'
 
-## java_agent.rb:
+### java_agent.rb:
 
 * `node['newrelic']['java_agent']['version']` - New Relic Java Agent version to use. To find the current version, check [New Relic repo](https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/)
 * `node['newrelic']['java_agent']['https_download']` - The url to download the jar for the New Relic Java agent. If you override `version` parameter, you must also update this.
@@ -168,7 +170,7 @@ Make sure you run Chef >= 0.10.0.
 * `node['newrelic']['java_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
 * `node['newrelic']['java_agent']['template']['source']` - Sets source for template, defaults to 'agent/newrelic.yml.erb'
 
-## nodejs_agent.rb
+### nodejs_agent.rb
 
 * `node['newrelic']['nodejs_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['nodejs_agent']['apps']` - Array of Hash describing the apps to monitor
@@ -191,7 +193,7 @@ require('newrelic');
 * `node['newrelic']['nodejs_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
 * `node['newrelic']['nodejs_agent']['template']['source']` - Sets source for template, defaults to 'agent/nodejs/newrelic.js.erb'
 
-## ruby_agent.rb:
+### ruby_agent.rb:
 
 * `node['newrelic']['ruby_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['ruby_agent']['install_dir']` - The directory to for the config file
@@ -204,12 +206,12 @@ require('newrelic');
 * `node['newrelic']['ruby_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
 * `node['newrelic']['ruby_agent']['template']['source']` - Sets source for template, defaults to 'agent/newrelic.yml.erb'
 
-# MeetMe plugin
+## MeetMe plugin
 
 To make sure the cookbook is focussed on getting New Relic server and application monitoring, no plugin logic is provided here.
 The New Relic MeetMe plugin-logic is still available, in a separate cookbook: [newrelic_meetme_plugin](https://github.com/escapestudios-cookbooks/newrelic_meetme_plugin).
 
-# Resources / Providers
+## Resources / Providers
 
 This cookbook includes an LWRP for notifying New Relic of a deployment
 
@@ -272,7 +274,7 @@ end
  java -Dnewrelic.config.file=#{newrelicyml}  -javaagent:#{node['newrelic']['install_dir']}/newrelic.jar [rest of your args]
 ```
 
-# Usage
+## Usage
 
 1. include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::server_monitor_agent]`  
 --- OR ---  
@@ -291,7 +293,7 @@ include the bits and pieces explicitly in a run list:
 --- OR ---  
 override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
-# References
+## References
 
 * [New Relic home page](http://newrelic.com/)
 * [New Relic for Server Monitoring](https://docs.newrelic.com/docs/server/new-relic-for-server-monitoring)
@@ -305,7 +307,7 @@ override the attributes on a higher level (http://wiki.opscode.com/display/chef/
 * ["newrelic_monitoring" cookbook on github](https://github.com/8thBridge/chef-newrelic-monitoring)
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
 
-# License and Authors
+## License and Authors
 
 Author: David Joos <david.joos@escapestudios.com>
 Author: Escape Studios Development <dev@escapestudios.com>
