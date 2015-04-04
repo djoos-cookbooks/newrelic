@@ -24,6 +24,7 @@ newrelic_yml "#{node['newrelic']['ruby_agent']['install_dir']}/newrelic.yml" do
   template_source node['newrelic']['ruby_agent']['template_source']
   enabled node['newrelic']['application_monitoring']['enabled']
   app_name node['newrelic']['application_monitoring']['app_name']
+  high_security node['newrelic']['application_monitoring']['high_security']
   owner node['newrelic']['ruby_agent']['app_user']
   group node['newrelic']['ruby_agent']['app_group']
   license license
@@ -49,4 +50,5 @@ newrelic_yml "#{node['newrelic']['ruby_agent']['install_dir']}/newrelic.yml" do
   error_collector_ignore_status_codes node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes']
   browser_monitoring_auto_instrument node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
   cross_application_tracer_enable node['newrelic']['application_monitoring']['cross_application_tracer']['enable']
+  thread_profiler_enable node['newrelic']['application_monitoring']['thread_profiler']['enable']
 end

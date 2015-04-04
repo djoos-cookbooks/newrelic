@@ -10,7 +10,7 @@ include_recipe 'newrelic::repository'
 license = NewRelic.server_monitoring_license(node)
 
 case node['platform']
-when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', 'smartos'
+when 'debian', 'ubuntu', 'redhat', 'centos', 'fedora', 'scientific', 'amazon', 'smartos', 'oracle'
   package node['newrelic']['server_monitor_agent']['service_name'] do
     action node['newrelic']['server_monitor_agent']['agent_action']
   end

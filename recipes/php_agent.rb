@@ -35,7 +35,7 @@ execute 'newrelic-install' do
   end
   action :nothing
   if node['newrelic']['php_agent']['web_server']['service_name']
-    notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
+    notifies :reload, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
   end
 end
 
@@ -69,6 +69,7 @@ template node['newrelic']['php_agent']['config_file'] do
     :logfile => node['newrelic']['application_monitoring']['logfile'],
     :loglevel => node['newrelic']['application_monitoring']['loglevel'],
     :app_name => node['newrelic']['application_monitoring']['app_name'],
+    :high_security => node['newrelic']['application_monitoring']['high_security'],
     :daemon_logfile => node['newrelic']['application_monitoring']['daemon']['logfile'],
     :daemon_loglevel => node['newrelic']['application_monitoring']['daemon']['loglevel'],
     :daemon_port => node['newrelic']['application_monitoring']['daemon']['port'],

@@ -39,6 +39,7 @@ action :generate do
       :enabled => new_resource.enabled,
       :license => new_resource.license,
       :app_name => new_resource.app_name,
+      :high_security => new_resource.high_security,
       :logfile => new_resource.logfile,
       :logfile_path => new_resource.logfile_path,
       :loglevel => new_resource.loglevel,
@@ -63,7 +64,8 @@ action :generate do
       :error_collector_ignore_errors => new_resource.error_collector_ignore_errors,
       :error_collector_ignore_status_codes => new_resource.error_collector_ignore_status_codes,
       :browser_monitoring_auto_instrument => new_resource.browser_monitoring_auto_instrument,
-      :cross_application_tracer_enable => new_resource.cross_application_tracer_enable
+      :cross_application_tracer_enable => new_resource.cross_application_tracer_enable,
+      :thread_profiler_enable => new_resource.thread_profiler_enable
     )
     action :create
   end
