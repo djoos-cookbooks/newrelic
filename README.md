@@ -26,6 +26,8 @@ Make sure you run Chef >= 0.10.0.
 
 * python
 * curl
+* apt
+* yum
 
 ### Platforms:
 
@@ -106,8 +108,7 @@ Make sure you run Chef >= 0.10.0.
 
 ### repository.rb:
 
-* `node['newrelic']['repository']['repository_key']` - The New Relic repository key, defaults to "548C16BF"
-* `node['newrelic']['repository']['repository_action']` - Repository action, defaults to :install
+* `node['newrelic']['repo']['key']` - URL to the New Relic repository key, defaults to "http://download.newrelic.com/548C16BF.gpg"
 
 ### php_agent.rb:
 
