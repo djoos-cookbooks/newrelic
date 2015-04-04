@@ -68,7 +68,7 @@ def newrelic_install
       )
     end
     action :nothing
-    # notifies :restart, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
+    # notifies :reload, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
   end
 end
 
@@ -91,7 +91,7 @@ end
 # rubocop:disable AbcSize
 def generate_agent_config
   # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
-  # and restart the web server in order to pick up the new settings
+  # and reload the web server in order to pick up the new settings
   execute_php5enmod = new_resource.execute_php5enmod ? 'true' : 'false'
   template new_resource.config_file do
     cookbook new_resource.cookbook_ini
@@ -106,7 +106,7 @@ def generate_agent_config
     if execute_php5enmod
       notifies :run, 'execute[newrelic-php5enmod]', :immediately
     end
-    # notifies :restart, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
+    # notifies :reload, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
   end
 end
 # rubocop:enable AbcSize
@@ -156,7 +156,7 @@ def startup_mode_config
       )
       action :create
       notifies :restart, 'service[newrelic-daemon]', :immediately
-      # notifies :restart, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
+      # notifies :reload, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
     end
     service 'newrelic-daemon' do
       action [:enable, :start] # starts the service if it's not running and enables it to start at system boot time

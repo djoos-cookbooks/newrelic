@@ -3,7 +3,6 @@ module Newrelic
   # helpers module
   module Helpers
     def newrelic_repository
-      install_wget node
       install_newrelic_repo
     end
 
@@ -12,33 +11,25 @@ module Newrelic
       fail 'The Newrelic key is required to notify New Relic of a deployment.' if new_resource.license.nil?
     end
 
-    def install_wget(node)
-      case node['platform_family']
-      when 'debian', 'rhel', 'fedora'
-        package 'wget'
-      end
-    end
-
     def install_newrelic_repo
-      debian_newrelic_repo if node['platform_family'] == 'debian'
-      rhel_newrelic_repo if node['platform_family'] == ('rhel' || 'fedora')
+      install_newrelic_repo_debian if node['platform_family'] == 'debian'
+      install_newrelic_repo_rhel if node['platform_family'] == ('rhel' || 'fedora')
     end
 
-    def debian_newrelic_repo
+    def install_newrelic_repo_debian
       apt_repository 'newrelic' do
-        uri 'http://apt.newrelic.com/debian/'
-        distribution 'newrelic'
-        components ['non-free']
-        key 'https://download.newrelic.com/548C16BF.gpg'
+        uri node['newrelic']['repository']['uri']
+        distribution node['newrelic']['repository']['distribution']
+        components node['newrelic']['repository']['components']
+        key node['newrelic']['repository']['key']
       end
     end
 
-    def rhel_newrelic_repo
+    def install_newrelic_repo_rhel
       yum_repository 'newrelic' do
         description 'New Relic packages for Enterprise Linux 5 - $basearch'
-        baseurl 'https://yum.newrelic.com/pub/newrelic/el5/$basearch'
-        gpgcheck false
-        action :create
+        baseurl node['newrelic']['repository']['uri']
+        gpgkey node['newrelic']['repository']['key']
       end
     end
   end
