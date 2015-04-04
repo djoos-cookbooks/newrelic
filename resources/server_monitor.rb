@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: newrelic
-# Resource:: agent
+# Resource:: server_monitor
 #
 # Copyright 2012-2015, Escape Studios
 #
