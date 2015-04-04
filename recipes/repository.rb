@@ -8,15 +8,15 @@
 case node['platform_family']
 when 'debian'
   apt_repository 'newrelic' do
-    uri node['newrelic']['repo']['uri']
-    distribution node['newrelic']['repo']['distribution']
-    components node['newrelic']['repo']['components']
-    key node['newrelic']['repo']['key']
+    uri node['newrelic']['repository']['uri']
+    distribution node['newrelic']['repository']['distribution']
+    components node['newrelic']['repository']['components']
+    key node['newrelic']['repository']['key']
   end
 when 'rhel'
   yum_repository 'newrelic' do
     description 'New Relic packages for Enterprise Linux 5 - $basearch'
-    baseurl node['newrelic']['repo']['uri']
-    gpgkey node['newrelic']['repo']['key']
+    baseurl node['newrelic']['repository']['uri']
+    gpgkey node['newrelic']['repository']['key']
   end
 end

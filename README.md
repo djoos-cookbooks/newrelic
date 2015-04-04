@@ -108,7 +108,7 @@ Make sure you run Chef >= 0.10.0.
 
 ### repository.rb:
 
-* `node['newrelic']['repo']['key']` - URL to the New Relic repository key, defaults to "http://download.newrelic.com/548C16BF.gpg"
+* `node['newrelic']['repository']['key']` - URL to the New Relic repository key, defaults to "http://download.newrelic.com/548C16BF.gpg"
 
 ### php_agent.rb:
 
