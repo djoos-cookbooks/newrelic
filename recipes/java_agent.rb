@@ -18,16 +18,14 @@ directory node['newrelic']['java_agent']['install_dir'] do
   action :create
 end
 
-remote_file = "#{node['newrelic']['java_agent']['install_dir']}/#{node['newrelic']['java_agent']['jar_file']}"
-local_file = "#{node['newrelic']['java_agent']['install_dir']}/newrelic.jar"
+agent_jar = "#{node['newrelic']['java_agent']['install_dir']}/#{node['newrelic']['java_agent']['jar_file']}"
 
-remote_file remote_file do
+remote_file agent_jar do
   source node['newrelic']['java_agent']['https_download']
   owner node['newrelic']['java_agent']['app_user']
   group node['newrelic']['java_agent']['app_group']
-  path local_file
   mode 0664
-  not_if { File.exist?(local_file) }
+  action :create_if_missing
 end
 
 if node['newrelic']['application_monitoring']['app_name'].nil?
@@ -41,6 +39,7 @@ newrelic_yml "#{node['newrelic']['java_agent']['install_dir']}/newrelic.yml" do
   template_source node['newrelic']['java_agent']['template_source']
   enabled node['newrelic']['application_monitoring']['enabled']
   app_name node['newrelic']['application_monitoring']['app_name']
+  high_security node['newrelic']['application_monitoring']['high_security']
   owner node['newrelic']['java_agent']['app_user']
   group node['newrelic']['java_agent']['app_group']
   license license
@@ -66,6 +65,7 @@ newrelic_yml "#{node['newrelic']['java_agent']['install_dir']}/newrelic.yml" do
   error_collector_ignore_status_codes node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes']
   browser_monitoring_auto_instrument node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
   cross_application_tracer_enable node['newrelic']['application_monitoring']['cross_application_tracer']['enable']
+  thread_profiler_enable node['newrelic']['application_monitoring']['thread_profiler']['enable']
 end
 
 # allow app_group to write to log_file_path
@@ -83,6 +83,6 @@ end
 
 # execution of the install
 execute 'newrelic-install' do
-  command "sudo java -jar #{local_file} -s #{node['newrelic']['java_agent']['app_location']} #{node['newrelic']['java_agent']['agent_action']}"
+  command "sudo java -jar #{agent_jar} -s #{node['newrelic']['java_agent']['app_location']} #{node['newrelic']['java_agent']['agent_action']}"
   only_if { node['newrelic']['java_agent']['execute_agent_action'] == true }
 end

@@ -12,6 +12,7 @@ attribute :license, :kind_of => String, :default => nil
 attribute :config_file, :kind_of => String, :default => nil
 attribute :startup_mode, :kind_of => String, :default => 'agent'
 attribute :app_name, :kind_of => String, :default => nil
+attribute :high_security, :kind_of => String, :default => nil
 attribute :install_silently, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :config_file_to_be_deleted, :kind_of => String, :default => nil
 attribute :service_name, :kind_of => String, :default => 'apache2'

@@ -635,3 +635,24 @@ newrelic.webtransaction.name.files = "<%= @resource.webtransaction_name_files %>
 <% else %>
 newrelic.cross_application_tracer.enabled = <%= @resource.cross_application_tracer_enable %>
 <% end %>
+
+;
+; Setting: newrelic.high_security
+; Type   : Boolean
+; Scope  : per-directory
+; Default: flase
+; Info   : Enables high security for all applications. When high security is set to true, the following behaviors take effect:
+;  * Data will not be sent to New Relic unless the newrelic-daemon is using SSL. If the PHP process spawns a newrelic-daemon
+;          it will be configured to use SSL regardless of the value of newrelic.daemon.ssl.
+;  * Raw SQL strings will never be gathered, regardless of the value of newrelic.transaction_tracer.record_sql.
+;  * Request attributes will never be captured, regardless of the newrelic.attributes configuration settings.
+;  * The newrelic_add_custom_parameter and newrelic_set_user_attributes API functions will have no effect, and they will return false.
+;
+; Caution: If you change this setting, you must also change the security setting in the New Relic APM user interface.
+;    If the two settings do not match, then no data will be collected. For more information, see https://docs.newrelic.com/docs/subscriptions/high-security
+;
+<% if @resource.high_security.nil? %>
+;newrelic.high_security = false
+<% else %>
+newrelic.high_security = <%= @resource.high_security %>
+<% end %>
