@@ -1,7 +1,7 @@
 # Encoding: utf-8
 #
 # Cookbook Name:: newrelic_poc
-# Recipe:: agent
+# Recipe:: server_monitor
 #
 # Copyright 2015, Rackspace
 #
