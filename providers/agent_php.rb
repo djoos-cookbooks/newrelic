@@ -20,6 +20,7 @@ action :install do
   newrelic_repository
   newrelic_php5_broken
   newrelic_php_agent
+  webserver_service if new_resource.service_name
   newrelic_install
   newrelic_daemon
   newrelic_php5enmod
@@ -29,12 +30,10 @@ action :install do
 
   # https://newrelic.com/docs/php/newrelic-daemon-startup-modes
   Chef::Log.info "newrelic-daemon startup mode: #{new_resource.startup_mode}"
-  new_resource.updated_by_last_action(true)
 end
 
 action :remove do
   newrelic_remove
-  new_resource.updated_by_last_action(true)
 end
 
 def newrelic_php5_broken
@@ -68,13 +67,19 @@ def newrelic_install
       )
     end
     action :nothing
-    # notifies :reload, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
+    notifies :reload, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
   end
 end
 
 def newrelic_daemon
   service 'newrelic-daemon' do
     supports :status => true, :start => true, :stop => true, :restart => true
+  end
+end
+
+def webserver_service
+  service new_resource.service_name do
+    supports :status => true, :start => true, :stop => true, :restart => true, :reload => true
   end
 end
 
@@ -106,7 +111,7 @@ def generate_agent_config
     if execute_php5enmod
       notifies :run, 'execute[newrelic-php5enmod]', :immediately
     end
-    # notifies :reload, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
+    notifies :reload, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
   end
 end
 # rubocop:enable AbcSize
@@ -156,7 +161,7 @@ def startup_mode_config
       )
       action :create
       notifies :restart, 'service[newrelic-daemon]', :immediately
-      # notifies :reload, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
+      notifies :reload, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
     end
     service 'newrelic-daemon' do
       action [:enable, :start] # starts the service if it's not running and enables it to start at system boot time

@@ -6,10 +6,10 @@
 # Copyright 2015, Rackspace
 #
 
-newrelic_agent 'Install' do
+newrelic_server_monitor 'Install' do
   license node['newrelic']['license']
 end
 
-# newrelic_agent 'Remove' do
+# newrelic_server_remove 'Remove' do
 #  action :remove
 # end
