@@ -12,6 +12,7 @@ attribute :yml_path, :kind_of => String, :name_attribute => true
 attribute :template_cookbook, :kind_of => String, :default => 'newrelic'
 attribute :template_source, :kind_of => String, :default => 'agent/newrelic.yml.erb'
 attribute :app_name, :kind_of => String, :default => nil
+attribute :high_security, :kind_of => [TrueClass, FalseClass, String], :default => nil
 attribute :agent_type, :kind_of => String, :required => true, :regex => /^(java|ruby)$/
 attribute :enabled, :kind_of => [TrueClass, FalseClass, String], :default => nil
 attribute :owner, :kind_of => String, :default => nil
@@ -39,3 +40,4 @@ attribute :error_collector_ignore_errors, :default => node['newrelic']['applicat
 attribute :error_collector_ignore_status_codes, :default => node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes']
 attribute :browser_monitoring_auto_instrument, :default => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
 attribute :cross_application_tracer_enable, :default => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
+attribute :thread_profiler_enable, :default => node['newrelic']['application_monitoring']['thread_profiler']['enable']
