@@ -8,7 +8,7 @@
 # include helper methods
 include Newrelic::Helpers
 
- use_inline_resources if defined?(use_inline_resources)
+use_inline_resources if defined?(use_inline_resources)
 
 action :install do
   # Check license key provided
@@ -27,6 +27,7 @@ action :install do
   generate_agent_config
   delete_config_file
   startup_mode_config
+  stub_service
 
   # https://newrelic.com/docs/php/newrelic-daemon-startup-modes
   Chef::Log.info "newrelic-daemon startup mode: #{new_resource.startup_mode}"
@@ -106,7 +107,7 @@ def generate_agent_config
     mode 0644
     variables(
       :resource => new_resource
-      )
+    )
     action :create
     if execute_php5enmod
       notifies :run, 'execute[newrelic-php5enmod]', :immediately

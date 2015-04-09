@@ -19,7 +19,6 @@ action :install do
   when 'windows'
     install_newrelic_service_windows
   end
-  new_resource.updated_by_last_action(true)
 end
 
 action :remove do
@@ -29,7 +28,6 @@ action :remove do
   when 'windows'
     remove_newrelic_service_windows
   end
-  new_resource.updated_by_last_action(true)
 end
 
 # rubocop:disable AbcSize
