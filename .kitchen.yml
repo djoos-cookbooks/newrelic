@@ -33,10 +33,21 @@ platforms:
             service_name: httpd
           php_config: '/etc/php.d/newrelic.ini'
 
+#>>  - name: win-2012r2
+#>>    driver_config:
+#>>      box_url: https://wrock.ca.tier3.io/win2012r2-virtualbox.box
+#>>      communicator: winrm
+#>>      vm_hostname: false
+#>>      customize:
+#>>        usbehci: "off"
+#>>    transport:
+#>>      name: winrm
+
 suites:
   - name: default
     run_list:
       - recipe[newrelic::default]
+#>>    excludes: win-2012r2
     attributes:
       newrelic:
         license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
@@ -55,3 +66,8 @@ suites:
     attributes:
       newrelic:
         license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
+#>>  - name: dotnet_agent
+#>>    run_list:
+#>>      - recipe[newrelic::dotnet_agent]
+#>>    includes: win-2012r2
+
