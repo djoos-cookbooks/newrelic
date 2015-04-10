@@ -5,6 +5,7 @@ describe 'newrelic_lwrp_test::agent_php' do
     stub_resources
   end
 
+  # Using Centos as the test cookbook is specific to Centos. The Webserver service used is 'httpd'
   ::CHECK_OPTS = {
     :log_level => LOG_LEVEL,
     :platform => 'centos',
@@ -55,7 +56,7 @@ describe 'newrelic_lwrp_test::agent_php' do
     end
 
     it 'creates newrelic ini config template from newrelic.ini.erb' do
-      expect(chef_run).to render_file('/etc/php.d/newrelic.ini')
+      expect(chef_run).to render_file('/etc/php.d/newrelic.ini').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
 
     it 'restarts the webserver at the end of the chef run when changing the config file' do

@@ -30,7 +30,6 @@ action :remove do
   end
 end
 
-# rubocop:disable AbcSize
 def install_newrelic_service_linux
   package new_resource.service_name do
     action new_resource.action
@@ -52,9 +51,7 @@ def install_newrelic_service_linux
     action new_resource.service_actions
   end
 end
-# rubocop:enable AbcSize
 
-# rubocop:disable AbcSize
 def install_newrelic_service_windows
   if node['kernel']['machine'] == 'x86_64'
     windows_package 'New Relic Server Monitor' do
@@ -75,7 +72,6 @@ def install_newrelic_service_windows
   end
   # on Windows service creation/startup is done by the installer
 end
-# rubocop:enable AbcSize
 
 def remove_newrelic_service_linux
   package new_resource.service_name do
