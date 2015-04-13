@@ -8,7 +8,6 @@ actions :install, :remove
 default_action :install
 
 attribute :license, :kind_of => String, :default => nil
-# attribute :agent_action, :kind_of => String, :default => 'install'
 attribute :config_file, :kind_of => String, :default => nil
 attribute :startup_mode, :kind_of => String, :default => 'agent'
 attribute :app_name, :kind_of => String, :default => nil

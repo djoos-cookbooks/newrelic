@@ -9,10 +9,6 @@
 include_recipe 'apache2'
 include_recipe 'php'
 
-newrelic_server_monitor 'Install' do
-  license node['newrelic']['license']
-end
-
 newrelic_agent_php 'Install' do
   license node['newrelic']['license']
   service_name 'httpd'
@@ -20,8 +16,3 @@ newrelic_agent_php 'Install' do
   config_file '/etc/php.d/newrelic.ini'
   startup_mode 'external'
 end
-
-
-# newrelic_agent_php 'remove' do
-#  action :remove
-# end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative 'spec_helper'
 
 describe 'newrelic::server_monitor_agent' do
   context 'Ubuntu 12.04' do
