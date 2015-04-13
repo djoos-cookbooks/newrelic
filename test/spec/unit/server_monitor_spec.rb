@@ -32,7 +32,7 @@ describe 'newrelic_lwrp_test::server_monitor' do
     end
 
     it 'creates newrelic config template from nrsysmond.cfg.erb' do
-      expect(chef_run).to render_file('/etc/newrelic/nrsysmond.cfg')
+      expect(chef_run).to render_file('/etc/newrelic/nrsysmond.cfg').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
 
     it 'enables service' do
