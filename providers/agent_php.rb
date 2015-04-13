@@ -94,7 +94,6 @@ def newrelic_php5enmod
   end
 end
 
-# rubocop:disable AbcSize
 def generate_agent_config
   # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
   # and reload the web server in order to pick up the new settings
@@ -115,7 +114,6 @@ def generate_agent_config
     notifies :reload, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
   end
 end
-# rubocop:enable AbcSize
 
 def delete_config_file
   if new_resource.config_file_to_be_deleted
@@ -129,7 +127,6 @@ def delete_config_file
   end
 end
 
-# rubocop:disable AbcSize
 def startup_mode_config
   case new_resource.startup_mode
   when 'agent'
@@ -171,7 +168,6 @@ def startup_mode_config
     fail "#{new_resource.startup_mode} is not a valid newrelic-daemon startup mode."
   end
 end
-# rubocop:enable AbcSize
 
 def newrelic_remove
   package 'newrelic-php5-' do
