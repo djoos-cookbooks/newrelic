@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: server_monitor_agent
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 newrelic_server_monitor 'Install' do

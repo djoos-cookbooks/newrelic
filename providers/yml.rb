@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Provider:: yml
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 require 'uri'

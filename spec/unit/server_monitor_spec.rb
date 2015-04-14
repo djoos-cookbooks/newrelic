@@ -12,7 +12,7 @@ describe 'newrelic_lwrp_test::server_monitor' do
       end.converge(described_recipe)
     end
 
-    it 'Installs Newrelic PHP agent' do
+    it 'Installs New Relic PHP agent' do
       expect(chef_run).to install_newrelic_server_monitor('Install')
     end
 

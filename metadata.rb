@@ -9,6 +9,7 @@ version '2.10.0'
 %w( debian ubuntu redhat centos fedora scientific amazon windows smartos oracle ).each do |os|
   supports os
 end
+
 depends 'python'
 depends 'curl'
 depends 'apt', '~> 2.0'

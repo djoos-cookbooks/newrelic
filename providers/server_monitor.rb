@@ -2,11 +2,11 @@
 # Cookbook Name:: newrelic
 # Provider:: server_monitor
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 # include helper methods
-include Newrelic::Helpers
+include NewRelic::Helpers
 
 use_inline_resources if defined?(use_inline_resources)
 

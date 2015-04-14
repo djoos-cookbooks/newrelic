@@ -3,7 +3,7 @@
 # Cookbook Name:: newrelic_poc
 # Recipe:: agent_php
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 include_recipe 'apache2'

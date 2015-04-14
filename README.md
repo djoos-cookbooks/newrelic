@@ -47,7 +47,6 @@ Make sure you run Chef >= 0.10.0.
 * SmartOS
 * Oracle
 
-
 ## Attributes
 
 ### default.rb:
@@ -115,7 +114,6 @@ Make sure you run Chef >= 0.10.0.
 ### repository.rb:
 
 * `node['newrelic']['repository']['key']` - URL to the New Relic repository key, defaults to "http://download.newrelic.com/548C16BF.gpg"
-
 
 ### python_agent.rb:
 
@@ -201,8 +199,8 @@ The `newrelic_server_monitor` resource will handle the requirements to configure
 
 #### Actions
 
-- :install -  will setup the Newrelic repository, install and install package.  
-- :remove -  Uninstall the Newrelic package
+- :install -  will setup the New Relic repository, install and install package.  
+- :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
 
@@ -238,7 +236,6 @@ newrelic_server_monitor 'Install' do
 end
 ```
 
-
 ### `newrelic_agent_php`  
 This cookbook includes an LWRP for installing the server monitor agent   
 
@@ -246,12 +243,12 @@ The `newrelic_agent_php` resource will handle the requirements to install php ap
 
 #### Actions
 
-- :install -  will setup the Newrelic repository, install package and update php config with license key.  
-- :remove -  Uninstall the Newrelic package
+- :install -  will setup the New Relic repository, install package and update php config with license key.  
+- :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
 
-* `'license'` Newrelic license key
+* `'license'` New Relic license key
 * `'install_silently'` - Determine whether to run the install in silent mode, defaults to false
 * * `'app_name'` is missing it will default to `PHP Application`.  
 * `'startup_mode'` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
@@ -411,7 +408,7 @@ override the attributes on a higher level (http://wiki.opscode.com/display/chef/
 
 Author: David Joos <david.joos@escapestudios.com>
 Author: Escape Studios Development <dev@escapestudios.com>
-Copyright: 2012-2014, Escape Studios
+Copyright: 2012-2015, Escape Studios
 
 Unless otherwise noted, all files are released under the MIT license,
 possible exceptions will contain licensing information in them.

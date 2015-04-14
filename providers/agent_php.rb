@@ -2,11 +2,11 @@
 # Cookbook Name:: newrelic
 # Provider:: agent_php
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 # include helper methods
-include Newrelic::Helpers
+include NewRelic::Helpers
 
 use_inline_resources if defined?(use_inline_resources)
 
@@ -170,7 +170,7 @@ def startup_mode_config
 end
 
 def newrelic_remove
-  package 'newrelic-php5-' do
+  package 'newrelic-php5' do
     package_name 'newrelic-php5'
     action :remove
   end

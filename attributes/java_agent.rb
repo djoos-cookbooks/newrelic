@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Attributes:: java_agent
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 default['newrelic']['java_agent']['version'] = '3.9.0'

@@ -1,5 +1,5 @@
-# Newrelic helpers
-module Newrelic
+# NewRelic helpers
+module NewRelic
   # helpers module
   module Helpers
     def newrelic_repository
@@ -7,8 +7,8 @@ module Newrelic
     end
 
     def check_license
-      # Check license key provided
-      fail 'The Newrelic key is required to notify New Relic of a deployment.' if new_resource.license.nil?
+      # check license key provided
+      fail 'The NewRelic key is required to notify New Relic of a deployment.' if new_resource.license.nil?
     end
 
     def install_newrelic_repo

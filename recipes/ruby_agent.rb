@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: ruby_agent
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 include_recipe 'newrelic::repository'

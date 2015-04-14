@@ -3,7 +3,7 @@
 # Cookbook Name:: newrelic_poc
 # Recipe:: server_monitor
 #
-# Copyright 2015, Rackspace
+# Copyright 2012-2015, Escape Studios
 #
 
 newrelic_server_monitor 'Install' do
