@@ -32,8 +32,9 @@ describe 'newrelic::php_agent' do
       expect(chef_run.execute('newrelic-install')).to do_nothing
     end
 
-    it 'restarts the webserver at the end of the chef run when running newrelic-install' do
-      expect(chef_run.execute('newrelic-install')).to notify("service[#{chef_run.node['newrelic']['php_agent']['web_server']['service_name']}]").delayed
+    it 'notifies the webserver at the end of the chef run when running newrelic-install' do
+      expect(chef_run.execute('newrelic-install')).to notify("service[#{chef_run.node['newrelic']['php_agent']['web_server']['service_name']}]").to(
+        chef_run.node['newrelic']['php_agent']['web_server']['service_action'].to_sym).delayed
     end
 
     it 'creates newrelic ini config template from newrelic.ini.erb' do
@@ -45,7 +46,8 @@ describe 'newrelic::php_agent' do
     end
 
     it 'restarts the webserver at the end of the chef run when changing the config file' do
-      expect(chef_run.template("#{chef_run.node['newrelic']['php_agent']['config_file']}")).to notify("service[#{chef_run.node['newrelic']['php_agent']['web_server']['service_name']}]").delayed
+      expect(chef_run.template("#{chef_run.node['newrelic']['php_agent']['config_file']}")).to notify("service[#{chef_run.node['newrelic']['php_agent']['web_server']['service_name']}]").to(
+        chef_run.node['newrelic']['php_agent']['web_server']['service_action'].to_sym).delayed
     end
 
     it 'logs the startup mode' do
@@ -68,11 +70,12 @@ describe 'newrelic::php_agent' do
       end
 
       it 'restarts the webserver at the end of the chef run when changing /etc/newrelic/newrelic.cfg config file' do
-        expect(chef_run.template('/etc/newrelic/newrelic.cfg')).to notify("service[#{chef_run.node['newrelic']['php_agent']['web_server']['service_name']}]").delayed
+        expect(chef_run.template('/etc/newrelic/newrelic.cfg')).to notify("service[#{chef_run.node['newrelic']['php_agent']['web_server']['service_name']}]").to(
+          chef_run.node['newrelic']['php_agent']['web_server']['service_action'].to_sym).delayed
       end
 
       it 'restarts the newrelic-daemon when changing /etc/newrelic/newrelic.cfg config file' do
-        expect(chef_run.template('/etc/newrelic/newrelic.cfg')).to notify("service[#{chef_run.node['newrelic']['php_agent']['web_server']['service_name']}]").delayed
+        expect(chef_run.template('/etc/newrelic/newrelic.cfg')).to notify('service[newrelic-daemon]').immediately
       end
 
       it 'starts and enables newrelic-daemon' do
