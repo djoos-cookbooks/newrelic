@@ -35,7 +35,7 @@ execute 'newrelic-install' do
   end
   action :nothing
   if node['newrelic']['php_agent']['web_server']['service_name']
-    notifies :reload, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
+    notifies node['newrelic']['php_agent']['web_server']['service_action'].to_sym, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
   end
 end
 
@@ -107,7 +107,7 @@ template node['newrelic']['php_agent']['config_file'] do
     notifies :run, 'execute[newrelic-php5enmod]', :immediately
   end
   if node['newrelic']['php_agent']['web_server']['service_name']
-    notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
+    notifies node['newrelic']['php_agent']['web_server']['service_action'].to_sym, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
   end
 end
 
@@ -171,7 +171,7 @@ when 'external'
     action :create
     notifies :restart, 'service[newrelic-daemon]', :immediately
     if node['newrelic']['php_agent']['web_server']['service_name']
-      notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
+      notifies node['newrelic']['php_agent']['web_server']['service_action'].to_sym, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
     end
   end
 
