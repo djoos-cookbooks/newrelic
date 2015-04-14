@@ -138,12 +138,12 @@ def startup_mode_config
     # ensure that the file /etc/newrelic/newrelic.cfg does not exist if it does, move it aside (or remove it)
     execute 'newrelic-backup-cfg' do
       command 'mv /etc/newrelic/newrelic.cfg /etc/newrelic/newrelic.cfg.external'
-      only_if { File.exist?('/etc/newrelic/newrelic.cfg') }
+      only_if { ::File.exist?('/etc/newrelic/newrelic.cfg') }
     end
     # ensure that the file /etc/newrelic/upgrade_please.key does not exist if it does, move it aside (or remove it)
     execute 'newrelic-backup-key' do
       command 'mv /etc/newrelic/upgrade_please.key /etc/newrelic/upgrade_please.key.external'
-      only_if { File.exist?('/etc/newrelic/upgrade_please.key') }
+      only_if { ::File.exist?('/etc/newrelic/upgrade_please.key') }
     end
   when 'external'
     # external startup mode
