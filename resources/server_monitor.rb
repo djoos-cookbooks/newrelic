@@ -4,6 +4,7 @@
 #
 # Copyright 2012-2015, Escape Studios
 #
+
 actions :install, :remove
 default_action :install
 
@@ -16,13 +17,10 @@ attribute :ssl, :kind_of => String, :default => nil
 attribute :ssl_ca_bundle, :kind_of => String, :default => nil
 attribute :ssl_ca_path, :kind_of => String, :default => nil
 attribute :hostname, :kind_of => String, :default => nil
-attribute :lables, :kind_of => String, :default => nil
+attribute :labels, :kind_of => String, :default => nil
 attribute :pidfile, :kind_of => String, :default => nil
 attribute :collector_host, :kind_of => String, :default => nil
 attribute :timeout, :kind_of => String, :default => nil
-attribute :user, :kind_of => String, :default => nil
-attribute :group, :kind_of => String, :default => nil
-attribute :labels, :kind_of => String, :default => nil
 
 attribute :config_file_user, :kind_of => String, :default => 'root'
 attribute :service_notify_action, :kind_of => String, :default => 'restart'
