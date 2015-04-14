@@ -319,6 +319,15 @@ common: &default_settings
     enabled: <%= @thread_profiler_enable %>
     <% end %>
 
+  # A dictionary of label names and values that will be applied to the data sent from
+  # this agent. May also be expressed as a semi-colon delimited string of colon-separated
+  # pairs for example, Server:One;Data Center:Primary).  
+  <% if @labels.nil? %>
+  #labels:
+  <% else %>
+  labels: <%= @labels %>
+  <% end %>
+
   #============================== Browser Monitoring ===============================
   # New Relic Real User Monitoring gives you insight into the performance real users are
   # experiencing with your website. This is accomplished by measuring the time it takes for

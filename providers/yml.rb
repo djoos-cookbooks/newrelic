@@ -65,7 +65,8 @@ action :generate do
       :error_collector_ignore_status_codes => new_resource.error_collector_ignore_status_codes,
       :browser_monitoring_auto_instrument => new_resource.browser_monitoring_auto_instrument,
       :cross_application_tracer_enable => new_resource.cross_application_tracer_enable,
-      :thread_profiler_enable => new_resource.thread_profiler_enable
+      :thread_profiler_enable => new_resource.thread_profiler_enable,
+      :labels => new_resource.labels
     )
     action :create
   end
