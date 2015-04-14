@@ -1,21 +1,13 @@
-require_relative 'spec_helper'
+require 'spec_helper'
 
 describe 'newrelic_lwrp_test::agent_php' do
   before do
     stub_resources
   end
 
-  # Using Centos to test cookbook logic. The Webserver service used is 'httpd'
-  ::CHECK_OPTS = {
-    :log_level => LOG_LEVEL,
-    :platform => 'centos',
-    :version => '6.5',
-    :step_into => ['newrelic_agent_php']
-  }
-
   context 'Centos' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(CHECK_OPTS) do |node|
+      ChefSpec::Runner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_agent_php']) do |node|
         stub_node_resources(node)
       end.converge(described_recipe)
     end
@@ -65,7 +57,7 @@ describe 'newrelic_lwrp_test::agent_php' do
 
     context 'with an external startup mode' do
       let(:chef_run) do
-        ChefSpec::SoloRunner.new(CHECK_OPTS) do |node|
+        ChefSpec::Runner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_agent_php']) do |node|
           stub_node_resources(node)
         end.converge(described_recipe)
       end

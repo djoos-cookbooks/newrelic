@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require 'spec_helper'
 
 describe 'newrelic::python_agent' do
   context 'Any OS' do
