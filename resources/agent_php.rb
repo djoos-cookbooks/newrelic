@@ -4,6 +4,7 @@
 #
 # Copyright 2012-2015, Escape Studios
 #
+
 actions :install, :remove
 default_action :install
 

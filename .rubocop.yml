@@ -5,7 +5,7 @@ Encoding:
   Enabled: false
 
 LineLength:
-  Max: 200
+  Max: 240
 
 HashSyntax:
   EnforcedStyle: hash_rockets
