@@ -3,7 +3,7 @@
 # Cookbook Name:: newrelic_poc
 # Recipe:: agent_php
 #
-# Copyright 2015, Rackspace
+# Copyright 2012-2014, Escape Studios
 #
 
 include_recipe 'apache2'
@@ -11,8 +11,6 @@ include_recipe 'php'
 
 newrelic_agent_php 'Install' do
   license node['newrelic']['license']
-  service_name 'httpd'
-  app_name 'test_app'
-  config_file '/etc/php.d/newrelic.ini'
-  startup_mode 'external'
+  service_name node['newrelic']['php_agent']['web_server']['service_name']
+  config_file node['newrelic']['php_agent']['php_config']
 end
