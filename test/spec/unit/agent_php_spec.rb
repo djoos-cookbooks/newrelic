@@ -5,7 +5,7 @@ describe 'newrelic_lwrp_test::agent_php' do
     stub_resources
   end
 
-  # Using Centos as the test cookbook is specific to Centos. The Webserver service used is 'httpd'
+  # Using Centos to test cookbook logic. The Webserver service used is 'httpd'
   ::CHECK_OPTS = {
     :log_level => LOG_LEVEL,
     :platform => 'centos',
@@ -13,7 +13,7 @@ describe 'newrelic_lwrp_test::agent_php' do
     :step_into => ['newrelic_agent_php']
   }
 
-  context 'Any OS' do
+  context 'Centos' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(CHECK_OPTS) do |node|
         stub_node_resources(node)
