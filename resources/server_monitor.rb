@@ -24,8 +24,8 @@ attribute :timeout, :kind_of => String, :default => nil
 
 attribute :config_file_user, :kind_of => String, :default => 'root'
 attribute :service_notify_action, :kind_of => String, :default => 'restart'
-attribute :service_actions, :kind_of => String, :default => 'start'
-attribute :windows_version, :kind_of => String, :default => '2.0.0.198"'
+attribute :service_actions, :kind_of => Array, :default => %w(enable start)
+attribute :windows_version, :kind_of => String, :default => '2.0.0.198'
 attribute :windows64_checksum, :kind_of => String, :default => '5a8f3f5e8f15997463430401756d377c321c8899c2790ca85e5587a5b643651e'
 attribute :windows32_checksum, :kind_of => String, :default => 'ac2b65eecaad461fdd2e4386e3e4c9f96ea940b35bdf7a8c532c21dbd1c99ff0'
 attribute :cookbook, :kind_of => String, :default => 'newrelic'
