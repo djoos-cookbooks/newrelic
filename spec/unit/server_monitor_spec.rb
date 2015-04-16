@@ -29,7 +29,7 @@ describe 'newrelic_lwrp_test::server_monitor' do
     end
 
     it 'enables service' do
-      expect(chef_run).to_not enable_service('newrelic-sysmond')
+      expect(chef_run).to enable_service('newrelic-sysmond')
     end
   end
 end
