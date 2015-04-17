@@ -55,3 +55,8 @@ suites:
     attributes: 
       newrelic: 
         license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
+  - name: java-agent
+    run_list: "recipe[newrelic_lwrp_test::agent_java]"
+    attributes: 
+      newrelic: 
+        license: '838b28411b5f8c36f9c3855b8f566e7ff5259d02'
