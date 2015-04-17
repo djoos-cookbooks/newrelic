@@ -59,9 +59,10 @@ end
 
 def newrelic_install
   # run newrelic-install
+  install_silently = new_resource.install_silently ? 'true' : 'false'
   execute 'newrelic-install' do
     command 'newrelic-install install'
-    if new_resource.install_silently
+    if install_silently
       environment(
         'NR_INSTALL_SILENT' => '1'
       )
@@ -84,17 +85,19 @@ def webserver_service
 end
 
 def newrelic_php5enmod
+  execute_php5enmod = new_resource.execute_php5enmod ? 'true' : 'false'
   # run php5enmod newrelic
   execute 'newrelic-php5enmod' do
     command 'php5enmod newrelic'
     action :nothing
-    only_if new_resource.execute_php5enmod
+    only_if execute_php5enmod
   end
 end
 
 def generate_agent_config
   # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
   # and reload the web server in order to pick up the new settings
+  execute_php5enmod = new_resource.execute_php5enmod ? 'true' : 'false'
   template new_resource.config_file do
     cookbook new_resource.cookbook_ini
     source new_resource.source_ini
@@ -105,7 +108,7 @@ def generate_agent_config
       :resource => new_resource
     )
     action :create
-    if new_resource.execute_php5enmod
+    if execute_php5enmod
       notifies :run, 'execute[newrelic-php5enmod]', :immediately
     end
     notifies :reload, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
