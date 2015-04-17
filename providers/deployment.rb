@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Provider:: deployment
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 use_inline_resources if defined?(use_inline_resources)

@@ -55,10 +55,10 @@
 #          which process to monitor or kill.
 # Default: OS-dependent. Uses a filename of newrelic-daemon.pid in the first
 #          directory from the list /var/run or /var/pid that is found.
-<% if @daemon_pidfile.nil? %>
+<% if @resource.daemon_pidfile.nil? %>
 #pidfile=/var/run/newrelic-daemon.pid
 <% else %>
-pidfile=<%= @daemon_pidfile %>
+pidfile=<%= @resource.daemon_pidfile %>
 <% end %>
 
 #
@@ -69,10 +69,10 @@ pidfile=<%= @daemon_pidfile %>
 #          will not start up. The amount of information sent to this file is
 #          controlled by the loglevel settings, defined below.
 # Default: /var/log/newrelic/newrelic-daemon.log
-<% if @daemon_logfile.nil? %>
+<% if @resource.daemon_logfile.nil? %>
 #logfile=/var/log/newrelic/newrelic-daemon.log
 <% else %>
-logfile=<%= @daemon_logfile %>
+logfile=<%= @resource.daemon_logfile %>
 <% end %>
 
 #
@@ -90,10 +90,10 @@ logfile=<%= @daemon_logfile %>
 #          debug - very verbose, includes messages only relevant to support
 #          verbosedebug - extremely verbose, creates massive log files
 # Default: info
-<% if @daemon_loglevel.nil? %>
+<% if @resource.daemon_loglevel.nil? %>
 #loglevel=info
 <% else %>
-loglevel=<%= @daemon_loglevel %>
+loglevel=<%= @resource.daemon_loglevel %>
 <% end %>
 
 #
@@ -106,10 +106,10 @@ loglevel=<%= @daemon_loglevel %>
 #          the super-user. This is a fundamental OS limitation and not one
 #          imposed by the daemon itself.
 # Default: 33142
-<% if @daemon_port.nil? %>
+<% if @resource.daemon_port.nil? %>
 #port=33142
 <% else %>
-port=<%= @daemon_port %>
+port=<%= @resource.daemon_port %>
 <% end %>
 
 #
@@ -123,10 +123,10 @@ port=<%= @daemon_port %>
 #          you may need to use the ssl_ca_bundle or ssl_ca_path variables
 #          below.
 # Default: false
-<% if @daemon_ssl.nil? %>
+<% if @resource.daemon_ssl.nil? %>
 #ssl=false
 <% else %>
-ssl=<%= @daemon_ssl %>
+ssl=<%= @resource.daemon_ssl %>
 <% end %>
 
 #
@@ -144,10 +144,10 @@ ssl=<%= @daemon_ssl %>
 #          someuser@proxy.mydomain.com:4321
 #          proxy.mydomain.com
 # Default: none
-<% if @daemon_proxy.nil? %>
+<% if @resource.daemon_proxy.nil? %>
 #proxy=
 <% else %>
-proxy=<%= @daemon_proxy %>
+proxy=<%= @resource.daemon_proxy %>
 <% end %>
 
 #
@@ -161,10 +161,10 @@ proxy=<%= @daemon_proxy %>
 # Default: Looks for one of two files: /etc/pki/tls/certs/ca-bundle.crt or
 #          /etc/ssl/certs/ca-certificates.crt.
 #
-<% if @daemon_ssl_ca_bundle.nil? %>
+<% if @resource.daemon_ssl_ca_bundle.nil? %>
 #ssl_ca_bundle=
 <% else %>
-ssl_ca_bundle=<%= @daemon_ssl_ca_bundle %>
+ssl_ca_bundle=<%= @resource.daemon_ssl_ca_bundle %>
 <% end %>
 
 #
@@ -174,10 +174,10 @@ ssl_ca_bundle=<%= @daemon_ssl_ca_bundle %>
 #          installation uses a sub-directory with a list of CA certificates.
 #          Set this variable to point to that directory.
 # Default: /etc/ssl/certs
-<% if @daemon_ssl_ca_path.nil? %>
+<% if @resource.daemon_ssl_ca_path.nil? %>
 #ssl_ca_path=
 <% else %>
-ssl_ca_path=<%= @daemon_ssl_ca_path %>
+ssl_ca_path=<%= @resource.daemon_ssl_ca_path %>
 <% end %>
 
 #
@@ -190,10 +190,10 @@ ssl_ca_path=<%= @daemon_ssl_ca_path %>
 #          have resource usage (memory, CPU etc.) implications so do not just
 #          increase this arbitrarily.
 # Default: 8
-<% if @daemon_max_threads.nil? %>
+<% if @resource.daemon_max_threads.nil? %>
 #max_threads=8
 <% else %>
-max_threads=<%= @daemon_max_threads %>
+max_threads=<%= @resource.daemon_max_threads %>
 <% end %>
 
 #
@@ -206,8 +206,8 @@ max_threads=<%= @daemon_max_threads %>
 #          circumstances, and then only on instruction from a New Relic sales
 #          person or support staff member.
 # Default: collector.newrelic.com
-<% if @daemon_collector_host.nil? %>
+<% if @resource.daemon_collector_host.nil? %>
 #collector_host=collector.newrelic.com
 <% else %>
-collector_host=<%= @daemon_collector_host %>
+collector_host=<%= @resource.daemon_collector_host %>
 <% end %>

@@ -6,6 +6,11 @@
 
 This cookbook provides an easy way to install various New Relic agents and the New Relic server monitor.
 
+The agent installs are being converted into libraries, currently the following agents are now resources:
+
+* php_agent  
+* server_monitor  
+
 More information?
 
 * https://docs.newrelic.com/docs/server/new-relic-for-server-monitoring
@@ -110,20 +115,6 @@ Make sure you run Chef >= 0.10.0.
 
 * `node['newrelic']['repository']['key']` - URL to the New Relic repository key, defaults to "http://download.newrelic.com/548C16BF.gpg"
 
-### php_agent.rb:
-
-* `node['newrelic']['php_agent']['agent_action']` - Agent action, defaults to :install
-* `node['newrelic']['php_agent']['install_silently']` - Determine whether to run the install in silent mode, defaults to false
-* `node['newrelic']['php_agent']['startup_mode']` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
-* `node['newrelic']['php_agent']['web_server']['service_name']` - The web server service name, defaults to "apache2"
-* `node['newrelic']['php_agent']['config_file']` - The New Relic php agent config file, depends on your php external configuration directory; e.g. /etc/php5/conf.d/newrelic.ini, /etc/php5/mods-available/newrelic.ini, … Defaults to nil
-* `node['newrelic']['php_agent']['config_file_to_be_deleted']` - The New Relic php agent-generated config file, e.g. /etc/php5/cli/conf.d/newrelic.ini. If set, the file will get deleted during the Chef run as we want the Chef-generated config file to be used instead (`node['newrelic']['php_agent']['config_file']`), defaults to nil
-* `node['newrelic']['php_agent']['execute_php5enmod']` - Executes "php5enmod newrelic" if true. Needed if you use the mods-available directory, defaults to false
-* `node['newrelic']['php_agent']['template']['cookbook_ini']` - Sets cookbook for .ini template, defaults to 'newrelic'
-* `node['newrelic']['php_agent']['template']['source_ini']` - Sets source for .ini template, defaults to 'agent/php/newrelic.ini.erb'
-* `node['newrelic']['php_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
-* `node['newrelic']['php_agent']['template']['source']` - Sets source for template, defaults to 'agent/php/newrelic.cfg.erb'
-
 ### python_agent.rb:
 
 * `node['newrelic']['python_agent']['agent_action']` - Agent action, defaults to :install
@@ -139,19 +130,6 @@ Make sure you run Chef >= 0.10.0.
 * `node['newrelic']['dotnet_agent']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
 * `node['newrelic']['dotnet_agent']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 * `node['newrelic']['dotnet_agent']['agent_action']` - Agent action, defaults to :install
-
-### server_monitor_agent.rb:
-
-* `node['newrelic']['server_monitor_agent']['service_name']` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
-* `node['newrelic']['server_monitor_agent']['service_notify_action']` - The New Relic server monitoring notify action, defaults to ":restart"
-* `node['newrelic']['server_monitor_agent']['service_actions']` - The New Relic server monitoring service actions, defaults to "[:enable, :start]" (#starts the service if it's not running and enables it to start at system boot time)
-* `node['newrelic']['server_monitor_agent']['config_path']` - The New Relic server monitoring config path, defaults to "/etc/newrelic"
-* `node['newrelic']['server_monitor_agent']['config_file_group']` - The New Relic server monitoring config file group, defaults to "newrelic"
-* `node['newrelic']['server_monitor_agent']['windows_version']` - the Windows version to install, defaults to "2.0.0.198"
-* `node['newrelic']['server_monitor_agent']['windows64_checksum']` - checksum of the 64-bit Windows version, defaults to "5a8f3f5e8f15997463430401756d377c321c8899c2790ca85e5587a5b643651e"
-* `node['newrelic']['server_monitor_agent']['windows32_checksum']` - checksum of the 32-bit Windows version, defaults to "ac2b65eecaad461fdd2e4386e3e4c9f96ea940b35bdf7a8c532c21dbd1c99ff0"
-* `node['newrelic']['server_monitor_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
-* `node['newrelic']['server_monitor_agent']['template']['source']` - Sets source for template, defaults to 'agent/server_monitor/nrsysmond.cfg.erb'
 
 ### java_agent.rb:
 
@@ -214,9 +192,127 @@ The New Relic MeetMe plugin-logic is still available, in a separate cookbook: [n
 
 ## Resources / Providers
 
-This cookbook includes an LWRP for notifying New Relic of a deployment
+### `newrelic_server_monitor` 
+This cookbook includes an LWRP for installing the PHP agent   
+   
+The `newrelic_server_monitor` resource will handle the requirements to configure server monitoring.
+
+#### Actions
+
+- :install -  will setup the New Relic repository, install and install package.  
+- :remove -  Uninstall the New Relic package
+
+#### Attribute parameters
+
+* `'service_name'` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
+* `'service_notify_action'` - The New Relic server monitoring notify action, defaults to ":restart"
+* `'service_actions'` - The New Relic server monitoring service actions, defaults to "[:enable, :start`" (#starts the service if it's not running and enables it to start at system boot time)
+* `'config_path'` - The New Relic server monitoring config path, defaults to "/etc/newrelic"
+* `'config_file_group'` - The New Relic server monitoring config file group, defaults to "newrelic"
+* `'windows_version'` - the Windows version to install, defaults to "2.0.0.198"
+* `'windows64_checksum'` - checksum of the 64-bit Windows version, defaults to "5a8f3f5e8f15997463430401756d377c321c8899c2790ca85e5587a5b643651e"
+* `'windows32_checksum'` - checksum of the 32-bit Windows version, defaults to "ac2b65eecaad461fdd2e4386e3e4c9f96ea940b35bdf7a8c532c21dbd1c99ff0"
+* `'cookbook'` - Sets cookbook for template, defaults to 'newrelic'
+* `'source'` - Sets source for template, defaults to 'agent/server_monitor/nrsysmond.cfg.erb'
+
+#### Advanced parameters  
+
+* `'logfile'` defaults to nil
+* `'loglevel'` defaults to nil
+* `'proxy'` defaults to nil
+* `'ssl'` defaults to nil
+* `'ssl_ca_bundle'` defaults to nil
+* `'ssl_ca_path'` defaults to nil
+* `'hostname'` defaults to nil
+* `'labels'` defaults to nil
+* `'pidfile'` defaults to nil
+* `'collector_host'` defaults to nil
+* `'timeout'` defaults to nil
+
+#### Example  
+```ruby
+newrelic_server_monitor 'Install' do
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff' 
+end
+```
+
+### `newrelic_agent_php`  
+This cookbook includes an LWRP for installing the server monitor agent   
+
+The `newrelic_agent_php` resource will handle the requirements to install php application monitoring.  
+
+#### Actions
+
+- :install -  will setup the New Relic repository, install package and update php config with license key.  
+- :remove -  Uninstall the New Relic package
+
+#### Attribute parameters
+
+* `'license'` New Relic license key
+* `'install_silently'` - Determine whether to run the install in silent mode, defaults to false
+* * `'app_name'` is missing it will default to `PHP Application`.  
+* `'startup_mode'` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
+* `'service_name'` - The web server service name. If it is missing the resource will not handle the webserver reload. This allows this to be handled by the recipe, defaults to nil
+* `'config_file'` - The New Relic php agent config file, depends on your php external configuration directory; e.g. /etc/php5/conf.d/newrelic.ini, /etc/php5/mods-available/newrelic.ini, … Defaults to nil
+* `'config_file_to_be_deleted'` - The New Relic php agent-generated config file, e.g. /etc/php5/cli/conf.d/newrelic.ini. If set, the file will get deleted during the Chef run as we want the Chef-generated config file to be used instead (`'config_file'`), defaults to nil
+* `'execute_php5enmod'` - Executes "php5enmod newrelic" if true. Needed if you use the mods-available directory, defaults to false
+* `'cookbook_ini'` - Sets cookbook for .ini template, defaults to 'newrelic'
+* `'source_ini'` - Sets source for .ini template, defaults to 'agent/php/newrelic.ini.erb'
+* `'cookbook'` - Sets cookbook for template, defaults to 'newrelic'
+* `'source'` - Sets source for template, defaults to 'agent/php/newrelic.cfg.erb'
+
+#### Advanced parameters  
+
+* `'enabled'` default => true
+* `'logfile'` default to nil
+* `'loglevel'` default to nil
+* `'daemon_logfile'` default to  '/var/log/newrelic/newrelic-daemon.log'
+* `'daemon_loglevel'` default to nil
+* `'daemon_port'` default to nil
+* `'daemon_max_threads'` default to nil
+* `'daemon_ssl'` default to nil
+* `'daemon_ssl_ca_path'` default to nil
+* `'daemon_ssl_ca_bundle'` default to nil
+* `'daemon_proxy'` default to nil
+* `'daemon_pidfile'` default to nil
+* `'daemon_location'` default to nil
+* `'daemon_collector_host'` default to nil
+* `'daemon_dont_launch'` default to nil
+* `'capture_params'` default to nil
+* `'ignored_params'` default to nil
+* `'error_collector_enable'` default to nil
+* `'error_collector_record_database_errors'` default to nil
+* `'error_collector_prioritize_api_errors'` default to nil
+* `'browser_monitoring_auto_instrument'` default to nil
+* `'transaction_tracer_enable'` default to nil
+* `'transaction_tracer_threshold'` default to nil
+* `'transaction_tracer_detail'` default to nil
+* `'transaction_tracer_slow_sql'` default to nil
+* `'transaction_tracer_stack_trace_threshold'` default to nil
+* `'transaction_tracer_explain_threshold'` default to nil
+* `'transaction_tracer_record_sql'` default to nil
+* `'transaction_tracer_custom'` default to nil
+* `'framework'` default to nil
+* `'webtransaction_name_remove_trailing_path'` default to nil
+* `'webtransaction_name_functions'` default to nil
+* `'webtransaction_name_files'` default to nil
+* `'cross_application_tracer_enable'` default to nil
+
+
+#### Example  
+
+```ruby
+newrelic_agent_php 'Install' do  
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'  
+  app_name 'php_test_app'  
+  service_name 'httpd'
+  config_file '/etc/php.d/newrelic.ini'  
+end 
+``` 
+
 
 ### `newrelic_deployment`
+This cookbook includes an LWRP for notifying New Relic of a deployment
 
 #### Actions
 
@@ -224,14 +320,14 @@ This cookbook includes an LWRP for notifying New Relic of a deployment
 
 #### Attribute parameters
 
-- key_type: Your New Relic API key type (api_key or license_key, defaults to api_key currently for backwards compatibility)
-- key: Your New Relic key (see key_type for more information on what value to provide here exactly)
-- app_name: The name of the application, found in the newrelic.yml file
-- app_id: The ID # of the application
-- description: Text annotation for the deployment (notes for you)
-- revision: The revision number from your source control system (SVN, git, etc.)
-- changelog: A list of changes for this deployment
-- user: The name of the user/process that triggered this deployment
+* `'key_type'` Your New Relic API key type (api_key or license_key, defaults to api_key currently for backwards compatibility)
+* `'key'` Your New Relic key (see key_type for more information on what value to provide here exactly)
+* `'app_name'` The name of the application, found in the newrelic.yml file
+* `'app_id'` The ID # of the application
+* `'description'` Text annotation for the deployment (notes for you)
+* `'revision'` The revision number from your source control system (SVN, git, etc.)
+* `'changelog'` A list of changes for this deployment
+* `'user'` The name of the user/process that triggered this deployment
 
 #### Example(s)
 
@@ -312,7 +408,7 @@ override the attributes on a higher level (http://wiki.opscode.com/display/chef/
 
 Author: David Joos <david.joos@escapestudios.com>
 Author: Escape Studios Development <dev@escapestudios.com>
-Copyright: 2012-2014, Escape Studios
+Copyright: 2012-2015, Escape Studios
 
 Unless otherwise noted, all files are released under the MIT license,
 possible exceptions will contain licensing information in them.
