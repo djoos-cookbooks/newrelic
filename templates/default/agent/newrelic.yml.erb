@@ -213,7 +213,7 @@ common: &default_settings
     # SQL, "raw" which sends the SQL statement in its original form,
     # and "obfuscated", which strips out numeric and string literals.
     # Default is obfuscated.
-    <% if @resourcetransaction_tracer_record_sql.nil? %>
+    <% if @resource.transaction_tracer_record_sql.nil? %>
     record_sql: obfuscated
     <% else %>
     record_sql: <%= @resource.transaction_tracer_record_sql %>
