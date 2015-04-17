@@ -34,13 +34,5 @@ module NewRelic
         gpgkey node['newrelic']['repository']['key']
       end
     end
-
-    def to_boolean(variable)
-      if variable.is_a?(TrueClass) || variable.is_a?(FalseClass)
-        variable
-      else
-        variable == 'true' || variable == 1
-      end
-    end
   end
 end
