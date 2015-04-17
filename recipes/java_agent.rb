@@ -28,7 +28,7 @@ remote_file agent_jar do
   action :create_if_missing
 end
 
-if node['newrelic']['application_monitoring']['app_name'].nil?
+unless node['newrelic']['application_monitoring']['app_name'] && !node['newrelic']['application_monitoring']['app_name'].empty?
   node.set['newrelic']['application_monitoring']['app_name'] = node['hostname']
 end
 

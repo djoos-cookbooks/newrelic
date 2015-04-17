@@ -13,7 +13,7 @@ gem_package 'newrelic_rpm' do
   action node['newrelic']['ruby_agent']['agent_action']
 end
 
-if node['newrelic']['application_monitoring']['app_name'].nil?
+unless node['newrelic']['application_monitoring']['app_name'] && !node['newrelic']['application_monitoring']['app_name'].empty?
   node.set['newrelic']['application_monitoring']['app_name'] = node['hostname']
 end
 

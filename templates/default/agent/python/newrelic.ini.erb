@@ -37,7 +37,7 @@ license_key = <%= @license %>
 # application as you would like it to show up in New Relic UI.
 # The UI will then auto-map instances of your application into a
 # entry on your home dashboard page.
-<% if @app_name.nil? %>
+<% unless @app_name && !@app_name.empty? %>
 app_name = Python Application
 <% else %>
 app_name = <%= @app_name %>
@@ -46,7 +46,7 @@ app_name = <%= @app_name %>
 # In order for high security to be enabled, this property must be set to true and the high security property in the New Relic user
 # interface must be enabled. Enabling high security means SSL is turned on, request and message queue parameters are not collected, and
 # SQL cannot be sent to New Relic in its raw form.
-<% unless @high_security.nil? %>
+<% if @high_security && !@high_security.empty? %>
 high_security: <%= @high_security %>
 <% end %>
 
@@ -54,7 +54,7 @@ high_security: <%= @high_security %>
 # application and reports this data to the New Relic UI at
 # newrelic.com. This global switch is normally overridden for
 # each environment below.
-<% if @enabled.nil? %>
+<% unless @enabled && !@enabled.empty? %>
 monitor_mode = true
 <% else %>
 monitor_mode = <%= @enabled %>
@@ -71,7 +71,7 @@ monitor_mode = <%= @enabled %>
 # write out a log file, it is also possible to say "stderr" and
 # output to standard error output. This would normally result in
 # output appearing in your web server log.
-<% if @logfile.nil? %>
+<% unless @logfile && !@logfile.empty? %>
 log_file = /tmp/newrelic-python-agent.log
 <% else %>
 log_file = <%= @logfile %>
@@ -86,7 +86,7 @@ log_file = <%= @logfile %>
 # of information very quickly, so it is best not to keep the
 # agent at this level for longer than it takes to reproduce the
 # problem you are experiencing.
-<% if @loglevel.nil? %>
+<% unless @loglevel && !@loglevel.empty? %>
 log_level = info
 <% else %>
 log_level = <%= @loglevel %>
@@ -99,7 +99,7 @@ log_level = <%= @loglevel %>
 # perform the encryption involved in SSL communication, but this
 # work is done asynchronously to the threads that process your
 # application code, so it should not impact response times.
-<% if @daemon_ssl.nil? %>
+<% unless @daemon_ssl && !@daemon_ssl.empty? %>
 ssl = false
 <% else %>
 ssl = <%= @daemon_ssl %>
@@ -123,7 +123,7 @@ ssl = <%= @daemon_ssl %>
 # URL and send it as the request parameters for display in the
 # UI. When "true", it is still possible to exclude specific
 # values from being captured using the "ignored_params" setting.
-<% if @capture_params.nil? %>
+<% unless @capture_params && !@capture_params.empty? %>
 capture_params = false
 <% else %>
 capture_params = <%= @capture_params %>
@@ -132,7 +132,7 @@ capture_params = <%= @capture_params %>
 # Space separated list of variables that should be removed from
 # the query string captured for display as the request
 # parameters in the UI.
-<% if @ignored_params.nil? %>
+<% unless @ignored_params && !@ignored_params.empty? %>
 ignored_params =
 <% else %>
 ignored_params = <%= @ignored_params %>
@@ -142,7 +142,7 @@ ignored_params = <%= @ignored_params %>
 # transactions and sends this to the UI on a periodic basis. The
 # transaction tracer is enabled by default. Set this to "false"
 # to turn it off.
-<% if @transaction_tracer_enable.nil? %>
+<% unless @transaction_tracer_enable && !@transaction_tracer_enable.empty? %>
 transaction_tracer.enabled = true
 <% else %>
 transaction_tracer.enabled = <%= @transaction_tracer_enable %>
@@ -154,7 +154,7 @@ transaction_tracer.enabled = <%= @transaction_tracer_enable %>
 # the UI. Valid values are any positive float value, or (default)
 # "apdex_f", which will use the threshold for a dissatisfying
 # Apdex controller action - four times the Apdex T value.
-<% if @transaction_tracer_threshold.nil? %>
+<% unless @transaction_tracer_threshold && !@transaction_tracer_threshold.empty? %>
 transaction_tracer.transaction_threshold = apdex_f
 <% else %>
 transaction_tracer.transaction_threshold = "<%= @transaction_tracer_threshold %>"
@@ -165,7 +165,7 @@ transaction_tracer.transaction_threshold = "<%= @transaction_tracer_threshold %>
 # which sends no SQL, "raw" which sends the SQL statement in its
 # original form, and "obfuscated", which strips out numeric and
 # string literals.
-<% if @transaction_tracer_record_sql.nil? %>
+<% unless @transaction_tracer_record_sql && !@transaction_tracer_record_sql.empty? %>
 transaction_tracer.record_sql = obfuscated
 <% else %>
 transaction_tracer.record_sql = <%= @transaction_tracer_record_sql %>
@@ -176,7 +176,7 @@ transaction_tracer.record_sql = <%= @transaction_tracer_record_sql %>
 # threshold, then capture and send to the UI the current stack
 # trace. This is helpful for pinpointing where long SQL calls
 # originate from in an application.
-<% if @transaction_tracer_stack_trace_threshold.nil? %>
+<% unless @transaction_tracer_stack_trace_threshold && !@transaction_tracer_stack_trace_threshold.empty? %>
 transaction_tracer.stack_trace_threshold = 0.5
 <% else %>
 transaction_tracer.stack_trace_threshold = <%= @transaction_tracer_stack_trace_threshold %>
@@ -185,7 +185,7 @@ transaction_tracer.stack_trace_threshold = <%= @transaction_tracer_stack_trace_t
 # Determines whether the agent will capture query plans for slow
 # SQL queries. Only supported in MySQL and PostgreSQL. Set this
 # to "false" to turn it off.
-<% if @transaction_tracer_slow_sql.nil? %>
+<% unless @transaction_tracer_slow_sql && !@transaction_tracer_slow_sql.empty? %>
 transaction_tracer.explain_enabled = true
 <% else %>
 transaction_tracer.explain_enabled = <%= @transaction_tracer_slow_sql %>
@@ -194,7 +194,7 @@ transaction_tracer.explain_enabled = <%= @transaction_tracer_slow_sql %>
 # Threshold for query execution time below which query plans
 # will not not be captured. Relevant only when "explain_enabled"
 # is true.
-<% if @transaction_tracer_explain_threshold.nil? %>
+<% unless @transaction_tracer_explain_threshold && !@transaction_tracer_explain_threshold.empty? %>
 transaction_tracer.explain_threshold = 0.5
 <% else %>
 transaction_tracer.explain_threshold = <%= @transaction_tracer_explain_threshold %>
@@ -209,7 +209,7 @@ transaction_tracer.function_trace =
 # exceptions or logged exceptions and sends them to UI for
 # viewing. The error collector is enabled by default. Set this
 # to "false" to turn it off.
-<% if @error_collector_enable.nil? %>
+<% unless @error_collector_enable && !@error_collector_enable.empty? %>
 error_collector.enabled = true
 <% else %>
 error_collector.enabled = <%= @error_collector_enable %>
@@ -218,7 +218,7 @@ error_collector.enabled = <%= @error_collector_enable %>
 # To stop specific errors from reporting to the UI, set this to
 # a space separated list of the Python exception type names to
 # ignore. The exception name should be of the form 'module:class'.
-<% if @error_collector_ignore_errors.nil? %>
+<% unless @error_collector_ignore_errors && !@error_collector_ignore_errors.empty? %>
 error_collector.ignore_errors =
 <% else %>
 error_collector.ignore_errors = <%= @error_collector_ignore_errors %>
@@ -228,7 +228,7 @@ error_collector.ignore_errors = <%= @error_collector_ignore_errors %>
 # For those Python web frameworks that are supported, this
 # setting enables the auto-insertion of the browser monitoring
 # JavaScript fragments.
-<% if @browser_monitoring_auto_instrument.nil? %>
+<% unless @browser_monitoring_auto_instrument && !@browser_monitoring_auto_instrument.empty? %>
 browser_monitoring.auto_instrument = true
 <% else %>
 browser_monitoring.auto_instrument = <%= @browser_monitoring_auto_instrument %>
@@ -239,7 +239,7 @@ browser_monitoring.auto_instrument = <%= @browser_monitoring_auto_instrument %>
 # capture a snapshot of the call stack for each active thread in
 # the application to construct a statistically representative
 # call tree.
-<% if @thread_profiler_enable.nil? %>
+<% unless @thread_profiler_enable && !@thread_profiler_enable.empty? %>
 thread_profiler.enabled = true
 <% else %>
 thread_profiler.enabled = <%= @thread_profiler_enable %>
@@ -249,13 +249,13 @@ thread_profiler.enabled = <%= @thread_profiler_enable %>
 # The cross application tracer inserts HTTP headers into outbound requests
 # and the response in order to link together web transaction metrics and
 # transaction traces between applications.
-<% if @cross_application_tracer_enable.nil? %>
+<% unless @cross_application_tracer_enable && !@cross_application_tracer_enable.empty? %>
 # cross_application_tracer.enabled = true
 <% else %>
 cross_application_tracer.enabled = <%= @cross_application_tracer_enable %>
 <% end %>
 
-<% unless @feature_flag.nil? %>
+<% if @feature_flag && !@feature_flag.empty? %>
 # Feature flag
 # eg. use for improved Tornado instrumentation
 # (https://docs.newrelic.com/docs/release-notes/agent-release-notes/python-release-notes/python-agent-232028)

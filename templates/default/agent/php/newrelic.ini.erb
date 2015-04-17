@@ -26,7 +26,7 @@ extension=newrelic.so
 ;          agent will not initialize at all. However, you can selectively
 ;          disable the agent on a per-directory basis.
 ;
-<% if @resource.enabled.nil? %>
+<% unless @resource.enabled && !@resource.enabled.empty? %>
 ;newrelic.enabled = true
 <% else %>
 newrelic.enabled = <%= @resource.enabled %>
@@ -66,7 +66,7 @@ newrelic.license = "<%= @resource.license %>"
 ; Default: none
 ; Info   : Sets the name of the file to send log messages to.
 ;
-<% if @resource.logfile.nil? %>
+<% unless @resource.logfile && !@resource.logfile.empty? %>
 newrelic.logfile = "/var/log/newrelic/php_agent.log"
 <% else %>
 newrelic.logfile = "<%= @resource.logfile %>"
@@ -82,7 +82,7 @@ newrelic.logfile = "<%= @resource.logfile %>"
 ;          the guidance of technical support. This option has changed meaning
 ;          fairly significantly from agent versions 1.x and 2.x.
 ;
-<% if @resource.loglevel.nil? %>
+<% unless @resource.loglevel && !@resource.loglevel.empty? %>
 ;newrelic.loglevel = "info"
 <% else %>
 newrelic.loglevel = "<%= @resource.loglevel %>"
@@ -99,7 +99,7 @@ newrelic.loglevel = "<%= @resource.loglevel %>"
 ;          list is considered the 'primary' application name and must be unique
 ;          for each account / license key.
 ;
-<% if @resource.app_name.nil? %>
+<% unless @resource.app_name && !@resource.app_name.empty? %>
 ;newrelic.appname = "PHP Application"
 <% else %>
 newrelic.appname = "<%= @resource.app_name %>"
@@ -147,7 +147,7 @@ newrelic.daemon.logfile = "<%= @resource.daemon_logfile %>"
 ;          the guidance of technical support. This option has changed meaning
 ;          fairly significantly from agent versions 1.x and 2.x.
 ;
-<% if @resource.daemon_loglevel.nil? %>
+<% unless @resource.daemon_loglevel && !@resource.daemon_loglevel.empty? %>
 ;newrelic.daemon.loglevel = "info"
 <% else %>
 newrelic.daemon.loglevel = "<%= @resource.daemon_loglevel %>"
@@ -162,7 +162,7 @@ newrelic.daemon.loglevel = "<%= @resource.daemon_loglevel %>"
 ;          daemon listens on. This is used for the worker processes and CLI
 ;          invocations to communicate with the daemon.
 ;
-<% if @resource.daemon_port.nil? %>
+<% unless @resource.daemon_port && !@resource.daemon_port.empty? %>
 ;newrelic.daemon.port = 33142
 <% else %>
 newrelic.daemon.port = <%= @resource.daemon_port %>
@@ -177,7 +177,7 @@ newrelic.daemon.port = <%= @resource.daemon_port %>
 ;          used for processing requests from each agent. The minimum is 4 and
 ;          the maximum is 128.
 ;
-<% if @resource.daemon_max_threads.nil? %>
+<% unless @resource.daemon_max_threads && !@resource.daemon_max_threads.empty? %>
 ;newrelic.daemon.max_threads = 8
 <% else %>
 newrelic.daemon.max_threads = <%= @resource.daemon_max_threads %>
@@ -195,7 +195,7 @@ newrelic.daemon.max_threads = <%= @resource.daemon_max_threads %>
 ;          PEM-encoded certificate file, or a directory that contains a list
 ;          of such files, using the following two options.
 ;
-<% if @resource.daemon_ssl.nil? %>
+<% unless @resource.daemon_ssl && !@resource.daemon_ssl.empty? %>
 ;newrelic.daemon.ssl = false
 <% else %>
 newrelic.daemon.ssl = <%= @resource.daemon_ssl %>
@@ -211,12 +211,12 @@ newrelic.daemon.ssl = <%= @resource.daemon_ssl %>
 ;          of certificate authorities. May be required when you enable https
 ;          support above.
 ;
-<% if @resource.daemon_ssl_ca_path.nil? %>
+<% unless @resource.daemon_ssl_ca_path && !@resource.daemon_ssl_ca_path.empty? %>
 ;newrelic.daemon.ssl_ca_path = ""
 <% else %>
 newrelic.daemon.ssl_ca_path = "<%= @resource.daemon_ssl_ca_path %>"
 <% end %>
-<% if @resource.daemon_ssl_ca_bundle.nil? %>
+<% unless @resource.daemon_ssl_ca_bundle && !@resource.daemon_ssl_ca_bundle.empty? %>
 ;newrelic.daemon.ssl_ca_bundle = ""
 <% else %>
 newrelic.daemon.ssl_ca_bundle = "<%= @resource.daemon_ssl_ca_bundle %>"
@@ -238,7 +238,7 @@ newrelic.daemon.ssl_ca_bundle = "<%= @resource.daemon_ssl_ca_bundle %>"
 ;             user:password@hostname
 ;             user:password@hostname:port
 ;
-<% if @resource.daemon_proxy.nil? %>
+<% unless @resource.daemon_proxy && !@resource.daemon_proxy.empty? %>
 ;newrelic.daemon.proxy = ""
 <% else %>
 newrelic.daemon.proxy = "<%= @resource.daemon_proxy %>"
@@ -253,7 +253,7 @@ newrelic.daemon.proxy = "<%= @resource.daemon_proxy %>"
 ;          (PID) in. This file is used by the daemon startup and shutdown
 ;          script to determine whether or not the daemon is already running.
 ;
-<% if @resource.daemon_pidfile.nil? %>
+<% unless @resource.daemon_pidfile && !@resource.daemon_pidfile.empty? %>
 ;newrelic.daemon.pidfile = ""
 <% else %>
 newrelic.daemon.pidfile = "<%= @resource.daemon_pidfile %>"
@@ -269,7 +269,7 @@ newrelic.daemon.pidfile = "<%= @resource.daemon_pidfile %>"
 ;          filesystem, the default daemon location is
 ;          /opt/newrelic/bin/newrelic-daemon.
 ;
-<% if @resource.daemon_location.nil? %>
+<% unless @resource.daemon_location && !@resource.daemon_location.empty? %>
 ;newrelic.daemon.location = "/usr/bin/newrelic-daemon"
 <% else %>
 newrelic.daemon.location = "<%= @resource.daemon_location %>"
@@ -287,7 +287,7 @@ newrelic.daemon.location = "<%= @resource.daemon_location %>"
 ;          circumstances, and then only on instruction from a New Relic sales
 ;          person or support staff member.
 ;
-<% if @resource.daemon_collector_host.nil? %>
+<% unless @resource.daemon_collector_host && !@resource.daemon_collector_host.empty? %>
 ;newrelic.daemon.collector_host = "collector.newrelic.com"
 <% else %>
 newrelic.daemon.collector_host = "<%= @resource.daemon_collector_host %>"
@@ -307,7 +307,7 @@ newrelic.daemon.collector_host = "<%= @resource.daemon_collector_host %>"
 ;          2 - only CLI agents can start the daemon
 ;          3 - the agent will never start the daemon
 ;
-<% if @resource.daemon_dont_launch.nil? %>
+<% unless @resource.daemon_dont_launch && !@resource.daemon_dont_launch.empty? %>
 ;newrelic.daemon.dont_launch = 0
 <% else %>
 newrelic.daemon.dont_launch = <%= @resource.daemon_dont_launch %>
@@ -326,7 +326,7 @@ newrelic.daemon.dont_launch = <%= @resource.daemon_dont_launch %>
 ;          parameters are simply used for parameters without sensitive data but
 ;          that are meaningful to each transaction then you can enable this.
 ;
-<% if @resource.capture_params.nil? %>
+<% unless @resource.capture_params && !@resource.capture_params.empty? %>
 ;newrelic.capture_params = false
 <% else %>
 newrelic.capture_params = <%= @resource.capture_params %>
@@ -340,7 +340,7 @@ newrelic.capture_params = <%= @resource.capture_params %>
 ;          capturing is enabled above. You can use this to filter out sensitive
 ;          user data that may appear as a URL parameter.
 ;
-<% if @resource.ignored_params.nil? %>
+<% unless @resource.ignored_params && !@resource.ignored_params.empty? %>
 ;newrelic.ignored_params = ""
 <% else %>
 newrelic.ignored_params = "<%= @resource.ignored_params %>"
@@ -356,7 +356,7 @@ newrelic.ignored_params = "<%= @resource.ignored_params %>"
 ;          Please also note that your New Relic subscription level may force
 ;          this to be disabled regardless of any value you set for it.
 ;
-<% if @resource.error_collector_enable.nil? %>
+<% unless @resource.error_collector_enable && !@resource.error_collector_enable.empty? %>
 ;newrelic.error_collector.enable = true
 <% else %>
 newrelic.error_collector.enable = <%= @resource.error_collector_enable %>
@@ -373,7 +373,7 @@ newrelic.error_collector.enable = <%= @resource.error_collector_enable %>
 ;          collection. This is only objeyed if the error collector is enabled
 ;          above and the account subscription level permits error trapping.
 ;
-<% if @resource.error_collector_record_database_errors.nil? %>
+<% unless @resource.error_collector_record_database_errors && !@resource.error_collector_record_database_errors.empty? %>
 ;newrelic.error_collector.record_database_errors = false
 <% else %>
 newrelic.error_collector.record_database_errors = <%= @resource.error_collector_record_database_errors %>
@@ -388,7 +388,7 @@ newrelic.error_collector.record_database_errors = <%= @resource.error_collector_
 ;          notice an error, if this is set to true then assign the highest
 ;          priority to such errors.
 ;
-<% if @resource.error_collector_prioritize_api_errors.nil? %>
+<% unless @resource.error_collector_prioritize_api_errors && !@resource.error_collector_prioritize_api_errors.empty? %>
 ;newrelic.error_collector.prioritize_api_errors = false
 <% else %>
 newrelic.error_collector.prioritize_api_errors = <%= @resource.error_collector_prioritize_api_errors %>
@@ -403,7 +403,7 @@ newrelic.error_collector.prioritize_api_errors = <%= @resource.error_collector_p
 ;          When enabled will cause the agent to insert a header and a footer
 ;          in HTML output that will time the actual end-user experience.
 ;
-<% if @resource.browser_monitoring_auto_instrument.nil? %>
+<% unless @resource.browser_monitoring_auto_instrument && !@resource.browser_monitoring_auto_instrument.empty? %>
 ;newrelic.browser_monitoring.auto_instrument = true
 <% else %>
 newrelic.browser_monitoring.auto_instrument = <%= @resource.browser_monitoring_auto_instrument %>
@@ -423,7 +423,7 @@ newrelic.browser_monitoring.auto_instrument = <%= @resource.browser_monitoring_a
 ;          note that TT's may be disabled by your account subscription level
 ;          regardless of what you set here.
 ;
-<% if @resource.transaction_tracer_enable.nil? %>
+<% unless @resource.transaction_tracer_enable && !@resource.transaction_tracer_enable.empty? %>
 ;newrelic.transaction_tracer.enable = true
 <% else %>
 newrelic.transaction_tracer.enable = <%= @resource.transaction_tracer_enable %>
@@ -441,7 +441,7 @@ newrelic.transaction_tracer.enable = <%= @resource.transaction_tracer_enable %>
 ;          Thus the threshold changes according to your apdex_t setting. This
 ;          is the default.
 ;
-<% if @resource.transaction_tracer_threshold.nil? %>
+<% unless @resource.transaction_tracer_threshold && !@resource.transaction_tracer_threshold.empty? %>
 ;newrelic.transaction_tracer.threshold = "apdex_f"
 <% else %>
 newrelic.transaction_tracer.threshold = "<%= @resource.transaction_tracer_threshold %>"
@@ -465,7 +465,7 @@ newrelic.transaction_tracer.threshold = "<%= @resource.transaction_tracer_thresh
 ;
 ;          In earlier releases of the agent this was known as "top100".
 ;
-<% if @resource.transaction_tracer_detail.nil? %>
+<% unless @resource.transaction_tracer_detail && !@resource.transaction_tracer_detail.empty? %>
 ;newrelic.transaction_tracer.detail = 1
 <% else %>
 newrelic.transaction_tracer.detail = <%= @resource.transaction_tracer_detail %>
@@ -480,7 +480,7 @@ newrelic.transaction_tracer.detail = <%= @resource.transaction_tracer_detail %>
 ;          record the top 10 slowest SQL calls along with a stack trace of
 ;          where the call occurred in your code.
 ;
-<% if @resource.transaction_tracer_slow_sql.nil? %>
+<% unless @resource.transaction_tracer_slow_sql && !@resource.transaction_tracer_slow_sql.empty? %>
 ;newrelic.transaction_tracer.slow_sql = true
 <% else %>
 newrelic.transaction_tracer.slow_sql = <%= @resource.transaction_tracer_slow_sql %>
@@ -494,7 +494,7 @@ newrelic.transaction_tracer.slow_sql = <%= @resource.transaction_tracer_slow_sql
 ; Info   : Sets the threshold above which the New Relic agent will record a
 ;          stack trace for a transaction trace.
 ;
-<% if @resource.transaction_tracer_stack_trace_threshold.nil? %>
+<% unless @resource.transaction_tracer_stack_trace_threshold && !@resource.transaction_tracer_stack_trace_threshold.empty? %>
 ;newrelic.transaction_tracer.stack_trace_threshold = 500
 <% else %>
 newrelic.transaction_tracer.stack_trace_threshold = <%= @resource.transaction_tracer_stack_trace_threshold %>
@@ -511,7 +511,7 @@ newrelic.transaction_tracer.stack_trace_threshold = <%= @resource.transaction_tr
 ;          base for slow SQL. This latter feature may not be active yet, please
 ;          refer to the agent release notes to see when it becomes available.
 ;
-<% if @resource.transaction_tracer_explain_threshold.nil? %>
+<% unless @resource.transaction_tracer_explain_threshold && !@resource.transaction_tracer_explain_threshold.empty? %>
 ;newrelic.transaction_tracer.explain_threshold = 500
 <% else %>
 newrelic.transaction_tracer.explain_threshold = <%= @resource.transaction_tracer_explain_threshold %>
@@ -528,7 +528,7 @@ newrelic.transaction_tracer.explain_threshold = <%= @resource.transaction_tracer
 ;          has considerable security implications as it can expose sensitive
 ;          and private customer data.
 ;
-<% if @resource.transaction_tracer_record_sql.nil? %>
+<% unless @resource.transaction_tracer_record_sql && !@resource.transaction_tracer_record_sql.empty? %>
 ;newrelic.transaction_tracer.record_sql = "obfuscated"
 <% else %>
 newrelic.transaction_tracer.record_sql = "<%= @resource.transaction_tracer_record_sql %>"
@@ -543,7 +543,7 @@ newrelic.transaction_tracer.record_sql = "<%= @resource.transaction_tracer_recor
 ;          set newrelic.transaction_tracer.detail to 0. This can be a comma-
 ;          separated list of function or class method names.
 ;
-<% if @resource.transaction_tracer_custom.nil? %>
+<% unless @resource.transaction_tracer_custom && !@resource.transaction_tracer_custom.empty? %>
 ;newrelic.transaction_tracer.custom = ""
 <% else %>
 newrelic.transaction_tracer.custom = "<%= @resource.transaction_tracer_custom %>"
@@ -562,7 +562,7 @@ newrelic.transaction_tracer.custom = "<%= @resource.transaction_tracer_custom %>
 ;          cakephp, codeigniter, drupal, joomla, kohana, magento, mediawiki,
 ;          symfony, wordpress, yii, zend or no_framework.
 ;
-<% if @resource.framework.nil? %>
+<% unless @resource.framework && !@resource.framework.empty? %>
 ;newrelic.framework = ""
 <% else %>
 newrelic.framework = "<%= @resource.framework %>"
@@ -579,7 +579,7 @@ newrelic.framework = "<%= @resource.framework %>"
 ;          would cause the "/xyz/zy" to be stripped from a URL such as
 ;          "/path/to/foo.php/xyz/zy".
 ;
-<% if @resource.webtransaction_name_remove_trailing_path.nil? %>
+<% unless @resource.webtransaction_name_remove_trailing_path && !@resource.webtransaction_name_remove_trailing_path.empty? %>
 ;newrelic.webtransaction.name.remove_trailing_path = false
 <% else %>
 newrelic.webtransaction.name.remove_trailing_path = <%= @resource.webtransaction_name_remove_trailing_path %>
@@ -599,7 +599,7 @@ newrelic.webtransaction.name.remove_trailing_path = <%= @resource.webtransaction
 ;          and the function names specified here will be used to name the
 ;          transaction.
 ;
-<% if @resource.webtransaction_name_functions.nil? %>
+<% unless @resource.webtransaction_name_functions && !@resource.webtransaction_name_functions.empty? %>
 ;newrelic.webtransaction.name.functions = ""
 <% else %>
 newrelic.webtransaction.name.functions = "<%= @resource.webtransaction_name_functions %>"
@@ -614,7 +614,7 @@ newrelic.webtransaction.name.functions = "<%= @resource.webtransaction_name_func
 ;          names instead of function names. Accepts standard POSIX regular
 ;          expressions.
 ;
-<% if @resource.webtransaction_name_files.nil? %>
+<% unless @resource.webtransaction_name_files && !@resource.webtransaction_name_files.empty? %>
 ;newrelic.webtransaction.name.files = ""
 <% else %>
 newrelic.webtransaction.name.files = "<%= @resource.webtransaction_name_files %>"
@@ -630,7 +630,7 @@ newrelic.webtransaction.name.files = "<%= @resource.webtransaction_name_files %>
 ;          and the response in order to link together web transaction metrics and
 ;          transaction traces between applications.
 ;
-<% if @resource.cross_application_tracer_enable.nil? %>
+<% unless @resource.cross_application_tracer_enable && !@resource.cross_application_tracer_enable.empty? %>
 ;newrelic.cross_application_tracer.enabled = true
 <% else %>
 newrelic.cross_application_tracer.enabled = <%= @resource.cross_application_tracer_enable %>
@@ -651,7 +651,7 @@ newrelic.cross_application_tracer.enabled = <%= @resource.cross_application_trac
 ; Caution: If you change this setting, you must also change the security setting in the New Relic APM user interface.
 ;    If the two settings do not match, then no data will be collected. For more information, see https://docs.newrelic.com/docs/subscriptions/high-security
 ;
-<% if @resource.high_security.nil? %>
+<% unless @resource.high_security && !@resource.high_security.empty? %>
 ;newrelic.high_security = false
 <% else %>
 newrelic.high_security = <%= @resource.high_security %>

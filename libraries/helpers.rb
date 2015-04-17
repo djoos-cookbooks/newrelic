@@ -8,7 +8,7 @@ module NewRelic
 
     def check_license
       # check license key provided
-      fail 'The NewRelic key is required to notify New Relic of a deployment.' if new_resource.license.nil?
+      fail 'The NewRelic key is required to notify New Relic of a deployment.' unless new_resource.license && !new_resource.license.empty?
     end
 
     def install_newrelic_repo
@@ -32,14 +32,6 @@ module NewRelic
         description 'New Relic packages for Enterprise Linux 5 - $basearch'
         baseurl node['newrelic']['repository']['uri']
         gpgkey node['newrelic']['repository']['key']
-      end
-    end
-
-    def to_boolean(variable)
-      if variable.is_a?(TrueClass) || variable.is_a?(FalseClass)
-        variable
-      else
-        variable == 'true' || variable == 1
       end
     end
   end
