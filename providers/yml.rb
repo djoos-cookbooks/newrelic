@@ -14,18 +14,18 @@ def whyrun_supported?
 end
 
 action :generate do
-  if new_resource.daemon_proxy.nil?
-    daemon_proxy_host = nil
-    daemon_proxy_port = nil
-    daemon_proxy_user = nil
-    daemon_proxy_password = nil
-  else
+  if new_resource.daemon_proxy && !new_resource.daemon_proxy.empty?
     proxy = URI(new_resource.daemon_proxy)
 
     daemon_proxy_host = proxy.host
     daemon_proxy_port = proxy.port
     daemon_proxy_user = proxy.user
     daemon_proxy_password = proxy.password
+  else
+    daemon_proxy_host = nil
+    daemon_proxy_port = nil
+    daemon_proxy_user = nil
+    daemon_proxy_password = nil
   end
 
   t = template new_resource.yml_path do

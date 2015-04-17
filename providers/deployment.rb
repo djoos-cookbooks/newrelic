@@ -15,12 +15,12 @@ action :notify do
   key = new_resource.key
 
   # @todo take out deprecated api_key logic
-  unless new_resource.api_key.nil?
+  if new_resource.api_key && !new_resource.api_key.empty?
     Chef::Log.warn "The 'api_key'-attribute has been deprecated. Please make use of the key and key_type attributes instead."
     key = new_resource.api_key
   end
 
-  if key.nil?
+  unless key && !key.empty?
     Chef::Log.fatal "The #{key_type} is required to notify New Relic of a deployment."
   end
 
@@ -35,27 +35,27 @@ action :notify do
       data << '"x-api-key:' + key + '"'
     end
 
-    unless new_resource.app_name.nil?
+    if new_resource.app_name && !new_resource.app_name.empty?
       data << '-d "deployment[app_name]=' + new_resource.app_name + '"'
     end
 
-    unless new_resource.app_id.nil?
+    if new_resource.app_id && !new_resource.app_id.empty?
       data << '-d "deployment[app_id]=' + new_resource.app_id.to_s + '"'
     end
 
-    unless new_resource.description.nil?
+    if new_resource.description && !new_resource.description.empty?
       data << '-d "deployment[description]=' + clean(new_resource.description) + '"'
     end
 
-    unless new_resource.revision.nil?
+    if new_resource.revision && !new_resource.revision.empty?
       data << '-d "deployment[revision]=' + new_resource.revision + '"'
     end
 
-    unless new_resource.changelog.nil?
+    if new_resource.changelog && !new_resource.changelog.empty?
       data << '-d "deployment[changelog]=' + clean(new_resource.changelog) + '"'
     end
 
-    unless new_resource.user.nil?
+    if new_resource.user && !new_resource.user.empty?
       data << '-d "deployment[user]=' + new_resource.user + '"'
     end
 

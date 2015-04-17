@@ -23,7 +23,7 @@ exports.config = {
          * issues with the agent, 'info' and higher will impose the least overhead on
          * production applications.
          */
-        level: '<%= @app_log_level %>'<% unless @app_log_filepath.nil? -%>,
+        level: '<%= @app_log_level %>'<% if @app_log_filepath && !@app_log_filepath.empty? -%>,
         filepath: '<%= @app_log_filepath %>'
         <% else -%>
 

@@ -23,7 +23,7 @@ common: &default_settings
   # Use this setting to force the agent to run or not run.
   # Default is true.
   # agent_enabled: true
-  <% if @enabled.nil? -%>
+  <% unless @enabled && !@enabled.empty? -%>
   agent_enabled: true
   <% else -%>
   agent_enabled: <%= @enabled %>
@@ -49,7 +49,7 @@ common: &default_settings
   # For example, to report data to"My Application" and "My Application 2" use this:
   # app_name: My Application;My Application 2
   # This setting is required.
-  <% if @app_name.nil? %>
+  <% unless @app_name && !@app_name.empty? %>
   app_name: <%= @agent_type %> Application
   <% else %>
   app_name: <%= @app_name %>
@@ -58,7 +58,7 @@ common: &default_settings
   # In order for high security to be enabled, this property must be set to true and the high security property in the New Relic user
   # interface must be enabled. Enabling high security means SSL is turned on, request and message queue parameters are not collected, and
   # SQL cannot be sent to New Relic in its raw form.
-  <% unless @high_security.nil? %>
+  <% if @high_security && !@high_security.empty? %>
   high_security: <%= @high_security %>
   <% end %>
 
@@ -67,7 +67,7 @@ common: &default_settings
   # This setting is dynamic, so changes do not require restarting your application.
   # The levels in increasing order of verboseness are: off, severe, warning, info, fine, finer, finest
   # Default is info.
-  <% if @loglevel.nil? %>
+  <% unless @loglevel && !@loglevel.empty? %>
   log_level: info
   <% else %>
   log_level: <%= @loglevel %>
@@ -76,7 +76,7 @@ common: &default_settings
   # Log all data to and from New Relic in plain text.
   # This setting is dynamic, so changes do not require restarting your application.
   # Default is false.
-  <% if @audit_mode.nil? %>
+  <% unless @audit_mode && !@audit_mode.empty? %>
   audit_mode: true
   <% else %>
   audit_mode: <%= @audit_mode %>
@@ -84,7 +84,7 @@ common: &default_settings
 
   # The number of log files to use.
   # Default is 1.
-  <% if @log_file_count.nil? %>
+  <% unless @log_file_count && !@log_file_count.empty? %>
   log_file_count: 1
   <% else %>
   log_file_count: <%= @log_file_count %>
@@ -94,7 +94,7 @@ common: &default_settings
   # The log_file_count must be set greater than 1.
   # Default is 0 (no limit).
   #log_limit_in_kbytes: 0
-  <% if @log_limit_in_kbytes.nil? %>
+  <% unless @log_limit_in_kbytes && !@log_limit_in_kbytes.empty? %>
   log_limit_in_kbytes: 0
   <% else %>
   log_limit_in_kbytes: <%= @log_limit_in_kbytes %>
@@ -103,7 +103,7 @@ common: &default_settings
   # Override other log rolling configuration and roll the logs daily.
   # Default is false.
   #log_daily: false
-  <% if @log_daily.nil? %>
+  <% unless @log_daily && !@log_daily.empty? %>
   log_daily: false
   <% else %>
   log_daily: <%= @log_daily %>
@@ -111,7 +111,7 @@ common: &default_settings
 
   # The name of the log file.
   # Default is newrelic_agent.log.
-  <% if @logfile.nil? %>
+  <% unless @logfile && !@logfile.empty? %>
   log_file: newrelic_agent.log
   <% else %>
   log_file: <%= @logfile %>
@@ -119,7 +119,7 @@ common: &default_settings
 
   # The log file directory.
   # Default is the logs directory in the newrelic.jar parent directory.
-  <% if @logfile_path.nil? %>
+  <% unless @logfile_path && !@logfile_path.empty? %>
   #log_file_path:
   <% else %>
   log_file_path: <%= @logfile_path %>
@@ -132,7 +132,7 @@ common: &default_settings
   # application code, so response times will not be directly affected
   # by this change.
   # Default is true.
-  <% if @daemon_ssl.nil? %>
+  <% unless @daemon_ssl && !@daemon_ssl.empty? %>
   ssl: true
   <% else %>
   ssl: <%= @daemon_ssl %>
@@ -149,16 +149,16 @@ common: &default_settings
   # proxy_port: 8080
   # proxy_user: username
   # proxy_password: password
-  <% unless @daemon_proxy_host.nil? %>
+  <% if @daemon_proxy_host && !@daemon_proxy_host.empty? %>
   proxy_host: <%= @daemon_proxy_host %>
   <% end %>
-  <% unless @daemon_proxy_port.nil? %>
+  <% if @daemon_proxy_port && !@daemon_proxy_port.empty? %>
   proxy_port: <%= @daemon_proxy_port %>
   <% end %>
-  <% unless @daemon_proxy_user.nil? %>
+  <% if @daemon_proxy_user && !@daemon_proxy_user.empty? %>
   proxy_user: <%= @daemon_proxy_user %>
   <% end %>
-  <% unless @daemon_proxy_password.nil? %>
+  <% if @daemon_proxy_password && !@daemon_proxy_password.empty? %>
   proxy_password: <%= @daemon_proxy_password %>
   <% end %>
 
@@ -166,7 +166,7 @@ common: &default_settings
   # whether or not to capture HTTP params.  When true, frameworks can
   # exclude HTTP parameters from being captured.
   # Default is false.
-  <% if @capture_params.nil? %>
+  <% unless @capture_params && !@capture_params.empty? %>
   capture_params: false
   <% else %>
   capture_params: <%= @capture_params %>
@@ -174,7 +174,7 @@ common: &default_settings
 
   # Tells transaction tracer and error collector to not to collect
   # specific http request parameters.
-  <% if @ignored_params.nil? %>
+  <% unless @ignored_params && !@ignored_params.empty? %>
   # ignored_params: credit_card, ssn, password
   <% else %>
   ignored_params: <%= @ignored_params %>
@@ -189,7 +189,7 @@ common: &default_settings
     # Transaction tracer is enabled by default. Set this to false to
     # turn it off. This feature is only available at the higher product levels.
     # Default is true.
-    <% if @transaction_tracer_enable.nil? %>
+    <% unless @transaction_tracer_enable && !@transaction_tracer_enable.empty? %>
     enabled: true
     <% else %>
     enabled: <%= @transaction_tracer_enable %>
@@ -202,7 +202,7 @@ common: &default_settings
     # which will use the threshold for the "Frustrated" Apdex level
     # (greater than four times the apdex_t value).
     # Default is apdex_f.
-    <% if @transaction_tracer_threshold.nil? %>
+    <% unless @transaction_tracer_threshold && !@transaction_tracer_threshold.empty? %>
     transaction_threshold: apdex_f
     <% else %>
     transaction_threshold: <%= @transaction_tracer_threshold %>
@@ -213,7 +213,7 @@ common: &default_settings
     # SQL, "raw" which sends the SQL statement in its original form,
     # and "obfuscated", which strips out numeric and string literals.
     # Default is obfuscated.
-    <% if @transaction_tracer_record_sql.nil? %>
+    <% unless @transaction_tracer_record_sql && !@transaction_tracer_record_sql.empty? %>
     record_sql: obfuscated
     <% else %>
     record_sql: <%= @transaction_tracer_record_sql %>
@@ -233,7 +233,7 @@ common: &default_settings
     # then capture and send to New Relic the current stack trace. This is
     # helpful for pinpointing where long SQL calls originate from.
     # Default is 0.5 seconds.
-    <% if @transaction_tracer_stack_trace_threshold.nil? %>
+    <% unless @transaction_tracer_stack_trace_threshold && !@transaction_tracer_stack_trace_threshold.empty? %>
     stack_trace_threshold: 0.5
     <% else %>
     stack_trace_threshold: <%= @transaction_tracer_stack_trace_threshold %>
@@ -242,7 +242,7 @@ common: &default_settings
     # Determines whether the agent will capture query plans for slow
     # SQL queries. Only supported for MySQL and PostgreSQL.
     # Default is true.
-    <% if @transaction_tracer_slow_sql.nil? %>
+    <% unless @transaction_tracer_slow_sql && !@transaction_tracer_slow_sql.empty? %>
     explain_enabled: true
     <% else %>
     explain_enabled: <%= @transaction_tracer_slow_sql %>
@@ -251,7 +251,7 @@ common: &default_settings
     # Threshold for query execution time below which query plans will not
     # not be captured.  Relevant only when `explain_enabled` is true.
     # Default is 0.5 seconds.
-    <% if @transaction_tracer_explain_threshold.nil? %>
+    <% unless @transaction_tracer_explain_threshold && !@transaction_tracer_explain_threshold.empty? %>
     explain_threshold: 0.5
     <% else %>
     explain_threshold: <%= @transaction_tracer_explain_threshold %>
@@ -271,7 +271,7 @@ common: &default_settings
     # Error collector is enabled by default. Set this to false to turn
     # it off. This feature is only available at the higher product levels.
     # Default is true.
-    <% if @error_collector_enable.nil? %>
+    <% unless @error_collector_enable && !@error_collector_enable.empty? %>
     enabled: true
     <% else %>
     enabled: <%= @error_collector_enable %>
@@ -281,7 +281,7 @@ common: &default_settings
     # to a comma separated list of full class names.
     #
     # ignore_errors:
-    <% unless @error_collector_ignore_errors.nil? %>
+    <% if @error_collector_ignore_errors && !@error_collector_ignore_errors.empty? %>
     ignore_errors: <%= @error_collector_ignore_errors %>
     <% end %>
 
@@ -290,7 +290,7 @@ common: &default_settings
     # When this property is commented out it defaults to ignoring 404s.
     #
     # ignore_status_codes: 404
-    <% unless @error_collector_ignore_status_codes.nil? %>
+    <% if @error_collector_ignore_status_codes && !@error_collector_ignore_status_codes.empty? %>
     ignore_status_codes: <%= @error_collector_ignore_status_codes %>
     <% end %>
 
@@ -301,7 +301,7 @@ common: &default_settings
   cross_application_tracer:
     # Set to true to enable cross application tracing.
     # Default is true.
-    <%if @cross_application_tracer_enable.nil? %>
+    <% unless @cross_application_tracer_enable && !@cross_application_tracer_enable.empty? %>
     enabled: true
     <% else %>
     enabled: <%= @cross_application_tracer_enable %>
@@ -313,7 +313,7 @@ common: &default_settings
 
     # Set to false to disable the thread profiler.
     # Default is true.
-    <% if @thread_profiler_enable.nil? %>
+    <% unless @thread_profiler_enable && !@thread_profiler_enable.empty? %>
     enabled: true
     <% else %>
     enabled: <%= @thread_profiler_enable %>
@@ -328,7 +328,7 @@ common: &default_settings
     # By default the agent automatically inserts API calls in compiled JSPs to
     # inject the monitoring JavaScript into web pages.
     # Set this attribute to false to turn off this behavior.
-    <% if @browser_monitoring_auto_instrument.nil? %>
+    <% unless @browser_monitoring_auto_instrument && !@browser_monitoring_auto_instrument.empty? %>
     auto_instrument: true
     <% else %>
     auto_instrument: <%= @browser_monitoring_auto_instrument %>
