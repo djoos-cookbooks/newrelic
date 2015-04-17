@@ -13,7 +13,7 @@ attribute :license, :kind_of => String, :default => nil
 attribute :logfile, :kind_of => String, :default => nil
 attribute :loglevel, :kind_of => String, :default => nil
 attribute :proxy, :kind_of => String, :default => nil
-attribute :ssl, :kind_of => String, :default => nil
+attribute :ssl, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :ssl_ca_bundle, :kind_of => String, :default => nil
 attribute :ssl_ca_path, :kind_of => String, :default => nil
 attribute :hostname, :kind_of => String, :default => nil
