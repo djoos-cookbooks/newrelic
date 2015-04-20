@@ -58,11 +58,13 @@ suites:
   - name: php-agent
     run_list:
       - "recipe[newrelic_lwrp_test::agent_php]"
+#>>    excludes: win-2012r2
     attributes:
       newrelic:
         license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
+#>>    excludes: win-2012r2
     attributes:
       newrelic:
         license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
