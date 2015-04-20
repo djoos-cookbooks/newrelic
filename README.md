@@ -270,7 +270,7 @@ The `newrelic_agent_php` resource will handle the requirements to install php ap
 * `'daemon_loglevel'` default to nil
 * `'daemon_port'` default to nil
 * `'daemon_max_threads'` default to nil
-* `'daemon_ssl'` default to nil
+* `'daemon_ssl'` default to true
 * `'daemon_ssl_ca_path'` default to nil
 * `'daemon_ssl_ca_bundle'` default to nil
 * `'daemon_proxy'` default to nil
@@ -278,25 +278,25 @@ The `newrelic_agent_php` resource will handle the requirements to install php ap
 * `'daemon_location'` default to nil
 * `'daemon_collector_host'` default to nil
 * `'daemon_dont_launch'` default to nil
-* `'capture_params'` default to nil
+* `'capture_params'` default to false
 * `'ignored_params'` default to nil
-* `'error_collector_enable'` default to nil
-* `'error_collector_record_database_errors'` default to nil
-* `'error_collector_prioritize_api_errors'` default to nil
-* `'browser_monitoring_auto_instrument'` default to nil
-* `'transaction_tracer_enable'` default to nil
+* `'error_collector_enable'` default to true
+* `'error_collector_record_database_errors'` default to true
+* `'error_collector_prioritize_api_errors'` default to false
+* `'browser_monitoring_auto_instrument'` default to true
+* `'transaction_tracer_enable'` default to true
 * `'transaction_tracer_threshold'` default to nil
 * `'transaction_tracer_detail'` default to nil
-* `'transaction_tracer_slow_sql'` default to nil
+* `'transaction_tracer_slow_sql'` default to true
 * `'transaction_tracer_stack_trace_threshold'` default to nil
 * `'transaction_tracer_explain_threshold'` default to nil
 * `'transaction_tracer_record_sql'` default to nil
 * `'transaction_tracer_custom'` default to nil
 * `'framework'` default to nil
-* `'webtransaction_name_remove_trailing_path'` default to nil
+* `'webtransaction_name_remove_trailing_path'` default to false
 * `'webtransaction_name_functions'` default to nil
 * `'webtransaction_name_files'` default to nil
-* `'cross_application_tracer_enable'` default to nil
+* `'cross_application_tracer_enable'` default to true
 
 
 #### Example  

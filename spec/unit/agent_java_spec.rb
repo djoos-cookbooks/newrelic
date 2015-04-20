@@ -12,8 +12,16 @@ describe 'newrelic_lwrp_test::agent_java' do
       end.converge(described_recipe)
     end
 
-    it 'creates a yum_repository for newrelic' do
-      expect(chef_run).to create_yum_repository('newrelic')
+    it 'Installs New Relic Java agent' do
+      expect(chef_run).to install_newrelic_agent_java('Install')
+    end
+
+    it 'creates install_dir' do
+      expect(chef_run).to create_directory('/opt/newrelic/java')
+    end
+
+    it 'creates newrelic yml config template from newrelic.yml.erb' do
+      expect(chef_run).to render_file('/opt/newrelic/java/newrelic.yml').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
   end
 end

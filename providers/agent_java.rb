@@ -13,7 +13,6 @@ use_inline_resources if defined?(use_inline_resources)
 action :install do
   # Check license key provided
   check_license
-  newrelic_repository
   create_install_directory
   agent_jar
   generate_agent_config
@@ -35,7 +34,6 @@ def create_install_directory
   end
 end
 
-# rubocop:disable AbcSize
 def agent_jar
   jar_file = "newrelic-agent-#{new_resource.version}.jar"
   agent_jar = "#{new_resource.install_dir}/#{jar_file}"
@@ -48,10 +46,10 @@ def agent_jar
     action :create_if_missing
   end
 end
-# rubocop:enable AbcSize
 
-# rubocop:disable AbcSize
 def generate_agent_config
+  new_resource.app_name = node['hostname'] if new_resource.app_name.nil?
+
   # Proxy host config??
 
   template "#{new_resource.install_dir}/newrelic.yml" do
@@ -66,7 +64,6 @@ def generate_agent_config
     action :create
   end
 end
-# rubocop:enable AbcSize
 
 def allow_app_group_write_to_log_file_path
   path = new_resource.logfile_path
@@ -80,19 +77,34 @@ def allow_app_group_write_to_log_file_path
   end
 end
 
+# TODO: Fails on 2nd chef-client run
 def install_newrelic
   jar_file = "newrelic-agent-#{new_resource.version}.jar"
-  app_location = new_resource.install_dir
+  if new_resource.app_location.nil?
+    app_location = new_resource.install_dir
+  else
+    app_location = new_resource.app_location
+  end
   execute "newrelic_install_#{jar_file}" do
     command "sudo java -jar #{jar_file} -s #{app_location} install"
     only_if { new_resource.execute_agent_action == true }
   end
 end
 
+# TODO: Complete logic and testing
 def remove_newrelic
-  jar_file = "newrelic-agent-#{new_resource.version}.jar"
-  app_location = new_resource.install_dir
-  execute 'newrelic-remove' do
-    command "sudo java -jar #{jar_file} -s #{app_location} remove"
+  if new_resource.app_location.nil?
+    app_location = new_resource.install_dir
+  else
+    app_location = new_resource.app_location
+  end
+  if app_location == '/opt/newrelic/java'
+    execute 'newrelic-remove-default' do
+      command 'sudo rm -rf /opt/newrelic'
+    end
+  else
+    execute 'newrelic-remove' do
+      command "sudo rm -rf #{app_location}/newrelic"
+    end
   end
 end
