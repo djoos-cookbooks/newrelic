@@ -11,5 +11,11 @@ include_recipe 'tomcat'
 
 newrelic_agent_java 'Install' do
   license node['newrelic']['license']
+  agent_type 'java'
   app_name 'java_test_app'
 end
+
+# newrelic_agent_java 'Remove' do
+#   action :remove
+# end
+#

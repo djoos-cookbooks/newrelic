@@ -45,15 +45,15 @@ suites:
           service_actions:
             - nothing
   - name: php-agent
-    run_list: 
+    run_list:
       - "recipe[newrelic_lwrp_test::agent_php]"
-    attributes: 
-      newrelic: 
+    attributes:
+      newrelic:
         license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
-    attributes: 
-      newrelic: 
+    attributes:
+      newrelic:
         license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
   - name: java-agent
     run_list: "recipe[newrelic_lwrp_test::agent_java]"
