@@ -12,14 +12,15 @@ attribute :version, :kind_of => String, :default => '3.9.0'
 attribute :jar_file, :kind_of => String, :default => nil
 attribute :https_download, :kind_of => String, :default => nil
 attribute :install_dir, :kind_of => String, :default => '/opt/newrelic/java'
-attribute :execute_agent_action, :kind_of => [TrueClass, FalseClass, String], :default => true
+attribute :execute_agent_action, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :app_location, :kind_of => String, :default => nil
 attribute :app_user, :kind_of => String, :default => 'newrelic'
 attribute :app_group, :kind_of => String, :default => 'newrelic'
-attribute :agent_type, :kind_of => String, :required => true, :regex => /^(java|ruby)$/
+attribute :agent_type, :kind_of => String, :required => true, :default => 'java'
 attribute :template_cookbook, :kind_of => String, :default => 'newrelic'
 attribute :template_source, :kind_of => String, :default => 'agent/newrelic.yml.erb'
-attribute :enabled, :kind_of => [TrueClass, FalseClass, String], :default => true
+
+attribute :enabled, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :app_name, :kind_of => String, :default => nil
 attribute :high_security, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :owner, :kind_of => String, :default => 'newrelic'
@@ -27,10 +28,10 @@ attribute :group, :kind_of => String, :default => 'newrelic'
 attribute :logfile, :kind_of => String, :default => nil
 attribute :logfile_path, :kind_of => String, :default => nil
 attribute :loglevel, :kind_of => String, :default => nil
-attribute :audit_mode, :kind_of => [TrueClass, FalseClass, String], :default => false
+attribute :audit_mode, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :log_file_count, :kind_of => String, :default => nil
 attribute :log_limit_in_kbytes, :kind_of => String, :default => nil
-attribute :log_daily, :kind_of => [TrueClass, FalseClass, String], :default => false
+attribute :log_daily, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :daemon_ssl, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :daemon_proxy, :kind_of => String, :default => nil
 attribute :daemon_proxy_host, :kind_of => String, :default => nil
