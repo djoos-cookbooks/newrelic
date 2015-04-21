@@ -28,6 +28,8 @@ attribute :group, :kind_of => String, :default => 'newrelic'
 attribute :logfile, :kind_of => String, :default => nil
 attribute :logfile_path, :kind_of => String, :default => nil
 attribute :loglevel, :kind_of => String, :default => nil
+attribute :daemon_logfile, :kind_of => String, :default => '/var/log/newrelic/newrelic-daemon.log'
+attribute :daemon_loglevel, :kind_of => String, :default => nil
 attribute :audit_mode, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :log_file_count, :kind_of => String, :default => nil
 attribute :log_limit_in_kbytes, :kind_of => String, :default => nil
