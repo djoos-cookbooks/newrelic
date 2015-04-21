@@ -3,6 +3,15 @@ driver_plugin: vagrant
 driver_config:
   require_chef_omnibus: true
 
+provisioner:
+  attributes:
+    newrelic:
+      license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
+      java_agent:
+        install_dir: '/opt/newrelic/java'
+      ruby_agent:
+        install_dir: '/opt/newrelic/ruby'
+
 platforms:
   - name: ubuntu-12.04
     run_list:
@@ -13,8 +22,6 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/conf.d/newrelic.ini'
-          java_agent:
-            install_dir: '/opt/newrelic/java'
 
   - name: ubuntu-14.04
     run_list:
@@ -26,9 +33,6 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/mods-available/newrelic.ini'
-          java_agent:
-            install_dir: '/opt/newrelic/java'
-
   - name: centos-6.6
     attributes:
       newrelic:
@@ -36,8 +40,6 @@ platforms:
           web_server:
             service_name: httpd
           php_config: '/etc/php.d/newrelic.ini'
-          java_agent:
-            install_dir: '/opt/newrelic/java'
 
 suites:
   - name: default
@@ -45,24 +47,15 @@ suites:
       - recipe[newrelic::default]
     attributes:
       newrelic:
-        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
         server_monitor_agent:
           service_notify_action: nothing
           service_actions:
             - nothing
   - name: php-agent
-    run_list:
-      - "recipe[newrelic_lwrp_test::agent_php]"
-    attributes:
-      newrelic:
-        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
+    run_list: "recipe[newrelic_lwrp_test::agent_php]"
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
-    attributes:
-      newrelic:
-        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
   - name: java-agent
     run_list: "recipe[newrelic_lwrp_test::agent_java]"
-    attributes: 
-      newrelic: 
-        license: 0000ffff0000ffff0000ffff0000ffff0000ffff
+  - name: ruby-agent
+    run_list: "recipe[newrelic_lwrp_test::agent_ruby]"
