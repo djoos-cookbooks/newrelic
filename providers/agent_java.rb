@@ -49,7 +49,19 @@ def agent_jar
 end
 
 def generate_agent_config
-  # Proxy host config??
+  if new_resource.daemon_proxy.nil?
+    daemon_proxy_host = nil
+    daemon_proxy_port = nil
+    daemon_proxy_user = nil
+    daemon_proxy_password = nil
+  else
+    proxy = URI(new_resource.daemon_proxy)
+
+    daemon_proxy_host = proxy.host
+    daemon_proxy_port = proxy.port
+    daemon_proxy_user = proxy.user
+    daemon_proxy_password = proxy.password
+  end
 
   template "#{new_resource.install_dir}/newrelic.yml" do
     cookbook new_resource.template_cookbook
