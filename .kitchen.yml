@@ -2,7 +2,10 @@
 driver_plugin: vagrant
 driver_config:
   require_chef_omnibus: true
-
+provisioner:
+  attributes:
+    newrelic:
+      license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
 platforms:
   - name: ubuntu-12.04
     run_list:
@@ -13,7 +16,6 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/conf.d/newrelic.ini'
-
   - name: ubuntu-14.04
     run_list:
       - recipe[apt]
@@ -24,7 +26,6 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/mods-available/newrelic.ini'
-
   - name: centos-6.6
     attributes:
       newrelic:
@@ -32,7 +33,6 @@ platforms:
           web_server:
             service_name: httpd
           php_config: '/etc/php.d/newrelic.ini'
-
 suites:
   - name: default
     run_list:
@@ -45,13 +45,19 @@ suites:
           service_actions:
             - nothing
   - name: php-agent
-    run_list:
-      - "recipe[newrelic_lwrp_test::agent_php]"
+    run_list: "recipe[newrelic_lwrp_test::agent_php]"
     attributes:
-      newrelic:
-        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
-    attributes:
-      newrelic:
-        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
+    attributes: 
+    run_list: "recipe[newrelic_lwrp_test::agent_python]"
+    attributes: 
+  - name: python-agent-recipe
+    run_list: "recipe[newrelic_lwrp_test::agent_python_recipe]"
+    attributes: 
+  - name: nodejs-agent
+    run_list: "recipe[newrelic_lwrp_test::agent_nodejs]"
+    attributes: 
+  - name: nodejs-agent-recipe
+    run_list: "recipe[newrelic_lwrp_test::agent_nodejs_recipe]"
+    attributes: 
