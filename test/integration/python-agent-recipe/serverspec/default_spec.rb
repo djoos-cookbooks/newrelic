@@ -20,7 +20,7 @@ describe file('/etc/newrelic/newrelic.ini') do
   its(:content) { should match(/monitor_mode = true/) }
   its(:content) { should match(/log_level = info/) }
   its(:content) { should match(%r{log_file = /tmp/newrelic-python-agent.log}) }
-  its(:content) { should match(/ssl = false/) }
+  its(:content) { should match(/ssl = true/) }
   its(:content) { should match(/capture_params = false/) }
   its(:content) { should match(/transaction_tracer.enabled = true/) }
   its(:content) { should match(/transaction_tracer.transaction_threshold = apdex_f/) }
