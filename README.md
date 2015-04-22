@@ -368,13 +368,12 @@ end
 
 
 ### `newrelic_agent_nodejs`  
-This cookbook includes an LWRP for installing the newrelic python agent   
-
-The `newrelic_agent_python` resource will handle the requirements to install python application monitoring.  
+This cookbook includes an LWRP for installing the newrelic nodejs agent   
+The `newrelic_agent_nodejs` resource will handle the requirements to install nodejs application monitoring.  
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install package and update newrelic python config with license key.  
+- :install -  will setup the New Relic repository, install npm package and update newrelic nodejs config with license key.  
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
