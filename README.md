@@ -337,7 +337,7 @@ for an explanation on each attribute.
 * `'enabled'`  Default true
 * `'logfile'` Default '/tmp/newrelic-python-agent.log'
 * `'loglevel'` Default 'info'
-* `'daemon_ssl'` Default false
+* `'daemon_ssl'` Default true
 * `'high_security'` Dfault false
 * `'capture_params'` Default false
 * `'ignored_params'` Default ' '

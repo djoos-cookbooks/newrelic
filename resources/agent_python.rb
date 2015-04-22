@@ -18,7 +18,7 @@ attribute :app_name, :kind_of => String, :default => 'Python Application'
 attribute :enabled, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :logfile, :kind_of => String, :default => '/tmp/newrelic-python-agent.log'
 attribute :loglevel, :kind_of => String, :default => 'info'
-attribute :daemon_ssl, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :daemon_ssl, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :high_security, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :capture_params, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :ignored_params, :kind_of => String, :default => ' '
