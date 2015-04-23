@@ -9,7 +9,8 @@ This cookbook provides an easy way to install various New Relic agents and the N
 The agent installs are being converted into libraries, currently the following agents are now resources:
 
 * php_agent  
-* server_monitor  
+* server_monitor
+* dontnet_agent
 
 More information?
 
@@ -296,7 +297,7 @@ end
 ### `newrelic_agent_java`  
 This cookbook includes an LWRP for installing the java agent   
 
-The `newrelic_agent_php` resource will handle the requirements to install php application monitoring.  
+The `newrelic_agent_java` resource will handle the requirements to install java application monitoring.  
 
 #### Actions
 
@@ -368,6 +369,31 @@ newrelic_agent_java 'Install' do
 end
 ``` 
 
+
+### `newrelic_agent_dotnet`  
+This cookbook includes an LWRP for installing the dotnet agent   
+
+The `newrelic_agent_dotnet` resource will handle the requirements to install .Net application monitoring.
+
+#### Actions
+
+
+- :install -  will retrieve .Net agent and install.  
+- :remove -  Uninstall the New Relic agent.
+
+#### Attribute parameters
+
+* `'https_download'` The URL to download the MSI installer from New Relic. Default is to pull "latest"
+* `'dotnet_agent'` The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
+
+
+#### Example  
+```ruby
+newrelic_agent_dotnet 'Install' do
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'  
+end
+```  
+
 ### `newrelic_deployment`
 This cookbook includes an LWRP for notifying New Relic of a deployment
 
@@ -402,6 +428,7 @@ end
 ```
 
 This cookbook includes an LWRP for generating the newrelic.yml configuration file in a specific path, which can be used to generate multiple configurations when deploying multiple different applications
+
 
 ### `newrelic_yml`
 
