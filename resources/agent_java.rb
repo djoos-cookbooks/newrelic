@@ -8,7 +8,7 @@ actions :install, :remove
 default_action :install
 
 attribute :license, :kind_of => String, :default => nil
-attribute :version, :kind_of => String, :default => '3.9.0'
+attribute :version, :kind_of => String, :default => '3.15.0'
 attribute :jar_file, :kind_of => String, :default => nil
 attribute :https_download, :kind_of => String, :default => nil
 attribute :install_dir, :kind_of => String, :default => '/opt/newrelic/java'
@@ -31,8 +31,8 @@ attribute :loglevel, :kind_of => String, :default => nil
 attribute :daemon_logfile, :kind_of => String, :default => '/var/log/newrelic/newrelic-daemon.log'
 attribute :daemon_loglevel, :kind_of => String, :default => nil
 attribute :audit_mode, :kind_of => [TrueClass, FalseClass], :default => false
-attribute :log_file_count, :kind_of => String, :default => nil
-attribute :log_limit_in_kbytes, :kind_of => String, :default => nil
+attribute :log_file_count, :kind_of => Fixnum, :default => nil
+attribute :log_limit_in_kbytes, :kind_of => Fixnum, :default => nil
 attribute :log_daily, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :daemon_ssl, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :daemon_proxy, :kind_of => String, :default => nil
