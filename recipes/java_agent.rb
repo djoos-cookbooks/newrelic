@@ -5,11 +5,11 @@
 # Copyright 2012-2015, Escape Studios
 #
 
-newrelic_agent_php 'Install' do
+newrelic_agent_java 'Install' do
   license NewRelic.application_monitoring_license(node)
   agent_type 'java'
   template_cookbook node['newrelic']['java_agent']['template_cookbook'] unless node['newrelic']['java_agent']['template_cookbook'].nil?
-  template_source node['newrelic']['java_agent']['template_source'] unless ode['newrelic']['java_agent']['template_source'].nil?
+  template_source node['newrelic']['java_agent']['template_source'] unless node['newrelic']['java_agent']['template_source'].nil?
   enabled node['newrelic']['application_monitoring']['enabled'] unless node['newrelic']['application_monitoring']['enabled'].nil?
   app_name node['newrelic']['application_monitoring']['app_name'] unless node['newrelic']['application_monitoring']['app_name'].nil?
   high_security NewRelic.to_boolean(node['newrelic']['application_monitoring']['high_security']) unless node['newrelic']['application_monitoring']['high_security'].nil?

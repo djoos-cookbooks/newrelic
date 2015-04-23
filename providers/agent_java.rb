@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: agent_java
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 # include helper methods
@@ -13,6 +13,7 @@ use_inline_resources if defined?(use_inline_resources)
 action :install do
   # Check license key provided
   check_license
+  newrelic_repository
   create_install_directory
   agent_jar
   generate_agent_config
@@ -48,9 +49,19 @@ def agent_jar
 end
 
 def generate_agent_config
-  new_resource.app_name = node['hostname'] if new_resource.app_name.nil?
+  if new_resource.daemon_proxy.nil?
+    daemon_proxy_host = nil
+    daemon_proxy_port = nil
+    daemon_proxy_user = nil
+    daemon_proxy_password = nil
+  else
+    proxy = URI(new_resource.daemon_proxy)
 
-  # Proxy host config??
+    daemon_proxy_host = proxy.host
+    daemon_proxy_port = proxy.port
+    daemon_proxy_user = proxy.user
+    daemon_proxy_password = proxy.password
+  end
 
   template "#{new_resource.install_dir}/newrelic.yml" do
     cookbook new_resource.template_cookbook
