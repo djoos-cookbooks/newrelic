@@ -13,14 +13,13 @@ use_inline_resources if defined?(use_inline_resources)
 action :install do
   # Check license key provided
   check_license
-  newrelic_repository
   create_install_directory
   install_newrelic
   generate_agent_config
 end
 
 action :remove do
-  newrelic_remove
+  remove_newrelic
 end
 
 def create_install_directory
@@ -67,7 +66,11 @@ def generate_agent_config
   end
 end
 
-def newrelic_remove
+def remove_newrelic
+  execute 'remove-newrelic.yml' do
+    command "sudo rm #{new_resource.install_dir}/newrelic.yml"
+    only_if { ::File.exist?("#{new_resource.install_dir}/newrelic.yml") }
+  end
   gem_package 'newrelic_rpm' do
     action :remove
   end
