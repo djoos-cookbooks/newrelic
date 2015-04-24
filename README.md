@@ -293,10 +293,78 @@ newrelic_agent_php 'Install' do
 end  
 ```   
 
+### `newrelic_agent_ruby`  
+This cookbook includes an LWRP for installing the ruby agent   
+
+The `newrelic_agent_ruby` resource will handle the requirements to install ruby application monitoring.  
+
+#### Actions
+
+- :install -  will setup the New Relic repository, install package and update ruby config with license key.  
+- :remove -  Uninstall the New Relic package
+
+#### Attribute parameters
+
+* `'install_dir'` The directory to for the config file
+* `'app_user'` The user that runs the Ruby application that will use the New Relic Ruby agent
+* `'app_group'` The group for the app_user
+* `'audit_mode'` Boolean, log all data to and from New Relic in plain text
+* `'log_file_count'` The number of log files to use
+* `'log_limit_in_kbytes'` The maximum number of bytes to write to any one log file
+* `'log_daily'` Override other log rolling configuration and roll the logs daily
+* `'template']['cookbook'` Sets cookbook for template, defaults to 'newrelic'
+* `'template']['source'` Sets source for template, defaults to 'agent/newrelic.yml.erb
+
+#### Advanced parameters  
+
+* `'enabled'` default => true
+* `'app_name'` default => nil
+* `'high_security'` default => false
+* `'owner'` default => 'newrelic'
+* `'group'` default => 'newrelic'
+* `'logfile'` default => 'newrelic-daemon.log'
+* `'logfile_path'` default => '/var/log/newrelic/'
+* `'loglevel'` default => nil
+* `'audit_mode'` default => false
+* `'log_file_count, :kind_of => Fixnum, :default => 1
+* `'log_limit_in_kbytes, :kind_of => Fixnum, :default => 0
+* `'log_daily'` default => true
+* `'daemon_ssl'` default => true
+* `'daemon_proxy'` default => nil
+* `'daemon_proxy_host'` default => nil
+* `'daemon_proxy_port'` default => nil
+* `'daemon_proxy_user'` default => nil
+* `'daemon_proxy_password'` default => nil
+* `'capture_params'` default => nil
+* `'ignored_params'` default => nil
+* `'transaction_tracer_enable'` default => true
+* `'transaction_tracer_threshold'` default => nil
+* `'transaction_tracer_record_sql'` default => nil
+* `'transaction_tracer_stack_trace_threshold'` default => nil
+* `'transaction_tracer_slow_sql'` default => nil
+* `'transaction_tracer_explain_threshold'` default => nil
+* `'error_collector_enable'` default => true
+* `'error_collector_ignore_errors'` default => nil
+* `'error_collector_ignore_status_codes'` default => nil
+* `'browser_monitoring_auto_instrument'` default => nil
+* `'cross_application_tracer_enable'` default => true
+* `'thread_profiler_enable'` default => true  
+
+
+#### Example  
+```ruby
+newrelic_agent_ruby 'Install' do
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'
+  agent_type 'ruby'
+  app_name 'ruby_test_app'
+end
+``` 
+
+
 ### `newrelic_agent_java`  
 This cookbook includes an LWRP for installing the java agent   
 
-The `newrelic_agent_php` resource will handle the requirements to install php application monitoring.  
+The `newrelic_agent_java` resource will handle the requirements to install java application monitoring.  
 
 #### Actions
 
