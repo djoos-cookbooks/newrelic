@@ -17,6 +17,7 @@ platforms:
     run_list:
       - recipe[apt]
     attributes:
+      rubygems: 'rubygems'
       newrelic:
         php_agent:
           web_server:
@@ -27,6 +28,7 @@ platforms:
     run_list:
       - recipe[apt]
     attributes:
+      rubygems: 'rubygems-integration'
       newrelic:
         php5enmode: = true
         php_agent:
@@ -35,6 +37,7 @@ platforms:
           php_config: '/etc/php5/mods-available/newrelic.ini'
   - name: centos-6.6
     attributes:
+      rubygems: 'rubygems'
       newrelic:
         php_agent:
           web_server:
