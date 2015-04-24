@@ -6,6 +6,6 @@
 # Copyright 2015, Rackspace
 #
 
-newrelic_agent_java 'Install' do
+newrelic_agent_dotnet 'Install' do
   license node['newrelic']['license']
 end

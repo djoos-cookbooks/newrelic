@@ -10,8 +10,6 @@ include NewRelic::Helpers
 
 use_inline_resources if defined?(use_inline_resources)
 
-license = NewRelic.application_monitoring_license(node)
-
 action :install do
   check_license
   install_newrelic
@@ -27,7 +25,7 @@ def install_newrelic
     options "/qb NR_LICENSE_KEY=#{new_resource.license} INSTALLLEVEL=#{new_resource.install_level}"
     installer_type :msi
     action :install
-    not_if { File.exist?('C:\\Program Files\\New Relic\\.NET Agent') }
+    not_if { ::File.exist?('C:\\Program Files\\New Relic\\.NET Agent') }
   end
 end
 
