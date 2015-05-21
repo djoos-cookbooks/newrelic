@@ -13,7 +13,6 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/conf.d/newrelic.ini'
-
   - name: ubuntu-14.04
     run_list:
       - recipe[apt]
@@ -24,7 +23,6 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/mods-available/newrelic.ini'
-
   - name: centos-6.6
     attributes:
       newrelic:
@@ -45,13 +43,28 @@ suites:
           service_actions:
             - nothing
   - name: php-agent
-    run_list:
-      - "recipe[newrelic_lwrp_test::agent_php]"
+    run_list: "recipe[newrelic_lwrp_test::agent_php]"
     attributes:
       newrelic:
         license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
+    attributes:
+      newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
+    run_list: "recipe[newrelic_lwrp_test::agent_python]"
+  - name: python-agent-recipe
+    run_list: "recipe[newrelic_lwrp_test::agent_python_recipe]"
+    attributes:
+      newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
+  - name: nodejs-agent
+    run_list: "recipe[newrelic_lwrp_test::agent_nodejs]"
+    attributes:
+      newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
+  - name: nodejs-agent-recipe
+    run_list: "recipe[newrelic_lwrp_test::agent_nodejs_recipe]"
     attributes:
       newrelic:
         license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
