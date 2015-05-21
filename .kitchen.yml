@@ -2,10 +2,7 @@
 driver_plugin: vagrant
 driver_config:
   require_chef_omnibus: true
-provisioner:
-  attributes:
-    newrelic:
-      license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
+
 platforms:
   - name: ubuntu-12.04
     run_list:
@@ -33,6 +30,7 @@ platforms:
           web_server:
             service_name: httpd
           php_config: '/etc/php.d/newrelic.ini'
+
 suites:
   - name: default
     run_list:
@@ -47,17 +45,26 @@ suites:
   - name: php-agent
     run_list: "recipe[newrelic_lwrp_test::agent_php]"
     attributes:
+      newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
-    attributes: 
+    attributes:
+      newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
     run_list: "recipe[newrelic_lwrp_test::agent_python]"
-    attributes: 
   - name: python-agent-recipe
     run_list: "recipe[newrelic_lwrp_test::agent_python_recipe]"
-    attributes: 
+    attributes:
+      newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
   - name: nodejs-agent
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs]"
-    attributes: 
+    attributes:
+      newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
   - name: nodejs-agent-recipe
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs_recipe]"
-    attributes: 
+    attributes:
+      newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
