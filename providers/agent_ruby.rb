@@ -67,7 +67,7 @@ def generate_agent_config
 end
 
 def remove_newrelic
-  execute 'remove-newrelic.yml' do
+  execute "remove #{new_resource.install_dir}/newrelic.yml" do
     command "sudo rm #{new_resource.install_dir}/newrelic.yml"
     only_if { ::File.exist?("#{new_resource.install_dir}/newrelic.yml") }
   end
