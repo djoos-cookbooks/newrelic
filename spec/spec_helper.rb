@@ -9,7 +9,7 @@ def stub_resources
   stub_command('/usr/sbin/httpd -t').and_return(true)
   shellout = double('shellout')
   shellout.stub(:run_command)
-  shellout.stub(:error?) 
+  shellout.stub(:error?)
   Mixlib::ShellOut.stub(:new).with('which npm').and_return(shellout)
   allow(File).to receive(:exist?).and_call_original
   allow(File).to receive(:exist?).with('/var/mynode_app').and_return(true)
