@@ -34,5 +34,10 @@ module NewRelic
         gpgkey node['newrelic']['repository']['key']
       end
     end
+
+    def directory_exists?(dir)
+      return false unless ::File.exist?(dir)
+      true
+    end
   end
 end

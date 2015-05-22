@@ -112,10 +112,12 @@ def remove_newrelic
   if app_location == '/opt/newrelic/java'
     execute 'newrelic-remove-default' do
       command 'sudo rm -rf /opt/newrelic'
+      only_if { ::File.exist?('/opt/newrelic/newrelic.yml') }
     end
   else
     execute 'newrelic-remove' do
       command "sudo rm -rf #{app_location}/newrelic"
+      only_if { ::File.exist?("#{app_location}/newrelic/newrelic.yml") }
     end
   end
 end

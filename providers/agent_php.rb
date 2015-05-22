@@ -10,6 +10,10 @@ include NewRelic::Helpers
 
 use_inline_resources if defined?(use_inline_resources)
 
+def whyrun_supported?
+  true
+end
+
 action :install do
   # Check license key provided
   check_license

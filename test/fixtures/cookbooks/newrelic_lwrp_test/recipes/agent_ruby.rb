@@ -7,12 +7,10 @@
 #
 #
 
-include_recipe 'rbenv::default'
-include_recipe 'rbenv::ruby_build'
-ruby_version = '2.1.2'
+include_recipe 'ruby'
 
-rbenv_ruby ruby_version do
-  global true
+package node['rubygems'] do
+  action :install
 end
 
 newrelic_agent_ruby 'Install' do
