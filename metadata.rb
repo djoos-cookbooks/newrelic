@@ -5,8 +5,6 @@ license 'MIT'
 description 'Installs/Configures New Relic'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '2.12.0'
-source_url 'https://github.com/escapestudios-cookbooks/newrelic'
-issues_url 'https://github.com/escapestudios-cookbooks/newrelic/issues'
 
 %w( debian ubuntu redhat centos fedora scientific amazon windows smartos oracle ).each do |os|
   supports os
