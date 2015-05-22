@@ -1,8 +1,9 @@
 # Encoding: utf-8
 #
 # Cookbook Name:: newrelic_poc
-# Recipe:: agent_ndoejs_recipe
-# Copyright 2015, Rackspace
+# Recipe:: agent_nodejs_recipe
+#
+# Copyright 2012-2015, Escape Studios
 #
 
 nodeapp = { 'app_path' => '/var/mynode_app', 'app_name' => 'My Node Application', 'app_log_level' => 'info', 'app_log_filepath' => '/var/mynode_app/newrelic.log' }
