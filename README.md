@@ -236,7 +236,7 @@ The `newrelic_agent_php` resource will handle the requirements to install php ap
 * `'app_name'` is missing it will default to `PHP Application`.  
 * `'startup_mode'` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
 * `'service_name'` - The web server service name. If it is missing the resource will not handle the webserver reload. This allows this to be handled by the recipe, defaults to nil
-* `'config_file'` - The New Relic php agent config file, depends on your php external configuration directory; e.g. /etc/php5/conf.d/newrelic.ini, /etc/php5/mods-available/newrelic.ini, … Defaults to nil
+* `'config_file'` - The New Relic php agent config file, depends on your php external configuration directory; e.g. /etc/php5/conf.d/newrelic.ini, /etc/php5/mods-available/newrelic.ini, ... Defaults to nil
 * `'config_file_to_be_deleted'` - The New Relic php agent-generated config file, e.g. /etc/php5/cli/conf.d/newrelic.ini. If set, the file will get deleted during the Chef run as we want the Chef-generated config file to be used instead (`'config_file'`), defaults to nil
 * `'execute_php5enmod'` - Executes "php5enmod newrelic" if true. Needed if you use the mods-available directory, defaults to false
 * `'cookbook_ini'` - Sets cookbook for .ini template, defaults to 'newrelic'
@@ -365,6 +365,100 @@ newrelic_agent_java 'Install' do
   install_dir '/opt/newrelic/java'
   agent_type 'java'
   app_name 'java_test_app'
+
+### `newrelic_agent_python`  
+This cookbook includes an LWRP for installing the newrelic python agent   
+
+The `newrelic_agent_python` resource will handle the requirements to install python application monitoring.  
+
+#### Actions
+
+- :install -  will setup the New Relic repository, install package and update newrelic python config with license key.  
+- :remove -  Uninstall the New Relic package
+
+#### Attribute parameters
+See https://docs.newrelic.com/docs/agents/python-agent/installation-configuration/python-agent-configuration#general-settings 
+for an explanation on each attribute. 
+
+* `'license'` NewRelic license key
+* `'version'` Python agent version. Will default to latest if nil.
+* `'virtualenv'` VirtualEnv to install puthon agent into. Default nil.
+* `'config_file'` Path to config file. Default '/etc/newrelic/newrelic.ini'
+* `'cookbook'` Cookbook holding config template. Default this cookbook.
+* `'source'` Config template source. Default 'agent/python/newrelic.ini.erb'
+* `'app_name'` Your newrelic python app name as it will show in the UI. Default => 'Python Application'
+
+#### Advanced parameters  
+
+* `'enabled'`  Default true
+* `'logfile'` Default '/tmp/newrelic-python-agent.log'
+* `'loglevel'` Default 'info'
+* `'daemon_ssl'` Default true
+* `'high_security'` Dfault false
+* `'capture_params'` Default false
+* `'ignored_params'` Default ' '
+* `'transaction_tracer_enable'` Default true
+* `'transaction_tracer_threshold'` Default 'apdex_f'
+* `'transaction_tracer_record_sql'` Default 'obfuscated'
+* `'transaction_tracer_stack_trace_threshold'` Default '0.5'
+* `'transaction_tracer_slow_sql'` Default true
+* `'transaction_tracer_explain_threshold'` Default '0.5'
+* `'thread_profiler_enable'` Default true
+* `'error_collector_enable'` Default true
+* `'error_collector_ignore_errors'` Default ' '
+* `'browser_monitoring_auto_instrument'` Default true
+* `'cross_application_tracer_enable'` Default true
+* `'feature_flag'` Default nil
+
+
+#### Example  
+
+```ruby
+include_recipe 'python'
+
+newrelic_agent_python 'Install' do
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'
+  app_name 'my_python_app'
+end
+``` 
+
+
+### `newrelic_agent_nodejs`  
+This cookbook includes an LWRP for installing the newrelic nodejs agent   
+The `newrelic_agent_nodejs` resource will handle the requirements to install nodejs application monitoring.  
+
+#### Actions
+
+- :install -  will setup the New Relic repository, install npm package and update newrelic nodejs config with license key.  
+- :remove -  Uninstall the New Relic package
+
+#### Attribute parameters
+https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/nodejs-agent-configuration
+for an explanation on each attribute. 
+
+* `'license'` NewRelic license key
+* `'version'` NewRelic npm package version. Will default to latest if nil.
+* `'app_name'` Your newrelic nodejs app name as it will show in the UI. Default => 'My Node App'
+* `'app_path'` Required true. Default nil.  You must provide a valid path to your nodejs app root dir.
+* `'cookbook'` Cookbook holding config template. Default this cookbook.
+* `'source'` Config template source. Default 'agent/python/newrelic.ini.erb'
+
+attribute :license, :kind_of => String, :required => true, :default => nil
+attribute :version, :kind_of => String, :default => nil
+attribute :app_name, :kind_of => String, :default => 'My Node App'
+
+#### Advanced parameters  
+
+* `'enabled'`  Default true
+* `'logfile'` Default '/tmp/newrelic-python-agent.log'
+* `'loglevel'` Default 'info'
+
+#### Example  
+
+```ruby
+newrelic_agent_nodejs '/var/my_node_approot' do
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'
+  app_name 'my_nodejs_app'
 end
 ``` 
 

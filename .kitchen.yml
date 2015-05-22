@@ -51,8 +51,7 @@ suites:
           service_actions:
             - nothing
   - name: php-agent
-    run_list:
-      - "recipe[newrelic_lwrp_test::agent_php]"
+    run_list: "recipe[newrelic_lwrp_test::agent_php]"
     attributes:
       newrelic:
         license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
@@ -66,3 +65,19 @@ suites:
     attributes: 
       newrelic: 
         license: 0000ffff0000ffff0000ffff0000ffff0000ffff
+    run_list: "recipe[newrelic_lwrp_test::agent_python]"
+  - name: python-agent-recipe
+    run_list: "recipe[newrelic_lwrp_test::agent_python_recipe]"
+    attributes:
+      newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
+  - name: nodejs-agent
+    run_list: "recipe[newrelic_lwrp_test::agent_nodejs]"
+    attributes:
+      newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
+  - name: nodejs-agent-recipe
+    run_list: "recipe[newrelic_lwrp_test::agent_nodejs_recipe]"
+    attributes:
+      newrelic:
+        license: '0000ffff0000ffff0000ffff0000ffff0000ffff'

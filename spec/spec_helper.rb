@@ -7,6 +7,8 @@ require 'chefspec/berkshelf'
 def stub_resources
   stub_command('/usr/sbin/apache2 -t').and_return(true)
   stub_command('/usr/sbin/httpd -t').and_return(true)
+  allow(File).to receive(:exist?).and_call_original
+  allow(File).to receive(:exist?).with('/var/mynode_app').and_return(true)
 end
 
 def stub_node_resources(node)
