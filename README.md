@@ -8,8 +8,12 @@ This cookbook provides an easy way to install various New Relic agents and the N
 
 The agent installs are being converted into libraries, currently the following agents are now resources:
 
-* php_agent  
 * server_monitor
+* php_agent  
+* java_agent
+* ruby_agent
+* python_agent
+* nodejs_agent
 * dontnet_agent
 
 More information?
