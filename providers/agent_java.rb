@@ -5,6 +5,8 @@
 # Copyright 2012-2014, Escape Studios
 #
 
+require 'uri'
+
 # include helper methods
 include NewRelic::Helpers
 
@@ -35,9 +37,21 @@ def create_install_directory
 end
 
 def agent_jar
-  jar_file = "newrelic-agent-#{new_resource.version}.jar"
+  version = nil
+  jar_file = nil
+
+  if new_resource.version == 'latest'
+    version = 'current'
+
+    url_content = open('https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/') { |f| f.read.lines.grep(/jar/i).to_s }
+    jar_file = url_content.split(/\W+jar/).first.to_s.split('\\"').last + '.jar'
+  else
+    version = new_resource.version
+    jar_file = "newrelic-agent-#{new_resource.version}.jar"
+  end
+
   agent_jar = "#{new_resource.install_dir}/#{jar_file}"
-  https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{new_resource.version}/newrelic-agent-#{new_resource.version}.jar"
+  https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{jar_file}"
   remote_file jar_file do
     source https_download
     owner 'root'
