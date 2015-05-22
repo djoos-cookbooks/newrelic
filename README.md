@@ -136,6 +136,23 @@ Make sure you run Chef >= 0.10.0.
 * `node['newrelic']['dotnet_agent']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 * `node['newrelic']['dotnet_agent']['agent_action']` - Agent action, defaults to :install
 
+### java_agent.rb:
+
+* `node['newrelic']['java_agent']['version']` - New Relic Java Agent version to use. To find the current version, check [New Relic repo](https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/)
+* `node['newrelic']['java_agent']['https_download']` - The url to download the jar for the New Relic Java agent. If you override `version` parameter, you must also update this.
+* `node['newrelic']['java_agent']['jar_file']` - The name of the newrelic jar file that will be used locally, defaults to `newrelic-agent-version.jar`
+* `node['newrelic']['java_agent']['install_dir']` - The directory to install the newrelic jar and config file
+* `node['newrelic']['java_agent']['app_user']` - The user that runs the Java application that will use the New Relic Java agent
+* `node['newrelic']['java_agent']['app_group']` - The group for the app_user
+* `node['newrelic']['java_agent']['audit_mode']` - Boolean, log all data to and from New Relic in plain text
+* `node['newrelic']['java_agent']['log_file_count']` - The number of log files to use
+* `node['newrelic']['java_agent']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
+* `node['newrelic']['java_agent']['log_daily']` - Override other log rolling configuration and roll the logs daily
+* `node['newrelic']['java_agent']['agent_action']` - Agent action, defaults to :install
+* `node['newrelic']['java_agent']['execute_agent_action']` - Execute the agent action or not, defaults to true
+* `node['newrelic']['java_agent']['app_location']` - Application's location, defaults to `node['newrelic']['java_agent']['install_dir']`
+* `node['newrelic']['java_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
+* `node['newrelic']['java_agent']['template']['source']` - Sets source for template, defaults to 'agent/newrelic.yml.erb'
 
 ### nodejs_agent.rb
 
