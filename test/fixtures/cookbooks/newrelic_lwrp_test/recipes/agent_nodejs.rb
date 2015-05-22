@@ -1,9 +1,9 @@
 # Encoding: utf-8
 #
 # Cookbook Name:: newrelic_poc
-# Recipe:: agent_python
+# Recipe:: agent_nodejs
 #
-# Copyright 2015, Rackspace
+# Copyright 2012-2015, Escape Studios
 #
 
 include_recipe 'nodejs'

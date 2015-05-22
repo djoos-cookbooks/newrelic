@@ -3,7 +3,7 @@
 # Cookbook Name:: newrelic_poc
 # Recipe:: agent_python_recipe
 #
-# Copyright 2015, Rackspace
+# Copyright 2012-2015, Escape Studios
 #
 
 node.default['newrelic']['application_monitoring']['app_name'] = 'My Python Application'

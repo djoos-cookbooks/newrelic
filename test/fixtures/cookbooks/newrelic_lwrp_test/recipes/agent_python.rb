@@ -3,7 +3,7 @@
 # Cookbook Name:: newrelic_poc
 # Recipe:: agent_python
 #
-# Copyright 2015, Rackspace
+# Copyright 2012-2015, Escape Studios
 #
 
 include_recipe 'python'

@@ -551,14 +551,12 @@ newrelic_agent_nodejs '/var/my_node_approot' do
 end
 ``` 
 
-
 ### `newrelic_agent_dotnet`  
 This cookbook includes an LWRP for installing the dotnet agent   
 
 The `newrelic_agent_dotnet` resource will handle the requirements to install .Net application monitoring.
 
 #### Actions
-
 
 - :install -  will retrieve .Net agent and install.  
 - :remove -  Uninstall the New Relic agent.
@@ -610,7 +608,6 @@ end
 ```
 
 This cookbook includes an LWRP for generating the newrelic.yml configuration file in a specific path, which can be used to generate multiple configurations when deploying multiple different applications
-
 
 ### `newrelic_yml`
 
