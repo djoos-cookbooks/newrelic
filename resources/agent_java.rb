@@ -8,9 +8,7 @@ actions :install, :remove
 default_action :install
 
 attribute :license, :kind_of => String, :default => nil
-attribute :version, :kind_of => String, :default => '3.15.0'
-attribute :jar_file, :kind_of => String, :default => nil
-attribute :https_download, :kind_of => String, :default => nil
+attribute :version, :kind_of => String, :default => 'latest'
 attribute :install_dir, :kind_of => String, :default => '/opt/newrelic/java'
 attribute :execute_agent_action, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :app_location, :kind_of => String, :default => nil
@@ -54,3 +52,4 @@ attribute :error_collector_ignore_status_codes, :kind_of => String, :default => 
 attribute :browser_monitoring_auto_instrument, :kind_of => String, :default => nil
 attribute :cross_application_tracer_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :thread_profiler_enable, :kind_of => [TrueClass, FalseClass], :default => true
+attribute :labels, :kind_of => String, :default => nil
