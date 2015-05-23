@@ -28,7 +28,7 @@ describe 'newrelic_lwrp_test::agent_java' do
       expect(chef_run).to render_file('/opt/newrelic/java/newrelic.yml').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
 
-    it 'execute newrelic_install_newrelic-agent-current.jar' do
+    it 'execute newrelic_install_newrelic.jar' do
       expect(chef_run).to run_execute('newrelic_install_newrelic.jar')
     end
   end

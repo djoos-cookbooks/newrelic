@@ -47,7 +47,7 @@ def agent_jar
     jar_file = url_content.split(/\W+jar/).first.to_s.split('\\"').last + '.jar'
   else
     version = new_resource.version
-    jar_file = "newrelic-agent-#{new_resource.version}.jar"
+    jar_file = "newrelic.jar"
   end
 
   agent_jar = "#{new_resource.install_dir}/#{jar_file}"
@@ -91,7 +91,7 @@ def allow_app_group_write_to_log_file_path
 end
 
 def install_newrelic
-  jar_file = "newrelic-agent-#{new_resource.version}.jar"
+  jar_file = "newrelic.jar"
   if new_resource.app_location.nil?
     app_location = new_resource.install_dir
   else

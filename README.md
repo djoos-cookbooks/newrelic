@@ -139,8 +139,6 @@ Make sure you run Chef >= 0.10.0.
 ### java_agent.rb:
 
 * `node['newrelic']['java_agent']['version']` - New Relic Java Agent version to use. To find the current version, check [New Relic repo](https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/)
-* `node['newrelic']['java_agent']['https_download']` - The url to download the jar for the New Relic Java agent. If you override `version` parameter, you must also update this.
-* `node['newrelic']['java_agent']['jar_file']` - The name of the newrelic jar file that will be used locally, defaults to `newrelic-agent-version.jar`
 * `node['newrelic']['java_agent']['install_dir']` - The directory to install the newrelic jar and config file
 * `node['newrelic']['java_agent']['app_user']` - The user that runs the Java application that will use the New Relic Java agent
 * `node['newrelic']['java_agent']['app_group']` - The group for the app_user
