@@ -2,88 +2,42 @@
 # Cookbook Name:: newrelic
 # Recipe:: java_agent
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
-include_recipe 'newrelic::repository'
-
-license = NewRelic.application_monitoring_license(node)
-
-# create the directory to install the jar into
-directory node['newrelic']['java_agent']['install_dir'] do
-  owner node['newrelic']['java_agent']['app_user']
-  group node['newrelic']['java_agent']['app_group']
-  recursive true
-  mode 0775
-  action :create
-end
-
-agent_jar = "#{node['newrelic']['java_agent']['install_dir']}/#{node['newrelic']['java_agent']['jar_file']}"
-
-remote_file agent_jar do
-  source node['newrelic']['java_agent']['https_download']
-  owner node['newrelic']['java_agent']['app_user']
-  group node['newrelic']['java_agent']['app_group']
-  mode 0664
-  action :create_if_missing
-end
-
-if node['newrelic']['application_monitoring']['app_name'].nil?
-  node.set['newrelic']['application_monitoring']['app_name'] = node['hostname']
-end
-
-# configure your New Relic license key
-newrelic_yml "#{node['newrelic']['java_agent']['install_dir']}/newrelic.yml" do
+newrelic_agent_java 'Install' do
+  license NewRelic.application_monitoring_license(node)
   agent_type 'java'
-  template_cookbook node['newrelic']['java_agent']['template_cookbook']
-  template_source node['newrelic']['java_agent']['template_source']
-  enabled node['newrelic']['application_monitoring']['enabled']
-  app_name node['newrelic']['application_monitoring']['app_name']
-  high_security node['newrelic']['application_monitoring']['high_security']
-  owner node['newrelic']['java_agent']['app_user']
-  group node['newrelic']['java_agent']['app_group']
-  license license
-  logfile node['newrelic']['application_monitoring']['logfile']
-  logfile_path node['newrelic']['application_monitoring']['logfile_path']
-  loglevel node['newrelic']['application_monitoring']['loglevel']
-  audit_mode node['newrelic']['java_agent']['audit_mode']
-  log_file_count node['newrelic']['java_agent']['log_file_count']
-  log_limit_in_kbytes node['newrelic']['java_agent']['log_limit_in_kbytes']
-  log_daily node['newrelic']['java_agent']['log_daily']
-  daemon_ssl node['newrelic']['application_monitoring']['daemon']['ssl']
-  daemon_proxy node['newrelic']['application_monitoring']['daemon']['proxy']
-  capture_params node['newrelic']['application_monitoring']['capture_params']
-  ignored_params node['newrelic']['application_monitoring']['ignored_params']
-  transaction_tracer_enable node['newrelic']['application_monitoring']['transaction_tracer']['enable']
-  transaction_tracer_threshold node['newrelic']['application_monitoring']['transaction_tracer']['threshold']
-  transaction_tracer_record_sql node['newrelic']['application_monitoring']['transaction_tracer']['record_sql']
-  transaction_tracer_stack_trace_threshold node['newrelic']['application_monitoring']['transaction_tracer']['stack_trace_threshold']
-  transaction_tracer_slow_sql node['newrelic']['application_monitoring']['transaction_tracer']['slow_sql']
-  transaction_tracer_explain_threshold node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold']
-  error_collector_enable node['newrelic']['application_monitoring']['error_collector']['enable']
-  error_collector_ignore_errors node['newrelic']['application_monitoring']['error_collector']['ignore_errors']
-  error_collector_ignore_status_codes node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes']
-  browser_monitoring_auto_instrument node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
-  cross_application_tracer_enable node['newrelic']['application_monitoring']['cross_application_tracer']['enable']
-  thread_profiler_enable node['newrelic']['application_monitoring']['thread_profiler']['enable']
-  labels node['newrelic']['application_monitoring']['labels']
-end
-
-# allow app_group to write to log_file_path
-path = node['newrelic']['application_monitoring']['logfile_path']
-
-until path.nil? || path.empty? || path == File::SEPARATOR
-  directory path do
-    group node['newrelic']['java_agent']['app_group']
-    mode 0775
-    action :create
-  end
-
-  path = File.dirname(path)
-end
-
-# execution of the install
-execute 'newrelic-install' do
-  command "sudo java -jar #{agent_jar} -s #{node['newrelic']['java_agent']['app_location']} #{node['newrelic']['java_agent']['agent_action']}"
-  only_if { node['newrelic']['java_agent']['execute_agent_action'] == true }
+  template_cookbook node['newrelic']['java_agent']['template_cookbook'] unless node['newrelic']['java_agent']['template_cookbook'].nil?
+  template_source node['newrelic']['java_agent']['template_source'] unless node['newrelic']['java_agent']['template_source'].nil?
+  enabled node['newrelic']['application_monitoring']['enabled'] unless node['newrelic']['application_monitoring']['enabled'].nil?
+  app_name node['newrelic']['application_monitoring']['app_name'] unless node['newrelic']['application_monitoring']['app_name'].nil?
+  high_security NewRelic.to_boolean(node['newrelic']['application_monitoring']['high_security']) unless node['newrelic']['application_monitoring']['high_security'].nil?
+  owner node['newrelic']['java_agent']['app_user'] unless node['newrelic']['java_agent']['app_user'].nil?
+  group node['newrelic']['java_agent']['app_group'] unless node['newrelic']['java_agent']['app_group'].nil?
+  logfile node['newrelic']['application_monitoring']['logfile'] unless node['newrelic']['application_monitoring']['logfile'].nil?
+  logfile_path node['newrelic']['application_monitoring']['logfile_path'] unless node['newrelic']['application_monitoring']['logfile_path'].nil?
+  loglevel node['newrelic']['application_monitoring']['loglevel'] unless node['newrelic']['application_monitoring']['loglevel'].nil?
+  audit_mode node['newrelic']['java_agent']['audit_mode'] unless node['newrelic']['java_agent']['audit_mode'].nil?
+  log_file_count node['newrelic']['java_agent']['log_file_count'] unless node['newrelic']['java_agent']['log_file_count'].nil?
+  log_limit_in_kbytes node['newrelic']['java_agent']['log_limit_in_kbytes'] unless node['newrelic']['java_agent']['log_limit_in_kbytes'].nil?
+  log_daily node['newrelic']['java_agent']['log_daily'] unless node['newrelic']['java_agent']['log_daily'].nil?
+  daemon_ssl NewRelic.to_boolean(node['newrelic']['application_monitoring']['daemon']['ssl']) unless node['newrelic']['application_monitoring']['daemon']['ssl'].nil?
+  daemon_proxy node['newrelic']['application_monitoring']['daemon']['proxy'] unless node['newrelic']['application_monitoring']['daemon']['proxy'].nil?
+  capture_params node['newrelic']['application_monitoring']['capture_params'] unless node['newrelic']['application_monitoring']['capture_params'].nil?
+  ignored_params node['newrelic']['application_monitoring']['ignored_params'] unless node['newrelic']['application_monitoring']['ignored_params'].nil?
+  transaction_tracer_enable node['newrelic']['application_monitoring']['transaction_tracer']['enable'] unless node['newrelic']['application_monitoring']['transaction_tracer']['enable'].nil?
+  transaction_tracer_threshold node['newrelic']['application_monitoring']['transaction_tracer']['threshold'] unless node['newrelic']['application_monitoring']['transaction_tracer']['threshold'].nil?
+  transaction_tracer_record_sql node['newrelic']['application_monitoring']['transaction_tracer']['record_sql'] unless node['newrelic']['application_monitoring']['transaction_tracer']['record_sql'].nil?
+  transaction_tracer_stack_trace_threshold node['newrelic']['application_monitoring']['transaction_tracer']['stack_trace_threshold'] unless node['newrelic']['application_monitoring']['transaction_tracer']['stack_trace_threshold'].nil?
+  transaction_tracer_slow_sql node['newrelic']['application_monitoring']['transaction_tracer']['slow_sql'] unless node['newrelic']['application_monitoring']['transaction_tracer']['slow_sql'].nil?
+  transaction_tracer_explain_threshold node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold'] unless node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold'].nil?
+  error_collector_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['error_collector']['enable']) unless node['newrelic']['application_monitoring']['error_collector']['enable'].nil?
+  error_collector_ignore_errors node['newrelic']['application_monitoring']['error_collector']['ignore_errors'] unless node['newrelic']['application_monitoring']['error_collector']['ignore_errors'].nil?
+  error_collector_ignore_status_codes node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes'] unless node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes'].nil?
+  browser_monitoring_auto_instrument node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'] unless node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'].nil?
+  cross_application_tracer_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['cross_application_tracer']['enable']) unless node['newrelic']['application_monitoring']['cross_application_tracer']['enable'].nil?
+  thread_profiler_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['thread_profiler']['enable']) unless node['newrelic']['application_monitoring']['thread_profiler']['enable'].nil?
+  labels node['newrelic']['application_monitoring']['labels'] unless node['newrelic']['application_monitoring']['labels'].nil?
+  execute_agent_action node['newrelic']['java_agent']['execute_agent_action'] unless node['newrelic']['java_agent']['execute_agent_action'].nil?
 end

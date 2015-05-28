@@ -1,10 +1,17 @@
-newrelic cookbook CHANGELOG
-===========================
-This file is used to list changes made in each version (> 2.0.0) of the newrelic cookbook.
+# newrelic cookbook CHANGELOG
 
-v2.0.0 (2014-07-02)
--------------------
-- Refactoring: separation of New Relic MeetMe plugin logic into separate cookbook: https://github.com/escapestudios-cookbooks/newrelic_meetme_plugin
-- Refactoring: "use snake_case for source file names" + RuboCop FileName-check
-- Don't rely on this cookbook to get the specific agent's application set up; state that particular logic in a run list instead
-- Addition of CHANGELOG.md
+This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
+
+## v2.11.2 (2015-04-18)
+
+- Bugfix: ssl attribute in server monitor, see issue #179
+- General: 2.11.x cleanup
+
+## v2.11.1 (2015-04-17)
+
+- Bugfix: attribute that was previously potentially a TrueClass or FalseClass must be of type String, see issue #175
+
+## v2.11.0 (2015-04-17)
+
+- Refactoring: convert php agent and server monitor to lwrp
+- Housekeeping: copyright

@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Attributes:: repository
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 default['newrelic']['repository']['key'] = 'http://download.newrelic.com/548C16BF.gpg'

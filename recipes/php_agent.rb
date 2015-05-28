@@ -2,189 +2,55 @@
 # Cookbook Name:: newrelic
 # Recipe:: php_agent
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
-include_recipe 'newrelic::repository'
-
-license = NewRelic.application_monitoring_license(node)
-
-# the older version (3.0) had a bug in the init scripts that when it shut down the daemon
-# it would also kill dpkg as it was trying to upgrade let's remove the old package before continuing
-package 'newrelic-php5-broken' do
-  # set package_name attribute explicitly as the name attribute is *not* the correct package name
-  # so not to clash with the package resource block below... (see issue #109 for more information)
-  package_name 'newrelic-php5'
-  action :remove
-  version '3.0.5.95'
-end
-
-# install/update latest php agent
-package 'newrelic-php5' do
-  action node['newrelic']['php_agent']['agent_action']
-  notifies :run, 'execute[newrelic-install]', :immediately
-end
-
-# run newrelic-install
-execute 'newrelic-install' do
-  command 'newrelic-install install'
-  if node['newrelic']['php_agent']['install_silently']
-    environment(
-      'NR_INSTALL_SILENT' => '1'
-    )
-  end
-  action :nothing
-  if node['newrelic']['php_agent']['web_server']['service_name']
-    notifies :reload, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
-  end
-end
-
-service 'newrelic-daemon' do
-  supports :status => true, :start => true, :stop => true, :restart => true
-end
-
-# run php5enmod newrelic
-execute 'newrelic-php5enmod' do
-  command 'php5enmod newrelic'
-  action :nothing
-  only_if { node['newrelic']['php_agent']['execute_php5enmod'] }
-end
-
-# check config_file attribute value
-if node['newrelic']['php_agent']['config_file'].nil?
-  Chef::Log.fatal 'Please specify the path to your New Relic php agent config file (node[\'newrelic\'][\'php_agent\'][\'config_file\'])'
-end
-
-# configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
-# and restart the web server in order to pick up the new settings
-template node['newrelic']['php_agent']['config_file'] do
-  cookbook node['newrelic']['php_agent']['template']['cookbook_ini']
-  source node['newrelic']['php_agent']['template']['source_ini']
-  owner 'root'
-  group 'root'
-  mode 0644
-  variables(
-    :enabled => node['newrelic']['application_monitoring']['enabled'],
-    :license => license,
-    :logfile => node['newrelic']['application_monitoring']['logfile'],
-    :loglevel => node['newrelic']['application_monitoring']['loglevel'],
-    :app_name => node['newrelic']['application_monitoring']['app_name'],
-    :high_security => node['newrelic']['application_monitoring']['high_security'],
-    :daemon_logfile => node['newrelic']['application_monitoring']['daemon']['logfile'],
-    :daemon_loglevel => node['newrelic']['application_monitoring']['daemon']['loglevel'],
-    :daemon_port => node['newrelic']['application_monitoring']['daemon']['port'],
-    :daemon_max_threads => node['newrelic']['application_monitoring']['daemon']['max_threads'],
-    :daemon_ssl => node['newrelic']['application_monitoring']['daemon']['ssl'],
-    :daemon_ssl_ca_path => node['newrelic']['application_monitoring']['daemon']['ssl_ca_path'],
-    :daemon_ssl_ca_bundle => node['newrelic']['application_monitoring']['daemon']['ssl_ca_bundle'],
-    :daemon_proxy => node['newrelic']['application_monitoring']['daemon']['proxy'],
-    :daemon_pidfile => node['newrelic']['application_monitoring']['daemon']['pidfile'],
-    :daemon_location => node['newrelic']['application_monitoring']['daemon']['location'],
-    :daemon_collector_host => node['newrelic']['application_monitoring']['daemon']['collector_host'],
-    :daemon_dont_launch => node['newrelic']['application_monitoring']['daemon']['dont_launch'],
-    :capture_params => node['newrelic']['application_monitoring']['capture_params'],
-    :ignored_params => node['newrelic']['application_monitoring']['ignored_params'],
-    :error_collector_enable => node['newrelic']['application_monitoring']['error_collector']['enable'],
-    :error_collector_record_database_errors => node['newrelic']['application_monitoring']['error_collector']['record_database_errors'],
-    :error_collector_prioritize_api_errors => node['newrelic']['application_monitoring']['error_collector']['prioritize_api_errors'],
-    :browser_monitoring_auto_instrument => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'],
-    :transaction_tracer_enable => node['newrelic']['application_monitoring']['transaction_tracer']['enable'],
-    :transaction_tracer_threshold => node['newrelic']['application_monitoring']['transaction_tracer']['threshold'],
-    :transaction_tracer_detail => node['newrelic']['application_monitoring']['transaction_tracer']['detail'],
-    :transaction_tracer_slow_sql => node['newrelic']['application_monitoring']['transaction_tracer']['slow_sql'],
-    :transaction_tracer_stack_trace_threshold => node['newrelic']['application_monitoring']['transaction_tracer']['stack_trace_threshold'],
-    :transaction_tracer_explain_threshold => node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold'],
-    :transaction_tracer_record_sql => node['newrelic']['application_monitoring']['transaction_tracer']['record_sql'],
-    :transaction_tracer_custom => node['newrelic']['application_monitoring']['transaction_tracer']['custom'],
-    :framework => node['newrelic']['application_monitoring']['framework'],
-    :webtransaction_name_remove_trailing_path => node['newrelic']['application_monitoring']['webtransaction']['name']['remove_trailing_path'],
-    :webtransaction_name_functions => node['newrelic']['application_monitoring']['webtransaction']['name']['functions'],
-    :webtransaction_name_files => node['newrelic']['application_monitoring']['webtransaction']['name']['files'],
-    :cross_application_tracer_enable => node['newrelic']['application_monitoring']['cross_application_tracer']['enable']
-  )
-  action :create
-  if node['newrelic']['php_agent']['execute_php5enmod']
-    notifies :run, 'execute[newrelic-php5enmod]', :immediately
-  end
-  if node['newrelic']['php_agent']['web_server']['service_name']
-    notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
-  end
-end
-
-if node['newrelic']['php_agent']['config_file_to_be_deleted']
-  # delete the New Relic PHP agent-generated config file
-  # see issues #119 and #143
-  file node['newrelic']['php_agent']['config_file_to_be_deleted'] do
-    action :delete
-  end
-else
-  Chef::Log.warn 'You\'ve opted not to delete any PHP agent-generated config file.'
-end
-
-# https://newrelic.com/docs/php/newrelic-daemon-startup-modes
-log "newrelic-daemon startup mode: #{node['newrelic']['php_agent']['startup_mode']}" do
-  level :info
-end
-
-case node['newrelic']['php_agent']['startup_mode']
-when 'agent'
-  # agent startup mode
-
-  # ensure that the daemon isn't currently running
-  service 'newrelic-daemon' do
-    action [:disable, :stop] # stops the service if it's running and disables it from starting at system boot time
-  end
-
-  # ensure that the file /etc/newrelic/newrelic.cfg does not exist if it does, move it aside (or remove it)
-  execute 'newrelic-backup-cfg' do
-    command 'mv /etc/newrelic/newrelic.cfg /etc/newrelic/newrelic.cfg.external'
-    only_if { File.exist?('/etc/newrelic/newrelic.cfg') }
-  end
-
-  # ensure that the file /etc/newrelic/upgrade_please.key does not exist if it does, move it aside (or remove it)
-  execute 'newrelic-backup-key' do
-    command 'mv /etc/newrelic/upgrade_please.key /etc/newrelic/upgrade_please.key.external'
-    only_if { File.exist?('/etc/newrelic/upgrade_please.key') }
-  end
-when 'external'
-  # external startup mode
-
-  # configure proxy daemon settings
-  template '/etc/newrelic/newrelic.cfg' do
-    cookbook node['newrelic']['php_agent']['template']['cookbook']
-    source node['newrelic']['php_agent']['template']['source']
-    owner 'root'
-    group 'root'
-    mode 0644
-    variables(
-      :daemon_pidfile => node['newrelic']['application_monitoring']['daemon']['pidfile'],
-      :daemon_logfile => node['newrelic']['application_monitoring']['daemon']['logfile'],
-      :daemon_loglevel => node['newrelic']['application_monitoring']['daemon']['loglevel'],
-      :daemon_port => node['newrelic']['application_monitoring']['daemon']['port'],
-      :daemon_ssl => node['newrelic']['application_monitoring']['daemon']['ssl'],
-      :daemon_proxy => node['newrelic']['application_monitoring']['daemon']['proxy'],
-      :daemon_ssl_ca_path => node['newrelic']['application_monitoring']['daemon']['ssl_ca_path'],
-      :daemon_ssl_ca_bundle => node['newrelic']['application_monitoring']['daemon']['ssl_ca_bundle'],
-      :daemon_max_threads => node['newrelic']['application_monitoring']['daemon']['max_threads'],
-      :daemon_collector_host => node['newrelic']['application_monitoring']['daemon']['collector_host']
-    )
-    action :create
-    notifies :restart, 'service[newrelic-daemon]', :immediately
-    if node['newrelic']['php_agent']['web_server']['service_name']
-      notifies :restart, "service[#{node['newrelic']['php_agent']['web_server']['service_name']}]", :delayed
-    end
-  end
-
-  service 'newrelic-daemon' do
-    action [:enable, :start] # starts the service if it's not running and enables it to start at system boot time
-  end
-else
-  Chef::Application.fatal!("#{node['newrelic']['php_agent']['startup_mode']} is not a valid newrelic-daemon startup mode.")
-end
-
-# only used for ChefSpec-purposes
-# we don't want to redeclare node['newrelic']['php_agent']['web_server']['service_name'] (eg. apache2)
-# so decided to add a 'stub_service' to the resource collection which can then be used in the unit test(s)
-service 'stub_service' do
-  action :nothing
+newrelic_agent_php 'Install' do
+  license NewRelic.application_monitoring_license(node)
+  config_file node['newrelic']['php_agent']['config_file'] unless node['newrelic']['php_agent']['config_file'].nil?
+  startup_mode node['newrelic']['php_agent']['startup_mode'] unless node['newrelic']['php_agent']['startup_mode'].nil?
+  app_name node['newrelic']['application_monitoring']['app_name'] unless node['newrelic']['application_monitoring']['app_name'].nil?
+  high_security NewRelic.to_boolean(node['newrelic']['application_monitoring']['high_security']) unless node['newrelic']['application_monitoring']['high_security'].nil?
+  install_silently node['newrelic']['php_agent']['install_silently'] unless node['newrelic']['php_agent']['install_silently'].nil?
+  config_file_to_be_deleted node['newrelic']['php_agent']['config_file_to_be_deleted'] unless node['newrelic']['php_agent']['config_file_to_be_deleted'].nil?
+  service_name node['newrelic']['php_agent']['web_server']['service_name'] unless node['newrelic']['php_agent']['web_server']['service_name'].nil?
+  execute_php5enmod NewRelic.to_boolean(node['newrelic']['php_agent']['execute_php5enmod']) unless node['newrelic']['php_agent']['execute_php5enmod'].nil?
+  cookbook_ini node['newrelic']['php_agent']['template']['cookbook_ini'] unless node['newrelic']['php_agent']['template']['cookbook_ini'].nil?
+  source_ini node['newrelic']['php_agent']['template']['source_ini'] unless node['newrelic']['php_agent']['template']['source_ini'].nil?
+  cookbook node['newrelic']['php_agent']['template']['cookbook'] unless node['newrelic']['php_agent']['template']['cookbook'].nil?
+  source node['newrelic']['php_agent']['template']['source'] unless node['newrelic']['php_agent']['template']['source'].nil?
+  enabled node['newrelic']['application_monitoring']['enabled'] unless node['newrelic']['application_monitoring']['enabled'].nil?
+  logfile node['newrelic']['application_monitoring']['logfile'] unless node['newrelic']['application_monitoring']['logfile'].nil?
+  loglevel node['newrelic']['application_monitoring']['loglevel'] unless node['newrelic']['application_monitoring']['loglevel'].nil?
+  daemon_logfile node['newrelic']['application_monitoring']['daemon']['logfile'] unless node['newrelic']['application_monitoring']['daemon']['logfile'].nil?
+  daemon_loglevel node['newrelic']['application_monitoring']['daemon']['loglevel'] unless node['newrelic']['application_monitoring']['daemon']['loglevel'].nil?
+  daemon_port node['newrelic']['application_monitoring']['daemon']['port'] unless node['newrelic']['application_monitoring']['daemon']['port'].nil?
+  daemon_max_threads node['newrelic']['application_monitoring']['daemon']['max_threads'] unless node['newrelic']['application_monitoring']['daemon']['max_threads'].nil?
+  daemon_ssl NewRelic.to_boolean(node['newrelic']['application_monitoring']['daemon']['ssl']) unless node['newrelic']['application_monitoring']['daemon']['ssl'].nil?
+  daemon_ssl_ca_path node['newrelic']['application_monitoring']['daemon']['ssl_ca_path'] unless node['newrelic']['application_monitoring']['daemon']['ssl_ca_path'].nil?
+  daemon_ssl_ca_bundle node['newrelic']['application_monitoring']['daemon']['ssl_ca_bundle'] unless node['newrelic']['application_monitoring']['daemon']['ssl_ca_bundle'].nil?
+  daemon_proxy node['newrelic']['application_monitoring']['daemon']['proxy'] unless node['newrelic']['application_monitoring']['daemon']['proxy'].nil?
+  daemon_pidfile node['newrelic']['application_monitoring']['daemon']['pidfile'] unless node['newrelic']['application_monitoring']['daemon']['pidfile'].nil?
+  daemon_location node['newrelic']['application_monitoring']['daemon']['location'] unless node['newrelic']['application_monitoring']['daemon']['location'].nil?
+  daemon_collector_host node['newrelic']['application_monitoring']['daemon']['collector_host'] unless node['newrelic']['application_monitoring']['daemon']['collector_host'].nil?
+  daemon_dont_launch node['newrelic']['application_monitoring']['daemon']['dont_launch'] unless node['newrelic']['application_monitoring']['daemon']['dont_launch'].nil?
+  capture_params NewRelic.to_boolean(node['newrelic']['application_monitoring']['capture_params']) unless node['newrelic']['application_monitoring']['capture_params'].nil?
+  ignored_params node['newrelic']['application_monitoring']['ignored_params'] unless node['newrelic']['application_monitoring']['ignored_params'].nil?
+  error_collector_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['error_collector']['enable']) unless node['newrelic']['application_monitoring']['error_collector']['enable'].nil?
+  error_collector_record_database_errors NewRelic.to_boolean(node['newrelic']['application_monitoring']['error_collector']['record_database_errors']) unless node['newrelic']['application_monitoring']['error_collector']['record_database_errors'].nil?
+  error_collector_prioritize_api_errors NewRelic.to_boolean(node['newrelic']['application_monitoring']['error_collector']['prioritize_api_errors']) unless node['newrelic']['application_monitoring']['error_collector']['prioritize_api_errors'].nil?
+  browser_monitoring_auto_instrument NewRelic.to_boolean(node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']) unless node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'].nil?
+  transaction_tracer_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['transaction_tracer']['enable']) unless node['newrelic']['application_monitoring']['transaction_tracer']['enable'].nil?
+  transaction_tracer_threshold node['newrelic']['application_monitoring']['transaction_tracer']['threshold'] unless node['newrelic']['application_monitoring']['transaction_tracer']['threshold'].nil?
+  transaction_tracer_detail node['newrelic']['application_monitoring']['transaction_tracer']['detail'] unless node['newrelic']['application_monitoring']['transaction_tracer']['detail'].nil?
+  transaction_tracer_slow_sql NewRelic.to_boolean(node['newrelic']['application_monitoring']['transaction_tracer']['slow_sql']) unless node['newrelic']['application_monitoring']['transaction_tracer']['slow_sql'].nil?
+  transaction_tracer_stack_trace_threshold node['newrelic']['application_monitoring']['transaction_tracer']['stack_trace_threshold'] unless node['newrelic']['application_monitoring']['transaction_tracer']['stack_trace_threshold'].nil?
+  transaction_tracer_explain_threshold node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold'] unless node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold'].nil?
+  transaction_tracer_record_sql node['newrelic']['application_monitoring']['transaction_tracer']['record_sql'] unless node['newrelic']['application_monitoring']['transaction_tracer']['record_sql'].nil?
+  transaction_tracer_custom node['newrelic']['application_monitoring']['transaction_tracer']['custom'] unless node['newrelic']['application_monitoring']['transaction_tracer']['custom'].nil?
+  framework node['newrelic']['application_monitoring']['framework'] unless node['newrelic']['application_monitoring']['framework'].nil?
+  webtransaction_name_remove_trailing_path NewRelic.to_boolean(node['newrelic']['application_monitoring']['webtransaction']['name']['remove_trailing_path']) unless node['newrelic']['application_monitoring']['webtransaction']['name']['remove_trailing_path'].nil?
+  webtransaction_name_functions node['newrelic']['application_monitoring']['webtransaction']['name']['functions'] unless node['newrelic']['application_monitoring']['webtransaction']['name']['functions'].nil?
+  webtransaction_name_files node['newrelic']['application_monitoring']['webtransaction']['name']['files'] unless node['newrelic']['application_monitoring']['webtransaction']['name']['files'].nil?
+  cross_application_tracer_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['cross_application_tracer']['enable']) unless node['newrelic']['application_monitoring']['cross_application_tracer']['enable'].nil?
 end
