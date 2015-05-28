@@ -50,10 +50,10 @@ def agent_jar
     jar_file = 'newrelic.jar'
   end
 
-  agent_jar = "#{new_resource.install_dir}/newrelic.jar"
+  agent_jar = "#{new_resource.install_dir}/#{jar_file}"
   https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{jar_file}"
 
-  remote_file agent_jar do
+  remote_file 'newrelic.jar' do
     source https_download
     owner 'root'
     group 'root'

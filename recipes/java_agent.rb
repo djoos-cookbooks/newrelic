@@ -40,5 +40,4 @@ newrelic_agent_java 'Install' do
   thread_profiler_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['thread_profiler']['enable']) unless node['newrelic']['application_monitoring']['thread_profiler']['enable'].nil?
   labels node['newrelic']['application_monitoring']['labels'] unless node['newrelic']['application_monitoring']['labels'].nil?
   execute_agent_action node['newrelic']['java_agent']['execute_agent_action'] unless node['newrelic']['java_agent']['execute_agent_action'].nil?
-  install_dir node['newrelic']['java_agent']['install_dir'] unless node['newrelic']['java_agent']['install_dir'].nil?
 end
