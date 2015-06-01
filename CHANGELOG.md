@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.12.1 (2015-06-01)
+
+- Bugfix: fixed detection of the java_agent execute_agent_action node attribute
+
 ## v2.11.2 (2015-04-18)
 
 - Bugfix: ssl attribute in server monitor, see issue #179
