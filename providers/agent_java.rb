@@ -63,8 +63,6 @@ def agent_jar
 end
 
 def generate_agent_config
-  new_resource.app_name = node['hostname'] if new_resource.app_name.nil?
-
   template "#{new_resource.install_dir}/newrelic.yml" do
     cookbook new_resource.template_cookbook
     source new_resource.template_source
