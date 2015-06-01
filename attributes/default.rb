@@ -12,6 +12,7 @@
 default['newrelic']['license'] = nil
 default['newrelic']['server_monitoring']['license'] = nil
 default['newrelic']['application_monitoring']['license'] = nil
+default['newrelic']['api_key'] = nil
 
 # proxy
 default['newrelic']['proxy'] = nil

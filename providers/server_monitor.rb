@@ -7,6 +7,7 @@
 
 # include helper methods
 include NewRelic::Helpers
+include NewRelic::ServerMonitorHelpers
 
 use_inline_resources if defined?(use_inline_resources)
 
@@ -50,6 +51,8 @@ def install_newrelic_service_linux
     supports :status => true, :start => true, :stop => true, :restart => true, :enable => true
     action new_resource.service_actions
   end
+
+  update_newrelic_alert_policy_linux(new_resource.alert_policy_id) if new_resource.alert_policy_id
 end
 
 def install_newrelic_service_windows
@@ -74,6 +77,8 @@ def install_newrelic_service_windows
 end
 
 def remove_newrelic_service_linux
+  update_newrelic_alert_policy_linux(new_resource.alert_policy_id) if new_resource.alert_policy_id
+
   package new_resource.service_name do
     action new_resource.action
   end
@@ -82,5 +87,17 @@ end
 def remove_newrelic_service_windows
   windows_package 'New Relic Server Monitor' do
     action new_resource.action
+  end
+end
+
+def update_newrelic_alert_policy_linux(alert_policy_id)
+  ruby_block 'Move server to newrelic decommissioned policy' do
+    block do
+      update_alert_policy(alert_policy_id)
+    end
+
+    only_if do
+      node['newrelic']['api_key'].length > 0
+    end
   end
 end
