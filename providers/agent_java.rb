@@ -53,7 +53,7 @@ def agent_jar
   agent_jar = "#{new_resource.install_dir}/#{jar_file}"
   https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{jar_file}"
 
-  remote_file 'newrelic.jar' do
+  remote_file agent_jar do
     source https_download
     owner 'root'
     group 'root'
@@ -78,13 +78,13 @@ end
 
 def allow_app_group_write_to_log_file_path
   path = new_resource.logfile_path
-  until path.nil? || path.empty? || path == File::SEPARATOR
+  until path.nil? || path.empty? || path == ::File::SEPARATOR
     directory path do
       group new_resource.app_group
       mode 0775
       action :create
     end
-    path = File.dirname(path)
+    path = ::File.dirname(path)
   end
 end
 
