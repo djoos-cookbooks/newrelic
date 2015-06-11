@@ -8,6 +8,8 @@
 newrelic_agent_java 'Install' do
   license NewRelic.application_monitoring_license(node)
   agent_type 'java'
+  version node['newrelic']['java_agent']['version'] unless node['newrelic']['java_agent']['version'].nil?
+  install_dir node['newrelic']['java_agent']['install_dir'] unless node['newrelic']['java_agent']['install_dir'].nil?
   template_cookbook node['newrelic']['java_agent']['template_cookbook'] unless node['newrelic']['java_agent']['template_cookbook'].nil?
   template_source node['newrelic']['java_agent']['template_source'] unless node['newrelic']['java_agent']['template_source'].nil?
   enabled node['newrelic']['application_monitoring']['enabled'] unless node['newrelic']['application_monitoring']['enabled'].nil?

@@ -27,7 +27,7 @@ action :remove do
 end
 
 def create_install_directory
-  directory new_resource.install_dir do
+  directory "#{new_resource.install_dir}/newrelic" do
     owner new_resource.app_user
     group new_resource.app_group
     recursive true
@@ -47,10 +47,10 @@ def agent_jar
     jar_file = url_content.split(/\W+jar/).first.to_s.split('\\"').last + '.jar'
   else
     version = new_resource.version
-    jar_file = 'newrelic.jar'
+    jar_file = 'newrelic-agent-#{version}.jar'
   end
 
-  agent_jar = "#{new_resource.install_dir}/#{jar_file}"
+  agent_jar = "#{new_resource.install_dir}/newrelic/newrelic.jar"
   https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{jar_file}"
 
   remote_file agent_jar do
@@ -63,7 +63,7 @@ def agent_jar
 end
 
 def generate_agent_config
-  template "#{new_resource.install_dir}/newrelic.yml" do
+  template "#{new_resource.install_dir}/newrelic/newrelic.yml" do
     cookbook new_resource.template_cookbook
     source new_resource.template_source
     owner 'root'
@@ -96,7 +96,8 @@ def install_newrelic
     app_location = new_resource.app_location
   end
   execute "newrelic_install_#{jar_file}" do
-    command "sudo java -jar #{jar_file} -s #{app_location} install"
+    command "sudo java -jar #{jar_file} install"
+    cwd "#{new_resource.install_dir}/newrelic"
     only_if { new_resource.execute_agent_action == true }
   end
 end
