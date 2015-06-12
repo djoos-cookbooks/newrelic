@@ -16,7 +16,6 @@ action :install do
   # Check license key provided
   check_license
   create_install_directory
-  agent_jar
   generate_agent_config
   allow_app_group_write_to_log_file_path
   install_newrelic
@@ -36,7 +35,7 @@ def create_install_directory
   end
 end
 
-def agent_jar
+def install_newrelic
   version = nil
   jar_file = nil
 
@@ -50,20 +49,42 @@ def agent_jar
     jar_file = 'newrelic.jar'
   end
 
-  agent_jar = "#{new_resource.install_dir}/#{jar_file}"
   https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{jar_file}"
 
-  remote_file 'newrelic.jar' do
+  if new_resource.app_location.nil?
+    app_location = new_resource.install_dir
+  else
+    app_location = new_resource.app_location
+  end
+
+  # If we are installing it using java, just cache the file
+  if new_resource.execute_agent_action == true
+    jarfile_location = "#{Chef::Config['file_cache_path']}/newrelic.jar"
+  else
+    jarfile_location = "#{app_location}/newrelic.jar"
+  end
+
+  remote_file jarfile_location do
     source https_download
     owner 'root'
     group 'root'
     mode 0664
     action :create
   end
+
+  execute "newrelic_install_jar_file" do
+    command "sudo java -jar #{jar_file} -s #{app_location} install"
+    only_if { new_resource.execute_agent_action == true }
+  end
 end
 
 def generate_agent_config
-  template "#{new_resource.install_dir}/newrelic.yml" do
+  if new_resource.app_location.nil?
+    app_location = new_resource.install_dir
+  else
+    app_location = new_resource.app_location
+  end
+  template "#{app_location.install_dir}/newrelic.yml" do
     cookbook new_resource.template_cookbook
     source new_resource.template_source
     owner 'root'
@@ -85,19 +106,6 @@ def allow_app_group_write_to_log_file_path
       action :create
     end
     path = File.dirname(path)
-  end
-end
-
-def install_newrelic
-  jar_file = 'newrelic.jar'
-  if new_resource.app_location.nil?
-    app_location = new_resource.install_dir
-  else
-    app_location = new_resource.app_location
-  end
-  execute "newrelic_install_#{jar_file}" do
-    command "sudo java -jar #{jar_file} -s #{app_location} install"
-    only_if { new_resource.execute_agent_action == true }
   end
 end
 
