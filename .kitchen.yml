@@ -19,7 +19,6 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/conf.d/newrelic.ini'
-
   - name: ubuntu-14.04
     run_list:
       - recipe[apt]
@@ -56,10 +55,6 @@ suites:
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
   - name: java-agent
     run_list: "recipe[newrelic_lwrp_test::agent_java]"
-    attributes:
-      newrelic:
-        java_agent:
-          install_dir: '/opt/newrelic/java'
   - name: ruby-agent
     run_list: "recipe[newrelic_lwrp_test::agent_ruby]"
     attributes: 

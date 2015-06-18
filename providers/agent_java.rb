@@ -47,13 +47,12 @@ def agent_jar
     jar_file = url_content.split(/\W+jar/).first.to_s.split('\\"').last + '.jar'
   else
     version = new_resource.version
-    jar_file = 'newrelic.jar'
+    jar_file = "newrelic-agent-#{version}.jar"
   end
 
-  agent_jar = "#{new_resource.install_dir}/#{jar_file}"
   https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{jar_file}"
 
-  remote_file 'newrelic.jar' do
+  remote_file "#{new_resource.install_dir}/newrelic.jar" do
     source https_download
     owner 'root'
     group 'root'
@@ -96,7 +95,8 @@ def install_newrelic
     app_location = new_resource.app_location
   end
   execute "newrelic_install_#{jar_file}" do
-    command "sudo java -jar #{jar_file} -s #{app_location} install"
+    cwd new_resource.install_dir
+    command "sudo java -jar newrelic.jar -s #{app_location} install"
     only_if { new_resource.execute_agent_action == true }
   end
 end

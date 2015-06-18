@@ -11,7 +11,8 @@ include_recipe 'tomcat'
 
 newrelic_agent_java 'Install' do
   license node['newrelic']['license']
-  install_dir node['newrelic']['java_agent']['install_dir']
+  install_dir "#{node['tomcat']['home']}/newrelic"
+  app_location node['tomcat']['home']
   agent_type 'java'
   app_name 'java_test_app'
 end
@@ -19,4 +20,3 @@ end
 # newrelic_agent_java 'Remove' do
 #   action :remove
 # end
-#
