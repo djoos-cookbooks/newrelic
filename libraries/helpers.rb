@@ -8,7 +8,7 @@ module NewRelic
 
     def check_license
       # check license key provided
-      fail 'The NewRelic key is required to notify New Relic of a deployment.' if new_resource.license.nil?
+      fail 'The NewRelic key is required.' if new_resource.license.nil?
     end
 
     def install_newrelic_repo
