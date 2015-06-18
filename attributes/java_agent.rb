@@ -6,7 +6,7 @@
 #
 
 default['newrelic']['java_agent']['version'] = 'latest'
-default['newrelic']['java_agent']['install_dir'] = '/opt/newrelic/java'
+default['newrelic']['java_agent']['install_dir'] = '/opt'
 default['newrelic']['java_agent']['app_user'] = 'newrelic'
 default['newrelic']['java_agent']['app_group'] = 'newrelic'
 default['newrelic']['java_agent']['audit_mode'] = false

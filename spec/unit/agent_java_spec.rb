@@ -17,15 +17,15 @@ describe 'newrelic_lwrp_test::agent_java' do
     end
 
     it 'creates install_dir' do
-      expect(chef_run).to create_directory('/opt/newrelic/java')
+      expect(chef_run).to create_directory('/opt/newrelic')
     end
 
     it 'creates newrelic.jar' do
-      expect(chef_run).to create_remote_file('newrelic.jar')
+      expect(chef_run).to create_remote_file('/opt/newrelic/newrelic.jar')
     end
 
     it 'creates newrelic yml config template from newrelic.yml.erb' do
-      expect(chef_run).to render_file('/opt/newrelic/java/newrelic.yml').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
+      expect(chef_run).to render_file('/opt/newrelic/newrelic.yml').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
 
     it 'execute newrelic_install_newrelic.jar' do

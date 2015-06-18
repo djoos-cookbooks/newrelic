@@ -18,3 +18,5 @@ attribute :source, :kind_of => String, :default => 'agent/nodejs/newrelic.js.erb
 attribute :enabled, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :app_log_level, :kind_of => String, :default => 'info'
 attribute :app_log_filepath, :kind_of => String, :default => nil
+attribute :capture_params, :kind_of => String, :default => nil
+attribute :ignored_params, :kind_of => String, :default => nil
