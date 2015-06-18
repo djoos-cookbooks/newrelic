@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.12.4 (2015-06-18)
+
+- Bugfix: broken YML LWRP after 2.11.0
+
 ## v2.12.3 (2015-06-18)
 
 - Bugfix: newrelic_lwrp_test::agent_java failed due to incorrect remote_file usage
