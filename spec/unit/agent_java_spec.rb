@@ -21,7 +21,7 @@ describe 'newrelic_lwrp_test::agent_java' do
     end
 
     it 'creates newrelic.jar' do
-      expect(chef_run).to create_remote_file('newrelic.jar')
+      expect(chef_run).to create_remote_file('/opt/newrelic/java/newrelic.jar')
     end
 
     it 'creates newrelic yml config template from newrelic.yml.erb' do
