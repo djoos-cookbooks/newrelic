@@ -16,7 +16,6 @@ module NewRelic
       install_newrelic_repo_rhel if node['platform_family'] == ('rhel' || 'fedora')
     end
 
-    # rubocop:disable AbcSize
     def install_newrelic_repo_debian
       apt_repository 'newrelic' do
         uri node['newrelic']['repository']['uri']
@@ -25,7 +24,6 @@ module NewRelic
         key node['newrelic']['repository']['key']
       end
     end
-    # rubocop:enable AbcSize
 
     def install_newrelic_repo_rhel
       yum_repository 'newrelic' do
