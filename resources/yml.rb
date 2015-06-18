@@ -27,6 +27,10 @@ attribute :log_limit_in_kbytes, :default => nil
 attribute :log_daily, :default => nil
 attribute :daemon_ssl, :default => node['newrelic']['application_monitoring']['daemon']['ssl']
 attribute :daemon_proxy, :default => node['newrelic']['application_monitoring']['daemon']['proxy']
+attribute :daemon_proxy_host, :kind_of => String, :default => nil
+attribute :daemon_proxy_port, :kind_of => String, :default => nil
+attribute :daemon_proxy_user, :kind_of => String, :default => nil
+attribute :daemon_proxy_password, :kind_of => String, :default => nil
 attribute :capture_params, :default => node['newrelic']['application_monitoring']['capture_params']
 attribute :ignored_params, :default => node['newrelic']['application_monitoring']['ignored_params']
 attribute :transaction_tracer_enable, :default => node['newrelic']['application_monitoring']['transaction_tracer']['enable']
