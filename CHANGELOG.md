@@ -8,6 +8,7 @@ This file is used to list changes made in each version (>= 2.11.0) of the newrel
 - Bugfix: NodeJS cookbook default attribute to avoid capitalization issue with the New Relic agent
 - Bugfix: Java agent provider was throwing a uninitialized constant Chef::Provider::File::SEPARATOR error due to a missing Ruby namespace resolution operator
 - php -> python typo
+- Take out unnecessary disabling of Metrics/AbcSize
 
 ## v2.12.2 (2015-06-01)
 
