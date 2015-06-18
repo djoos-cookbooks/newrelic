@@ -195,9 +195,9 @@ The New Relic MeetMe plugin-logic is still available, in a separate cookbook: [n
 
 ## Resources / Providers
 
-### `newrelic_server_monitor` 
-This cookbook includes an LWRP for installing the PHP agent   
-   
+### `newrelic_server_monitor`
+This cookbook includes an LWRP for installing the PHP agent
+
 The `newrelic_server_monitor` resource will handle the requirements to configure server monitoring.
 
 #### Actions
@@ -235,12 +235,12 @@ The `newrelic_server_monitor` resource will handle the requirements to configure
 #### Example  
 ```ruby
 newrelic_server_monitor 'Install' do
-  license '0000ffff0000ffff0000ffff0000ffff0000ffff' 
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'
 end
 ```
 
 ### `newrelic_agent_php`  
-This cookbook includes an LWRP for installing the php agent   
+This cookbook includes an LWRP for installing the php agent
 
 The `newrelic_agent_php` resource will handle the requirements to install php application monitoring.  
 
@@ -311,10 +311,10 @@ newrelic_agent_php 'Install' do
   service_name 'httpd'
   config_file '/etc/php.d/newrelic.ini'  
 end  
-```   
+```
 
 ### `newrelic_agent_ruby`  
-This cookbook includes an LWRP for installing the ruby agent   
+This cookbook includes an LWRP for installing the ruby agent
 
 The `newrelic_agent_ruby` resource will handle the requirements to install ruby application monitoring.  
 
@@ -378,11 +378,11 @@ newrelic_agent_ruby 'Install' do
   agent_type 'ruby'
   app_name 'ruby_test_app'
 end
-``` 
+```
 
 
 ### `newrelic_agent_java`  
-This cookbook includes an LWRP for installing the java agent   
+This cookbook includes an LWRP for installing the java agent
 
 The `newrelic_agent_java` resource will handle the requirements to install java application monitoring.  
 
@@ -455,7 +455,7 @@ newrelic_agent_java 'Install' do
   app_name 'java_test_app'
 
 ### `newrelic_agent_python`  
-This cookbook includes an LWRP for installing the newrelic python agent   
+This cookbook includes an LWRP for installing the newrelic python agent
 
 The `newrelic_agent_python` resource will handle the requirements to install python application monitoring.  
 
@@ -465,8 +465,8 @@ The `newrelic_agent_python` resource will handle the requirements to install pyt
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
-See https://docs.newrelic.com/docs/agents/python-agent/installation-configuration/python-agent-configuration#general-settings 
-for an explanation on each attribute. 
+See https://docs.newrelic.com/docs/agents/python-agent/installation-configuration/python-agent-configuration#general-settings
+for an explanation on each attribute.
 
 * `'license'` NewRelic license key
 * `'version'` Python agent version. Will default to latest if nil.
@@ -508,10 +508,10 @@ newrelic_agent_python 'Install' do
   license '0000ffff0000ffff0000ffff0000ffff0000ffff'
   app_name 'my_python_app'
 end
-``` 
- 
+```
+
 ### `newrelic_agent_nodejs`  
-This cookbook includes an LWRP for installing the newrelic nodejs agent   
+This cookbook includes an LWRP for installing the newrelic nodejs agent
 The `newrelic_agent_nodejs` resource will handle the requirements to install nodejs application monitoring.  
 
 #### Actions
@@ -521,7 +521,7 @@ The `newrelic_agent_nodejs` resource will handle the requirements to install nod
 
 #### Attribute parameters
 https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/nodejs-agent-configuration
-for an explanation on each attribute. 
+for an explanation on each attribute.
 
 * `'license'` NewRelic license key
 * `'version'` NewRelic npm package version. Will default to latest if nil.
@@ -547,10 +547,10 @@ newrelic_agent_nodejs '/var/my_node_approot' do
   license '0000ffff0000ffff0000ffff0000ffff0000ffff'
   app_name 'my_nodejs_app'
 end
-``` 
+```
 
 ### `newrelic_agent_dotnet`  
-This cookbook includes an LWRP for installing the dotnet agent   
+This cookbook includes an LWRP for installing the dotnet agent
 
 The `newrelic_agent_dotnet` resource will handle the requirements to install .Net application monitoring.
 

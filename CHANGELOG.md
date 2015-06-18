@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.12.3 (2015-06-02)
+
+- Bugfix: newrelic_lwrp_test::agent_java failed due to incorrect remote_file usage
+- Bugfix: NodeJS cookbook default attribute to avoid capitalization issue with the New Relic agent
+- Bugfix: Java agent provider was throwing a uninitialized constant Chef::Provider::File::SEPARATOR error due to a missing Ruby namespace resolution operator
+- A few tweaks here and there
+
 ## v2.12.2 (2015-06-01)
 
 - Bugfix: illegal to set resource values during the provider execution
@@ -9,6 +16,13 @@ This file is used to list changes made in each version (>= 2.11.0) of the newrel
 ## v2.12.1 (2015-06-01)
 
 - Bugfix: fixed detection of the java_agent execute_agent_action node attribute
+
+## v2.12.0 (2015-05-23)
+
+- Refactoring: convert other agents to lwrp
+- Removal of non-ASCII characters in README.md
+- Java agent upgrades: 'latest'
+- support for labels in Java and Ruby agents
 
 ## v2.11.2 (2015-04-18)
 
