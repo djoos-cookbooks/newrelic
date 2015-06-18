@@ -4,7 +4,7 @@ maintainer_email 'dev@escapestudios.com'
 license 'MIT'
 description 'Installs/Configures New Relic'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '2.12.2'
+version '2.12.3'
 
 %w( debian ubuntu redhat centos fedora scientific amazon windows smartos oracle ).each do |os|
   supports os
