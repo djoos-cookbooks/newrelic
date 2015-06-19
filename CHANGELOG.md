@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.12.5 (2015-06-19)
+
+- nodejs template update - make use of LWRP attributes
+- Cleanup of unused attribute(s) in agent_java LWRP: owner > app_user and group > app_group
+
 ## v2.12.4 (2015-06-18)
 
 - Bugfix: broken YML LWRP after 2.11.0
