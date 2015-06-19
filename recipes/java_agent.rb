@@ -16,8 +16,8 @@ newrelic_agent_java 'Install' do
   enabled node['newrelic']['application_monitoring']['enabled'] unless node['newrelic']['application_monitoring']['enabled'].nil?
   app_name node['newrelic']['application_monitoring']['app_name'] unless node['newrelic']['application_monitoring']['app_name'].nil?
   high_security NewRelic.to_boolean(node['newrelic']['application_monitoring']['high_security']) unless node['newrelic']['application_monitoring']['high_security'].nil?
-  owner node['newrelic']['java_agent']['app_user'] unless node['newrelic']['java_agent']['app_user'].nil?
-  group node['newrelic']['java_agent']['app_group'] unless node['newrelic']['java_agent']['app_group'].nil?
+  app_user node['newrelic']['java_agent']['app_user'] unless node['newrelic']['java_agent']['app_user'].nil?
+  app_group node['newrelic']['java_agent']['app_group'] unless node['newrelic']['java_agent']['app_group'].nil?
   logfile node['newrelic']['application_monitoring']['logfile'] unless node['newrelic']['application_monitoring']['logfile'].nil?
   logfile_path node['newrelic']['application_monitoring']['logfile_path'] unless node['newrelic']['application_monitoring']['logfile_path'].nil?
   loglevel node['newrelic']['application_monitoring']['loglevel'] unless node['newrelic']['application_monitoring']['loglevel'].nil?
