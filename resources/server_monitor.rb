@@ -21,6 +21,7 @@ attribute :labels, :kind_of => String, :default => nil
 attribute :pidfile, :kind_of => String, :default => nil
 attribute :collector_host, :kind_of => String, :default => nil
 attribute :timeout, :kind_of => String, :default => nil
+attribute :alert_policy_id, :kind_of => String, :default => nil
 
 attribute :config_file_user, :kind_of => String, :default => 'root'
 attribute :service_notify_action, :kind_of => String, :default => 'restart'
