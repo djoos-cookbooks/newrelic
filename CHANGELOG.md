@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.13.0 (2015-06-19)
+
+- Ability to configure the alert policy group when installing/removing server monitor
+
 ## v2.12.5 (2015-06-19)
 
 - nodejs template update - make use of LWRP attributes
