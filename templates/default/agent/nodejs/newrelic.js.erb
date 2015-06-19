@@ -28,6 +28,23 @@ exports.config = {
         <% else -%>
 
         <% end -%>
-    }
+    }<% unless @resource.capture_params.nil? -%>,
+    /**
+     * Whether to capture request parameters in the request URL for slow transaction
+     * traces and error traces.
+     */
+    capture_params: <%= @resource.capture_params %>
+    <% else -%>
 
+    <% end -%><% unless @resource.ignored_params.nil? -%>,
+    /**
+     * Comma-delimited list of parameter names to ignore that otherwise would be
+     * captured from request URLs in slow transaction traces and error traces. For
+     * example, some parameters may contain sensitive values you do not want being
+     * sent out of your application.
+     */
+    ignored_params: <%= @resource.ignored_params.split(',') %>
+    <% else -%>
+
+    <% end -%>
 };
