@@ -1,4 +1,12 @@
 if defined?(ChefSpec)
+  ChefSpec.define_matcher :newrelic_server_monitor
+  ChefSpec.define_matcher :newrelic_agent_php
+  ChefSpec.define_matcher :newrelic_agent_java
+  ChefSpec.define_matcher :newrelic_agent_ruby
+  ChefSpec.define_matcher :newrelic_agent_dotnet
+  ChefSpec.define_matcher :newrelic_agent_python
+  ChefSpec.define_matcher :newrelic_agent_nodejs
+
   def install_newrelic_server_monitor(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(:newrelic_server_monitor, :install, resource_name)
   end
