@@ -594,8 +594,8 @@ This cookbook includes an LWRP for notifying New Relic of a deployment
 
 ```ruby
 newrelic_deployment "my-application" do
-    api_key "abcdef"
-    #app_name "my-application"
+    key_type "license_key"
+    key "yourlicensekey"
     app_id 1234567
     description "some description"
     revision "some revision"
