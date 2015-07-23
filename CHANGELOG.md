@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.14.0 (2015-07-23)
+
+- Addition of matcher methods for resources
+- Cleanup documentation on newrelic_deployment LWRP
+
 ## v2.13.0 (2015-06-19)
 
 - Ability to configure the alert policy group when installing/removing server monitor
