@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.14.1 (2015-07-27)
+
+- Do not stop newrelic-daemon unnecessarily when using agent mode
+
 ## v2.14.0 (2015-07-23)
 
 - Addition of matcher methods for resources
