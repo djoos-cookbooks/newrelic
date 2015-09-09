@@ -656,3 +656,7 @@ newrelic.cross_application_tracer.enabled = <%= @resource.cross_application_trac
 <% else %>
 newrelic.high_security = <%= @resource.high_security %>
 <% end %>
+
+<% @resource.additional_config.each do |config, value|%>
+<%= config %> = "<%= value %>"
+<% end %>

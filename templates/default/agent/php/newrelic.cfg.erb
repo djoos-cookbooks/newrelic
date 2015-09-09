@@ -211,3 +211,7 @@ max_threads=<%= @resource.daemon_max_threads %>
 <% else %>
 collector_host=<%= @resource.daemon_collector_host %>
 <% end %>
+
+<% @resource.additional_config.each do |config, value|%>
+<%= config %>=<%= value %>
+<% end %>

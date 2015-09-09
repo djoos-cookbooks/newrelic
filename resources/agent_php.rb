@@ -56,3 +56,4 @@ attribute :webtransaction_name_remove_trailing_path, :kind_of => [TrueClass, Fal
 attribute :webtransaction_name_functions, :kind_of => String, :default => nil
 attribute :webtransaction_name_files, :kind_of => String, :default => nil
 attribute :cross_application_tracer_enable, :kind_of => [TrueClass, FalseClass], :default => true
+attribute :additional_config, :kind_of => Hash, :default => Hash.new
