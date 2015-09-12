@@ -53,4 +53,5 @@ newrelic_agent_php 'Install' do
   webtransaction_name_functions node['newrelic']['application_monitoring']['webtransaction']['name']['functions'] unless node['newrelic']['application_monitoring']['webtransaction']['name']['functions'].nil?
   webtransaction_name_files node['newrelic']['application_monitoring']['webtransaction']['name']['files'] unless node['newrelic']['application_monitoring']['webtransaction']['name']['files'].nil?
   cross_application_tracer_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['cross_application_tracer']['enable']) unless node['newrelic']['application_monitoring']['cross_application_tracer']['enable'].nil?
+  additional_config node['newrelic']['php_agent']['additional_config'] unless node['newrelic']['php_agent']['additional_config'].empty?
 end
