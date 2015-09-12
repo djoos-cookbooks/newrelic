@@ -14,6 +14,7 @@ newrelic_agent_php 'Install' do
   install_silently node['newrelic']['php_agent']['install_silently'] unless node['newrelic']['php_agent']['install_silently'].nil?
   config_file_to_be_deleted node['newrelic']['php_agent']['config_file_to_be_deleted'] unless node['newrelic']['php_agent']['config_file_to_be_deleted'].nil?
   service_name node['newrelic']['php_agent']['web_server']['service_name'] unless node['newrelic']['php_agent']['web_server']['service_name'].nil?
+  service_action node['newrelic']['php_agent']['web_server']['service_action'] unless node['newrelic']['php_agent']['web_server']['service_action'].nil?
   execute_php5enmod NewRelic.to_boolean(node['newrelic']['php_agent']['execute_php5enmod']) unless node['newrelic']['php_agent']['execute_php5enmod'].nil?
   cookbook_ini node['newrelic']['php_agent']['template']['cookbook_ini'] unless node['newrelic']['php_agent']['template']['cookbook_ini'].nil?
   source_ini node['newrelic']['php_agent']['template']['source_ini'] unless node['newrelic']['php_agent']['template']['source_ini'].nil?

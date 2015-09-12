@@ -253,9 +253,10 @@ The `newrelic_agent_php` resource will handle the requirements to install php ap
 
 * `'license'` New Relic license key
 * `'install_silently'` - Determine whether to run the install in silent mode, defaults to false
-* `'app_name'` is missing it will default to `PHP Application`.  
+* `'app_name'` if missing it will default to `PHP Application`.
 * `'startup_mode'` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
-* `'service_name'` - The web server service name. If it is missing the resource will not handle the webserver reload. This allows this to be handled by the recipe, defaults to nil
+* `'service_name'` - The web server service name
+* `'service_action'` - The web server service action, defaults to "restart"
 * `'config_file'` - The New Relic php agent config file, depends on your php external configuration directory; e.g. /etc/php5/conf.d/newrelic.ini, /etc/php5/mods-available/newrelic.ini, ... Defaults to nil
 * `'config_file_to_be_deleted'` - The New Relic php agent-generated config file, e.g. /etc/php5/cli/conf.d/newrelic.ini. If set, the file will get deleted during the Chef run as we want the Chef-generated config file to be used instead (`'config_file'`), defaults to nil
 * `'execute_php5enmod'` - Executes "php5enmod newrelic" if true. Needed if you use the mods-available directory, defaults to false
