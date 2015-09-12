@@ -75,5 +75,5 @@ end
 private
 
 def clean(string)
-  string.gsub('"', '\"').gsub("'", "\'")
+  string.tr('"', '\"').tr("'", "\'")
 end
