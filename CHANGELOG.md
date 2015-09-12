@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.15.0 (2015-09-12)
+
+- Make service action configurable; service_action will be restart by default as per New Relic docs
+- Ability to add additional config
+
 ## v2.14.2 (2015-08-07)
 
 - Trigger apt-get update run
