@@ -376,7 +376,6 @@ The `newrelic_agent_ruby` resource will handle the requirements to install ruby 
 ```ruby
 newrelic_agent_ruby 'Install' do
   license '0000ffff0000ffff0000ffff0000ffff0000ffff'
-  agent_type 'ruby'
   app_name 'ruby_test_app'
 end
 ```
@@ -452,7 +451,6 @@ The `newrelic_agent_java` resource will handle the requirements to install java 
 newrelic_agent_java 'Install' do
   license '0000ffff0000ffff0000ffff0000ffff0000ffff'  
   install_dir '/opt/newrelic/java'
-  agent_type 'java'
   app_name 'java_test_app'
 
 ### `newrelic_agent_python`  
@@ -622,7 +620,6 @@ This cookbook includes an LWRP for generating the newrelic.yml configuration fil
 ```ruby
 newrelicyml="#{my_app_path}/newrelic.yml"
 newrelic_yml newrelicyml do
-  agent_type 'java'
   app_name 'my-super-duper-application'
 end
 ```

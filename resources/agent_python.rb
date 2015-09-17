@@ -8,7 +8,7 @@
 actions :install, :remove
 default_action :install
 
-attribute :license, :kind_of => String, :required => true, :default => nil
+attribute :license, :kind_of => String, :required => true, :default => NewRelic.application_monitoring_license(node)
 attribute :version, :kind_of => String, :default => nil
 attribute :virtualenv, :kind_of => String, :default => nil
 attribute :config_file, :kind_of => String, :default => '/etc/newrelic/newrelic.ini'

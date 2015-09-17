@@ -7,14 +7,14 @@
 actions :install, :remove
 default_action :install
 
-attribute :license, :kind_of => String, :default => nil
+attribute :license, :kind_of => String, :default => NewRelic.application_monitoring_license(node)
 attribute :version, :kind_of => String, :default => 'latest'
 attribute :install_dir, :kind_of => String, :default => '/opt/newrelic/java'
 attribute :execute_agent_action, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :app_location, :kind_of => String, :default => nil
 attribute :app_user, :kind_of => String, :default => 'newrelic'
 attribute :app_group, :kind_of => String, :default => 'newrelic'
-attribute :agent_type, :kind_of => String, :required => true, :default => 'java'
+attribute :agent_type, :kind_of => String, :default => 'java'
 attribute :template_cookbook, :kind_of => String, :default => 'newrelic'
 attribute :template_source, :kind_of => String, :default => 'agent/newrelic.yml.erb'
 
