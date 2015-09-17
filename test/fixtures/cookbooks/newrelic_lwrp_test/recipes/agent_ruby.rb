@@ -14,7 +14,6 @@ end
 
 newrelic_agent_ruby 'Install' do
   license node['newrelic']['license']
-  agent_type 'ruby'
   app_name 'ruby_test_app'
 end
 

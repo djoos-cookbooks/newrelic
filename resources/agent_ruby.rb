@@ -7,8 +7,8 @@
 actions :install, :remove
 default_action :install
 
-attribute :license, :kind_of => String, :default => nil
-attribute :agent_type, :kind_of => String, :required => true, :default => 'ruby'
+attribute :license, :kind_of => String, :default => NewRelic.application_monitoring_license(node)
+attribute :agent_type, :kind_of => String, :default => 'ruby'
 attribute :install_dir, :kind_of => String, :default => '/opt/newrelic/ruby'
 attribute :app_user, :kind_of => String, :default => 'newrelic'
 attribute :app_group, :kind_of => String, :default => 'newrelic'
