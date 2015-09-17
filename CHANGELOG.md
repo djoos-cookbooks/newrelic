@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.16.0 (2015-09-17)
+
+- Add verify_agent_config virtualenv support
+- Refactoring: set agent_type and license as default in resources
+
 ## v2.15.1 (2015-09-17)
 
 - Bugfix: Fedora is [not](https://github.com/chef/ohai/blob/master/lib/ohai/plugins/linux/platform.rb#L180) part of the RedHat platform_family
