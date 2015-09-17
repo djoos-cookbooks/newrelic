@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.15.1 (2015-09-17)
+
+- Bugfix: Fedora is [not](https://github.com/chef/ohai/blob/master/lib/ohai/plugins/linux/platform.rb#L180) part of the RedHat platform_family
+
 ## v2.15.0 (2015-09-12)
 
 - Make service action configurable; service_action will be restart by default as per New Relic docs
