@@ -12,6 +12,6 @@ when 'debian'
   default['newrelic']['repository']['uri'] = 'http://download.newrelic.com/debian/'
   default['newrelic']['repository']['distribution'] = 'newrelic'
   default['newrelic']['repository']['components'] = ['non-free']
-when 'rhel'
+when 'rhel', 'fedora'
   default['newrelic']['repository']['uri'] = 'http://download.newrelic.com/pub/newrelic/el5/$basearch/'
 end
