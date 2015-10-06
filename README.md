@@ -231,6 +231,7 @@ The `newrelic_server_monitor` resource will handle the requirements to configure
 * `'pidfile'` defaults to nil
 * `'collector_host'` defaults to nil
 * `'timeout'` defaults to nil
+* `'alert_policy_id'` default to nil
 
 #### Example  
 ```ruby
@@ -252,6 +253,7 @@ The `newrelic_agent_php` resource will handle the requirements to install php ap
 #### Attribute parameters
 
 * `'license'` New Relic license key
+* `'api_key'` New Relic API key (required by alert_policy_idmo)
 * `'install_silently'` - Determine whether to run the install in silent mode, defaults to false
 * `'app_name'` if missing it will default to `PHP Application`.
 * `'startup_mode'` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
