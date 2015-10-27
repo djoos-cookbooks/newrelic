@@ -452,6 +452,7 @@ newrelic_agent_java 'Install' do
   license '0000ffff0000ffff0000ffff0000ffff0000ffff'  
   install_dir '/opt/newrelic/java'
   app_name 'java_test_app'
+```
 
 ### `newrelic_agent_python`  
 This cookbook includes an LWRP for installing the newrelic python agent
