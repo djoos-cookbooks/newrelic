@@ -13,5 +13,6 @@ newrelic_agent_php 'Install' do
   license node['newrelic']['license']
   service_name node['newrelic']['php_agent']['web_server']['service_name']
   config_file node['newrelic']['php_agent']['php_config']
+  execute_php5enmod node['newrelic']['php_agent']['execute_php5enmod']
   startup_mode 'external'
 end

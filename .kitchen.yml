@@ -51,6 +51,16 @@ suites:
             - nothing
   - name: php-agent
     run_list: "recipe[newrelic_lwrp_test::agent_php]"
+    attributes:
+      newrelic:
+        php_agent:
+          execute_php5enmod: false
+  - name: php-agent-php5enmod
+    run_list: "recipe[newrelic_lwrp_test::agent_php]"
+    attributes:
+      newrelic:
+        php_agent:
+          execute_php5enmod: true
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
   - name: java-agent
