@@ -57,8 +57,8 @@ suites:
     run_list: "recipe[newrelic_lwrp_test::agent_java]"
   - name: ruby-agent
     run_list: "recipe[newrelic_lwrp_test::agent_ruby]"
-    attributes: 
-      newrelic: 
+    attributes:
+      newrelic:
         ruby_agent:
           install_dir: '/opt/newrelic/ruby'
   - name: python-agent-recipe
