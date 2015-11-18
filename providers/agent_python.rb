@@ -50,6 +50,7 @@ def generate_agent_config
     variables(
       :resource => new_resource
     )
+    sensitive true
     action :create
   end
 end

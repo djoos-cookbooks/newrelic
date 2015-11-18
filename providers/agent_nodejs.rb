@@ -42,6 +42,7 @@ def install_nodejs_agent
     variables(
       :resource => new_resource
     )
+    sensitive true
   end
 end
 

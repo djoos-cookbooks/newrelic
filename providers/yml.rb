@@ -37,6 +37,7 @@ action :generate do
     variables(
       :resource => new_resource
     )
+    sensitive true
     action :create
   end
 
