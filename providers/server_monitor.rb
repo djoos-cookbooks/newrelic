@@ -45,7 +45,7 @@ def install_newrelic_service_linux
     variables(
       :resource => new_resource
     )
-    sensitive true # Important to ensure License Key is not logged during Chef run
+    sensitive true
     notifies new_resource.service_notify_action, "service[#{new_resource.service_name}]"
   end
   service new_resource.service_name do

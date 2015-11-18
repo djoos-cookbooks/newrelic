@@ -111,6 +111,7 @@ def generate_agent_config
     variables(
       :resource => new_resource
     )
+    sensitive true
     action :create
     if execute_php5enmod
       notifies :run, 'execute[newrelic-php5enmod]', :immediately
