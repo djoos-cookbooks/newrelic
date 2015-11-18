@@ -27,5 +27,9 @@ describe 'newrelic_lwrp_test::agent_ruby' do
     it 'creates newrelic yml config template from newrelic.yml.erb' do
       expect(chef_run).to render_file('/opt/newrelic/ruby/newrelic.yml').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
+
+    it 'installs rubygems from yum' do
+      expect(chef_run).to install_package('rubygems')
+    end
   end
 end
