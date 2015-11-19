@@ -180,6 +180,10 @@ common: &default_settings
   ignored_params: <%= @resource.ignored_params %>
   <% end %>
 
+  # Configure New Relic to detect custom traces
+  # https://docs.newrelic.com/docs/agents/java-agent/custom-instrumentation/java-instrumentation-annotation
+  enable_custom_tracing: <%= @resource.enable_custom_tracing %>
+
   # Transaction tracer captures deep information about slow
   # transactions and sends this to the New Relic service once a
   # minute. Included in the transaction is the exact call sequence of
