@@ -27,6 +27,10 @@ newrelic_agent_java 'Install' do
   log_daily node['newrelic']['java_agent']['log_daily'] unless node['newrelic']['java_agent']['log_daily'].nil?
   daemon_ssl NewRelic.to_boolean(node['newrelic']['application_monitoring']['daemon']['ssl']) unless node['newrelic']['application_monitoring']['daemon']['ssl'].nil?
   daemon_proxy node['newrelic']['application_monitoring']['daemon']['proxy'] unless node['newrelic']['application_monitoring']['daemon']['proxy'].nil?
+  daemon_proxy_host node['newrelic']['application_monitoring']['daemon']['proxy_host'] unless node['newrelic']['application_monitoring']['daemon']['proxy_host'].nil?
+  daemon_proxy_port node['newrelic']['application_monitoring']['daemon']['proxy_port'] unless node['newrelic']['application_monitoring']['daemon']['proxy_port'].nil?
+  daemon_proxy_user node['newrelic']['application_monitoring']['daemon']['proxy_user'] unless node['newrelic']['application_monitoring']['daemon']['proxy_user'].nil?
+  daemon_proxy_password node['newrelic']['application_monitoring']['daemon']['proxy_password'] unless node['newrelic']['application_monitoring']['daemon']['proxy_password'].nil?
   capture_params node['newrelic']['application_monitoring']['capture_params'] unless node['newrelic']['application_monitoring']['capture_params'].nil?
   ignored_params node['newrelic']['application_monitoring']['ignored_params'] unless node['newrelic']['application_monitoring']['ignored_params'].nil?
   transaction_tracer_enable node['newrelic']['application_monitoring']['transaction_tracer']['enable'] unless node['newrelic']['application_monitoring']['transaction_tracer']['enable'].nil?

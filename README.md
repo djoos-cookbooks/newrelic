@@ -148,6 +148,7 @@ Make sure you run Chef >= 0.10.0.
 * `node['newrelic']['java_agent']['log_daily']` - Override other log rolling configuration and roll the logs daily
 * `node['newrelic']['java_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['java_agent']['execute_agent_action']` - Execute the agent action or not, defaults to true
+* `node['newrelic']['java_agent']['enable_custom_tracing']` - Configure New Relic to detect custom traces
 * `node['newrelic']['java_agent']['app_location']` - Application server's location, defaults to nil
 * `node['newrelic']['java_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
 * `node['newrelic']['java_agent']['template']['source']` - Sets source for template, defaults to 'agent/newrelic.yml.erb'
