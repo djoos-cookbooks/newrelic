@@ -17,7 +17,7 @@
 #          required in order for the server monitor to start.
 # Default: none
 #
-license_key=<%= @license %>
+license_key=<%= @resource.license %>
 
 #
 # Option : loglevel
@@ -32,10 +32,10 @@ license_key=<%= @license %>
 # Default: error
 # Note   : Can also be set with the -d command line option.
 #
-<% if @loglevel.nil? %>
+<% if @resource.loglevel.nil? %>
 loglevel=info
 <% else %>
-loglevel=<%= @loglevel %>
+loglevel=<%= @resource.loglevel %>
 <% end %>
 
 #
@@ -46,10 +46,10 @@ loglevel=<%= @loglevel %>
 # Default: none. However it is highly recommended you set a value for this.
 # Note   : Can also be set with the -l command line option.
 #
-<% if @logfile.nil? %>
+<% if @resource.logfile.nil? %>
 logfile=/var/log/newrelic/nrsysmond.log
 <% else %>
-logfile=<%= @logfile %>
+logfile=<%= @resource.logfile %>
 <% end %>
 
 #
@@ -63,10 +63,10 @@ logfile=<%= @logfile %>
 #            fred:secret@proxy.mydomain.com:8181
 # Default: none (use a direct connection)
 #
-<% if @proxy.nil? %>
+<% if @resource.proxy.nil? %>
 #proxy=
 <% else %>
-proxy=<%= @proxy %>
+proxy=<%= @resource.proxy %>
 <% end %>
 
 #
@@ -77,10 +77,10 @@ proxy=<%= @proxy %>
 #          the SSL certificates settings below.
 # Default: false
 #
-<% if @ssl.nil? %>
+<% if @resource.ssl.nil? %>
 #ssl=false
 <% else %>
-ssl=<%= @ssl %>
+ssl=<%= @resource.ssl %>
 <% end %>
 
 #
@@ -94,10 +94,10 @@ ssl=<%= @ssl %>
 #          /etc/pki/tls/certs/ca-bundle.crt
 # Note   : Can also be set with the -b command line option.
 #
-<% if @ssl_ca_bundle.nil? %>
+<% if @resource.ssl_ca_bundle.nil? %>
 #ssl_ca_bundle=/path/to/your/bundle.crt
 <% else %>
-ssl_ca_bundle=<%= @ssl_ca_bundle %>
+ssl_ca_bundle=<%= @resource.ssl_ca_bundle %>
 <% end %>
 
 #
@@ -108,10 +108,10 @@ ssl_ca_bundle=<%= @ssl_ca_bundle %>
 # Default: /etc/ssl/certs
 # Note   : Can also be set with the -S command line option.
 #
-<% if @ssl_ca_path.nil? %>
+<% if @resource.ssl_ca_path.nil? %>
 #ssl_ca_path=/etc/ssl/certs
 <% else %>
-ssl_ca_path=<%= @ssl_ca_path %>
+ssl_ca_path=<%= @resource.ssl_ca_path %>
 <% end %>
 
 #
@@ -124,10 +124,24 @@ ssl_ca_path=<%= @ssl_ca_path %>
 # Default: Whatever the system calls the host.
 # Note   : Can also be set with the -n command line option.
 #
-<% if @hostname.nil? %>
+<% if @resource.hostname.nil? %>
 #hostname=
 <% else %>
-hostname=<%= @hostname %>
+hostname=<%= @resource.hostname %>
+<% end %>
+
+#
+# Option : labels
+#
+# Value  : A dictionary of label names and values for categories that will be
+#          applied to the data sent from this agent. May also be expressed as
+#          a semicolon delimited string of colon-separated pairs;
+#          for example, labels=Server:One;Data Center:Primary;.
+# Default: nil
+<% if @resource.labels.nil? %>
+#labels=
+<% else %>
+labels=<%= @resource.labels %>
 <% end %>
 
 #
@@ -139,10 +153,10 @@ hostname=<%= @hostname %>
 # Default: /tmp/nrsysmond.pid
 # Note   : Can also be set with the -p command line option.
 #
-<% if @pidfile.nil? %>
+<% if @resource.pidfile.nil? %>
 #pidfile=/var/run/newrelic/nrsysmond.pid
 <% else %>
-pidfile=<%= @pidfile %>
+pidfile=<%= @resource.pidfile %>
 <% end %>
 
 #
@@ -154,10 +168,10 @@ pidfile=<%= @pidfile %>
 #          if SSL is enabled. If the port is omitted the default value is used.
 # Default: collector.newrelic.com
 #
-<% if @collector_host.nil? %>
+<% if @resource.collector_host.nil? %>
 #collector_host=collector.newrelic.com
 <% else %>
-collector_host=<%= @collector_host %>
+collector_host=<%= @resource.collector_host %>
 <% end %>
 
 #
@@ -172,8 +186,8 @@ collector_host=<%= @collector_host %>
 #          once the original connection has been made. The value is in seconds.
 # Default: 30
 #
-<% if @timeout.nil? %>
+<% if @resource.timeout.nil? %>
 #timeout=30
 <% else %>
-timeout=<%= @timeout %>
+timeout=<%= @resource.timeout %>
 <% end %>

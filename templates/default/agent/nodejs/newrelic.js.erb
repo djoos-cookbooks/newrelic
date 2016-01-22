@@ -12,17 +12,39 @@ exports.config = {
     /**
      * Array of application names.
      */
-    app_name: ['<%= @app_name %>'],
+    app_name: ['<%= @resource.app_name %>'],
     /**
      * Your New Relic license key.
      */
-    license_key: '<%= @license %>',
+    license_key: '<%= @resource.license %>',
     logging: {
         /**
          * Level at which to log. 'trace' is most useful to New Relic when diagnosing
          * issues with the agent, 'info' and higher will impose the least overhead on
          * production applications.
          */
-        level: '<%= @app_log_level %>'
-    }
+        level: '<%= @resource.app_log_level %>'<% unless @resource.app_log_filepath.nil? -%>,
+        filepath: '<%= @resource.app_log_filepath %>'
+        <% else -%>
+
+        <% end -%>
+    }<% unless @resource.capture_params.nil? -%>,
+    /**
+     * Whether to capture request parameters in the request URL for slow transaction
+     * traces and error traces.
+     */
+    capture_params: <%= @resource.capture_params %>
+    <% else -%>
+
+    <% end -%><% unless @resource.ignored_params.nil? -%>,
+    /**
+     * Comma-delimited list of parameter names to ignore that otherwise would be
+     * captured from request URLs in slow transaction traces and error traces. For
+     * example, some parameters may contain sensitive values you do not want being
+     * sent out of your application.
+     */
+    ignored_params: <%= @resource.ignored_params.split(',') %>
+    <% else -%>
+
+    <% end -%>
 };
