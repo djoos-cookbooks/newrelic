@@ -36,6 +36,7 @@ attribute :daemon_proxy_user, :kind_of => String, :default => nil
 attribute :daemon_proxy_password, :kind_of => String, :default => nil
 attribute :capture_params, :kind_of => String, :default => nil
 attribute :ignored_params, :kind_of => String, :default => nil
+attribute :enable_custom_tracing, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :transaction_tracer_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :transaction_tracer_threshold, :kind_of => String, :default => nil
 attribute :transaction_tracer_record_sql, :kind_of => String, :default => nil
