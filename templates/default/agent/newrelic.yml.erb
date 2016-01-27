@@ -373,6 +373,10 @@ test:
 production:
   <<: *default_settings
 
+acceptance:
+  <<: *default_settings
+  app_name: <%= @resource.app_name %> (Acceptance)
+
 staging:
   <<: *default_settings
   app_name: <%= @resource.app_name %> (Staging)
