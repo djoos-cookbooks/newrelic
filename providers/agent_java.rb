@@ -43,7 +43,7 @@ def agent_jar
   if new_resource.version == 'latest'
     version = 'current'
 
-    url_content = open('https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/') { |f| f.read.lines.grep(/jar/i).to_s }
+    url_content = open('https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/', {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}) { |f| f.read.lines.grep(/jar/i).to_s }
     jar_file = url_content.split(/\W+jar/).first.to_s.split('\\"').last + '.jar'
   else
     version = new_resource.version
