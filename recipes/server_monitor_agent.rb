@@ -6,6 +6,7 @@
 #
 
 newrelic_server_monitor 'Install' do
+  action node['newrelic']['server_monitoring']['action']
   license NewRelic.server_monitoring_license(node)
   logfile node['newrelic']['server_monitoring']['logfile'] unless node['newrelic']['server_monitoring']['logfile'].nil?
   loglevel node['newrelic']['server_monitoring']['loglevel'] unless node['newrelic']['server_monitoring']['loglevel'].nil?

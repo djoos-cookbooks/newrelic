@@ -32,6 +32,7 @@ default['newrelic']['server_monitoring']['hostname'] = nil
 default['newrelic']['server_monitoring']['pidfile'] = nil
 default['newrelic']['server_monitoring']['collector_host'] = nil
 default['newrelic']['server_monitoring']['timeout'] = nil
+default['newrelic']['server_monitoring']['action'] = :install
 
 # application monitoring
 default['newrelic']['application_monitoring']['enabled'] = nil
