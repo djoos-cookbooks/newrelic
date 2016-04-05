@@ -28,6 +28,12 @@ action :remove do
   remove_newrelic
 end
 
+action :update do
+  generate_agent_config
+  allow_app_group_write_to_log_file_path
+  install_newrelic
+end
+
 def create_install_directory
   directory new_resource.install_dir do
     owner new_resource.app_user

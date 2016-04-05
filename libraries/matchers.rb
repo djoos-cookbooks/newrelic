@@ -23,6 +23,10 @@ if defined?(ChefSpec)
     ChefSpec::Matchers::ResourceMatcher.new(:newrelic_agent_java, :install, resource_name)
   end
 
+  def update_newrelic_agent_java(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:newrelic_agent_java, :update, resource_name)
+  end
+
   def install_newrelic_agent_ruby(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(:newrelic_agent_ruby, :install, resource_name)
   end

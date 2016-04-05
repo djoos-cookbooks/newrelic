@@ -14,6 +14,7 @@ user 'newrelic' do
 end
 
 newrelic_agent_java 'Install' do
+  action node['newrelic']['java_agent']['agent_action']
   license node['newrelic']['license']
   install_dir node['newrelic']['java_agent']['install_dir']
   app_location node['tomcat']['home']

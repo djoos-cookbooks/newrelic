@@ -36,13 +36,13 @@ describe 'newrelic_lwrp_test::server_monitor' do
   context 'Centos, updating method' do
     let(:chef_run) do
       ChefSpec::Runner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_server_monitor']) do |node|
-        node.set['newrelic']['server_monitoring']['action'] = :update
         stub_node_resources(node)
+        node.set['newrelic']['server_monitoring']['action'] = :update
       end.converge(described_recipe)
     end
 
-    it 'Installs New Relic PHP agent' do
-      expect(chef_run).to install_newrelic_server_monitor('Install')
+    it 'Updates New Relic server monitor' do
+      expect(chef_run).to update_newrelic_server_monitor('Install')
     end
 
     it 'creates newrelic config template from nrsysmond.cfg.erb' do

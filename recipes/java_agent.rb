@@ -6,6 +6,7 @@
 #
 
 newrelic_agent_java 'Install' do
+  action node['newrelic']['java_agent']['agent_action']
   license NewRelic.application_monitoring_license(node)
   version node['newrelic']['java_agent']['version'] unless node['newrelic']['java_agent']['version'].nil?
   install_dir node['newrelic']['java_agent']['install_dir'] unless node['newrelic']['java_agent']['install_dir'].nil?

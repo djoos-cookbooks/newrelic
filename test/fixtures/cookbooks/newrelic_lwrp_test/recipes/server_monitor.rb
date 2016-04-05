@@ -7,6 +7,7 @@
 #
 
 newrelic_server_monitor 'Install' do
+  action node['newrelic']['server_monitoring']['action']
   license node['newrelic']['license']
 end
 
