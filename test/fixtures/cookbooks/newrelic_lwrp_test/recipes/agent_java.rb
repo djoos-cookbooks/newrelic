@@ -9,6 +9,10 @@
 include_recipe 'java'
 include_recipe 'tomcat'
 
+user 'newrelic' do
+  action :create
+end
+
 newrelic_agent_java 'Install' do
   license node['newrelic']['license']
   install_dir node['newrelic']['java_agent']['install_dir']
