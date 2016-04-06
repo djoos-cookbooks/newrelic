@@ -637,23 +637,31 @@ end
 ## Usage
 
 1. include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::server_monitor_agent]`  
---- OR ---  
-include the bits and pieces explicitly in a run list:
-	```ruby
-	`recipe[newrelic::repository]`
-	`recipe[newrelic::server_monitor_agent]`
-	`recipe[newrelic::dotnet_agent]`
-	`recipe[newrelic::java_agent]`
-	`recipe[newrelic::nodejs_agent]`
-	`recipe[newrelic::php_agent]`
-	`recipe[newrelic::python_agent]`
-	`recipe[newrelic::ruby_agent]`
-	```
+  --- OR ---  
+  include the bits and pieces explicitly in a run list:
+```ruby
+recipe[newrelic::repository]
+recipe[newrelic::server_monitor_agent]
+recipe[newrelic::dotnet_agent]
+recipe[newrelic::java_agent]
+recipe[newrelic::nodejs_agent]
+recipe[newrelic::php_agent]
+recipe[newrelic::python_agent]
+recipe[newrelic::ruby_agent]
+```
 2. change the `node['newrelic']['license']` attribute to your New Relic license keys  
---- OR ---  
-override the attributes from attributes/default.rb in attributes/customize.rb
---- OR ---  
-override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+  --- OR ---  
+  override attributes from `attributes/default.rb` in `attributes/customize.rb`:
+```ruby
+# attributes/default.rb
+default['newrelic']['license'] = nil
+```
+```ruby
+# attributes/customize.rb
+normal['newrelic']['license'] = 'yourlicensekeygoeshere'
+```
+  --- OR ---  
+  override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 ## References
 
