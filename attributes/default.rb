@@ -2,16 +2,17 @@
 # Cookbook Name:: newrelic
 # Attributes:: default
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 ##############
 # BASIC CONFIG
 ##############
-# license(s)
+# license(s), all default to node['newrelic']['license']
 default['newrelic']['license'] = nil
-default['newrelic']['server_monitoring']['license'] = node['newrelic']['license']
-default['newrelic']['application_monitoring']['license'] = node['newrelic']['license']
+default['newrelic']['server_monitoring']['license'] = nil
+default['newrelic']['application_monitoring']['license'] = nil
+default['newrelic']['api_key'] = nil
 
 # proxy
 default['newrelic']['proxy'] = nil
@@ -38,6 +39,7 @@ default['newrelic']['application_monitoring']['logfile'] = nil
 default['newrelic']['application_monitoring']['logfile_path'] = nil
 default['newrelic']['application_monitoring']['loglevel'] = nil
 default['newrelic']['application_monitoring']['app_name'] = nil
+default['newrelic']['application_monitoring']['high_security'] = nil
 default['newrelic']['application_monitoring']['daemon']['logfile'] = '/var/log/newrelic/newrelic-daemon.log'
 default['newrelic']['application_monitoring']['daemon']['loglevel'] = nil
 default['newrelic']['application_monitoring']['daemon']['port'] = nil
@@ -51,9 +53,12 @@ default['newrelic']['application_monitoring']['daemon']['collector_host'] = nil
 default['newrelic']['application_monitoring']['daemon']['dont_launch'] = nil
 default['newrelic']['application_monitoring']['capture_params'] = nil
 default['newrelic']['application_monitoring']['cross_application_tracer']['enable'] = nil
+default['newrelic']['application_monitoring']['thread_profiler']['enable'] = nil
+default['newrelic']['application_monitoring']['labels'] = nil
 default['newrelic']['application_monitoring']['ignored_params'] = nil
 default['newrelic']['application_monitoring']['error_collector']['enable'] = nil
 default['newrelic']['application_monitoring']['error_collector']['ignore_errors'] = nil
+default['newrelic']['application_monitoring']['error_collector']['ignore_status_codes'] = nil
 default['newrelic']['application_monitoring']['error_collector']['record_database_errors'] = nil
 default['newrelic']['application_monitoring']['error_collector']['prioritize_api_errors'] = nil
 default['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'] = nil

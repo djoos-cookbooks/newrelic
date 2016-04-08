@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Provider:: deployment
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright 2012-2015, Escape Studios
 #
 
 use_inline_resources if defined?(use_inline_resources)
@@ -12,25 +12,27 @@ def whyrun_supported?
 end
 
 action :notify do
+  key = new_resource.key
+
   # @todo take out deprecated api_key logic
   unless new_resource.api_key.nil?
     Chef::Log.warn "The 'api_key'-attribute has been deprecated. Please make use of the key and key_type attributes instead."
-    new_resource.key = new_resource.api_key
+    key = new_resource.api_key
   end
 
-  if new_resource.key.nil?
+  if key.nil?
     Chef::Log.fatal "The #{key_type} is required to notify New Relic of a deployment."
   end
 
   if new_resource.url && (new_resource.app_name || new_resource.app_id)
     Chef::Log.debug 'notify New Relic of deployment'
 
-    data = Array.new
+    data = []
 
     if new_resource.key_type == 'license_key'
-      data << '"x-license-key:' + new_resource.key + '"'
+      data << '"x-license-key:' + key + '"'
     else
-      data << '"x-api-key:' + new_resource.key + '"'
+      data << '"x-api-key:' + key + '"'
     end
 
     unless new_resource.app_name.nil?
@@ -73,5 +75,5 @@ end
 private
 
 def clean(string)
-  string.gsub('"', '\"').gsub("'", "\'")
+  string.tr('"', '\"').tr("'", "\'")
 end
