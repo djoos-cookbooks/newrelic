@@ -30,7 +30,15 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/mods-available/newrelic.ini'
-  - name: centos-6.6
+  - name: centos-6.7
+    attributes:
+      rubygems: 'rubygems'
+      newrelic:
+        php_agent:
+          web_server:
+            service_name: httpd
+          php_config: '/etc/php.d/newrelic.ini'
+  - name: centos-7.1
     attributes:
       rubygems: 'rubygems'
       newrelic:
@@ -67,3 +75,9 @@ suites:
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs]"
   - name: nodejs-agent-recipe
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs_recipe]"
+  - name: docker-agent
+    run_list: "recipe[newrelic_lwrp_test::agent_docker]"
+    excludes:
+      - ubuntu-12.04
+      - ubuntu-14.04
+      - centos-6.7
