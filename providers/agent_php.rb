@@ -19,7 +19,7 @@ action :install do
   check_license
 
   # check config_file attribute value
-  fail "Please specify the path to your New Relic php agent config file (#{new_resource.config_file})" if new_resource.config_file.nil?
+  raise "Please specify the path to your New Relic php agent config file (#{new_resource.config_file})" if new_resource.config_file.nil?
 
   newrelic_repository
   newrelic_php5_broken
@@ -172,7 +172,7 @@ def startup_mode_config
       action [:enable, :start] # starts the service if it's not running and enables it to start at system boot time
     end
   else
-    fail "#{new_resource.startup_mode} is not a valid newrelic-daemon startup mode."
+    raise "#{new_resource.startup_mode} is not a valid newrelic-daemon startup mode."
   end
 end
 

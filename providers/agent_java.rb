@@ -90,11 +90,11 @@ end
 
 def install_newrelic
   jar_file = 'newrelic.jar'
-  if new_resource.app_location.nil?
-    app_location = new_resource.install_dir
-  else
-    app_location = new_resource.app_location
-  end
+  app_location = if new_resource.app_location.nil?
+                   new_resource.install_dir
+                 else
+                   new_resource.app_location
+                 end
   execute "newrelic_install_#{jar_file}" do
     cwd new_resource.install_dir
     command "sudo java -jar newrelic.jar -s #{app_location} install"
@@ -103,11 +103,11 @@ def install_newrelic
 end
 
 def remove_newrelic
-  if new_resource.app_location.nil?
-    app_location = new_resource.install_dir
-  else
-    app_location = new_resource.app_location
-  end
+  app_location = if new_resource.app_location.nil?
+                   new_resource.install_dir
+                 else
+                   new_resource.app_location
+                 end
   if app_location == '/opt/newrelic/java'
     execute 'newrelic-remove-default' do
       command 'sudo rm -rf /opt/newrelic'
