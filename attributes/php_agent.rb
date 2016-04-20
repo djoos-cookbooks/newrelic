@@ -10,6 +10,8 @@ default['newrelic']['php_agent']['install_silently'] = nil
 default['newrelic']['php_agent']['startup_mode'] = nil
 default['newrelic']['php_agent']['web_server']['service_name'] = nil
 default['newrelic']['php_agent']['web_server']['service_action'] = nil
+default['newrelic']['php_agent']['web_server']['service_provider'] = nil
+default['newrelic']['php_agent']['web_server']['service_supports'] =  {:status => true, :start => true, :stop => true, :restart => true, :reload => true}
 default['newrelic']['php_agent']['config_file'] = nil
 default['newrelic']['php_agent']['config_file_to_be_deleted'] = nil
 default['newrelic']['php_agent']['execute_php5enmod'] = nil
