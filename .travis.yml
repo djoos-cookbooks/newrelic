@@ -19,9 +19,9 @@ script:
 branches:
   only:
     - master
-    - /^release/.*$/
-    - /^feature/.*$/
-    - /^bugfix/.*$/
+    - /^release\/.*$/
+    - /^feature\/.*$/
+    - /^bugfix\/.*$/
 
 notifications:
   email:
