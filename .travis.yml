@@ -11,6 +11,7 @@ addons:
 install: true
 
 before_script:
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)" # make ChefDK's Ruby the default
   - chef exec berks install
 
 script:
