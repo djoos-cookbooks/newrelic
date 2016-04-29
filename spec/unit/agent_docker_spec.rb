@@ -21,7 +21,7 @@ describe 'newrelic_lwrp_test::agent_docker' do
     end
 
     it 'creates docker group with newrelic user' do
-      expect(chef_run).to create_group('docker').with(members: ['newrelic'])
+      expect(chef_run).to create_group('docker').with(:members => ['newrelic'])
     end
   end
 end

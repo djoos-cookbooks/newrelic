@@ -23,6 +23,9 @@ action :remove do
 end
 
 def create_install_directory
+  user new_resource.app_user do
+    action :create
+  end
   directory new_resource.install_dir do
     owner new_resource.app_user
     group new_resource.app_group
