@@ -13,5 +13,5 @@ when 'debian'
   default['newrelic']['repository']['distribution'] = 'newrelic'
   default['newrelic']['repository']['components'] = ['non-free']
 when 'rhel', 'fedora'
-  default['newrelic']['repository']['uri'] = 'http://download.newrelic.com/pub/newrelic/el5/$basearch/'
+  default['newrelic']['repository']['uri'] = 'http://artifactory.gannettdigital.com/artifactory/yum-newrelic/'
 end
