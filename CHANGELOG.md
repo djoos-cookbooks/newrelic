@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.20.0 (2016-04-11)
+
+- Add support for enabling new relic with docker on centos
+- Fixed issues with rubocop, foodcritic, and spec testing
+- Deprecated along with atlas centos-6.6 suite in favor of centos-6.7
+
 ## v2.16.0 (2015-09-17)
 
 - Add verify_agent_config virtualenv support

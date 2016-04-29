@@ -9,6 +9,7 @@ end
 
 group :unit, :integration do
   gem 'berkshelf', '~> 3.0'
+  gem 'docker-api', '~> 1.26.2'
 end
 
 group :unit do

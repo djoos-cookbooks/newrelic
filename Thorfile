@@ -80,13 +80,13 @@ class Default < Thor
     else
       msg = nil
 
-      if out.empty?
-        msg = "Running `#{cmd}` failed. Run this command directly for more detailed output."
-      else
-        msg = out
-      end
+      msg = if out.empty?
+              "Running `#{cmd}` failed. Run this command directly for more detailed output."
+            else
+              out
+            end
 
-      fail(msg)
+      raise(msg)
     end
   end
 
@@ -96,7 +96,7 @@ class Default < Thor
 
     Dir.chdir(dir) do
       outbuf = `#{cmd}`
-      block.call(outbuf) if $CHILD_STATUS == 0 && block
+      yield(outbuf) if $CHILD_STATUS == 0 && block
     end
 
     [outbuf, $CHILD_STATUS]
