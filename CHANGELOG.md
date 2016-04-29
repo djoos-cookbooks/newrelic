@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v3.0.0 (2016-04-29)
+
+- Tom Barber updated newrelic cookbook to install from artifactory.gannettdigitl.com
+
 ## v2.20.0 (2016-04-11)
 
 - Add support for enabling new relic with docker on centos
