@@ -97,7 +97,7 @@ def install_newrelic
   end
   execute "newrelic_install_#{jar_file}" do
     cwd new_resource.install_dir
-    command "sudo java -jar newrelic.jar -s #{app_location} install"
+    command "sudo java -jar newrelic.jar -s #{app_location} #{new_resource.agent_action}"
     only_if { new_resource.execute_agent_action == true }
   end
 end
