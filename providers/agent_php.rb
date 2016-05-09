@@ -89,19 +89,17 @@ def webserver_service
 end
 
 def newrelic_php5enmod
-  execute_php5enmod = new_resource.execute_php5enmod ? 'true' : 'false'
   # run php5enmod newrelic
   execute 'newrelic-php5enmod' do
     command 'php5enmod newrelic'
     action :nothing
-    only_if execute_php5enmod
+    only_if { new_resource.execute_php5enmod }
   end
 end
 
 def generate_agent_config
   # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
   # and reload/restart (determined by service_action) the web server in order to pick up the new settings
-  execute_php5enmod = new_resource.execute_php5enmod ? 'true' : 'false'
   template new_resource.config_file do
     cookbook new_resource.cookbook_ini
     source new_resource.source_ini
@@ -113,7 +111,7 @@ def generate_agent_config
     )
     sensitive true
     action :create
-    if execute_php5enmod
+    if new_resource.execute_php5enmod
       notifies :run, 'execute[newrelic-php5enmod]', :immediately
     end
     notifies new_resource.service_action, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
