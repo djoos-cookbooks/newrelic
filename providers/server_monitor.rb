@@ -37,10 +37,6 @@ def install_newrelic_service_linux
   end
 
   # configure your New Relic license key
-  if node.platform_family.include?('debian')
-    execute "dpkg-divert --add --local --rename #{new_resource.config_path}/nrsysmond.cfg"
-  end
-
   template "#{new_resource.config_path}/nrsysmond.cfg" do
     cookbook new_resource.cookbook
     source new_resource.source
