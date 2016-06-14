@@ -125,6 +125,195 @@ common: &default_settings
   log_file_path: <%= @resource.logfile_path %>
   <% end %>
 
+  class_transformer:
+    classloader_blacklist: org.codehaus.groovy.runtime.callsite.CallSiteClassLoader, groovy.lang.GroovyClassLoader$InnerLoader
+    com.newrelic.instrumentation.akka-2.0:
+      enabled: false
+    com.newrelic.instrumentation.akka-2.1:
+      enabled: false
+    com.newrelic.instrumentation.akka-2.2:
+      enabled: false   
+    com.newrelic.instrumentation.netty-3.4:
+      enabled: false
+    com.newrelic.instrumentation.netty-3.8:
+      enabled: false
+    com.newrelic.instrumentation.netty-4.0.0:
+      enabled: false
+    com.newrelic.instrumentation.netty-4.0.8:
+      enabled: false
+    com.newrelic.instrumentation.play-2.1:
+      enabled: false
+    com.newrelic.instrumentation.play-2.2:
+      enabled: false
+    com.newrelic.instrumentation.play-2.3:
+      enabled: false
+    com.newrelic.instrumentation.play-2.4:
+      enabled: false
+    com.newrelic.instrumentation.scala-2.9.3:
+      enabled: false
+    com.newrelic.instrumentation.akka-http-1.0:
+      enabled: false
+    com.newrelic.instrumentation.akka-http-2.0-M1:
+      enabled: false
+    com.newrelic.instrumentation.akka-http-core-0.4:
+      enabled: false
+    com.newrelic.instrumentation.akka-http-core-0.7:
+      enabled: false
+    com.newrelic.instrumentation.akka-http-core-1.0:
+      enabled: false
+    com.newrelic.instrumentation.anorm-2.4:
+      enabled: false
+    com.newrelic.instrumentation.cassandra-datastax-2.1.2:
+      enabled: false
+    com.newrelic.instrumentation.glassfish-3:
+      enabled: false
+    com.newrelic.instrumentation.grails-1.3:
+      enabled: false
+    com.newrelic.instrumentation.hibernate-3.3:
+      enabled: false
+    com.newrelic.instrumentation.hibernate-4.0:
+      enabled: false
+    com.newrelic.instrumentation.hibernate-4.2:
+      enabled: false
+    com.newrelic.instrumentation.hibernate-4.3:
+      enabled: false
+    com.newrelic.instrumentation.httpclient-4.0:
+      enabled: false
+    com.newrelic.instrumentation.httpclient-4.0::
+      enabled: false
+    com.newrelic.instrumentation.jboss-7:
+      enabled: false
+    com.newrelic.instrumentation.tomcat-5.5:
+      enabled: false
+    com.newrelic.instrumentation.ning-async-http-client-1.0:
+      enabled: false
+    com.newrelic.instrumentation.ning-async-http-client-1.1:
+      enabled: false
+    com.newrelic.instrumentation.ning-async-http-client-1.6.1:
+      enabled: false
+    com.newrelic.instrumentation.play-2.0:
+      enabled: false
+    com.newrelic.instrumentation.spray-can-1.3.1:
+      enabled: false
+    com.newrelic.instrumentation.spray-http-1.3.1:
+      enabled: false
+    com.newrelic.instrumentation.akka-http-2.4.2:
+      enabled: false
+    com.newrelic.instrumentation.anorm-2.0:
+      enabled: false
+    com.newrelic.instrumentation.anorm-2.3:
+      enabled: false
+    com.newrelic.instrumentation.cassandra-datastax-3.0.0:
+      enabled: false
+    com.newrelic.instrumentation.cxf-2.7:
+      enabled: false
+    com.newrelic.instrumentation.ejb-3.0:
+      enabled: false
+    com.newrelic.instrumentation.hystrix-1.0.2:
+      enabled: false
+    com.newrelic.instrumentation.hystrix-1.2:
+      enabled: false
+    com.newrelic.instrumentation.hystrix-1.3.0:
+      enabled: false
+    com.newrelic.instrumentation.hystrix-1.3.15:
+      enabled: false
+    com.newrelic.instrumentation.hystrix-1.4:
+      enabled: false
+    com.newrelic.instrumentation.jdbc-embedded-derby-10.10.1.1:
+      enabled: false
+    com.newrelic.instrumentation.jdbc-embedded-derby-10.11.1.1:
+      enabled: false
+    com.newrelic.instrumentation.jdbc-h2:
+      enabled: false
+    com.newrelic.instrumentation.jdbc-hsqldb-1.7.2.2:
+      enabled: false
+    com.newrelic.instrumentation.jdbc-hsqldb-2.2.9:
+      enabled: false
+    com.newrelic.instrumentation.jdbc-mariadb-1.1.7:
+      enabled: false
+    com.newrelic.instrumentation.jdbc-postgresql-9.4.1207:
+      enabled: false
+    com.newrelic.instrumentation.jdbc-postgresql-9.4.1208:
+      enabled: false
+    com.newrelic.instrumentation.jdbc-sqlserver:
+      enabled: false
+    com.newrelic.instrumentation.jedis-1.4.0:
+      enabled: false
+    com.newrelic.instrumentation.jedis-2.7.1:
+      enabled: false
+    com.newrelic.instrumentation.jedis-2.7.2:
+      enabled: false
+    com.newrelic.instrumentation.jetty-6:
+      enabled: false
+    com.newrelic.instrumentation.jetty-7:
+      enabled: false
+    com.newrelic.instrumentation.jetty-7.6:
+      enabled: false
+    com.newrelic.instrumentation.jetty-9:
+      enabled: false
+    com.newrelic.instrumentation.jetty-9.0.4:
+      enabled: false
+    com.newrelic.instrumentation.jetty-9.1:
+      enabled: false
+    com.newrelic.instrumentation.jetty-9.3:
+      enabled: false
+    com.newrelic.instrumentation.jetty-servlet-9:
+      enabled: false
+    com.newrelic.instrumentation.jsp-2.4:
+      enabled: false
+    com.newrelic.instrumentation.mongodb-2.12:
+      enabled: false
+    com.newrelic.instrumentation.mongodb-2.14:
+      enabled: false
+    com.newrelic.instrumentation.mongodb-3.0:
+      enabled: false
+    com.newrelic.instrumentation.mongodb-3.1:
+      enabled: false
+    com.newrelic.instrumentation.rabbit-amqp-2.7:
+      enabled: false
+    com.newrelic.instrumentation.rabbit-amqp-3.5.0:
+      enabled: false
+    com.newrelic.instrumentation.resin-3:
+      enabled: false
+    com.newrelic.instrumentation.resin-4:
+      enabled: false
+    com.newrelic.instrumentation.resteasy-2.2:
+      enabled: false
+    com.newrelic.instrumentation.resteasy-3.0:
+      enabled: false
+    com.newrelic.instrumentation.slick-3.0.0:
+      enabled: false
+    com.newrelic.instrumentation.spray-client-1.3.1:
+      enabled: false
+    com.newrelic.instrumentation.spring-jms-2:
+      enabled: false
+    com.newrelic.instrumentation.spring-ws-2.0:
+      enabled: false
+    com.newrelic.instrumentation.thrift-0.8:
+      enabled: false
+    com.newrelic.instrumentation.weblogic-1:
+      enabled: false
+    com.newrelic.instrumentation.weblogic-12:
+      enabled: false
+    com.newrelic.instrumentation.websphere-7:
+      enabled: false
+    com.newrelic.instrumentation.websphere-8:
+      enabled: false
+    com.newrelic.instrumentation.websphere-jmx-7:
+      enabled: false
+    com.newrelic.instrumentation.websphere-liberty-profile-8.5.5.5:
+      enabled: false
+    com.newrelic.instrumentation.websphere-liberty-profile-dispatcher-8.5.5.5:
+      enabled: false
+    com.newrelic.instrumentation.websphere-liberty-profile-environment-8.5.5.5:
+      enabled: false
+    com.newrelic.instrumentation.wildfly-8:
+      enabled: false
+    com.newrelic.instrumentation.wildfly-8-CAT:
+      enabled: false
+    com.newrelic.instrumentation.wildfly-8-PORT:
+      enabled: false
+
   # The agent communicates with New Relic via https by
   # default.  If you want to communicate with newrelic via http,
   # then turn off SSL by setting this value to false.
