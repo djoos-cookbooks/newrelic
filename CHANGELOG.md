@@ -2,6 +2,20 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v3.0.1 (2016-06-15)
+
+- Al Kemner updated newrelic python resource to support labels
+
+## v3.0.0 (2016-04-29)
+
+- Tom Barber updated newrelic cookbook to install from artifactory.gannettdigitl.com
+
+## v2.20.0 (2016-04-11)
+
+- Add support for enabling new relic with docker on centos
+- Fixed issues with rubocop, foodcritic, and spec testing
+- Deprecated along with atlas centos-6.6 suite in favor of centos-6.7
+
 ## v2.16.0 (2015-09-17)
 
 - Add verify_agent_config virtualenv support

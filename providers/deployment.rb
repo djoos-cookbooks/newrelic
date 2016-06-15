@@ -29,11 +29,11 @@ action :notify do
 
     data = []
 
-    if new_resource.key_type == 'license_key'
-      data << '"x-license-key:' + key + '"'
-    else
-      data << '"x-api-key:' + key + '"'
-    end
+    data << if new_resource.key_type == 'license_key'
+              '"x-license-key:' + key + '"'
+            else
+              '"x-api-key:' + key + '"'
+            end
 
     unless new_resource.app_name.nil?
       data << '-d "deployment[app_name]=' + new_resource.app_name + '"'

@@ -261,3 +261,17 @@ cross_application_tracer.enabled = <%= @resource.cross_application_tracer_enable
 # (https://docs.newrelic.com/docs/release-notes/agent-release-notes/python-release-notes/python-agent-232028)
 feature_flag = @resource.feature_flag
 <% end %>
+
+#
+# Option : labels
+#
+# Value  : A dictionary of label names and values for categories that will be
+#          applied to the data sent from this agent. May also be expressed as
+#          a semicolon delimited string of colon-separated pairs;
+#          for example, labels=Server:One;Data Center:Primary;.
+# Default: nil
+<% if @resource.labels.nil? %>
+#labels=
+<% else %>
+labels=<%= @resource.labels %>
+<% end %>
