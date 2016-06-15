@@ -5,6 +5,8 @@ license 'MIT'
 description 'Installs/Configures New Relic'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '2.19.0'
+issues_url 'https://github.com/djoos-cookbooks/newrelic/issues'
+source_url 'https://github.com/djoos-cookbooks/newrelic'
 
 %w( debian ubuntu redhat centos fedora scientific amazon windows smartos oracle ).each do |os|
   supports os

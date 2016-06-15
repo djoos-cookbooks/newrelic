@@ -4,7 +4,7 @@ gem 'rake'
 
 group :lint do
   gem 'rubocop', '~> 0.18'
-  gem 'foodcritic', '~> 3.0'
+  gem 'foodcritic', '~> 6.3.0'
 end
 
 group :unit, :integration do
