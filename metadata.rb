@@ -12,6 +12,9 @@ source_url 'https://github.com/djoos-cookbooks/newrelic'
   supports os
 end
 
+source_url 'https://github.com/escapestudios-cookbooks/newrelic' if respond_to?(:source_url)
+issues_url 'https://github.com/escapestudios-cookbooks/newrelic/issues' if respond_to?(:issues_url)
+
 depends 'python'
 depends 'curl'
 depends 'apt', '~> 2.0'
