@@ -90,7 +90,7 @@ end
 
 def newrelic_php5enmod
   # run php5enmod newrelic
-  execute 'newrelic-php5enmod' do
+  execute "newrelic-php5enmod#{new_resource.name}" do
     command 'php5enmod newrelic'
     action :nothing
     only_if { new_resource.execute_php5enmod }
@@ -112,7 +112,7 @@ def generate_agent_config
     sensitive true
     action :create
     if new_resource.execute_php5enmod
-      notifies :run, 'execute[newrelic-php5enmod]', :immediately
+      notifies :run, "execute[newrelic-php5enmod#{new_resource.name}]", :immediately
     end
     notifies new_resource.service_action, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
   end
