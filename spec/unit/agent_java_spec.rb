@@ -70,7 +70,7 @@ describe 'newrelic_lwrp_test::agent_java' do
       ChefSpec::Runner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_agent_java']) do |node|
         stub_node_resources(node)
         node.set['newrelic']['java_agent']['class_transformer_config'] = {
-          'classloader_blacklist' => ['class1', 'class2'],
+          'classloader_blacklist' => %w(class1 class2),
           'instrumentation_classes' => {
             'wildfly-8' => { 'enabled' => false },
             'wildfly-8-CAT' => { 'enabled' => false },
@@ -93,6 +93,5 @@ describe 'newrelic_lwrp_test::agent_java' do
     com.newrelic.instrumentation.wildfly-8-PORT:
       enabled: false')
     end
-
   end
 end
