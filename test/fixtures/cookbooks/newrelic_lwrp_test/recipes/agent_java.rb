@@ -19,6 +19,7 @@ newrelic_agent_java 'Install' do
   install_dir node['newrelic']['java_agent']['install_dir']
   app_location node['tomcat']['home']
   app_name 'java_test_app'
+  class_transformer_config node['newrelic']['java_agent']['class_transformer_config']
 end
 
 # newrelic_agent_java 'Remove' do

@@ -48,5 +48,6 @@ attribute :error_collector_ignore_errors, :kind_of => String, :default => nil
 attribute :error_collector_ignore_status_codes, :kind_of => String, :default => nil
 attribute :browser_monitoring_auto_instrument, :kind_of => String, :default => nil
 attribute :cross_application_tracer_enable, :kind_of => [TrueClass, FalseClass], :default => true
+attribute :class_transformer_config, :kind_of => Hash, :default => {}
 attribute :thread_profiler_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :labels, :kind_of => String, :default => nil
