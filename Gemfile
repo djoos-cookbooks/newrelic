@@ -4,11 +4,11 @@ gem 'rake'
 
 group :lint do
   gem 'rubocop', '~> 0.18'
-  gem 'foodcritic', '~> 3.0'
+  gem 'foodcritic', '~> 6.3.0'
 end
 
 group :unit, :integration do
-  gem 'berkshelf', '~> 3.0'
+  gem 'berkshelf', '~> 4.0.1'
 end
 
 group :unit do

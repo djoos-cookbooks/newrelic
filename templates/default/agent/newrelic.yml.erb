@@ -124,7 +124,6 @@ common: &default_settings
   <% else %>
   log_file_path: <%= @resource.logfile_path %>
   <% end %>
-
   # The agent communicates with New Relic via https by
   # default.  If you want to communicate with newrelic via http,
   # then turn off SSL by setting this value to false.
@@ -349,6 +348,27 @@ common: &default_settings
     # Set this attribute to false to prevent injection of the monitoring JavaScript.
     # Default is true.
     enabled: true
+
+
+  <% if @resource.class_transformer_config.empty? %>
+  #class_transformer:
+  #  classloader_blacklist: org.codehaus.groovy.runtime.callsite.CallSiteClassLoader, groovy.lang.GroovyClassLoader$InnerLoader
+  #  com.newrelic.instrumentation.akka-2.0:
+  #    enabled: false
+  <% else %>
+  class_transformer:
+    <% if @resource.class_transformer_config.key?('classloader_blacklist') %>
+    classloader_blacklist: <%= @resource.class_transformer_config['classloader_blacklist'].join(', ') %>
+    <% end %>
+    <% if @resource.class_transformer_config.key?('instrumentation_classes') %>
+      <% @resource.class_transformer_config['instrumentation_classes'].each do |class_to_config, config| %>
+    com.newrelic.instrumentation.<%= class_to_config %>:
+        <% config.each do |key, value| %>
+      <%= key %>: <%= value %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
 
 # Application Environments
 # ------------------------------------------

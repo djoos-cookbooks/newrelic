@@ -4,7 +4,9 @@ maintainer_email 'dev@escapestudios.com'
 license 'MIT'
 description 'Installs/Configures New Relic'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '2.20.0'
+issues_url 'https://github.com/djoos-cookbooks/newrelic/issues'
+source_url 'https://github.com/djoos-cookbooks/newrelic'
+version '2.21.0'
 
 %w( debian ubuntu redhat centos fedora scientific amazon windows smartos oracle ).each do |os|
   supports os
@@ -16,7 +18,7 @@ issues_url 'https://github.com/escapestudios-cookbooks/newrelic/issues' if respo
 depends 'python'
 depends 'curl'
 depends 'apt', '~> 2.0'
-depends 'yum', '~> 3.0'
+depends 'yum', '~> 3.10.0'
 
 recipe 'newrelic', 'Adds the New Relic repository, installs & configures the New Relic server monitor agent.'
 recipe 'newrelic::repository', 'Adds the New Relic repository.'

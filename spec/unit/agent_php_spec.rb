@@ -81,7 +81,7 @@ describe 'newrelic_lwrp_test::agent_php' do
     end
 
     it 'defines newrelic-php5enmod execute block' do
-      expect(chef_run.execute('newrelic-php5enmod')).to do_nothing
+      expect(chef_run.execute('newrelic-php5enmodInstall')).to do_nothing
     end
   end
 end
