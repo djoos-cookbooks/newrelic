@@ -197,7 +197,7 @@ The New Relic MeetMe plugin-logic is still available, in a separate cookbook: [n
 ## Resources / Providers
 
 ### `newrelic_server_monitor`
-This cookbook includes an LWRP for installing the PHP agent
+This cookbook includes an LWRP for installing the server monitor agent
 
 The `newrelic_server_monitor` resource will handle the requirements to configure server monitoring.
 
