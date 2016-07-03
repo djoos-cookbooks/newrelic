@@ -56,8 +56,8 @@ def generate_agent_config
   template "#{new_resource.install_dir}/newrelic.yml" do
     cookbook new_resource.template_cookbook
     source new_resource.template_source
-    owner 'root'
-    group 'root'
+    owner new_resource.app_user
+    group new_resource.app_group
     mode 0644
     variables(
       :resource => new_resource
