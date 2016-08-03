@@ -46,7 +46,7 @@ def generate_agent_config
     source new_resource.source
     owner 'root'
     group 'root'
-    mode 0644
+    mode '0644'
     variables(
       :resource => new_resource
     )

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/escapestudios-cookbooks/newrelic.png)](https://travis-ci.org/escapestudios-cookbooks/newrelic)
+[![Build Status](https://travis-ci.org/djoos-cookbooks/newrelic.png)](https://travis-ci.org/djoos-cookbooks/newrelic)
 
 # newrelic cookbook
 
@@ -192,7 +192,7 @@ require('newrelic');
 ## MeetMe plugin
 
 To make sure the cookbook is focussed on getting New Relic server and application monitoring, no plugin logic is provided here.
-The New Relic MeetMe plugin-logic is still available, in a separate cookbook: [newrelic_meetme_plugin](https://github.com/escapestudios-cookbooks/newrelic_meetme_plugin).
+The New Relic MeetMe plugin-logic is still available, in a separate cookbook: [newrelic_meetme_plugin](https://github.com/djoos-cookbooks/newrelic_meetme_plugin).
 
 ## Resources / Providers
 
@@ -668,6 +668,9 @@ override the attributes on a higher level (http://wiki.opscode.com/display/chef/
 * a very big thanks to heavywater <darrin@heavywater.ca> for the original version of this cookbook
 
 ## License and Authors
+
+Author: David Joos <iam@david.joos.com>
+Copyright: 2016, David Joos
 
 Author: David Joos <david.joos@escapestudios.com>
 Author: Escape Studios Development <dev@escapestudios.com>

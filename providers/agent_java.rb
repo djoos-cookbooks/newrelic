@@ -31,7 +31,7 @@ def create_install_directory
     owner new_resource.app_user
     group new_resource.app_group
     recursive true
-    mode 0775
+    mode '0775'
     action :create
   end
 end
@@ -56,7 +56,7 @@ def agent_jar
     source https_download
     owner new_resource.app_user
     group new_resource.app_group
-    mode 0664
+    mode '0664'
     action :create
   end
 end
@@ -67,7 +67,7 @@ def generate_agent_config
     source new_resource.template_source
     owner new_resource.app_user
     group new_resource.app_group
-    mode 0644
+    mode '0644'
     variables(
       :resource => new_resource
     )
@@ -81,7 +81,7 @@ def allow_app_group_write_to_log_file_path
   until path.nil? || path.empty? || path == ::File::SEPARATOR
     directory path do
       group new_resource.app_group
-      mode 0775
+      mode '0775'
       action :create
     end
     path = ::File.dirname(path)
@@ -90,11 +90,11 @@ end
 
 def install_newrelic
   jar_file = 'newrelic.jar'
-  if new_resource.app_location.nil?
-    app_location = new_resource.install_dir
-  else
-    app_location = new_resource.app_location
-  end
+  app_location = if new_resource.app_location.nil?
+                   new_resource.install_dir
+                 else
+                   new_resource.app_location
+                 end
   execute "newrelic_install_#{jar_file}" do
     cwd new_resource.install_dir
     command "sudo java -jar newrelic.jar -s #{app_location} #{new_resource.agent_action}"
@@ -103,11 +103,11 @@ def install_newrelic
 end
 
 def remove_newrelic
-  if new_resource.app_location.nil?
-    app_location = new_resource.install_dir
-  else
-    app_location = new_resource.app_location
-  end
+  app_location = if new_resource.app_location.nil?
+                   new_resource.install_dir
+                 else
+                   new_resource.app_location
+                 end
   if app_location == '/opt/newrelic/java'
     execute 'newrelic-remove-default' do
       command 'sudo rm -rf /opt/newrelic'

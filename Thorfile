@@ -45,7 +45,7 @@ class Default < Thor
   end
 
   def clean?
-    sh_with_excode('git diff --exit-code')[1] == 0
+    (sh_with_excode('git diff --exit-code')[1]).zero?
   end
 
   def tag_version
@@ -75,18 +75,16 @@ class Default < Thor
   def sh(cmd, dir = source_root, &block)
     out, code = sh_with_excode(cmd, dir, &block)
 
-    if code == 0
+    if code.zero?
       out
     else
-      msg = nil
+      msg = if out.empty?
+              "Running `#{cmd}` failed. Run this command directly for more detailed output."
+            else
+              out
+            end
 
-      if out.empty?
-        msg = "Running `#{cmd}` failed. Run this command directly for more detailed output."
-      else
-        msg = out
-      end
-
-      fail(msg)
+      raise(msg)
     end
   end
 
@@ -96,7 +94,7 @@ class Default < Thor
 
     Dir.chdir(dir) do
       outbuf = `#{cmd}`
-      block.call(outbuf) if $CHILD_STATUS == 0 && block
+      yield(outbuf) if $CHILD_STATUS.zero? && block
     end
 
     [outbuf, $CHILD_STATUS]

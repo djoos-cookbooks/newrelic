@@ -41,7 +41,7 @@ def install_newrelic_service_linux
     source new_resource.source
     owner new_resource.config_file_user
     group new_resource.config_file_group
-    mode 0640
+    mode '0640'
     variables(
       :resource => new_resource
     )
@@ -98,7 +98,7 @@ def update_newrelic_alert_policy_linux(alert_policy_id)
     end
 
     only_if do
-      node['newrelic']['api_key'].length > 0
+      node['newrelic']['api_key'].!empty?
     end
   end
 end

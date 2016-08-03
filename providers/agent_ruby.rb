@@ -27,7 +27,7 @@ def create_install_directory
     owner new_resource.app_user
     group new_resource.app_group
     recursive true
-    mode 0775
+    mode '0775'
     action :create
   end
 end
@@ -58,7 +58,7 @@ def generate_agent_config
     source new_resource.template_source
     owner 'root'
     group 'root'
-    mode 0644
+    mode '0644'
     variables(
       :resource => new_resource
     )

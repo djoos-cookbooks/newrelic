@@ -1,47 +1,25 @@
-Testing the cookbook
-====================
+# Testing the cookbook
 
-Contributions to this cookbook will only be accepted if all tests pass successfully:
+Contributions to this cookbook will only be accepted if all tests pass successfully.
 
-* Ruby syntax/lint checks: [RuboCop](http://batsov.com/rubocop/)
-* Chef syntax/lint checks: [Foodcritic](http://acrmp.github.io/foodcritic/)
-* Unit tests: [ChefSpec](http://code.sethvargo.com/chefspec/)
-* Integration tests: [Test Kitchen](http://kitchen.ci/)
+## Setting up the test environment
 
-Setting up the test environment
--------------------------------
+Install the latest stable version of [ChefDK](https://downloads.chef.io/chef-dk/). You'll need [Vagrant](http://www.vagrantup.com/downloads.html) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) for running integration tests.
 
-Install the latest version of [Vagrant](http://www.vagrantup.com/downloads.html) and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (free) or [VMWare Fusion](http://www.vmware.com/products/fusion) (paid).
+## Running tests
 
-Clone the latest version of the cookbook from the repository.
+### Style checks
 
-    git clone git@github.com:escapestudios-cookbooks/newrelic.git
-    cd newrelic
+`chef exec rake style`
 
-Install the gems used for testing:
+### Unit tests
 
-    bundle install
+`chef exec rake unit`
 
-Install the berkshelf plugin for vagrant:
+## Integration tests
 
-    vagrant plugin install vagrant-berkshelf
+`chef exec rake integration`
 
-Running syntax/lint checks
---------------------------
+## All checks/tests
 
-    bundle exec rake lint
-
-Running unit tests
-------------------
-
-    bundle exec rake unit
-
-Running integration tests
--------------------------
-
-    bundle exec rake integration
-
-Running all checks/tests
-------------------------
-
-    bundle exec rake
+`chef exec rake`

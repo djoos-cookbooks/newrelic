@@ -2,17 +2,30 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
-## v2.20.0 (2016-09-17)
+## v2.20.0 (2016-08-02)
 
 - add usage of Java agent_action attribute
 - ensure setting execute_php5enmod is meaningful
 - DRY up Test Kitchen spec_helper
 - bugfix: forward slashes must be escaped
-- run via ChefDK
+- run tests via ChefDK
 
-##
+## v2.19.0 (2016-04-01)
 
-- ...
+- MIA
+
+## v2.18.0 (2016-01-22)
+
+- MIA
+
+## v2.17.0 (2015-11-18)
+
+- MIA
+
+## v2.16.0 (2015-09-17)
+
+- Add verify_agent_config virtualenv support
+- Refactoring: set agent_type and license as default in resources
 
 ## v2.15.1 (2015-09-17)
 

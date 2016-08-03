@@ -1,14 +1,13 @@
 require 'rspec/core/rake_task'
 
-# syntax/lint checks: RuboCop & Foodcritic
-namespace :lint do
+namespace :style do
   require 'rubocop/rake_task'
   require 'foodcritic'
 
-  desc 'Run Ruby syntax/lint checks'
+  desc 'Run Ruby style checks (RuboCop)'
   RuboCop::RakeTask.new(:ruby)
 
-  desc 'Run Chef syntax/lint checks'
+  desc 'Run Chef style checks (FoodCritic)'
   FoodCritic::Rake::LintTask.new(:chef) do |task|
     task.options = {
       :tags => ['~FC037'],
@@ -18,17 +17,16 @@ namespace :lint do
 end
 
 desc 'Run all syntax/lint checks'
-task :lint => ['lint:ruby', 'lint:chef']
+task :style => ['style:ruby', 'style:chef']
 
-# unit testing: ChefSpec
-desc 'Run RSpec and ChefSpec unit tests'
-RSpec::Core::RakeTask.new(:unit)
+desc 'Run ChefSpec tests'
+RSpec::Core::RakeTask.new(:spec)
 
 # integration testing: Test Kitchen
 namespace :integration do
   require 'kitchen'
 
-  desc 'Run Test Kitchen integration tests with Vagrant'
+  desc 'Run integration tests (Test Kitchen & Vagrant)'
   task :vagrant do
     Kitchen.logger = Kitchen.default_file_logger
     Kitchen::Config.new.instances.each do |instance|
@@ -37,12 +35,16 @@ namespace :integration do
   end
 end
 
+desc 'Run lint checks'
+task :lint => ['style']
+
+desc 'Run unit tests'
+task :unit => ['spec']
+
 desc 'Run all integration tests'
 task :integration => ['integration:vagrant']
 
-# Travic CI
 desc 'Run tests on Travis CI'
 task :travis => [:lint, :unit]
 
-# the default rake task should just run it all
 task :default => [:lint, :unit, :integration]

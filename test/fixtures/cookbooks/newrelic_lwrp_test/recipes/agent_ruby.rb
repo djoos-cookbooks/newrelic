@@ -15,6 +15,8 @@ end
 newrelic_agent_ruby 'Install' do
   license node['newrelic']['license']
   app_name 'ruby_test_app'
+  app_user 'root'
+  app_group 'root'
 end
 
 # newrelic_agent_ruby 'Remove' do
