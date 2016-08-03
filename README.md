@@ -203,8 +203,9 @@ The `newrelic_server_monitor` resource will handle the requirements to configure
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install and install package.  
-- :remove -  Uninstall the New Relic package
+- :install -  Setup the New Relic repository, and install package.
+- :configure -  Configure the installed package.
+- :remove -  Uninstall the New Relic package.
 
 #### Attribute parameters
 

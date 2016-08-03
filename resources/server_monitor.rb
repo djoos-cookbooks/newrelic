@@ -5,8 +5,8 @@
 # Copyright 2012-2015, Escape Studios
 #
 
-actions :install, :remove
-default_action :install
+actions :install, :configure, :remove
+default_action [:install, :configure]
 
 attribute :license, :kind_of => String, :default => NewRelic.server_monitoring_license(node)
 
