@@ -1,17 +1,17 @@
 name 'newrelic'
-maintainer 'Escape Studios'
-maintainer_email 'dev@escapestudios.com'
+maintainer 'David Joos'
+maintainer_email 'development@davidjoos.com'
 license 'MIT'
 description 'Installs/Configures New Relic'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version '2.20.0'
 
-%w( debian ubuntu redhat centos fedora scientific amazon windows smartos oracle ).each do |os|
+%w(debian ubuntu redhat centos fedora scientific amazon windows smartos oracle).each do |os|
   supports os
 end
 
-source_url 'https://github.com/escapestudios-cookbooks/newrelic' if respond_to?(:source_url)
-issues_url 'https://github.com/escapestudios-cookbooks/newrelic/issues' if respond_to?(:issues_url)
+source_url 'https://github.com/djoos-cookbooks/newrelic' if respond_to?(:source_url)
+issues_url 'https://github.com/djoos-cookbooks/newrelic/issues' if respond_to?(:issues_url)
 
 depends 'python'
 depends 'curl'

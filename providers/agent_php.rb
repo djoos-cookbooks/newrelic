@@ -19,7 +19,7 @@ action :install do
   check_license
 
   # check config_file attribute value
-  fail "Please specify the path to your New Relic php agent config file (#{new_resource.config_file})" if new_resource.config_file.nil?
+  raise "Please specify the path to your New Relic php agent config file (#{new_resource.config_file})" if new_resource.config_file.nil?
 
   newrelic_repository
   newrelic_php5_broken
@@ -89,11 +89,13 @@ def webserver_service
 end
 
 def newrelic_php5enmod
+  execute_php5enmod = new_resource.execute_php5enmod
+
   # run php5enmod newrelic
   execute 'newrelic-php5enmod' do
     command 'php5enmod newrelic'
     action :nothing
-    only_if { new_resource.execute_php5enmod }
+    only_if { execute_php5enmod == true }
   end
 end
 
@@ -105,15 +107,14 @@ def generate_agent_config
     source new_resource.source_ini
     owner 'root'
     group 'root'
-    mode 0644
+    mode '0644'
     variables(
       :resource => new_resource
     )
     sensitive true
     action :create
-    if new_resource.execute_php5enmod
-      notifies :run, 'execute[newrelic-php5enmod]', :immediately
-    end
+
+    notifies :run, 'execute[newrelic-php5enmod]', :immediately if new_resource.execute_php5enmod == true
     notifies new_resource.service_action, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
   end
 end
@@ -158,7 +159,7 @@ def startup_mode_config
       source new_resource.source
       owner 'root'
       group 'root'
-      mode 0644
+      mode '0644'
       variables(
         :resource => new_resource
       )
@@ -170,7 +171,7 @@ def startup_mode_config
       action [:enable, :start] # starts the service if it's not running and enables it to start at system boot time
     end
   else
-    fail "#{new_resource.startup_mode} is not a valid newrelic-daemon startup mode."
+    raise "#{new_resource.startup_mode} is not a valid newrelic-daemon startup mode."
   end
 end
 

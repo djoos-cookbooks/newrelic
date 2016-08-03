@@ -1,7 +1,7 @@
 # Encoding: utf-8
 name 'newrelic_lwrp_test'
-maintainer 'Escape Studios'
-maintainer_email 'dev@escapestudios.com'
+maintainer 'David Joos'
+maintainer_email 'development@davidjoos.com'
 license 'MIT'
 description 'Installs/Configures newrelic_poc'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))

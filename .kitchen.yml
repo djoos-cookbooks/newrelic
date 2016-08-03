@@ -1,9 +1,8 @@
 ---
 driver_plugin: vagrant
-driver_config:
-  require_chef_omnibus: true
 
 provisioner:
+  name: chef_zero
   attributes:
     newrelic:
       license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
@@ -20,17 +19,14 @@ platforms:
             service_name: apache2
           php_config: '/etc/php5/conf.d/newrelic.ini'
   - name: ubuntu-14.04
-    run_list:
-      - recipe[apt]
     attributes:
       rubygems: 'rubygems-integration'
       newrelic:
-        php5enmode: = true
         php_agent:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/mods-available/newrelic.ini'
-  - name: centos-6.6
+  - name: centos-6.8
     attributes:
       rubygems: 'rubygems'
       newrelic:
@@ -61,10 +57,16 @@ suites:
       newrelic:
         php_agent:
           execute_php5enmod: true
+    includes:
+      - ubuntu-14.04
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
   - name: java-agent
     run_list: "recipe[newrelic_lwrp_test::agent_java]"
+    attributes:
+      newrelic:
+        java_agent:
+          install_dir: '/opt/tomcat_java_test_app'
   - name: ruby-agent
     run_list: "recipe[newrelic_lwrp_test::agent_ruby]"
     attributes:
