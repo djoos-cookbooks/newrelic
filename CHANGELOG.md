@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
-## v2.20.0 (2016-08-02)
+## v2.20.0 (2016-08-03)
 
 - add usage of Java agent_action attribute
 - ensure setting execute_php5enmod is meaningful
