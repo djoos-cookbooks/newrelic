@@ -27,11 +27,11 @@ attribute :svc_send_data_on_exit_threshold, :kind_of => Integer, :default => 600
 attribute :svc_auto_start, :kind_of => [TrueClass, FalseClass], :default => true
 
 attribute :use_proxy, :kind_of => [TrueClass, FalseClass], :default => false
-attribute :proxy_host, :kind_of => String
+attribute :proxy_host, :kind_of => String, :default => ''
 attribute :proxy_port, :kind_of => Integer, :default => 8080
-attribute :proxy_domain, :kind_of => String
-attribute :proxy_user, :kind_of => String
-attribute :proxy_password, :kind_of => String
+attribute :proxy_domain, :kind_of => String, :default => ''
+attribute :proxy_user, :kind_of => String, :default => ''
+attribute :proxy_password, :kind_of => String, :default => ''
 
 attribute :app_log_level, :kind_of => String, :default => 'info'
 attribute :audit_log_enabled, :kind_of => [TrueClass, FalseClass], :default => false
@@ -71,7 +71,7 @@ attribute :tx_events_attributes_include, :kind_of => Array, :default => []
 
 attribute :custom_events_enabled, :kind_of => [TrueClass, FalseClass], :default => true
 
-attribute :labels, :kind_of => String
+attribute :labels, :kind_of => String, :default => ''
 
 attribute :browser_monitoring_auto_instrument, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :browser_monitoring_req_paths_excluded, :kind_of => Array, :default => []
