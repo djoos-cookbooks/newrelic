@@ -27,6 +27,15 @@ def install_newrelic
     action :install
     not_if { ::File.exist?('C:\\Program Files\\New Relic\\.NET Agent') }
   end
+
+  template "#{new_resource.config_dir}/newrelic.config" do
+    cookbook new_resource.cookbook
+    source new_resource.source
+    variables(
+      :resource => new_resource
+    )
+    sensitive true
+  end
 end
 
 def remove_newrelic
