@@ -15,7 +15,7 @@ issues_url 'https://github.com/djoos-cookbooks/newrelic/issues' if respond_to?(:
 
 depends 'python'
 depends 'curl'
-depends 'apt', '~> 2.0'
+depends 'apt'
 depends 'yum', '~> 3.0'
 
 recipe 'newrelic', 'Adds the New Relic repository, installs & configures the New Relic server monitor agent.'
