@@ -100,3 +100,8 @@ Strainerfile
 ###########
 .vagrant
 Vagrantfile
+
+# Bespoke #
+#############
+.version
+.category
