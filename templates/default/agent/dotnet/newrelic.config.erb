@@ -57,13 +57,15 @@
     <include><%= included_attribute %></include>
     <% end -%>
   </attributes>
-
+  
+  <% unless @resource.app_pools.empty? -%>
   <applicationPools>
     <defaultBehavior instrument="<%= @resource.app_pools_instrument_default_behavior %>"/>
     <% @resource.app_pools.each do |pool| -%>
     <applicationPool name="<%= pool.name %>" instrument="<%= pool.instrument %>"/>
     <% end -%>
   </applicationPools>
+  <% end -%>
 
   <crossApplicationTracer enabled="<%= @resource.cross_application_tracer_enabled %>" />
 
