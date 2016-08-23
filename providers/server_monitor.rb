@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Provider:: server_monitor
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 # include helper methods

@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Resource:: agent_java
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 actions :install, :remove
 default_action :install
