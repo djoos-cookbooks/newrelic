@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.22.1 (2016-08-23)
+
+- workaround for [CHEF-3627](http://tickets.opscode.com/browse/CHEF-3627) in CI-setup
+- adjustment to upload complete-matcher when uploading to the Chef Supermarket
+
 ## v2.22.0 (2016-08-23)
 
 - CI-improvements
