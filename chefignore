@@ -104,4 +104,5 @@ Vagrantfile
 # Bespoke #
 #############
 .version
+cookbooks.tar.gz
 .category
