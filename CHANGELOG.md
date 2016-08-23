@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.22.0 (2016-08-23)
+
+- CI-improvements
+- fix for typo
+
 ## v2.21.0 (2016-08-03)
 
 - remove friction and run tests via ChefDK
