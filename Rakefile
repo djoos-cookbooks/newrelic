@@ -191,7 +191,7 @@ module KnifeCommands
     raise '[KNIFE] Missing cookbook name.' if cookbook_name.blank?
     raise '[KNIFE] Missing cookbook category.' if cookbook_category.blank?
 
-    return if /Upload complete/ =~ GeneralCommands.run("chef exec knife supermarket share #{cookbook_name} #{cookbook_category}", 0, 1)
+    return if /Upload complete/ =~ GeneralCommands.run("chef exec knife supermarket share '#{cookbook_name}' '#{cookbook_category}'", 0, 1)
     raise "[KNIFE] Failed to publish the #{cookbook_name}-cookbook on the Chef Supermarket"
   end
 end
