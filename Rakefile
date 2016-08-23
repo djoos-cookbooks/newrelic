@@ -66,10 +66,6 @@ module ReleaseCommands
     end
   end
 
-  def self.foodcritic_options
-    YAML.load(File.read('.foodcritic.yml'))
-  end
-
   def self.pre_publish
     GitCommands.ensure_branch('master')
 
@@ -214,9 +210,7 @@ namespace :style do
   RuboCop::RakeTask.new(:ruby)
 
   desc 'Run Chef style checks (FoodCritic)'
-  FoodCritic::Rake::LintTask.new(:chef) do |task|
-    task.options = ReleaseCommands.foodcritic_options
-  end
+  FoodCritic::Rake::LintTask.new(:chef)
 end
 
 desc 'Run all syntax/lint checks'
