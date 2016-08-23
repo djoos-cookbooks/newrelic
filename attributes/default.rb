@@ -74,3 +74,5 @@ default['newrelic']['application_monitoring']['framework'] = nil
 default['newrelic']['application_monitoring']['webtransaction']['name']['remove_trailing_path'] = nil
 default['newrelic']['application_monitoring']['webtransaction']['name']['functions'] = nil
 default['newrelic']['application_monitoring']['webtransaction']['name']['files'] = nil
+
+include_attribute 'newrelic::customize'
