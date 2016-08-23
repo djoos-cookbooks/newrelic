@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Attributes:: dotnet_agent
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 default['newrelic']['dotnet_agent']['https_download'] = 'https://download.newrelic.com/dot_net_agent/release/x64'

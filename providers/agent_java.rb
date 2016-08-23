@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: agent_java
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 require 'uri'

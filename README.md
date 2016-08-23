@@ -669,7 +669,7 @@ override the attributes on a higher level (http://wiki.opscode.com/display/chef/
 
 ## License and Authors
 
-Author: David Joos <iam@david.joos.com>
+Author: David Joos <iam@davidjoos.com>
 Copyright: 2016, David Joos
 
 Author: David Joos <david.joos@escapestudios.com>

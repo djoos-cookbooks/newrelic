@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: python_agent
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 newrelic_agent_python 'new python agent' do
