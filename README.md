@@ -14,7 +14,7 @@ The agent installs are being converted into libraries, currently the following a
 * ruby_agent
 * python_agent
 * nodejs_agent
-* dontnet_agent
+* dotnet_agent
 
 More information?
 
