@@ -12,7 +12,6 @@ include NewRelic::ServerMonitorHelpers
 use_inline_resources if defined?(use_inline_resources)
 
 action :install do
-  check_license
   newrelic_repository
   case node['platform_family']
   when 'debian', 'rhel', 'fedora'
@@ -20,6 +19,17 @@ action :install do
   when 'windows'
     install_newrelic_service_windows
   end
+end
+
+action :configure do
+  check_license
+  case node['platform_family']
+  when 'debian', 'rhel', 'fedora'
+    configure_newrelic_service_linux
+  when 'windows'
+    # on Windows service creation/startup is done by the installer
+  end
+
 end
 
 action :remove do
@@ -35,7 +45,9 @@ def install_newrelic_service_linux
   package new_resource.service_name do
     action new_resource.action
   end
-  # configure your New Relic license key
+end
+
+def configure_newrelic_service_linux
   template "#{new_resource.config_path}/nrsysmond.cfg" do
     cookbook new_resource.cookbook
     source new_resource.source
@@ -74,7 +86,6 @@ def install_newrelic_service_windows
       checksum new_resource.windows32_checksum
     end
   end
-  # on Windows service creation/startup is done by the installer
 end
 
 def remove_newrelic_service_linux
