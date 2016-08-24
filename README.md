@@ -651,7 +651,7 @@ include the bits and pieces explicitly in a run list:
 ```
 2. change the `node['newrelic']['license']` attribute to your New Relic license keys  
 --- OR ---  
-override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+[override the attributes on a higher level](http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 ## References
 
@@ -669,7 +669,7 @@ override the attributes on a higher level (http://wiki.opscode.com/display/chef/
 
 ## License and Authors
 
-Author: David Joos <iam@davidjoos.com>
+Author: David Joos <development@davidjoos.com>
 Copyright: 2016, David Joos
 
 Author: David Joos <david.joos@escapestudios.com>
