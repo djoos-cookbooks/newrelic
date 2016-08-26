@@ -17,6 +17,8 @@ attribute :install_silently, :kind_of => [TrueClass, FalseClass], :default => fa
 attribute :config_file_to_be_deleted, :kind_of => String, :default => nil
 attribute :service_name, :kind_of => String, :default => nil
 attribute :service_action, :kind_of => String, :default => 'restart'
+attribute :service_provider, :kind_of => String, :default => nil
+attribute :service_supports, :kind_of => Hash, :default => {:status => true, :start => true, :stop => true, :restart => true, :reload => true}
 attribute :execute_php5enmod, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :cookbook_ini, :kind_of => String, :default => 'newrelic'
 attribute :source_ini, :kind_of => String, :default => 'agent/php/newrelic.ini.erb'

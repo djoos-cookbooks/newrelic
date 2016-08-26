@@ -84,7 +84,10 @@ end
 
 def webserver_service
   service new_resource.service_name do
-    supports :status => true, :start => true, :stop => true, :restart => true, :reload => true
+    supports new_resource.service_supports
+    if new_resource.service_provider
+      provider eval(new_resource.service_provider)
+    end
   end
 end
 
