@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Provider:: agent_nodejs
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 # include helper methods

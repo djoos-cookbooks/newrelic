@@ -14,7 +14,7 @@ The agent installs are being converted into libraries, currently the following a
 * ruby_agent
 * python_agent
 * nodejs_agent
-* dontnet_agent
+* dotnet_agent
 
 More information?
 
@@ -197,7 +197,7 @@ The New Relic MeetMe plugin-logic is still available, in a separate cookbook: [n
 ## Resources / Providers
 
 ### `newrelic_server_monitor`
-This cookbook includes an LWRP for installing the PHP agent
+This cookbook includes an LWRP for installing the server monitor agent
 
 The `newrelic_server_monitor` resource will handle the requirements to configure server monitoring.
 
@@ -651,7 +651,7 @@ include the bits and pieces explicitly in a run list:
 ```
 2. change the `node['newrelic']['license']` attribute to your New Relic license keys  
 --- OR ---  
-override the attributes on a higher level (http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
+[override the attributes on a higher level](http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 ## References
 
@@ -669,7 +669,7 @@ override the attributes on a higher level (http://wiki.opscode.com/display/chef/
 
 ## License and Authors
 
-Author: David Joos <iam@david.joos.com>
+Author: David Joos <development@davidjoos.com>
 Copyright: 2016, David Joos
 
 Author: David Joos <david.joos@escapestudios.com>
