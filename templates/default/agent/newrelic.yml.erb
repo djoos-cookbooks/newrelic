@@ -62,6 +62,13 @@ common: &default_settings
   high_security: <%= @resource.high_security %>
   <% end %>
 
+  # Limits the number of lines the agent collects from each stack trace.
+  # Increasing this value may impact performance, because it increases the amount of memory the agent uses and
+  # the amount of data sent to New Relic.
+  <% unless @resource.max_stack_trace_lines.nil? %>
+  max_stack_trace_lines: <%= @resource.max_stack_trace_lines %>
+  <% end %>
+
   # The agent uses its own log file to keep its logging
   # separate from that of your application.  Specify the log level here.
   # This setting is dynamic, so changes do not require restarting your application.
