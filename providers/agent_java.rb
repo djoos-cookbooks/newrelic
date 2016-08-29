@@ -1,4 +1,3 @@
-
 #
 # Cookbook Name:: newrelic
 # Recipe:: agent_java
