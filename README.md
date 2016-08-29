@@ -414,10 +414,13 @@ The `newrelic_agent_java` resource will handle the requirements to install java 
 * `'template_cookbook'` Sets cookbook for template, defaults to 'newrelic'
 * `'template_source'` Sets source for template, defaults to `agent/newrelic.yml.erb`
 
-#### Advanced parameters  
+#### Advanced parameters
+See https://docs.newrelic.com/docs/agents/java-agent/configuration/java-agent-configuration-config-file
+for an explanation on each attribute.
 
 * `'enabled'` default => true
 * `'high_security'` default => false
+* `'max_stack_trace_lines'` default => false
 * `'owner'` default => 'newrelic'
 * `'group'` default => 'newrelic'
 * `'logfile'` default => nil

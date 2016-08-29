@@ -65,6 +65,7 @@ common: &default_settings
   # Limits the number of lines the agent collects from each stack trace.
   # Increasing this value may impact performance, because it increases the amount of memory the agent uses and
   # the amount of data sent to New Relic.
+  # Default is 30.
   <% unless @resource.max_stack_trace_lines.nil? %>
   max_stack_trace_lines: <%= @resource.max_stack_trace_lines %>
   <% end %>
