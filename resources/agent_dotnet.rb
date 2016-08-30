@@ -23,7 +23,7 @@ attribute :daemon_ssl, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :svc_send_env_info, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :svc_sync_startup, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :svc_send_data_on_exit, :kind_of => [TrueClass, FalseClass], :default => false
-attribute :svc_send_data_on_exit_threshold, :kind_of => Integer, :default => 60000
+attribute :svc_send_data_on_exit_threshold, :kind_of => Integer, :default => 60_000
 attribute :svc_auto_start, :kind_of => [TrueClass, FalseClass], :default => true
 
 attribute :use_proxy, :kind_of => [TrueClass, FalseClass], :default => false
@@ -58,13 +58,13 @@ attribute :error_collector_enabled, :kind_of => [TrueClass, FalseClass], :defaul
 attribute :ignored_exceptions, :kind_of => Array, :default => [
   'System.IO.FileNotFoundException',
   'System.Threading.ThreadAbortException']
-attribute :ignored_status_codes, :kind_of => Array, :default => [401,404]
+attribute :ignored_status_codes, :kind_of => Array, :default => [401, 404]
 
 attribute :high_security_enabled, :kind_of => [TrueClass, FalseClass], :default => false
 
 attribute :tx_events_enabled, :kind_of => [TrueClass, FalseClass], :default => true
-attribute :tx_events_max_samples_per_minute, :kind_of => Integer, :default => 10000
-attribute :tx_events_max_samples_stored, :kind_of => Integer, :default => 10000
+attribute :tx_events_max_samples_per_minute, :kind_of => Integer, :default => 10_000
+attribute :tx_events_max_samples_stored, :kind_of => Integer, :default => 10_000
 attribute :tx_events_attributes_collection_enabled, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :tx_events_attributes_exclude, :kind_of => Array, :default => []
 attribute :tx_events_attributes_include, :kind_of => Array, :default => []
@@ -87,7 +87,7 @@ attribute :tx_tracer_stack_trace_threshold, :kind_of => Integer, :default => 500
 attribute :tx_tracer_record_sql, :kind_of => String, :default => 'obfuscated'
 attribute :tx_tracer_explain_enabled, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :tx_tracer_explain_threshold, :kind_of => Integer, :default => 500
-attribute :tx_tracer_max_segments, :kind_of => Integer, :default => 3000
+attribute :tx_tracer_max_segments, :kind_of => Integer, :default => 3_000
 attribute :tx_tracer_max_stack_trace, :kind_of => Integer, :default => 30
 attribute :tx_tracer_max_explain_plans, :kind_of => Integer, :default => 20
 attribute :tx_tracer_attributes_collection_enabled, :kind_of => [TrueClass, FalseClass], :default => true
