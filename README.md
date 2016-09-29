@@ -9,7 +9,7 @@ This cookbook provides an easy way to install various New Relic agents and the N
 The agent installs are being converted into libraries, currently the following agents are now resources:
 
 * server_monitor
-* php_agent  
+* php_agent
 * java_agent
 * ruby_agent
 * python_agent
@@ -203,7 +203,7 @@ The `newrelic_server_monitor` resource will handle the requirements to configure
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install and install package.  
+- :install -  will setup the New Relic repository, install and install package.
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
@@ -219,7 +219,7 @@ The `newrelic_server_monitor` resource will handle the requirements to configure
 * `'cookbook'` - Sets cookbook for template, defaults to 'newrelic'
 * `'source'` - Sets source for template, defaults to 'agent/server_monitor/nrsysmond.cfg.erb'
 
-#### Advanced parameters  
+#### Advanced parameters
 
 * `'logfile'` defaults to nil
 * `'loglevel'` defaults to nil
@@ -234,21 +234,21 @@ The `newrelic_server_monitor` resource will handle the requirements to configure
 * `'timeout'` defaults to nil
 * `'alert_policy_id'` default to nil
 
-#### Example  
+#### Example
 ```ruby
 newrelic_server_monitor 'Install' do
   license '0000ffff0000ffff0000ffff0000ffff0000ffff'
 end
 ```
 
-### `newrelic_agent_php`  
+### `newrelic_agent_php`
 This cookbook includes an LWRP for installing the php agent
 
-The `newrelic_agent_php` resource will handle the requirements to install php application monitoring.  
+The `newrelic_agent_php` resource will handle the requirements to install php application monitoring.
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install package and update php config with license key.  
+- :install -  will setup the New Relic repository, install package and update php config with license key.
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
@@ -262,13 +262,13 @@ The `newrelic_agent_php` resource will handle the requirements to install php ap
 * `'service_action'` - The web server service action, defaults to "restart"
 * `'config_file'` - The New Relic php agent config file, depends on your php external configuration directory; e.g. /etc/php5/conf.d/newrelic.ini, /etc/php5/mods-available/newrelic.ini, ... Defaults to nil
 * `'config_file_to_be_deleted'` - The New Relic php agent-generated config file, e.g. /etc/php5/cli/conf.d/newrelic.ini. If set, the file will get deleted during the Chef run as we want the Chef-generated config file to be used instead (`'config_file'`), defaults to nil
-* `'execute_php5enmod'` - Executes "php5enmod newrelic" if true. Needed if you use the mods-available directory, defaults to false
+* `'execute_phpenmod'` - Executes "phpenmod newrelic" if true. Needed if you use the mods-available directory, defaults to false
 * `'cookbook_ini'` - Sets cookbook for .ini template, defaults to 'newrelic'
 * `'source_ini'` - Sets source for .ini template, defaults to 'agent/php/newrelic.ini.erb'
 * `'cookbook'` - Sets cookbook for template, defaults to 'newrelic'
 * `'source'` - Sets source for template, defaults to 'agent/php/newrelic.cfg.erb'
 
-#### Advanced parameters  
+#### Advanced parameters
 
 * `'enabled'` default => true
 * `'logfile'` default to nil
@@ -306,25 +306,25 @@ The `newrelic_agent_php` resource will handle the requirements to install php ap
 * `'cross_application_tracer_enable'` default to true
 
 
-#### Example  
+#### Example
 
 ```ruby
-newrelic_agent_php 'Install' do  
-  license '0000ffff0000ffff0000ffff0000ffff0000ffff'  
-  app_name 'php_test_app'  
+newrelic_agent_php 'Install' do
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'
+  app_name 'php_test_app'
   service_name 'httpd'
-  config_file '/etc/php.d/newrelic.ini'  
-end  
+  config_file '/etc/php.d/newrelic.ini'
+end
 ```
 
-### `newrelic_agent_ruby`  
+### `newrelic_agent_ruby`
 This cookbook includes an LWRP for installing the ruby agent
 
-The `newrelic_agent_ruby` resource will handle the requirements to install ruby application monitoring.  
+The `newrelic_agent_ruby` resource will handle the requirements to install ruby application monitoring.
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install package and update ruby config with license key.  
+- :install -  will setup the New Relic repository, install package and update ruby config with license key.
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
@@ -339,7 +339,7 @@ The `newrelic_agent_ruby` resource will handle the requirements to install ruby 
 * `'template']['cookbook'` Sets cookbook for template, defaults to 'newrelic'
 * `'template']['source'` Sets source for template, defaults to 'agent/newrelic.yml.erb
 
-#### Advanced parameters  
+#### Advanced parameters
 
 * `'enabled'` default => true
 * `'app_name'` default => nil
@@ -372,10 +372,10 @@ The `newrelic_agent_ruby` resource will handle the requirements to install ruby 
 * `'error_collector_ignore_status_codes'` default => nil
 * `'browser_monitoring_auto_instrument'` default => nil
 * `'cross_application_tracer_enable'` default => true
-* `'thread_profiler_enable'` default => true  
+* `'thread_profiler_enable'` default => true
 
 
-#### Example  
+#### Example
 ```ruby
 newrelic_agent_ruby 'Install' do
   license '0000ffff0000ffff0000ffff0000ffff0000ffff'
@@ -384,15 +384,15 @@ end
 ```
 
 
-### `newrelic_agent_java`  
+### `newrelic_agent_java`
 This cookbook includes an LWRP for installing the java agent
 
-The `newrelic_agent_java` resource will handle the requirements to install java application monitoring.  
+The `newrelic_agent_java` resource will handle the requirements to install java application monitoring.
 
 #### Actions
 
 
-- :install -  will retrieve Java agent, install and update config with license key.  
+- :install -  will retrieve Java agent, install and update config with license key.
 - :remove -  Uninstall the New Relic agent.
 
 #### Attribute parameters
@@ -414,7 +414,7 @@ The `newrelic_agent_java` resource will handle the requirements to install java 
 * `'template_cookbook'` Sets cookbook for template, defaults to 'newrelic'
 * `'template_source'` Sets source for template, defaults to `agent/newrelic.yml.erb`
 
-#### Advanced parameters  
+#### Advanced parameters
 
 * `'enabled'` default => true
 * `'high_security'` default => false
@@ -449,22 +449,22 @@ The `newrelic_agent_java` resource will handle the requirements to install java 
 * `'thread_profiler_enable'` default => true
 
 
-#### Example  
+#### Example
 ```ruby
 newrelic_agent_java 'Install' do
-  license '0000ffff0000ffff0000ffff0000ffff0000ffff'  
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'
   install_dir '/opt/newrelic/java'
   app_name 'java_test_app'
 ```
 
-### `newrelic_agent_python`  
+### `newrelic_agent_python`
 This cookbook includes an LWRP for installing the newrelic python agent
 
-The `newrelic_agent_python` resource will handle the requirements to install python application monitoring.  
+The `newrelic_agent_python` resource will handle the requirements to install python application monitoring.
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install package and update newrelic python config with license key.  
+- :install -  will setup the New Relic repository, install package and update newrelic python config with license key.
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
@@ -479,7 +479,7 @@ for an explanation on each attribute.
 * `'source'` Config template source. Default 'agent/python/newrelic.ini.erb'
 * `'app_name'` Your newrelic python app name as it will show in the UI. Default => 'Python Application'
 
-#### Advanced parameters  
+#### Advanced parameters
 
 * `'enabled'`  Default true
 * `'logfile'` Default '/tmp/newrelic-python-agent.log'
@@ -502,7 +502,7 @@ for an explanation on each attribute.
 * `'feature_flag'` Default nil
 
 
-#### Example  
+#### Example
 
 ```ruby
 include_recipe 'python'
@@ -513,13 +513,13 @@ newrelic_agent_python 'Install' do
 end
 ```
 
-### `newrelic_agent_nodejs`  
+### `newrelic_agent_nodejs`
 This cookbook includes an LWRP for installing the newrelic nodejs agent
-The `newrelic_agent_nodejs` resource will handle the requirements to install nodejs application monitoring.  
+The `newrelic_agent_nodejs` resource will handle the requirements to install nodejs application monitoring.
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install npm package and update newrelic nodejs config with license key.  
+- :install -  will setup the New Relic repository, install npm package and update newrelic nodejs config with license key.
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
@@ -537,13 +537,13 @@ attribute :license, :kind_of => String, :required => true, :default => nil
 attribute :version, :kind_of => String, :default => nil
 attribute :app_name, :kind_of => String, :default => 'My Node App'
 
-#### Advanced parameters  
+#### Advanced parameters
 
 * `'enabled'`  Default true
 * `'logfile'` Default '/tmp/newrelic-python-agent.log'
 * `'loglevel'` Default 'info'
 
-#### Example  
+#### Example
 
 ```ruby
 newrelic_agent_nodejs '/var/my_node_approot' do
@@ -552,14 +552,14 @@ newrelic_agent_nodejs '/var/my_node_approot' do
 end
 ```
 
-### `newrelic_agent_dotnet`  
+### `newrelic_agent_dotnet`
 This cookbook includes an LWRP for installing the dotnet agent
 
 The `newrelic_agent_dotnet` resource will handle the requirements to install .Net application monitoring.
 
 #### Actions
 
-- :install -  will retrieve .Net agent and install.  
+- :install -  will retrieve .Net agent and install.
 - :remove -  Uninstall the New Relic agent.
 
 #### Attribute parameters
@@ -568,12 +568,12 @@ The `newrelic_agent_dotnet` resource will handle the requirements to install .Ne
 * `'dotnet_agent'` The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 
 
-#### Example  
+#### Example
 ```ruby
 newrelic_agent_dotnet 'Install' do
-  license '0000ffff0000ffff0000ffff0000ffff0000ffff'  
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'
 end
-```  
+```
 
 ### `newrelic_deployment`
 This cookbook includes an LWRP for notifying New Relic of a deployment
@@ -636,8 +636,8 @@ end
 
 ## Usage
 
-1. include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::server_monitor_agent]`  
---- OR ---  
+1. include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::server_monitor_agent]`
+--- OR ---
 include the bits and pieces explicitly in a run list:
 ```ruby
 `recipe[newrelic::repository]`
@@ -649,8 +649,8 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::python_agent]`
 `recipe[newrelic::ruby_agent]`
 ```
-2. change the `node['newrelic']['license']` attribute to your New Relic license keys  
---- OR ---  
+2. change the `node['newrelic']['license']` attribute to your New Relic license keys
+--- OR ---
 [override the attributes on a higher level](http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 ## References
