@@ -101,9 +101,17 @@ suites:
       newrelic:
         ruby_agent:
           install_dir: '/opt/newrelic/ruby'
+    excludes:
+      - ubuntu-16.04
   - name: python-agent-recipe
     run_list: "recipe[newrelic_lwrp_test::agent_python_recipe]"
+    excludes:
+      - ubuntu-16.04
   - name: nodejs-agent
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs]"
+    excludes:
+      - ubuntu-16.04
   - name: nodejs-agent-recipe
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs_recipe]"
+    excludes:
+      - ubuntu-16.04
