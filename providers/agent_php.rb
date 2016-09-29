@@ -27,7 +27,7 @@ action :install do
   webserver_service if new_resource.service_name
   newrelic_install
   newrelic_daemon
-  newrelic_php5enmod
+  newrelic_phpenmod
   generate_agent_config
   delete_config_file
   startup_mode_config
@@ -88,14 +88,23 @@ def webserver_service
   end
 end
 
-def newrelic_php5enmod
-  execute_php5enmod = new_resource.execute_php5enmod
+def newrelic_phpenmod
+  execute_phpenmod = new_resource.execute_phpenmod
 
-  # run php5enmod newrelic
-  execute 'newrelic-php5enmod' do
-    command 'php5enmod newrelic'
+  cmd = Mixlib::ShellOut.new('which php5enmod')
+  cmd.run_command
+
+  enable_mod_cmd = if cmd.error?
+                     'phpenmod'
+                   else
+                     'php5enmod'
+                   end
+
+  # run phpenmod newrelic
+  execute 'newrelic-phpenmod' do
+    command "#{enable_mod_cmd} newrelic"
     action :nothing
-    only_if { execute_php5enmod == true }
+    only_if { execute_phpenmod == true }
   end
 end
 
@@ -114,7 +123,7 @@ def generate_agent_config
     sensitive true
     action :create
 
-    notifies :run, 'execute[newrelic-php5enmod]', :immediately if new_resource.execute_php5enmod == true
+    notifies :run, 'execute[newrelic-phpenmod]', :immediately if new_resource.execute_phpenmod == true
     notifies new_resource.service_action, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
   end
 end

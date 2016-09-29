@@ -28,6 +28,16 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/mods-available/newrelic.ini'
+  - name: ubuntu-16.04
+    run_list:
+      - recipe[apt]
+    attributes:
+      rubygems: 'rubygems-integration'
+      newrelic:
+        php_agent:
+          web_server:
+            service_name: apache2
+          php_config: '/etc/php/7.0/mods-available/newrelic.ini'
   - name: centos-6.8
     attributes:
       rubygems: 'rubygems'
@@ -60,15 +70,16 @@ suites:
     attributes:
       newrelic:
         php_agent:
-          execute_php5enmod: false
-  - name: php-agent-php5enmod
+          execute_phpenmod: false
+  - name: php-agent-phpenmod
     run_list: "recipe[newrelic_lwrp_test::agent_php]"
     attributes:
       newrelic:
         php_agent:
-          execute_php5enmod: true
+          execute_phpenmod: true
     includes:
       - ubuntu-14.04
+      - ubuntu-16.04
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
   - name: java-agent
