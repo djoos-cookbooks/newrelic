@@ -62,14 +62,6 @@ common: &default_settings
   high_security: <%= @resource.high_security %>
   <% end %>
 
-  # Limits the number of lines the agent collects from each stack trace.
-  # Increasing this value may impact performance, because it increases the amount of memory the agent uses and
-  # the amount of data sent to New Relic.
-  # Default is 30.
-  <% unless @resource.max_stack_trace_lines.nil? %>
-  max_stack_trace_lines: <%= @resource.max_stack_trace_lines %>
-  <% end %>
-
   # The agent uses its own log file to keep its logging
   # separate from that of your application.  Specify the log level here.
   # This setting is dynamic, so changes do not require restarting your application.
@@ -170,27 +162,33 @@ common: &default_settings
   proxy_password: <%= @resource.daemon_proxy_password %>
   <% end %>
 
-  # Tells transaction tracer and error collector (when enabled)
-  # whether or not to capture HTTP params.  When true, frameworks can
-  # exclude HTTP parameters from being captured.
-  # Default is false.
-  <% if @resource.capture_params.nil? %>
-  capture_params: false
-  <% else %>
-  capture_params: <%= @resource.capture_params %>
-  <% end %>
-
-  # Tells transaction tracer and error collector to not to collect
-  # specific http request parameters.
-  <% if @resource.ignored_params.nil? %>
-  # ignored_params: credit_card, ssn, password
-  <% else %>
-  ignored_params: <%= @resource.ignored_params %>
-  <% end %>
-
   # Configure New Relic to detect custom traces
   # https://docs.newrelic.com/docs/agents/java-agent/custom-instrumentation/java-instrumentation-annotation
   enable_custom_tracing: <%= @resource.enable_custom_tracing %>
+
+  # Limits the number of lines the agent collects from each stack trace.
+  # Increasing this value may impact performance, because it increases the amount of memory the agent uses and
+  # the amount of data sent to New Relic.
+  # Default is 30.
+  <% unless @resource.max_stack_trace_lines.nil? %>
+  max_stack_trace_lines: <%= @resource.max_stack_trace_lines %>
+  <% end %>
+
+  # Provides the ability to configure the attributes sent to New Relic. These
+  # attributes can be found in transaction traces, traced errors, Insight's
+  # transaction events, and Insight's page views.
+  attributes:
+
+    # When true, attributes will be sent to New Relic. The default is true.
+    enabled: true
+
+    #A comma separated list of attribute keys whose values should
+    # be sent to New Relic.
+    #include:
+
+    # A comma separated list of attribute keys whose values should
+    # not be sent to New Relic.
+    #exclude:
 
   # Transaction tracer captures deep information about slow
   # transactions and sends this to the New Relic service once a
@@ -275,7 +273,6 @@ common: &default_settings
     # Default is 20.
     top_n: 20
 
-
   # Error collector captures information about uncaught exceptions and
   # sends them to New Relic for viewing
   error_collector:
@@ -306,10 +303,22 @@ common: &default_settings
     ignore_status_codes: <%= @resource.error_collector_ignore_status_codes %>
     <% end %>
 
+  # Transaction Events are used for Histograms and Percentiles. Unaggregated data is collected
+  # for each web transaction and sent to the server on harvest.
+  transaction_events:
+
+    # Set to false to disable transaction events.
+    # Default is true.
+    enabled: true
+
+    # Events are collected up to the configured amount. Afterwards, events are sampled to
+    # maintain an even distribution across the harvest cycle.
+    # Default is 2000.  Setting to 0 will disable.
+    max_samples_stored: 2000
+
   # Cross Application Tracing adds request and response headers to
-  # external calls using the Apache HttpClient libraries to provided better
+  # external calls using supported HTTP libraries to provide better
   # performance data when calling applications monitored by other New Relic Agents.
-  #
   cross_application_tracer:
     # Set to true to enable cross application tracing.
     # Default is true.
@@ -357,6 +366,26 @@ common: &default_settings
     # Set this attribute to false to prevent injection of the monitoring JavaScript.
     # Default is true.
     enabled: true
+
+  class_transformer:
+    # This instrumentation reports the name of the user principal returned from
+    # HttpServletRequest.getUserPrincipal() when servlets and filters are invoked.
+    com.newrelic.instrumentation.servlet-user:
+      enabled: false
+
+    com.newrelic.instrumentation.spring-aop-2:
+      enabled: false
+
+    # Classes loaded by classloaders in this list will not be instrumented.
+    # This is a useful optimization for runtimes which use classloaders to
+    # load dynamic classes which the agent would not instrument.
+    classloader_excludes:
+      groovy.lang.GroovyClassLoader$InnerLoader,
+      org.codehaus.groovy.runtime.callsite.CallSiteClassLoader,
+      com.collaxa.cube.engine.deployment.BPELClassLoader,
+      org.springframework.data.convert.ClassGeneratingEntityInstantiator$ObjectInstantiatorClassGenerator,
+      org.mvel2.optimizers.impl.asm.ASMAccessorOptimizer$ContextClassLoader,
+      gw.internal.gosu.compiler.SingleServingGosuClassLoader,
 
 # Application Environments
 # ------------------------------------------
