@@ -80,7 +80,15 @@ describe 'newrelic_lwrp_test::agent_php' do
       end
     end
 
-    it 'defines newrelic-phpenmod execute block' do
+    it 'defines newrelic-phpenmod execute block with php5enmod' do
+      expect(chef_run.execute('newrelic-phpenmod')).to do_nothing
+    end
+
+    it 'defines newrelic-phpenmod execute block without php5enmod' do
+      shellout = double('shellout')
+      shellout.stub(:run_command)
+      shellout.stub(:error?).and_return(true)
+      Mixlib::ShellOut.stub(:new).with('which php5enmod').and_return(shellout)
       expect(chef_run.execute('newrelic-phpenmod')).to do_nothing
     end
   end
