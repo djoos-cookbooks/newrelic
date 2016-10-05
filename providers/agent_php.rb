@@ -94,11 +94,7 @@ def newrelic_phpenmod
   cmd = Mixlib::ShellOut.new('which php5enmod')
   cmd.run_command
 
-  enable_mod_cmd = if cmd.error?
-                     'phpenmod'
-                   else
-                     'php5enmod'
-                   end
+  enable_mod_cmd = cmd.error? ? 'phpenmod' : 'php5enmod'
 
   # run phpenmod newrelic
   execute 'newrelic-phpenmod' do
