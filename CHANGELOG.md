@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.22.4 (2016-10-06)
+
+- remove parsing of download page for java agent download
+- download from zip file rather than jar
+- include unzip package for unzipping jar file from zip
+
 ## v2.22.3 (2016-08-23)
 
 - get rid of confusing chefignore in cookbook repo, as it is actually only respected in the cookbook_path
