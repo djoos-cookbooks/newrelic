@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.23.0
+
+- remove parsing of download page for Java-agent download
+- include unzip-package for extracting newrelic.jar from zip
+- addition of CentOS 7.2 platform integration tests
+
 ## v2.22.4
 
 - minor syntax correction (server monitor)
