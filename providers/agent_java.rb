@@ -37,29 +37,27 @@ def create_install_directory
 end
 
 def agent_jar
-  zip_file = 'newrelic-java.zip'
-  version = new_resource.version
-  version = 'current' if version == 'latest'
-  https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{zip_file}"
   package 'unzip'
 
-  cache_dir = Chef::Config[:file_cache_path]
-  tmp_file = "#{cache_dir}/#{zip_file}"
+  version = new_resource.version
+  version = 'current' if version == 'latest'
+  https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/newrelic-java.zip"
 
-  remote_file tmp_file do
+  cache_dir = Chef::Config[:file_cache_path]
+
+  remote_file "#{new_resource.install_dir}/newrelic.zip" do
     source https_download
     mode '0664'
     action :create
-    notifies :run, "bash[unzip-#{tmp_file}]", :immediately
+    notifies :run, 'execute[newrelic-extract-jar]', :immediately
   end
 
-  bash "unzip-#{tmp_file}" do
+  execute 'newrelic-extract-jar' do
+    cwd new_resource.install_dir
     user new_resource.app_user
     group new_resource.app_group
+    command 'sudo unzip -oj newrelic.zip newrelic/newrelic.jar'
     action :nothing
-    code <<-EOH
-      sudo unzip -oj "#{tmp_file}" "newrelic/newrelic.jar" -d "#{new_resource.install_dir}"
-    EOH
   end
 end
 
