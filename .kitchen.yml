@@ -36,6 +36,14 @@ platforms:
           web_server:
             service_name: httpd
           php_config: '/etc/php.d/newrelic.ini'
+  - name: centos-7.2
+    attributes:
+      rubygems: 'rubygems'
+      newrelic:
+        php_agent:
+          web_server:
+            service_name: httpd
+          php_config: '/etc/php.d/newrelic.ini'
 
 suites:
   - name: default
