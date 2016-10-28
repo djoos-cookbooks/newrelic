@@ -56,8 +56,8 @@ def agent_jar
     cwd new_resource.install_dir
     user 'root'
     group 'root'
-    command "unzip -oj newrelic.zip newrelic/newrelic.jar"
-     notifies :run, 'execute[newrelic-set-jar-owner]', :immediately
+    command 'unzip -oj newrelic.zip newrelic/newrelic.jar'
+    notifies :run, 'execute[newrelic-set-jar-owner]', :immediately
     action :nothing
   end
   execute 'newrelic-set-jar-owner' do
