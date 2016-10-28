@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.23.2
+
+- workaround inconsistencies in .zip file naming of New Relic download
+
 ## v2.23.1
 
 - unzipping the agent with sudo broke when user didn't have sudo rights
