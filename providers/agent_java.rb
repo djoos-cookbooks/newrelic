@@ -54,9 +54,17 @@ def agent_jar
 
   execute 'newrelic-extract-jar' do
     cwd new_resource.install_dir
-    user new_resource.app_user
-    group new_resource.app_group
-    command 'sudo unzip -oj newrelic.zip newrelic/newrelic.jar'
+    user 'root'
+    group 'root'
+    command 'unzip -oj newrelic.zip newrelic/newrelic.jar'
+    notifies :run, 'execute[newrelic-set-jar-owner]', :immediately
+    action :nothing
+  end
+  execute 'newrelic-set-jar-owner' do
+    cwd new_resource.install_dir
+    user 'root'
+    group 'root'
+    command "chown #{new_resource.app_user}:#{new_resource.app_group} newrelic.jar"
     action :nothing
   end
 end
