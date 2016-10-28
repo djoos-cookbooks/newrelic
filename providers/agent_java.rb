@@ -47,6 +47,8 @@ def agent_jar
 
   remote_file "#{new_resource.install_dir}/newrelic.zip" do
     source https_download
+    user new_resource.app_user
+    group new_resource.app_group
     mode '0664'
     action :create
     notifies :run, 'execute[newrelic-extract-jar]', :immediately
@@ -56,7 +58,7 @@ def agent_jar
     cwd new_resource.install_dir
     user new_resource.app_user
     group new_resource.app_group
-    command 'sudo unzip -oj newrelic.zip newrelic/newrelic.jar'
+    command 'unzip -oj newrelic.zip newrelic/newrelic.jar'
     action :nothing
   end
 end
