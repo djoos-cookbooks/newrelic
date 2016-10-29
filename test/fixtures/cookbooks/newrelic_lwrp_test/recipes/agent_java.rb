@@ -16,6 +16,7 @@ end
 newrelic_agent_java 'Install' do
   license node['newrelic']['license']
   install_dir node['newrelic']['java_agent']['install_dir']
+  version node['newrelic']['java_agent']['version']
   app_name 'java_test_app'
   app_user 'root'
   app_group 'root'
