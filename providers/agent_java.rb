@@ -39,15 +39,19 @@ end
 def agent_jar
   package 'unzip'
 
+  version = if new_resource.version == 'latest'
+              'current'
+            else
+              new_resource.version
+            end
+
   filename = if new_resource.version == 'latest'
                'newrelic-java.zip'
              else
-               "newrelic-java-#{version}.zip"
+               "newrelic-java-#{new_resource.version}.zip"
              end
 
-  version = 'current' if new_resource.version == 'latest'
-
-  https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/newrelic-java.zip"
+  https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{filename}"
 
   cache_dir = Chef::Config[:file_cache_path]
 

@@ -77,6 +77,13 @@ suites:
       newrelic:
         java_agent:
           install_dir: '/opt/tomcat_java_test_app'
+  - name: java-agent-not-latest-version
+    run_list: "recipe[newrelic_lwrp_test::agent_java]"
+    attributes:
+      newrelic:
+        java_agent:
+          version: 3.31.1
+          install_dir: '/opt/tomcat_java_test_app'
   - name: ruby-agent
     run_list: "recipe[newrelic_lwrp_test::agent_ruby]"
     attributes:
