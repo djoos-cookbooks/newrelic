@@ -97,8 +97,8 @@ def update_newrelic_alert_policy_linux(alert_policy_id)
       update_alert_policy(alert_policy_id)
     end
 
-    only_if do
-      node['newrelic']['api_key'].!empty?
+    not_if do
+      node['newrelic']['api_key'].empty?
     end
   end
 end

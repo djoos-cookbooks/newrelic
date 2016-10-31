@@ -37,27 +37,39 @@ def create_install_directory
 end
 
 def agent_jar
-  version = nil
-  jar_file = nil
+  package 'unzip'
 
-  if new_resource.version == 'latest'
-    version = 'current'
+  version = if new_resource.version == 'latest'
+              'current'
+            else
+              new_resource.version
+            end
 
-    url_content = open('https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/') { |f| f.read.lines.grep(/jar/i).to_s }
-    jar_file = url_content.split(/\W+jar/).first.to_s.split('\\"').last + '.jar'
-  else
-    version = new_resource.version
-    jar_file = "newrelic-agent-#{version}.jar"
-  end
+  filename = if new_resource.version == 'latest'
+               'newrelic-java.zip'
+             else
+               "newrelic-java-#{new_resource.version}.zip"
+             end
 
-  https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{jar_file}"
+  https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{filename}"
 
-  remote_file "#{new_resource.install_dir}/newrelic.jar" do
+  cache_dir = Chef::Config[:file_cache_path]
+
+  remote_file "#{new_resource.install_dir}/newrelic.zip" do
     source https_download
-    owner new_resource.app_user
+    user new_resource.app_user
     group new_resource.app_group
     mode '0664'
     action :create
+    notifies :run, 'execute[newrelic-extract-jar]', :immediately
+  end
+
+  execute 'newrelic-extract-jar' do
+    cwd new_resource.install_dir
+    user new_resource.app_user
+    group new_resource.app_group
+    command 'unzip -oj newrelic.zip newrelic/newrelic.jar'
+    action :nothing
   end
 end
 

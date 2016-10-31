@@ -20,15 +20,23 @@ describe 'newrelic_lwrp_test::agent_java' do
       expect(chef_run).to create_directory('/opt/newrelic/java')
     end
 
-    it 'creates newrelic.jar' do
-      expect(chef_run).to create_remote_file('/opt/newrelic/java/newrelic.jar')
+    it 'creates newrelic-java.zip' do
+      expect(chef_run).to create_remote_file('/opt/newrelic/java/newrelic.zip')
+    end
+
+    it 'sends a notification to newrelic-extract-jar after creating newrelic-java.zip' do
+      expect(chef_run.remote_file('/opt/newrelic/java/newrelic.zip')).to notify('execute[newrelic-extract-jar]').immediately
+    end
+
+    it 'defines newrelic-extract-jar execute block' do
+      expect(chef_run.execute('newrelic-extract-jar')).to do_nothing
     end
 
     it 'creates newrelic yml config template from newrelic.yml.erb' do
       expect(chef_run).to render_file('/opt/newrelic/java/newrelic.yml').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
 
-    it 'execute newrelic_install_newrelic.jar' do
+    it 'execute newrelic_install_newrelic.zip' do
       expect(chef_run).to run_execute('newrelic_install_newrelic.jar')
     end
   end
