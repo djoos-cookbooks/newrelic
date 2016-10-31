@@ -18,6 +18,7 @@ attribute :config_file_to_be_deleted, :kind_of => String, :default => nil
 attribute :service_name, :kind_of => String, :default => nil
 attribute :service_action, :kind_of => String, :default => 'restart'
 attribute :execute_phpenmod, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :execute_php5enmod, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :cookbook_ini, :kind_of => String, :default => 'newrelic'
 attribute :source_ini, :kind_of => String, :default => 'agent/php/newrelic.ini.erb'
 attribute :cookbook, :kind_of => String, :default => 'newrelic'

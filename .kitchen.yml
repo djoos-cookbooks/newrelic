@@ -80,6 +80,14 @@ suites:
     includes:
       - ubuntu-14.04
       - ubuntu-16.04
+  - name: php-agent-php5enmod
+    run_list: "recipe[newrelic_lwrp_test::agent_php5]"
+    attributes:
+      newrelic:
+        php_agent:
+          execute_php5enmod: true
+    includes:
+      - ubuntu-14.04
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
   - name: java-agent
