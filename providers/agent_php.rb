@@ -89,7 +89,12 @@ def webserver_service
 end
 
 def newrelic_phpenmod
-  execute_phpenmod = new_resource.execute_phpenmod || new_resource.execute_php5enmod
+  execute_phpenmod = new_resource.execute_phpenmod
+
+  unless new_resource.execute_php5enmod.nil?
+    Chef::Log.warn "The 'execute_php5enmod'-attribute has been deprecated. Please make use of the 'execute_phpenmod' attribute instead."
+    execute_phpenmod = new_resource.execute_php5enmod
+  end
 
   cmd = Mixlib::ShellOut.new('which php5enmod')
   cmd.run_command
