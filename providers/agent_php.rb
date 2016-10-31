@@ -89,7 +89,7 @@ def webserver_service
 end
 
 def newrelic_phpenmod
-  execute_phpenmod = new_resource.execute_phpenmod
+  execute_phpenmod = new_resource.execute_phpenmod || new_resource.execute_php5enmod
 
   cmd = Mixlib::ShellOut.new('which php5enmod')
   cmd.run_command
@@ -107,6 +107,9 @@ end
 def generate_agent_config
   # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
   # and reload/restart (determined by service_action) the web server in order to pick up the new settings
+
+  execute_phpenmod = new_resource.execute_phpenmod || new_resource.execute_php5enmod
+
   template new_resource.config_file do
     cookbook new_resource.cookbook_ini
     source new_resource.source_ini
@@ -119,7 +122,7 @@ def generate_agent_config
     sensitive true
     action :create
 
-    notifies :run, 'execute[newrelic-phpenmod]', :immediately if new_resource.execute_phpenmod == true
+    notifies :run, 'execute[newrelic-phpenmod]', :immediately if execute_phpenmod == true
     notifies new_resource.service_action, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
   end
 end
