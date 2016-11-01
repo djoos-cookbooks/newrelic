@@ -27,7 +27,7 @@ action :install do
   webserver_service if new_resource.service_name
   newrelic_install
   newrelic_daemon
-  newrelic_php5enmod
+  newrelic_php_enable_module
   generate_agent_config
   delete_config_file
   startup_mode_config
@@ -88,14 +88,34 @@ def webserver_service
   end
 end
 
-def newrelic_php5enmod
-  execute_php5enmod = new_resource.execute_php5enmod
-
-  # run php5enmod newrelic
-  execute 'newrelic-php5enmod' do
-    command 'php5enmod newrelic'
+def newrelic_php_enable_module
+  # run enable newrelic module
+  execute 'newrelic-enable-module' do
+    command "#{enable_module_command} newrelic"
     action :nothing
-    only_if { execute_php5enmod == true }
+    only_if { enable_module == true }
+  end
+end
+
+def enable_module
+  enable_module = new_resource.enable_module
+
+  unless new_resource.execute_php5enmod.nil?
+    Chef::Log.warn "The 'execute_php5enmod'-attribute has been deprecated. Please make use of the 'enable_module' attribute instead."
+    enable_module = new_resource.execute_php5enmod
+  end
+
+  enable_module
+end
+
+def enable_module_command
+  cmd = Mixlib::ShellOut.new('php -v | grep "PHP 7."')
+  cmd.run_command
+
+  if cmd.error?
+    'phpenmod'
+  else
+    'php5enmod'
   end
 end
 
@@ -114,7 +134,7 @@ def generate_agent_config
     sensitive true
     action :create
 
-    notifies :run, 'execute[newrelic-php5enmod]', :immediately if new_resource.execute_php5enmod == true
+    notifies :run, 'execute[newrelic-enable-module]', :immediately if enable_module == true
     notifies new_resource.service_action, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
   end
 end
