@@ -18,21 +18,23 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/conf.d/newrelic.ini'
-  - name: ubuntu-14.04
-    run_list:
-      - recipe[apt]
-    attributes:
-      rubygems: 'rubygems-integration'
-      newrelic:
-        php_agent:
-          web_server:
-            service_name: apache2
-          php_config: '/etc/php5/mods-available/newrelic.ini'
+  # - name: ubuntu-14.04
+  #   run_list:
+  #     - recipe[apt]
+  #   attributes:
+  #     rubygems: 'rubygems-integration'
+  #     newrelic:
+  #       php_agent:
+  #         web_server:
+  #           service_name: apache2
+  #         php_config: '/etc/php5/mods-available/newrelic.ini'
   - name: ubuntu-16.04
     run_list:
       - recipe[apt]
     attributes:
       rubygems: 'rubygems-integration'
+      java:
+          jdk_version: 7
       newrelic:
         php_agent:
           web_server:
@@ -70,25 +72,19 @@ suites:
     attributes:
       newrelic:
         php_agent:
-          execute_phpenmod: false
-  - name: php-agent-phpenmod
+          enable_module: false
+  - name: php-agent-php-enable-module
     run_list: "recipe[newrelic_lwrp_test::agent_php]"
     attributes:
       newrelic:
         php_agent:
-          execute_phpenmod: true
-    includes:
-      - ubuntu-14.04
-      - ubuntu-16.04
+          enable_module: true
   - name: php-agent-php5enmod
     run_list: "recipe[newrelic_lwrp_test::agent_php5]"
     attributes:
       newrelic:
         php_agent:
           execute_php5enmod: true
-    includes:
-      - ubuntu-14.04
-      - ubuntu-16.04
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
   - name: java-agent
@@ -110,17 +106,9 @@ suites:
       newrelic:
         ruby_agent:
           install_dir: '/opt/newrelic/ruby'
-    excludes:
-      - ubuntu-16.04
   - name: python-agent-recipe
     run_list: "recipe[newrelic_lwrp_test::agent_python_recipe]"
-    excludes:
-      - ubuntu-16.04
   - name: nodejs-agent
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs]"
-    excludes:
-      - ubuntu-16.04
   - name: nodejs-agent-recipe
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs_recipe]"
-    excludes:
-      - ubuntu-16.04
