@@ -89,11 +89,10 @@ def webserver_service
 end
 
 def newrelic_php_enable_module
-  # run enable newrelic module
   execute 'newrelic-enable-module' do
     command "#{enable_module_command} newrelic"
     action :nothing
-    only_if { enable_module == true }
+    only_if { enable_module == true && !enable_module_command.nil? }
   end
 end
 
@@ -109,13 +108,18 @@ def enable_module
 end
 
 def enable_module_command
-  cmd = Mixlib::ShellOut.new('php -v | grep "PHP 7."')
+  cmd = Mixlib::ShellOut.new('php -r "echo PHP_MAJOR_VERSION;"')
   cmd.run_command
+  php_version_major = cmd.stdout.to_i
 
-  if cmd.error?
-    'php5enmod'
-  else
+  cmd = Mixlib::ShellOut.new('php -r "echo PHP_MINOR_VERSION;"')
+  cmd.run_command
+  php_version_minor = cmd.stdout.to_i
+
+  if php_version_major >= 7
     'phpenmod'
+  elsif php_version_major == 5 && php_version_minor > 3
+    'php5enmod'
   end
 end
 

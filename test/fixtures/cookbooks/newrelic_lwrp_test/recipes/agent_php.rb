@@ -14,5 +14,6 @@ newrelic_agent_php 'Install' do
   service_name node['newrelic']['php_agent']['web_server']['service_name']
   config_file node['newrelic']['php_agent']['php_config']
   enable_module node['newrelic']['php_agent']['enable_module']
+  execute_php5enmod node['newrelic']['php_agent']['execute_php5enmod']
   startup_mode 'external'
 end
