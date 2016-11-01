@@ -35,6 +35,7 @@ describe 'newrelic_lwrp_test::agent_php' do
     it 'Stub service' do
       expect(chef_run).to_not enable_service('stub_service')
     end
+
     it 'sends a notification to newrelic-install after installing newrelic-php5' do
       expect(chef_run.package('newrelic-php5')).to notify('execute[newrelic-install]').immediately
     end
@@ -80,16 +81,8 @@ describe 'newrelic_lwrp_test::agent_php' do
       end
     end
 
-    it 'defines newrelic-phpenmod execute block with php5enmod' do
-      expect(chef_run.execute('newrelic-phpenmod')).to do_nothing
-    end
-
-    it 'defines newrelic-phpenmod execute block without php5enmod' do
-      shellout = double('shellout')
-      shellout.stub(:run_command)
-      shellout.stub(:error?).and_return(true)
-      Mixlib::ShellOut.stub(:new).with('which php5enmod').and_return(shellout)
-      expect(chef_run.execute('newrelic-phpenmod')).to do_nothing
+    it 'defines newrelic-enable-module execute block' do
+      expect(chef_run.execute('newrelic-enable-module')).to do_nothing
     end
   end
 end

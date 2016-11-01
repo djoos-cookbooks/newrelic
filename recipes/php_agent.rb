@@ -15,7 +15,9 @@ newrelic_agent_php 'Install' do
   config_file_to_be_deleted node['newrelic']['php_agent']['config_file_to_be_deleted'] unless node['newrelic']['php_agent']['config_file_to_be_deleted'].nil?
   service_name node['newrelic']['php_agent']['web_server']['service_name'] unless node['newrelic']['php_agent']['web_server']['service_name'].nil?
   service_action node['newrelic']['php_agent']['web_server']['service_action'] unless node['newrelic']['php_agent']['web_server']['service_action'].nil?
-  execute_phpenmod NewRelic.to_boolean(node['newrelic']['php_agent']['execute_phpenmod']) unless node['newrelic']['php_agent']['execute_phpenmod'].nil?
+  # @todo take out deprecated execute_php5enmod logic: use enable_module instead
+  execute_php5enmod NewRelic.to_boolean(node['newrelic']['php_agent']['execute_php5enmod']) unless node['newrelic']['php_agent']['execute_php5enmod'].nil?
+  enable_module NewRelic.to_boolean(node['newrelic']['php_agent']['enable_module']) unless node['newrelic']['php_agent']['enable_module'].nil?
   cookbook_ini node['newrelic']['php_agent']['template']['cookbook_ini'] unless node['newrelic']['php_agent']['template']['cookbook_ini'].nil?
   source_ini node['newrelic']['php_agent']['template']['source_ini'] unless node['newrelic']['php_agent']['template']['source_ini'].nil?
   cookbook node['newrelic']['php_agent']['template']['cookbook'] unless node['newrelic']['php_agent']['template']['cookbook'].nil?

@@ -27,7 +27,7 @@ action :install do
   webserver_service if new_resource.service_name
   newrelic_install
   newrelic_daemon
-  newrelic_phpenmod
+  newrelic_php_enable_module
   generate_agent_config
   delete_config_file
   startup_mode_config
@@ -88,33 +88,40 @@ def webserver_service
   end
 end
 
-def newrelic_phpenmod
-  execute_phpenmod = new_resource.execute_phpenmod
+def newrelic_php_enable_module
+  # run enable newrelic module
+  execute 'newrelic-enable-module' do
+    command "#{enable_module_command} newrelic"
+    action :nothing
+    only_if { enable_module == true }
+  end
+end
+
+def enable_module
+  enable_module = new_resource.enable_module
 
   unless new_resource.execute_php5enmod.nil?
-    Chef::Log.warn "The 'execute_php5enmod'-attribute has been deprecated. Please make use of the 'execute_phpenmod' attribute instead."
-    execute_phpenmod = new_resource.execute_php5enmod
+    Chef::Log.warn "The 'execute_php5enmod'-attribute has been deprecated. Please make use of the 'enable_module' attribute instead."
+    enable_module = new_resource.execute_php5enmod
   end
 
-  cmd = Mixlib::ShellOut.new('which php5enmod')
+  enable_module
+end
+
+def enable_module_command
+  cmd = Mixlib::ShellOut.new('php -v | grep "PHP 7."')
   cmd.run_command
 
-  enable_mod_cmd = cmd.error? ? 'phpenmod' : 'php5enmod'
-
-  # run phpenmod newrelic
-  execute 'newrelic-phpenmod' do
-    command "#{enable_mod_cmd} newrelic"
-    action :nothing
-    only_if { execute_phpenmod == true }
+  if cmd.error?
+    'phpenmod'
+  else
+    'php5enmod'
   end
 end
 
 def generate_agent_config
   # configure New Relic INI file and set the daemon related options (documented at /usr/lib/newrelic-php5/scripts/newrelic.ini.template)
   # and reload/restart (determined by service_action) the web server in order to pick up the new settings
-
-  execute_phpenmod = new_resource.execute_phpenmod || new_resource.execute_php5enmod
-
   template new_resource.config_file do
     cookbook new_resource.cookbook_ini
     source new_resource.source_ini
@@ -127,7 +134,7 @@ def generate_agent_config
     sensitive true
     action :create
 
-    notifies :run, 'execute[newrelic-phpenmod]', :immediately if execute_phpenmod == true
+    notifies :run, 'execute[newrelic-enable-module]', :immediately if enable_module == true
     notifies new_resource.service_action, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
   end
 end
