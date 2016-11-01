@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.24.0
+
+- support for PHP7
+- parameterize dotnet agent config file
+- properly follow through with hostname
+- make documentation more consistent
+
 ## v2.23.3
 
 - version incorrectly used and filename unused
