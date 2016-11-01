@@ -73,14 +73,14 @@ suites:
       newrelic:
         php_agent:
           enable_module: false
-  - name: php-agent-php-enable-module
+  - name: php-agent-enable-module
     run_list: "recipe[newrelic_lwrp_test::agent_php]"
     attributes:
       newrelic:
         php_agent:
           enable_module: true
   - name: php-agent-php5enmod
-    run_list: "recipe[newrelic_lwrp_test::agent_php5]"
+    run_list: "recipe[newrelic_lwrp_test::agent_php]"
     attributes:
       newrelic:
         php_agent:
