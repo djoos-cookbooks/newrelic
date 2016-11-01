@@ -113,9 +113,9 @@ def enable_module_command
   cmd.run_command
 
   if cmd.error?
-    'phpenmod'
-  else
     'php5enmod'
+  else
+    'phpenmod'
   end
 end
 
