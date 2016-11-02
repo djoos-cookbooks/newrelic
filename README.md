@@ -254,7 +254,6 @@ The `newrelic_agent_php` resource will handle the requirements to install php ap
 #### Attribute parameters
 
 * `'license'` - New Relic license key
-* `'api_key'` - New Relic API key
 * `'install_silently'` - Determine whether to run the install in silent mode, defaults to false
 * `'app_name'` - The application name, defaults to `PHP Application`.
 * `'startup_mode'` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
