@@ -9,7 +9,7 @@ This cookbook provides an easy way to install various New Relic agents and the N
 The agent installs are being converted into libraries, currently the following agents are now resources:
 
 * server_monitor
-* php_agent  
+* php_agent
 * java_agent
 * ruby_agent
 * python_agent
@@ -203,14 +203,14 @@ The `newrelic_server_monitor` resource will handle the requirements to configure
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install and install package.  
+- :install -  will setup the New Relic repository, install and install package.
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
 
-* `'service_name'` - The New Relic server monitoring service name, defaults to "newrelic-sysmond"
+* `'service_name'` - The New Relic server monitoring service name, defaults to 'newrelic-sysmond'
 * `'service_notify_action'` - The New Relic server monitoring notify action, defaults to ":restart"
-* `'service_actions'` - The New Relic server monitoring service actions, defaults to "[:enable, :start`" (#starts the service if it's not running and enables it to start at system boot time)
+* `'service_actions'` - The New Relic server monitoring service actions, defaults to "`%w(enable start)`" (#starts the service if it's not running and enables it to start at system boot time)
 * `'config_path'` - The New Relic server monitoring config path, defaults to "/etc/newrelic"
 * `'config_file_group'` - The New Relic server monitoring config file group, defaults to "newrelic"
 * `'windows_version'` - the Windows version to install, defaults to "2.0.0.198"
@@ -219,163 +219,160 @@ The `newrelic_server_monitor` resource will handle the requirements to configure
 * `'cookbook'` - Sets cookbook for template, defaults to 'newrelic'
 * `'source'` - Sets source for template, defaults to 'agent/server_monitor/nrsysmond.cfg.erb'
 
-#### Advanced parameters  
+#### Advanced parameters
 
-* `'logfile'` defaults to nil
-* `'loglevel'` defaults to nil
-* `'proxy'` defaults to nil
-* `'ssl'` defaults to nil
-* `'ssl_ca_bundle'` defaults to nil
-* `'ssl_ca_path'` defaults to nil
-* `'hostname'` defaults to nil
-* `'labels'` defaults to nil
-* `'pidfile'` defaults to nil
-* `'collector_host'` defaults to nil
-* `'timeout'` defaults to nil
-* `'alert_policy_id'` default to nil
+* `'logfile'` - defaults to nil
+* `'loglevel'` - defaults to nil
+* `'proxy'` - defaults to nil
+* `'ssl'` - defaults to nil
+* `'ssl_ca_bundle'` - defaults to nil
+* `'ssl_ca_path'` - defaults to nil
+* `'hostname'` - defaults to nil
+* `'labels'` - defaults to nil
+* `'pidfile'` - defaults to nil
+* `'collector_host'` - defaults to nil
+* `'timeout'` - defaults to nil
+* `'alert_policy_id'` - defaults to nil
 
-#### Example  
+#### Example
 ```ruby
 newrelic_server_monitor 'Install' do
   license '0000ffff0000ffff0000ffff0000ffff0000ffff'
 end
 ```
 
-### `newrelic_agent_php`  
+### `newrelic_agent_php`
 This cookbook includes an LWRP for installing the php agent
 
-The `newrelic_agent_php` resource will handle the requirements to install php application monitoring.  
+The `newrelic_agent_php` resource will handle the requirements to install php application monitoring.
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install package and update php config with license key.  
+- :install -  will setup the New Relic repository, install package and update php config with license key.
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
 
-* `'license'` New Relic license key
-* `'api_key'` New Relic API key
+* `'license'` - New Relic license key
 * `'install_silently'` - Determine whether to run the install in silent mode, defaults to false
-* `'app_name'` if missing it will default to `PHP Application`.
+* `'app_name'` - The application name, defaults to `PHP Application`.
 * `'startup_mode'` - The newrelic-daemon startup mode ("agent"/"external"), defaults to "agent"
 * `'service_name'` - The web server service name
 * `'service_action'` - The web server service action, defaults to "restart"
 * `'config_file'` - The New Relic php agent config file, depends on your php external configuration directory; e.g. /etc/php5/conf.d/newrelic.ini, /etc/php5/mods-available/newrelic.ini, ... Defaults to nil
 * `'config_file_to_be_deleted'` - The New Relic php agent-generated config file, e.g. /etc/php5/cli/conf.d/newrelic.ini. If set, the file will get deleted during the Chef run as we want the Chef-generated config file to be used instead (`'config_file'`), defaults to nil
-* `'execute_php5enmod'` - Executes "php5enmod newrelic" if true. Needed if you use the mods-available directory, defaults to false
+* `'enable_module'` - Enables 'newrelic' php module (ie. php5enmod newrelic / phpenmod newrelic) if true. Needed if you use the mods-available directory, defaults to false
 * `'cookbook_ini'` - Sets cookbook for .ini template, defaults to 'newrelic'
 * `'source_ini'` - Sets source for .ini template, defaults to 'agent/php/newrelic.ini.erb'
 * `'cookbook'` - Sets cookbook for template, defaults to 'newrelic'
 * `'source'` - Sets source for template, defaults to 'agent/php/newrelic.cfg.erb'
 
-#### Advanced parameters  
+#### Advanced parameters
 
-* `'enabled'` default => true
-* `'logfile'` default to nil
-* `'loglevel'` default to nil
-* `'daemon_logfile'` default to  '/var/log/newrelic/newrelic-daemon.log'
-* `'daemon_loglevel'` default to nil
-* `'daemon_port'` default to nil
-* `'daemon_max_threads'` default to nil
-* `'daemon_ssl'` default to true
-* `'daemon_ssl_ca_path'` default to nil
-* `'daemon_ssl_ca_bundle'` default to nil
-* `'daemon_proxy'` default to nil
-* `'daemon_pidfile'` default to nil
-* `'daemon_location'` default to nil
-* `'daemon_collector_host'` default to nil
-* `'daemon_dont_launch'` default to nil
-* `'capture_params'` default to false
-* `'ignored_params'` default to nil
-* `'error_collector_enable'` default to true
-* `'error_collector_record_database_errors'` default to true
-* `'error_collector_prioritize_api_errors'` default to false
-* `'browser_monitoring_auto_instrument'` default to true
-* `'transaction_tracer_enable'` default to true
-* `'transaction_tracer_threshold'` default to nil
-* `'transaction_tracer_detail'` default to nil
-* `'transaction_tracer_slow_sql'` default to true
-* `'transaction_tracer_stack_trace_threshold'` default to nil
-* `'transaction_tracer_explain_threshold'` default to nil
-* `'transaction_tracer_record_sql'` default to nil
-* `'transaction_tracer_custom'` default to nil
-* `'framework'` default to nil
-* `'webtransaction_name_remove_trailing_path'` default to false
-* `'webtransaction_name_functions'` default to nil
-* `'webtransaction_name_files'` default to nil
-* `'cross_application_tracer_enable'` default to true
+* `'enabled'` - Defaults to true
+* `'logfile'` - Defaults to nil
+* `'loglevel'` - Defaults to nil
+* `'daemon_logfile'` - Defaults to '/var/log/newrelic/newrelic-daemon.log'
+* `'daemon_loglevel'` - Defaults to nil
+* `'daemon_port'` - Defaults to nil
+* `'daemon_max_threads'` - Defaults to nil
+* `'daemon_ssl'` - Defaults to true
+* `'daemon_ssl_ca_path'` - Defaults to nil
+* `'daemon_ssl_ca_bundle'` - Defaults to nil
+* `'daemon_proxy'` - Defaults to nil
+* `'daemon_pidfile'` - Defaults to nil
+* `'daemon_location'` - Defaults to nil
+* `'daemon_collector_host'` - Defaults to nil
+* `'daemon_dont_launch'` - Defaults to nil
+* `'capture_params'` - Defaults to false
+* `'ignored_params'` - Defaults to nil
+* `'error_collector_enable'` - Defaults to true
+* `'error_collector_record_database_errors'` - Defaults to true
+* `'error_collector_prioritize_api_errors'` - Defaults to false
+* `'browser_monitoring_auto_instrument'` - Defaults to true
+* `'transaction_tracer_enable'` - Defaults to true
+* `'transaction_tracer_threshold'` - Defaults to nil
+* `'transaction_tracer_detail'` - Defaults to nil
+* `'transaction_tracer_slow_sql'` - Defaults to true
+* `'transaction_tracer_stack_trace_threshold'` - Defaults to nil
+* `'transaction_tracer_explain_threshold'` - Defaults to nil
+* `'transaction_tracer_record_sql'` - Defaults to nil
+* `'transaction_tracer_custom'` - Defaults to nil
+* `'framework'` - Defaults to nil
+* `'webtransaction_name_remove_trailing_path'` - Defaults to false
+* `'webtransaction_name_functions'` - Defaults to nil
+* `'webtransaction_name_files'` - Defaults to nil
+* `'cross_application_tracer_enable'` - Defaults to true
 
-
-#### Example  
+#### Example
 
 ```ruby
-newrelic_agent_php 'Install' do  
-  license '0000ffff0000ffff0000ffff0000ffff0000ffff'  
-  app_name 'php_test_app'  
+newrelic_agent_php 'Install' do
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'
+  app_name 'php_test_app'
   service_name 'httpd'
-  config_file '/etc/php.d/newrelic.ini'  
-end  
+  config_file '/etc/php.d/newrelic.ini'
+end
 ```
 
-### `newrelic_agent_ruby`  
+### `newrelic_agent_ruby`
 This cookbook includes an LWRP for installing the ruby agent
 
-The `newrelic_agent_ruby` resource will handle the requirements to install ruby application monitoring.  
+The `newrelic_agent_ruby` resource will handle the requirements to install ruby application monitoring.
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install package and update ruby config with license key.  
+- :install -  will setup the New Relic repository, install package and update ruby config with license key.
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
 
-* `'install_dir'` The directory to for the config file
-* `'app_user'` The user that runs the Ruby application that will use the New Relic Ruby agent
-* `'app_group'` The group for the app_user
-* `'audit_mode'` Boolean, log all data to and from New Relic in plain text
-* `'log_file_count'` The number of log files to use
-* `'log_limit_in_kbytes'` The maximum number of bytes to write to any one log file
-* `'log_daily'` Override other log rolling configuration and roll the logs daily
-* `'template']['cookbook'` Sets cookbook for template, defaults to 'newrelic'
-* `'template']['source'` Sets source for template, defaults to 'agent/newrelic.yml.erb
+* `'install_dir'` - The directory to for the config file
+* `'app_user'` - The user that runs the Ruby application that will use the New Relic Ruby agent
+* `'app_group'` - The group for the app_user
+* `'audit_mode'` - Boolean, log all data to and from New Relic in plain text
+* `'log_file_count'` - The number of log files to use
+* `'log_limit_in_kbytes'` - The maximum number of bytes to write to any one log file
+* `'log_daily'` - Override other log rolling configuration and roll the logs daily
+* `'template_cookbook'` - Sets cookbook for template, defaults to 'newrelic'
+* `'template_source'` - Sets source for template, defaults to 'agent/newrelic.yml.erb
 
-#### Advanced parameters  
+#### Advanced parameters
 
-* `'enabled'` default => true
-* `'app_name'` default => nil
-* `'high_security'` default => false
-* `'owner'` default => 'newrelic'
-* `'group'` default => 'newrelic'
-* `'logfile'` default => 'newrelic-daemon.log'
-* `'logfile_path'` default => '/var/log/newrelic/'
-* `'loglevel'` default => nil
-* `'audit_mode'` default => false
-* `'log_file_count, :kind_of => Fixnum, :default => 1
-* `'log_limit_in_kbytes, :kind_of => Fixnum, :default => 0
-* `'log_daily'` default => true
-* `'daemon_ssl'` default => true
-* `'daemon_proxy'` default => nil
-* `'daemon_proxy_host'` default => nil
-* `'daemon_proxy_port'` default => nil
-* `'daemon_proxy_user'` default => nil
-* `'daemon_proxy_password'` default => nil
-* `'capture_params'` default => nil
-* `'ignored_params'` default => nil
-* `'transaction_tracer_enable'` default => true
-* `'transaction_tracer_threshold'` default => nil
-* `'transaction_tracer_record_sql'` default => nil
-* `'transaction_tracer_stack_trace_threshold'` default => nil
-* `'transaction_tracer_slow_sql'` default => nil
-* `'transaction_tracer_explain_threshold'` default => nil
-* `'error_collector_enable'` default => true
-* `'error_collector_ignore_errors'` default => nil
-* `'error_collector_ignore_status_codes'` default => nil
-* `'browser_monitoring_auto_instrument'` default => nil
-* `'cross_application_tracer_enable'` default => true
-* `'thread_profiler_enable'` default => true  
+* `'enabled'` - Defaults to true
+* `'app_name'` - Defaults to nil
+* `'high_security'` - Defaults to false
+* `'owner'` - Defaults to 'newrelic'
+* `'group'` - Defaults to 'newrelic'
+* `'logfile'` - Defaults to 'newrelic-daemon.log'
+* `'logfile_path'` - Defaults to '/var/log/newrelic/'
+* `'loglevel'` - Defaults to nil
+* `'audit_mode'` - Defaults to false
+* `'log_file_count'` - Fixnum, defaults to 1
+* `'log_limit_in_kbytes'` - Fixnum, defaults to 0
+* `'log_daily'` - Defaults to true
+* `'daemon_ssl'` - Defaults to true
+* `'daemon_proxy'` - Defaults to nil
+* `'daemon_proxy_host'` - Defaults to nil
+* `'daemon_proxy_port'` - Defaults to nil
+* `'daemon_proxy_user'` - Defaults to nil
+* `'daemon_proxy_password'` - Defaults to nil
+* `'capture_params'` - Defaults to nil
+* `'ignored_params'` - Defaults to nil
+* `'transaction_tracer_enable'` - Defaults to true
+* `'transaction_tracer_threshold'` - Defaults to nil
+* `'transaction_tracer_record_sql'` - Defaults to nil
+* `'transaction_tracer_stack_trace_threshold'` - Defaults to nil
+* `'transaction_tracer_slow_sql'` - Defaults to nil
+* `'transaction_tracer_explain_threshold'` - Defaults to nil
+* `'error_collector_enable'` - Defaults to true
+* `'error_collector_ignore_errors'` - Defaults to nil
+* `'error_collector_ignore_status_codes'` - Defaults to nil
+* `'browser_monitoring_auto_instrument'` - Defaults to nil
+* `'cross_application_tracer_enable'` - Defaults to true
+* `'thread_profiler_enable'` - Defaults to true
 
-
-#### Example  
+#### Example
 ```ruby
 newrelic_agent_ruby 'Install' do
   license '0000ffff0000ffff0000ffff0000ffff0000ffff'
@@ -383,129 +380,71 @@ newrelic_agent_ruby 'Install' do
 end
 ```
 
-
-### `newrelic_agent_java`  
+### `newrelic_agent_java`
 This cookbook includes an LWRP for installing the java agent
 
-The `newrelic_agent_java` resource will handle the requirements to install java application monitoring.  
+The `newrelic_agent_java` resource will handle the requirements to install java application monitoring.
 
 #### Actions
 
-
-- :install -  will retrieve Java agent, install and update config with license key.  
+- :install -  will retrieve Java agent, install and update config with license key.
 - :remove -  Uninstall the New Relic agent.
 
 #### Attribute parameters
 
-* `'license'` New Relic license key
-* `'version'` New Relic Java Agent version to use. To find the current version, check New Relic repo
-* `'https_download'` The url to download the jar for the New Relic Java agent. If you override version parameter, you must also update this.
-* `'jar_file'` The name of the newrelic jar file that will be used locally, defaults to `newrelic-agent-version.jar`
-* `'install_dir'` The directory to install the newrelic jar and config file
-* `'app_user'` The user that runs the Java application that will use the New Relic Java agent
-* `'app_group'` The group for the app_user
-* `'audit_mode'` Boolean, log all data to and from New Relic in plain text
-* `'log_file_count'` The number of log files to use
-* `'log_limit_in_kbytes'` The maximum number of bytes to write to any one log file
-* `'log_daily'` Override other log rolling configuration and roll the logs daily
-* `'agent_action'` Agent action, defaults to `:install`
-* `'execute_agent_action'` Execute the agent action or not, defaults to true
-* `'app_location'` Application's location, defaults to `install_dir`
-* `'template_cookbook'` Sets cookbook for template, defaults to 'newrelic'
-* `'template_source'` Sets source for template, defaults to `agent/newrelic.yml.erb`
-
-#### Advanced parameters
-See https://docs.newrelic.com/docs/agents/java-agent/configuration/java-agent-configuration-config-file
-for an explanation on each attribute.
-
-* `'enabled'` default => true
-* `'high_security'` default => false
-* `'max_stack_trace_lines'` default => false
-* `'owner'` default => 'newrelic'
-* `'group'` default => 'newrelic'
-* `'logfile'` default => nil
-* `'logfile_path'` default => nil
-* `'loglevel'` default => nil
-* `'audit_mode'` default => false
-* `'log_file_count'` default => nil
-* `'log_limit_in_kbytes'` default => nil
-* `'log_daily'` default => false
-* `'daemon_ssl'` default => true
-* `'daemon_proxy'` default => nil
-* `'daemon_proxy_host'` default => nil
-* `'daemon_proxy_port'` default => nil
-* `'daemon_proxy_user'` default => nil
-* `'daemon_proxy_password'` default => nil
-* `'capture_params'` default => nil
-* `'ignored_params'` default => nil
-* `'transaction_tracer_enable'` default => true
-* `'transaction_tracer_threshold'` default => nil
-* `'transaction_tracer_record_sql'` default => nil
-* `'transaction_tracer_stack_trace_threshold'` default => nil
-* `'transaction_tracer_slow_sql'` default => nil
-* `'transaction_tracer_explain_threshold'` default => nil
-* `'error_collector_enable'` default => true
-* `'error_collector_ignore_errors'` default => nil
-* `'error_collector_ignore_status_codes'` default => nil
-* `'browser_monitoring_auto_instrument'` default => nil
-* `'cross_application_tracer_enable'` default => true
-* `'thread_profiler_enable'` default => true
-
-
-#### Example  
+#### Example
 ```ruby
 newrelic_agent_java 'Install' do
-  license '0000ffff0000ffff0000ffff0000ffff0000ffff'  
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'
   install_dir '/opt/newrelic/java'
   app_name 'java_test_app'
 ```
 
-### `newrelic_agent_python`  
+### `newrelic_agent_python`
 This cookbook includes an LWRP for installing the newrelic python agent
 
-The `newrelic_agent_python` resource will handle the requirements to install python application monitoring.  
+The `newrelic_agent_python` resource will handle the requirements to install python application monitoring.
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install package and update newrelic python config with license key.  
+- :install -  will setup the New Relic repository, install package and update newrelic python config with license key.
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
 See https://docs.newrelic.com/docs/agents/python-agent/installation-configuration/python-agent-configuration#general-settings
 for an explanation on each attribute.
 
-* `'license'` NewRelic license key
-* `'version'` Python agent version. Will default to latest if nil.
-* `'virtualenv'` VirtualEnv to install puthon agent into. Default nil.
-* `'config_file'` Path to config file. Default '/etc/newrelic/newrelic.ini'
-* `'cookbook'` Cookbook holding config template. Default this cookbook.
-* `'source'` Config template source. Default 'agent/python/newrelic.ini.erb'
-* `'app_name'` Your newrelic python app name as it will show in the UI. Default => 'Python Application'
+* `'license'` - NewRelic license key
+* `'version'` - Python agent version. Will default to latest if nil.
+* `'virtualenv'` - VirtualEnv to install puthon agent into. Default nil.
+* `'config_file'` - Path to config file. Default '/etc/newrelic/newrelic.ini'
+* `'cookbook'` - Cookbook holding config template. Default this cookbook.
+* `'source'` - Config template source. Default 'agent/python/newrelic.ini.erb'
+* `'app_name'` - Your newrelic python app name as it will show in the UI. Default => 'Python Application'
 
-#### Advanced parameters  
+#### Advanced parameters
 
-* `'enabled'`  Default true
-* `'logfile'` Default '/tmp/newrelic-python-agent.log'
-* `'loglevel'` Default 'info'
-* `'daemon_ssl'` Default true
-* `'high_security'` Dfault false
-* `'capture_params'` Default false
-* `'ignored_params'` Default ' '
-* `'transaction_tracer_enable'` Default true
-* `'transaction_tracer_threshold'` Default 'apdex_f'
-* `'transaction_tracer_record_sql'` Default 'obfuscated'
-* `'transaction_tracer_stack_trace_threshold'` Default '0.5'
-* `'transaction_tracer_slow_sql'` Default true
-* `'transaction_tracer_explain_threshold'` Default '0.5'
-* `'thread_profiler_enable'` Default true
-* `'error_collector_enable'` Default true
-* `'error_collector_ignore_errors'` Default ' '
-* `'browser_monitoring_auto_instrument'` Default true
-* `'cross_application_tracer_enable'` Default true
-* `'feature_flag'` Default nil
+* `'enabled'` - Defaults to true
+* `'logfile'` - Defaults to '/tmp/newrelic-python-agent.log'
+* `'loglevel'` - Defaults to 'info'
+* `'daemon_ssl'` - Defaults to true
+* `'high_security'` - Defaults to false
+* `'capture_params'` - Defaults to false
+* `'ignored_params'` - Defaults to ' '
+* `'transaction_tracer_enable'` - Defaults to true
+* `'transaction_tracer_threshold'` - Defaults to 'apdex_f'
+* `'transaction_tracer_record_sql'` - Defaults to 'obfuscated'
+* `'transaction_tracer_stack_trace_threshold'` - Defaults to '0.5'
+* `'transaction_tracer_slow_sql'` - Defaults to true
+* `'transaction_tracer_explain_threshold'` - Defaults to '0.5'
+* `'thread_profiler_enable'` - Defaults to true
+* `'error_collector_enable'` - Defaults to true
+* `'error_collector_ignore_errors'` - Defaults to ' '
+* `'browser_monitoring_auto_instrument'` - Defaults to true
+* `'cross_application_tracer_enable'` - Defaults to true
+* `'feature_flag'` - Defaults to nil
 
-
-#### Example  
+#### Example
 
 ```ruby
 include_recipe 'python'
@@ -516,37 +455,33 @@ newrelic_agent_python 'Install' do
 end
 ```
 
-### `newrelic_agent_nodejs`  
+### `newrelic_agent_nodejs`
 This cookbook includes an LWRP for installing the newrelic nodejs agent
-The `newrelic_agent_nodejs` resource will handle the requirements to install nodejs application monitoring.  
+The `newrelic_agent_nodejs` resource will handle the requirements to install nodejs application monitoring.
 
 #### Actions
 
-- :install -  will setup the New Relic repository, install npm package and update newrelic nodejs config with license key.  
+- :install -  will setup the New Relic repository, install npm package and update newrelic nodejs config with license key.
 - :remove -  Uninstall the New Relic package
 
 #### Attribute parameters
 https://docs.newrelic.com/docs/agents/nodejs-agent/installation-configuration/nodejs-agent-configuration
 for an explanation on each attribute.
 
-* `'license'` NewRelic license key
-* `'version'` NewRelic npm package version. Will default to latest if nil.
-* `'app_name'` Your newrelic nodejs app name as it will show in the UI. Default => 'My Node App'
-* `'app_path'` Required true. Default nil.  You must provide a valid path to your nodejs app root dir.
-* `'cookbook'` Cookbook holding config template. Default this cookbook.
-* `'source'` Config template source. Default 'agent/python/newrelic.ini.erb'
+* `'license'` - NewRelic license key
+* `'version'` - NewRelic npm package version. Will default to latest if nil.
+* `'app_name'` - Your newrelic nodejs app name as it will show in the UI. Default => 'My Node App'
+* `'app_path'` - Required true. Default nil.  You must provide a valid path to your nodejs app root dir.
+* `'cookbook'` - Cookbook holding config template. Default this cookbook.
+* `'source'` - Config template source. Default 'agent/python/newrelic.ini.erb'
 
-attribute :license, :kind_of => String, :required => true, :default => nil
-attribute :version, :kind_of => String, :default => nil
-attribute :app_name, :kind_of => String, :default => 'My Node App'
+#### Advanced parameters
 
-#### Advanced parameters  
+* `'enabled'` - Defaults to true
+* `'logfile'` - Defaults to '/tmp/newrelic-python-agent.log'
+* `'loglevel'` - Defaults to 'info'
 
-* `'enabled'`  Default true
-* `'logfile'` Default '/tmp/newrelic-python-agent.log'
-* `'loglevel'` Default 'info'
-
-#### Example  
+#### Example
 
 ```ruby
 newrelic_agent_nodejs '/var/my_node_approot' do
@@ -555,46 +490,45 @@ newrelic_agent_nodejs '/var/my_node_approot' do
 end
 ```
 
-### `newrelic_agent_dotnet`  
+### `newrelic_agent_dotnet`
 This cookbook includes an LWRP for installing the dotnet agent
 
 The `newrelic_agent_dotnet` resource will handle the requirements to install .Net application monitoring.
 
 #### Actions
 
-- :install -  will retrieve .Net agent and install.  
-- :remove -  Uninstall the New Relic agent.
+- :install - installs the New Relic agent.
+- :remove - uninstalls the New Relic agent.
 
 #### Attribute parameters
 
-* `'https_download'` The URL to download the MSI installer from New Relic. Default is to pull "latest"
-* `'dotnet_agent'` The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
+* `'https_download'` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
+* `'dotnet_agent'` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 
-
-#### Example  
+#### Example
 ```ruby
 newrelic_agent_dotnet 'Install' do
-  license '0000ffff0000ffff0000ffff0000ffff0000ffff'  
+  license '0000ffff0000ffff0000ffff0000ffff0000ffff'
 end
-```  
+```
 
 ### `newrelic_deployment`
 This cookbook includes an LWRP for notifying New Relic of a deployment
 
 #### Actions
 
-- :notify: Notify New Relic of a deployment
+- :notify - notifies New Relic of a deployment
 
 #### Attribute parameters
 
-* `'key_type'` Your New Relic API key type (api_key or license_key, defaults to api_key currently for backwards compatibility)
-* `'key'` Your New Relic key (see key_type for more information on what value to provide here exactly)
-* `'app_name'` The name of the application, found in the newrelic.yml file
-* `'app_id'` The ID # of the application
-* `'description'` Text annotation for the deployment (notes for you)
-* `'revision'` The revision number from your source control system (SVN, git, etc.)
-* `'changelog'` A list of changes for this deployment
-* `'user'` The name of the user/process that triggered this deployment
+* `'key_type'` - Your New Relic API key type (api_key or license_key, defaults to api_key currently for backwards compatibility)
+* `'key'` - Your New Relic key (see key_type for more information on what value to provide here exactly)
+* `'app_name'` - The name of the application, found in the newrelic.yml file
+* `'app_id'` - The ID # of the application
+* `'description'` - Text annotation for the deployment (notes for you)
+* `'revision'` - The revision number from your source control system (SVN, git, etc.)
+* `'changelog'` - A list of changes for this deployment
+* `'user'` - The name of the user/process that triggered this deployment
 
 #### Example(s)
 
@@ -639,8 +573,8 @@ end
 
 ## Usage
 
-1. include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::server_monitor_agent]`  
---- OR ---  
+1. include `recipe[newrelic]` in a run list to implicly run `recipe[newrelic::server_monitor_agent]`
+--- OR ---
 include the bits and pieces explicitly in a run list:
 ```ruby
 `recipe[newrelic::repository]`
@@ -652,8 +586,8 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::python_agent]`
 `recipe[newrelic::ruby_agent]`
 ```
-2. change the `node['newrelic']['license']` attribute to your New Relic license keys  
---- OR ---  
+2. change the `node['newrelic']['license']` attribute to your New Relic license keys
+--- OR ---
 [override the attributes on a higher level](http://wiki.opscode.com/display/chef/Attributes#Attributes-AttributesPrecedence)
 
 ## References

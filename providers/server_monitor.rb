@@ -53,7 +53,7 @@ def install_newrelic_service_linux
     action new_resource.service_actions
   end
 
-  update_newrelic_alert_policy_linux(new_resource.alert_policy_id) if new_resource.alert_policy_id
+  update_newrelic_alert_policy_linux(new_resource.alert_policy_id, new_resource.hostname) if new_resource.alert_policy_id
 end
 
 def install_newrelic_service_windows
@@ -78,7 +78,7 @@ def install_newrelic_service_windows
 end
 
 def remove_newrelic_service_linux
-  update_newrelic_alert_policy_linux(new_resource.alert_policy_id) if new_resource.alert_policy_id
+  update_newrelic_alert_policy_linux(new_resource.alert_policy_id, new_resource.hostname) if new_resource.alert_policy_id
 
   package new_resource.service_name do
     action new_resource.action
@@ -91,14 +91,14 @@ def remove_newrelic_service_windows
   end
 end
 
-def update_newrelic_alert_policy_linux(alert_policy_id)
+def update_newrelic_alert_policy_linux(alert_policy_id, hostname = nil)
   ruby_block 'Move server to newrelic decommissioned policy' do
     block do
-      update_alert_policy(alert_policy_id)
+      update_alert_policy(alert_policy_id, hostname)
     end
 
-    only_if do
-      node['newrelic']['api_key'].!empty?
+    not_if do
+      node['newrelic']['api_key'].empty?
     end
   end
 end

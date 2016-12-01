@@ -2,6 +2,36 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.24.0
+
+- support for PHP7
+- parameterize dotnet agent config file
+- properly follow through with hostname
+- make documentation more consistent
+
+## v2.23.3
+
+- version incorrectly used and filename unused
+
+## v2.23.2
+
+- workaround inconsistencies in .zip file naming of New Relic download
+
+## v2.23.1
+
+- unzipping the agent with sudo broke when user didn't have sudo rights
+
+## v2.23.0
+
+- remove parsing of download page for Java-agent download
+- include unzip-package for extracting newrelic.jar from zip
+- addition of CentOS 7.2 platform integration tests
+
+## v2.22.4
+
+- minor syntax correction (server monitor)
+- README.md fix(es)
+
 ## v2.22.3 (2016-08-23)
 
 - get rid of confusing chefignore in cookbook repo, as it is actually only respected in the cookbook_path
