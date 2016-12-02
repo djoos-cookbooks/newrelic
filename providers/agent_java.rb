@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: agent_java
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 require 'uri'
@@ -33,33 +33,45 @@ def create_install_directory
     owner new_resource.app_user
     group new_resource.app_group
     recursive true
-    mode 0775
+    mode '0775'
     action :create
   end
 end
 
 def agent_jar
-  version = nil
-  jar_file = nil
+  package 'unzip'
 
-  if new_resource.version == 'latest'
-    version = 'current'
+  version = if new_resource.version == 'latest'
+              'current'
+            else
+              new_resource.version
+            end
 
-    url_content = open('https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/') { |f| f.read.lines.grep(/jar/i).to_s }
-    jar_file = url_content.split(/\W+jar/).first.to_s.split('\\"').last + '.jar'
-  else
-    version = new_resource.version
-    jar_file = "newrelic-agent-#{version}.jar"
+  filename = if new_resource.version == 'latest'
+               'newrelic-java.zip'
+             else
+               "newrelic-java-#{new_resource.version}.zip"
+             end
+
+  https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{filename}"
+
+  cache_dir = Chef::Config[:file_cache_path]
+
+  remote_file "#{new_resource.install_dir}/newrelic.zip" do
+    source https_download
+    user new_resource.app_user
+    group new_resource.app_group
+    mode '0664'
+    action :create
+    notifies :run, 'execute[newrelic-extract-jar]', :immediately
   end
 
-  https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{jar_file}"
-
-  remote_file "#{new_resource.install_dir}/newrelic.jar" do
-    source https_download
-    owner new_resource.app_user
+  execute 'newrelic-extract-jar' do
+    cwd new_resource.install_dir
+    user new_resource.app_user
     group new_resource.app_group
-    mode 0664
-    action :create
+    command 'unzip -oj newrelic.zip newrelic/newrelic.jar'
+    action :nothing
   end
 end
 
@@ -69,7 +81,7 @@ def generate_agent_config
     source new_resource.template_source
     owner new_resource.app_user
     group new_resource.app_group
-    mode 0644
+    mode '0644'
     variables(
       :resource => new_resource
     )
@@ -83,7 +95,7 @@ def allow_app_group_write_to_log_file_path
   until path.nil? || path.empty? || path == ::File::SEPARATOR
     directory path do
       group new_resource.app_group
-      mode 0775
+      mode '0775'
       action :create
     end
     path = ::File.dirname(path)
@@ -92,24 +104,24 @@ end
 
 def install_newrelic
   jar_file = 'newrelic.jar'
-  if new_resource.app_location.nil?
-    app_location = new_resource.install_dir
-  else
-    app_location = new_resource.app_location
-  end
+  app_location = if new_resource.app_location.nil?
+                   new_resource.install_dir
+                 else
+                   new_resource.app_location
+                 end
   execute "newrelic_install_#{jar_file}" do
     cwd new_resource.install_dir
-    command "sudo java -jar newrelic.jar -s #{app_location} install"
+    command "sudo java -jar newrelic.jar -s #{app_location} #{new_resource.agent_action}"
     only_if { new_resource.execute_agent_action == true }
   end
 end
 
 def remove_newrelic
-  if new_resource.app_location.nil?
-    app_location = new_resource.install_dir
-  else
-    app_location = new_resource.app_location
-  end
+  app_location = if new_resource.app_location.nil?
+                   new_resource.install_dir
+                 else
+                   new_resource.app_location
+                 end
   if app_location == '/opt/newrelic/java'
     execute 'newrelic-remove-default' do
       command 'sudo rm -rf /opt/newrelic'

@@ -1,19 +1,32 @@
-language: ruby
+# install the stable release of the Chef Development Kit (ChefDK)
+# use chef-current-precise to install the pre-release
+addons:
+  apt:
+    sources:
+      - chef-stable-precise
+    packages:
+      - chefdk
 
-rvm:
-  - 2.0.0
-  - 2.1.0
+services: docker
+
+# https://docs.travis-ci.com/user/customizing-the-build/#Skipping-the-Installation-Step
+install: true
 
 before_script:
-  - bundle exec berks install
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)" # make ChefDK's Ruby the default
+  - chef --version
+  - chef exec berks install
 
 script:
-  - bundle exec rake travis
+  - chef exec rake travis
 
 branches:
   only:
     - master
+    - /^release\/.*$/
+    - /^feature\/.*$/
+    - /^bugfix\/.*$/
 
 notifications:
   email:
-    - dev@escapestudios.com
+    - development@davidjoos.com

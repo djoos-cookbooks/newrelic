@@ -3,7 +3,7 @@
 # Cookbook Name:: newrelic_poc
 # Recipe:: server_monitor
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 newrelic_server_monitor 'Install' do

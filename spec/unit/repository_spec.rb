@@ -6,7 +6,7 @@ describe 'newrelic::repository' do
   # end
 
   context 'Ubuntu 12.04' do
-    let(:chef_run) { ChefSpec::Runner.new(:platform => 'ubuntu', :version => '12.04').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'ubuntu', :version => '12.04').converge(described_recipe) }
 
     it 'installs the New Relic apt repository' do
       expect(chef_run).to add_apt_repository('newrelic').with(
@@ -19,7 +19,7 @@ describe 'newrelic::repository' do
   end
 
   context 'Debian 7' do
-    let(:chef_run) { ChefSpec::Runner.new(:platform => 'debian', :version => '7.1').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'debian', :version => '7.1').converge(described_recipe) }
 
     it 'installs the New Relic apt repository' do
       expect(chef_run).to add_apt_repository('newrelic').with(
@@ -32,7 +32,7 @@ describe 'newrelic::repository' do
   end
 
   context 'CentOS 6' do
-    let(:chef_run) { ChefSpec::Runner.new(:platform => 'centos', :version => '6.4').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'centos', :version => '6.4').converge(described_recipe) }
 
     it 'installs the New Relic yum repository' do
       expect(chef_run).to create_yum_repository('newrelic').with(
@@ -44,7 +44,7 @@ describe 'newrelic::repository' do
   end
 
   context 'RedHat 6' do
-    let(:chef_run) { ChefSpec::Runner.new(:platform => 'redhat', :version => '6.3').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'redhat', :version => '6.3').converge(described_recipe) }
 
     it 'installs the New Relic yum repository' do
       expect(chef_run).to create_yum_repository('newrelic').with(

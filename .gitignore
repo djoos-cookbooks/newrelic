@@ -1,3 +1,5 @@
+.vagrant
+Berksfile.lock
 *~
 *#
 .#*
@@ -5,11 +7,10 @@
 .*.sw[a-z]
 *.un~
 
-Berksfile.lock
+# Bundler
 Gemfile.lock
-.vagrant
-Vagrantfile
-.bundle
-.coverage
-.kitchen
+bin/*
+.bundle/*
+
+.kitchen/
 .kitchen.local.yml

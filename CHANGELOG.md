@@ -2,6 +2,79 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.24.0
+
+- support for PHP7
+- parameterize dotnet agent config file
+- properly follow through with hostname
+- make documentation more consistent
+
+## v2.23.3
+
+- version incorrectly used and filename unused
+
+## v2.23.2
+
+- workaround inconsistencies in .zip file naming of New Relic download
+
+## v2.23.1
+
+- unzipping the agent with sudo broke when user didn't have sudo rights
+
+## v2.23.0
+
+- remove parsing of download page for Java-agent download
+- include unzip-package for extracting newrelic.jar from zip
+- addition of CentOS 7.2 platform integration tests
+
+## v2.22.4
+
+- minor syntax correction (server monitor)
+- README.md fix(es)
+
+## v2.22.3 (2016-08-23)
+
+- get rid of confusing chefignore in cookbook repo, as it is actually only respected in the cookbook_path
+- reimplementation of cookbook-path in Rakefile
+- rework of version in metadata.rb
+
+## v2.22.2 (2016-08-23)
+
+- addition of quotes around cookbook name and cookbook category
+
+## v2.22.1 (2016-08-23)
+
+- workaround for [CHEF-3627](http://tickets.opscode.com/browse/CHEF-3627) in CI-setup
+- adjustment to upload complete-matcher when uploading to the Chef Supermarket
+
+## v2.22.0 (2016-08-23)
+
+- CI-improvements
+- fix for typo
+
+## v2.21.0 (2016-08-03)
+
+- remove friction and run tests via ChefDK
+
+## v2.20.0 (2016-07-03)
+
+- add usage of Java agent_action attribute
+- ensure setting execute_php5enmod is meaningful
+- DRY up Test Kitchen spec_helper
+- bugfix: forward slashes must be escaped
+
+## v2.19.0 (2016-04-01)
+
+- MIA
+
+## v2.18.0 (2016-01-22)
+
+- MIA
+
+## v2.17.0 (2015-11-18)
+
+- MIA
+
 ## v2.16.0 (2015-09-17)
 
 - Add verify_agent_config virtualenv support

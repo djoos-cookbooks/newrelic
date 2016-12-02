@@ -3,7 +3,7 @@
 # Cookbook Name:: newrelic_poc
 # Recipe:: agent_nodejs
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 include_recipe 'nodejs'

@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Provider:: agent_python
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 # include helper methods
@@ -46,7 +46,7 @@ def generate_agent_config
     source new_resource.source
     owner 'root'
     group 'root'
-    mode 0644
+    mode '0644'
     variables(
       :resource => new_resource
     )

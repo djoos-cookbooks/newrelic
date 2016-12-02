@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: repository
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 case node['platform_family']

@@ -7,7 +7,7 @@ describe 'newrelic_lwrp_test::agent_dotnet' do
 
   context 'Windows' do
     let(:chef_run) do
-      ChefSpec::Runner.new(:log_level => LOG_LEVEL, :platform => 'windows', :version => '2012', :step_into => ['newrelic_agent_dotnet']) do |node|
+      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'windows', :version => '2012', :step_into => ['newrelic_agent_dotnet']) do |node|
         stub_node_resources(node)
       end.converge(described_recipe)
     end

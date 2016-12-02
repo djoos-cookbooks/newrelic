@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Provider:: yml
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 require 'uri'
@@ -33,7 +33,7 @@ action :generate do
     source new_resource.template_source
     owner new_resource.owner
     group new_resource.group
-    mode 0644
+    mode '0644'
     variables(
       :resource => new_resource
     )

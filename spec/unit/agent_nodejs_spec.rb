@@ -7,7 +7,7 @@ describe 'newrelic_lwrp_test::agent_nodejs' do
 
   context 'Centos' do
     let(:chef_run) do
-      ChefSpec::ServerRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_agent_nodejs']) do |node|
+      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_agent_nodejs']) do |node|
         stub_resources
         stub_node_resources(node)
       end.converge(described_recipe)

@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Resource:: agent_php
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 actions :install, :remove
@@ -17,7 +17,11 @@ attribute :install_silently, :kind_of => [TrueClass, FalseClass], :default => fa
 attribute :config_file_to_be_deleted, :kind_of => String, :default => nil
 attribute :service_name, :kind_of => String, :default => nil
 attribute :service_action, :kind_of => String, :default => 'restart'
+
+# @todo take out deprecated execute_php5enmod logic: use enable_module instead
 attribute :execute_php5enmod, :kind_of => [TrueClass, FalseClass], :default => false
+
+attribute :enable_module, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :cookbook_ini, :kind_of => String, :default => 'newrelic'
 attribute :source_ini, :kind_of => String, :default => 'agent/php/newrelic.ini.erb'
 attribute :cookbook, :kind_of => String, :default => 'newrelic'

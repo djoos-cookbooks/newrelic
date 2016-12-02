@@ -1,9 +1,8 @@
 ---
 driver_plugin: vagrant
-driver_config:
-  require_chef_omnibus: true
 
 provisioner:
+  name: chef_zero
   attributes:
     newrelic:
       license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
@@ -25,12 +24,31 @@ platforms:
     attributes:
       rubygems: 'rubygems-integration'
       newrelic:
-        php5enmode: = true
         php_agent:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/mods-available/newrelic.ini'
-  - name: centos-6.6
+  - name: ubuntu-16.04
+    run_list:
+      - recipe[apt]
+    attributes:
+      rubygems: 'rubygems-integration'
+      java:
+          jdk_version: 7
+      newrelic:
+        php_agent:
+          web_server:
+            service_name: apache2
+          php_config: '/etc/php/7.0/mods-available/newrelic.ini'
+  - name: centos-6.8
+    attributes:
+      rubygems: 'rubygems'
+      newrelic:
+        php_agent:
+          web_server:
+            service_name: httpd
+          php_config: '/etc/php.d/newrelic.ini'
+  - name: centos-7.2
     attributes:
       rubygems: 'rubygems'
       newrelic:
@@ -51,10 +69,37 @@ suites:
             - nothing
   - name: php-agent
     run_list: "recipe[newrelic_lwrp_test::agent_php]"
+    attributes:
+      newrelic:
+        php_agent:
+          enable_module: false
+  - name: php-agent-enable-module
+    run_list: "recipe[newrelic_lwrp_test::agent_php]"
+    attributes:
+      newrelic:
+        php_agent:
+          enable_module: true
+  - name: php-agent-php5enmod
+    run_list: "recipe[newrelic_lwrp_test::agent_php]"
+    attributes:
+      newrelic:
+        php_agent:
+          execute_php5enmod: true
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
   - name: java-agent
     run_list: "recipe[newrelic_lwrp_test::agent_java]"
+    attributes:
+      newrelic:
+        java_agent:
+          install_dir: '/opt/tomcat_java_test_app'
+  - name: java-agent-not-latest-version
+    run_list: "recipe[newrelic_lwrp_test::agent_java]"
+    attributes:
+      newrelic:
+        java_agent:
+          version: 3.31.1
+          install_dir: '/opt/tomcat_java_test_app'
   - name: ruby-agent
     run_list: "recipe[newrelic_lwrp_test::agent_ruby]"
     attributes:

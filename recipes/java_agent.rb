@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: java_agent
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 newrelic_agent_java 'Install' do
@@ -46,5 +46,6 @@ newrelic_agent_java 'Install' do
   cross_application_tracer_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['cross_application_tracer']['enable']) unless node['newrelic']['application_monitoring']['cross_application_tracer']['enable'].nil?
   thread_profiler_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['thread_profiler']['enable']) unless node['newrelic']['application_monitoring']['thread_profiler']['enable'].nil?
   labels node['newrelic']['application_monitoring']['labels'] unless node['newrelic']['application_monitoring']['labels'].nil?
+  agent_action node['newrelic']['java_agent']['agent_action'] unless node['newrelic']['java_agent']['agent_action'].nil?
   execute_agent_action node['newrelic']['java_agent']['execute_agent_action'] unless node['newrelic']['java_agent']['execute_agent_action'].nil?
 end
