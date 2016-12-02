@@ -36,7 +36,7 @@ action :update do
   when 'debian', 'rhel', 'fedora'
     update_newrelic_service_linux
   when 'windows'
-    fail 'Not supported method for windows'
+    raise 'Not supported method for windows'
   end
 end
 
