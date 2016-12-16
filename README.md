@@ -610,9 +610,10 @@ This cookbook includes an LWRP for generating the newrelic.yml configuration fil
 2. In your application cookbook, generate the newrelic.yml for this application:
 
 ```ruby
-newrelicyml="#{my_app_path}/newrelic.yml"
-newrelic_yml newrelicyml do
+yml_path = "#{my_app_path}/newrelic.yml"
+newrelic_yml yml_path do
   app_name 'my-super-duper-application'
+  agent_type 'java'
 end
 ```
 

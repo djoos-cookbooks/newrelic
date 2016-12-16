@@ -33,6 +33,7 @@ attribute :daemon_proxy_user, :kind_of => String, :default => nil
 attribute :daemon_proxy_password, :kind_of => String, :default => nil
 attribute :capture_params, :default => node['newrelic']['application_monitoring']['capture_params']
 attribute :ignored_params, :default => node['newrelic']['application_monitoring']['ignored_params']
+attribute :enable_custom_tracing, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :transaction_tracer_enable, :default => node['newrelic']['application_monitoring']['transaction_tracer']['enable']
 attribute :transaction_tracer_threshold, :default => node['newrelic']['application_monitoring']['transaction_tracer']['threshold']
 attribute :transaction_tracer_record_sql, :default => node['newrelic']['application_monitoring']['transaction_tracer']['record_sql']
