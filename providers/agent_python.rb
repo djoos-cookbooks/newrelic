@@ -21,7 +21,6 @@ action :install do
   install_python_agent
   create_config_dir
   generate_agent_config
-  verify_agent_config
 end
 
 action :remove do
@@ -52,13 +51,6 @@ def generate_agent_config
     )
     sensitive true
     action :create
-  end
-end
-
-def verify_agent_config
-  virtualenv = "#{new_resource.virtualenv}/bin/" if new_resource.virtualenv
-  execute 'verify-python-agent' do
-    command "#{virtualenv}newrelic-admin validate-config #{new_resource.config_file}"
   end
 end
 
