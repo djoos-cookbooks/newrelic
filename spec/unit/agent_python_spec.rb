@@ -28,10 +28,6 @@ describe 'newrelic_lwrp_test::agent_python' do
       expect(chef_run).to install_python_pip('newrelic')
     end
 
-    it 'execute verify python agent' do
-      expect(chef_run).to run_execute('newrelic-admin validate-config /etc/newrelic/newrelic.ini')
-    end
-
     it 'creates newrelic ini config template from newrelic.ini.erb' do
       expect(chef_run).to render_file('/etc/newrelic/newrelic.ini').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
