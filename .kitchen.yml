@@ -112,3 +112,9 @@ suites:
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs]"
   - name: nodejs-agent-recipe
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs_recipe]"
+  - name: lwrp_yml
+    run_list: "recipe[newrelic_lwrp_test::lwrp_yml]"
+    attributes:
+      newrelic:
+        java_agent:
+          install_dir: '/opt/tomcat_java_test_app'
