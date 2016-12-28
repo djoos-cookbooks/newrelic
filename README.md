@@ -75,6 +75,7 @@ Make sure you run Chef >= 0.10.0.
 * `node['newrelic']['server_monitoring']['pidfile']`
 * `node['newrelic']['server_monitoring']['collector_host']`
 * `node['newrelic']['server_monitoring']['timeout']`
+* `node['newrelic']['server_monitoring']['other_options']`
 
 * `node['newrelic']['application_monitoring']['enabled']`
 * `node['newrelic']['application_monitoring']['logfile']`
@@ -232,6 +233,7 @@ The `newrelic_server_monitor` resource will handle the requirements to configure
 * `'pidfile'` - defaults to nil
 * `'collector_host'` - defaults to nil
 * `'timeout'` - defaults to nil
+* `'other_options'` - defaults to empty Hash
 * `'alert_policy_id'` - defaults to nil
 
 #### Example
