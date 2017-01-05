@@ -2,6 +2,19 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.25.0
+
+- don't verify the Python agent configuration on every Chef run
+- Rubocop fix(es) for cops in latest Chef DK version
+
+## v2.24.2
+
+- updated version constraint for apt cookbook
+
+## v2.24.1
+
+- fix for enable_custom_tracing when using newrelic_yml-LWRP directly
+
 ## v2.24.0
 
 - support for PHP7
