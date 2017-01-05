@@ -57,7 +57,8 @@ attribute :cross_application_tracer_enabled, :kind_of => [TrueClass, FalseClass]
 attribute :error_collector_enabled, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :ignored_exceptions, :kind_of => Array, :default => [
   'System.IO.FileNotFoundException',
-  'System.Threading.ThreadAbortException']
+  'System.Threading.ThreadAbortException'
+]
 attribute :ignored_status_codes, :kind_of => Array, :default => [401, 404]
 
 attribute :high_security_enabled, :kind_of => [TrueClass, FalseClass], :default => false
@@ -96,4 +97,5 @@ attribute :tx_tracer_attributes_include, :kind_of => Array, :default => []
 
 attribute :ignored_thread_profiling_methods, :kind_of => Array, :default => [
   'System.Threading.WaitHandle:InternalWaitOne',
-  'System.Threading.WaitHandle:WaitAny']
+  'System.Threading.WaitHandle:WaitAny'
+]

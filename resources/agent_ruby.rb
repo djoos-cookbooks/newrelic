@@ -25,8 +25,8 @@ attribute :logfile, :kind_of => String, :default => 'newrelic-daemon.log'
 attribute :logfile_path, :kind_of => String, :default => '/var/log/newrelic/'
 attribute :loglevel, :kind_of => String, :default => nil
 attribute :audit_mode, :kind_of => [TrueClass, FalseClass], :default => false
-attribute :log_file_count, :kind_of => Fixnum, :default => 1
-attribute :log_limit_in_kbytes, :kind_of => Fixnum, :default => 0
+attribute :log_file_count, :kind_of => Integer, :default => 1
+attribute :log_limit_in_kbytes, :kind_of => Integer, :default => 0
 attribute :log_daily, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :daemon_ssl, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :daemon_proxy, :kind_of => String, :default => nil
