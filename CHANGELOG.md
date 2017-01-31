@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.26.0
+
+- (feature) class transformer configuration support for Java agent
+- (bugfix) default agent_actions converted to strings
+- (bugfix) for missing erb tag for feature_flag variable (#289)
+
 ## v2.25.0
 
 - don't verify the Python agent configuration on every Chef run
