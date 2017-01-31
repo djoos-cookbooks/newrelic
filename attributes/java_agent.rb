@@ -16,6 +16,17 @@ default['newrelic']['java_agent']['log_daily'] = true
 default['newrelic']['java_agent']['agent_action'] = 'install'
 default['newrelic']['java_agent']['execute_agent_action'] = true
 default['newrelic']['java_agent']['enable_custom_tracing'] = false
+default['newrelic']['java_agent']['class_transformer_config'] = {}
+# Example:
+# default['newrelic']['java_agent']['class_transformer_config'] = {
+#   'classloader_blacklist' => ['org.codehaus.groovy.runtime.callsite.CallSiteClassLoader'],
+#   'instrumentation_classes' => {
+#    'wildfly-8' => { 'enabled' => false },
+#    'wildfly-8-CAT' => { 'enabled' => false },
+#    'wildfly-8-PORT' => { 'enabled' => false }
+#   }
+# }
+#
 default['newrelic']['java_agent']['app_location'] = node['newrelic']['java_agent']['install_dir']
 default['newrelic']['java_agent']['template']['cookbook'] = 'newrelic'
 default['newrelic']['java_agent']['template']['source'] = 'agent/newrelic.yml.erb'

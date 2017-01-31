@@ -20,6 +20,7 @@ newrelic_agent_java 'Install' do
   app_name 'java_test_app'
   app_user 'root'
   app_group 'root'
+  class_transformer_config node['newrelic']['java_agent']['class_transformer_config']
 end
 
 # newrelic_agent_java 'Remove' do
