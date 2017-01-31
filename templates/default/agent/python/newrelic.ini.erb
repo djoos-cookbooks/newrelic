@@ -259,5 +259,5 @@ cross_application_tracer.enabled = <%= @resource.cross_application_tracer_enable
 # Feature flag
 # eg. use for improved Tornado instrumentation
 # (https://docs.newrelic.com/docs/release-notes/agent-release-notes/python-release-notes/python-agent-232028)
-feature_flag = @resource.feature_flag
+feature_flag = <%= @resource.feature_flag %>
 <% end %>
