@@ -40,6 +40,8 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php/7.0/mods-available/newrelic.ini'
+      nodejs:
+        repo: 'https://deb.nodesource.com/node_6.x'
   - name: centos-6.8
     attributes:
       rubygems: 'rubygems'
