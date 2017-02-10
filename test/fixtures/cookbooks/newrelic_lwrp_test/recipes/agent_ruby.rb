@@ -6,7 +6,7 @@
 # Copyright (c) 2016, David Joos
 #
 
-include_recipe 'ruby'
+package 'ruby'
 
 package node['rubygems'] do
   action :install
