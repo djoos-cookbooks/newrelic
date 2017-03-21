@@ -27,6 +27,7 @@ action :remove do
   python_package 'newrelic' do
     virtualenv new_resource.virtualenv if new_resource.virtualenv
     version new_resource.version if new_resource.version
+    python new_resource.python if new_resource.python
     action :remove
   end
 end
@@ -35,6 +36,7 @@ def install_python_agent
   python_package 'newrelic' do
     virtualenv new_resource.virtualenv if new_resource.virtualenv
     version new_resource.version if new_resource.version
+    python new_resource.python if new_resource.python
     action :install
   end
 end
