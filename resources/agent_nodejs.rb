@@ -10,7 +10,7 @@ actions :install, :remove
 default_action :install
 
 attribute :license, :kind_of => String, :required => true, :default => NewRelic.application_monitoring_license(node)
-attribute :version, :kind_of => String, :default => nil
+attribute :version, :kind_of => String, :default => 'latest'
 attribute :app_name, :kind_of => String, :default => 'My Node App'
 attribute :app_path, :kind_of => String, :name_attribute => true, :required => true
 attribute :cookbook, :kind_of => String, :default => 'newrelic'
