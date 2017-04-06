@@ -33,7 +33,7 @@ end
 def install_nodejs_agent
   execute 'npm-install-nodejs_agent' do
     cwd new_resource.app_path
-    command 'npm install newrelic'
+    command "npm install newrelic@#{new_resource.version}"
   end
 
   template "#{new_resource.app_path}/newrelic.js" do
