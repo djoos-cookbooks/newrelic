@@ -17,7 +17,7 @@ describe 'newrelic_lwrp_test::agent_nodejs' do
       expect(chef_run).to create_directory('/var/mynode_app')
     end
 
-    it 'Installs New Relic Nodejs agent' do
+    it 'installs New Relic Nodejs agent' do
       expect(chef_run).to install_newrelic_agent_nodejs('/var/mynode_app')
     end
 
@@ -29,8 +29,8 @@ describe 'newrelic_lwrp_test::agent_nodejs' do
       expect(chef_run).to render_file('/var/mynode_app/newrelic.js').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
 
-    it 'installs newrelic npm package' do
-      expect(chef_run).to run_execute('npm install newrelic')
+    it 'installs latest newrelic npm package' do
+      expect(chef_run).to run_execute('npm install newrelic@latest')
     end
   end
 end
