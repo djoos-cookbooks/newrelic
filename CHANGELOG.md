@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## Unreleased
+
+- swapping out python for poise-python as its deprecated
+
 ## v2.26.0
 
 - (feature) class transformer configuration support for Java agent

@@ -34,3 +34,4 @@ attribute :error_collector_ignore_errors, :kind_of => String, :default => ' '
 attribute :browser_monitoring_auto_instrument, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :cross_application_tracer_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :feature_flag, :kind_of => String, :default => nil
+attribute :python, :kind_of => String, :default => nil

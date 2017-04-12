@@ -25,7 +25,7 @@ describe 'newrelic_lwrp_test::agent_python' do
     end
 
     it 'installs python-pip newrelic package' do
-      expect(chef_run).to install_python_pip('newrelic')
+      expect(chef_run).to install_python_package('newrelic')
     end
 
     it 'creates newrelic ini config template from newrelic.ini.erb' do
