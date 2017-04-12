@@ -107,6 +107,8 @@ suites:
       newrelic:
         ruby_agent:
           install_dir: '/opt/newrelic/ruby'
+  - name: python-agent
+    run_list: "recipe[newrelic_lwrp_test::agent_python]"
   - name: python-agent-recipe
     run_list: "recipe[newrelic_lwrp_test::agent_python_recipe]"
   - name: nodejs-agent
