@@ -16,6 +16,7 @@ end
 
 newrelic_agent_nodejs '/var/mynode_app' do
   license node['newrelic']['license']
+  version '1.37.2' # 1.38.2 outputs readable-stream@2.2.3 invalid on `npm ls`
   app_name 'my_nodejs_app'
   enabled false
   app_log_level 'debug'

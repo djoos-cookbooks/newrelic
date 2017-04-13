@@ -6,6 +6,7 @@
 #
 
 default['newrelic']['ruby_agent']['agent_action'] = 'install'
+default['newrelic']['ruby_agent']['version'] = 'latest'
 default['newrelic']['ruby_agent']['install_dir'] = ''
 default['newrelic']['ruby_agent']['app_user'] = 'newrelic'
 default['newrelic']['ruby_agent']['app_group'] = 'newrelic'
