@@ -6,7 +6,8 @@
 # Copyright (c) 2016, David Joos
 #
 
-nodeapp = { 'app_path' => '/var/mynode_app', 'app_name' => 'My Node Application', 'app_log_level' => 'info', 'app_log_filepath' => '/var/mynode_app/newrelic.log', 'version' => '1.37.2' } # 1.38.2 outputs readable-stream@2.2.3 invalid on `npm ls`
+# version one dot thirty eight dot two has invalid readable stream version two dot two dot three
+nodeapp = { 'app_path' => '/var/mynode_app', 'app_name' => 'My Node Application', 'app_log_level' => 'info', 'app_log_filepath' => '/var/mynode_app/newrelic.log', 'version' => '1.37.2' }
 node.default['newrelic']['nodejs_agent']['apps'] = [nodeapp]
 
 directory '/var/mynode_app' do
