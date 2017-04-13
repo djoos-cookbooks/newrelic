@@ -191,3 +191,13 @@ collector_host=<%= @resource.collector_host %>
 <% else %>
 timeout=<%= @resource.timeout %>
 <% end %>
+
+#
+# Other Options : refer to the newrelic documentation for the details
+# https://docs.newrelic.com/docs/servers/new-relic-servers-linux/installation-configuration/linux-configuration-new-relic-servers
+#
+<% unless @resource.other_options.empty? %>
+<% @resource.other_options.each do | op_key, op_value | %>
+<%= op_key %>=<%= op_value %>
+<% end %>
+<% end %>
