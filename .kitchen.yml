@@ -19,6 +19,8 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/conf.d/newrelic.ini'
+        ruby_agent:
+          version: 3.18.1.330 # Ruby version >= 1.8.7, newrelic_rmp 4.x requires Ruby >= 2.0.0
   - name: ubuntu-14.04
     run_list:
       - recipe[apt]
@@ -29,6 +31,8 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/mods-available/newrelic.ini'
+        ruby_agent:
+          version: 3.18.1.330 # Ruby version >= 1.8.7, newrelic_rmp 4.x requires Ruby >= 2.0.0
   - name: ubuntu-16.04
     run_list:
       - recipe[apt]
@@ -41,6 +45,8 @@ platforms:
           web_server:
             service_name: apache2
           php_config: '/etc/php/7.0/mods-available/newrelic.ini'
+      nodejs:
+        repo: 'https://deb.nodesource.com/node_6.x'
   - name: centos-6.8
     attributes:
       rubygems: 'rubygems'
@@ -49,6 +55,8 @@ platforms:
           web_server:
             service_name: httpd
           php_config: '/etc/php.d/newrelic.ini'
+        ruby_agent:
+          version: 3.18.1.330 # Ruby version >= 1.8.7, newrelic_rmp 4.x requires Ruby >= 2.0.0
   - name: centos-7.2
     attributes:
       rubygems: 'rubygems'

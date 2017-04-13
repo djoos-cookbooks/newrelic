@@ -6,7 +6,7 @@
 # Copyright (c) 2016, David Joos
 #
 
-include_recipe 'ruby'
+package 'ruby'
 
 package node['rubygems'] do
   action :install
@@ -17,6 +17,7 @@ newrelic_agent_ruby 'Install' do
   app_name 'ruby_test_app'
   app_user 'root'
   app_group 'root'
+  version node['newrelic']['ruby_agent']['version']
 end
 
 # newrelic_agent_ruby 'Remove' do

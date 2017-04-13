@@ -92,7 +92,7 @@ def newrelic_php_enable_module
   execute 'newrelic-enable-module' do
     command "#{enable_module_command} newrelic"
     action :nothing
-    only_if { enable_module == true && !enable_module_command.nil? }
+    only_if { enable_module == true && !module_enabled? && !enable_module_command.nil? }
   end
 end
 
@@ -121,6 +121,12 @@ def enable_module_command
   elsif php_version_major == 5 && php_version_minor > 3
     'php5enmod'
   end
+end
+
+def module_enabled?
+  cmd = Mixlib::ShellOut.new('php --modules')
+  cmd.run_command
+  cmd.stdout.lines.grep(/^newrelic$/).any?
 end
 
 def generate_agent_config
