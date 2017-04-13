@@ -34,7 +34,7 @@ Make sure you run Chef >= 0.10.0.
 
 ### Cookbooks:
 
-* python
+* poise-python
 * curl
 * apt
 * yum
