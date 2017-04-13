@@ -2,9 +2,13 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
-## Unreleased
+## v2.27.0
 
 - swapping out python for poise-python as its deprecated
+- additional (integration) test suite: python-agent
+- added the ability to specify New Relic NodeJS agent version
+- rename test fixture cookbook: newrelic_poc > newrelic_lwrp_test
+- adding other_options to server_monitor
 
 ## v2.26.0
 
