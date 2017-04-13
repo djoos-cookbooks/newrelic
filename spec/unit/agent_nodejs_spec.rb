@@ -30,7 +30,8 @@ describe 'newrelic_lwrp_test::agent_nodejs' do
     end
 
     it 'installs latest newrelic npm package' do
-      expect(chef_run).to run_execute('npm install newrelic@latest')
+      # version one dot thirty eight dot two has invalid readable stream version two dot two dot three
+      expect(chef_run).to run_execute('npm install newrelic@1.37.2')
     end
   end
 end
