@@ -18,6 +18,7 @@ newrelic_server_monitor 'Install' do
   pidfile node['newrelic']['server_monitoring']['pidfile'] unless node['newrelic']['server_monitoring']['pidfile'].nil?
   collector_host node['newrelic']['server_monitoring']['collector_host'] unless node['newrelic']['server_monitoring']['collector_host'].nil?
   timeout node['newrelic']['server_monitoring']['timeout'] unless node['newrelic']['server_monitoring']['timeout'].nil?
+  other_options node['newrelic']['server_monitoring']['other_options'] unless node['newrelic']['server_monitoring']['other_options'].nil?
   alert_policy_id node['newrelic']['server_monitoring']['alert_policy_id'] unless node['newrelic']['server_monitoring']['alert_policy_id'].nil?
   config_file_user node['newrelic']['server_monitor_agent']['config_file_user'] unless node['newrelic']['server_monitor_agent']['config_file_user'].nil?
   config_file_group node['newrelic']['server_monitor_agent']['config_file_group'] unless node['newrelic']['server_monitor_agent']['config_file_group'].nil?
