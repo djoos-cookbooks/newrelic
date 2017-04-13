@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.27.1
+
+- integration test fix(es)
+
 ## v2.27.0
 
 - swapping out python for poise-python as its deprecated
