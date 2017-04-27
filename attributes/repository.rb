@@ -6,7 +6,7 @@
 #
 
 default['newrelic']['repository']['key'] = 'http://download.newrelic.com/548C16BF.gpg'
-
+default['newrelic']['repository']['sslverify'] = true
 case node['platform_family']
 when 'debian'
   default['newrelic']['repository']['uri'] = 'http://download.newrelic.com/debian/'
