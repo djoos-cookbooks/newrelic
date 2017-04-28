@@ -30,7 +30,7 @@ module NewRelic
         description 'New Relic packages for Enterprise Linux 5 - $basearch'
         baseurl node['newrelic']['repository']['uri']
         gpgkey node['newrelic']['repository']['key']
-        sslverify node['newrelic']['repository']['sslverify']
+        sslverify node['newrelic']['repository']['ssl_verify']
       end
     end
 
