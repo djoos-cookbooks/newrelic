@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.28.0
+- addition of ssl verify on yum_repository for those that have a mirror yum repo with a self-signed certificate
+
 ## v2.27.1
 
 - integration test fix(es)
