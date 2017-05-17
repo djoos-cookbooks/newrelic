@@ -120,6 +120,9 @@ Make sure you run Chef >= 0.10.0.
 ### repository.rb:
 
 * `node['newrelic']['repository']['key']` - URL to the New Relic repository key, defaults to "http://download.newrelic.com/548C16BF.gpg"
+* `node['newrelic']['repository']['proxy']` - Repository proxy host, defaults to nil
+* `node['newrelic']['repository']['proxy_username']` - Repository proxy username, defaults to nil
+* `node['newrelic']['repository']['proxy_password']` - Repository proxy password, defaults to nil
 
 ### python_agent.rb:
 
