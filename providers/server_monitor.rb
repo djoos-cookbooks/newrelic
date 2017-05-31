@@ -35,6 +35,7 @@ def install_newrelic_service_linux
   package new_resource.service_name do
     action new_resource.action
   end
+
   # configure your New Relic license key
   template "#{new_resource.config_path}/nrsysmond.cfg" do
     cookbook new_resource.cookbook
@@ -48,6 +49,7 @@ def install_newrelic_service_linux
     sensitive true
     notifies new_resource.service_notify_action, "service[#{new_resource.service_name}]"
   end
+
   service new_resource.service_name do
     supports :status => true, :start => true, :stop => true, :restart => true, :enable => true
     action new_resource.service_actions
