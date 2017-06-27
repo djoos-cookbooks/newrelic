@@ -15,6 +15,7 @@ The agent installs are being converted into libraries, currently the following a
 * python_agent
 * nodejs_agent
 * dotnet_agent
+* infrastructure_agent
 
 More information?
 
@@ -565,6 +566,29 @@ newrelic_agent_dotnet 'Install' do
 end
 ```
 
+### `newrelic_agent_infrastructure`
+This cookbook includes an LWRP for installing the infrastructure agent
+
+The `newrelic_agent_infrastructure` resource will handle the requirements to set up the infrastructure agent.
+
+#### Actions
+
+- :install -  will setup the New Relic Infrastructure agent.
+
+#### Attribute parameters
+
+* `'license'` - New Relic license key
+* `'version'` - New Relic Infrastructure Agent version to use. To find the current version, check New Relic repo
+* `'display_name'` - Overrides the auto-generated hostname for reporting, defaults to nil
+* `'logfile'` - To log to another location, provide a full path and file name, defaults to nil
+* `'verbose'` - Enables verbose logging for the agent, defaults to 0
+* `'proxy'` - Defaults to nil
+* `'template_cookbook'` - Sets cookbook for template, defaults to 'newrelic'
+* `'template_source'` - Sets source for template, defaults to 'agent/infrastructure/newrelic.yml.erb'
+* `'service_actions'` - The New Relic infrastructure agent service actions, defaults to "`%w(enable start)`" (#starts the service if it's not running and enables it to start at system boot time)
+* `'windows_version'` - the Windows version to install, defaults to "1.0.703"
+* `'windows_checksum'` - checksum of the (64-bit) Windows version, defaults to "3c9f98325dc484ee8735f01b913803eaef54f06641348b3dd9f3c0b3cd803ace"
+
 ### `newrelic_deployment`
 This cookbook includes an LWRP for notifying New Relic of a deployment
 
@@ -639,6 +663,7 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::php_agent]`
 `recipe[newrelic::python_agent]`
 `recipe[newrelic::ruby_agent]`
+`recipe[newrelic::infrastructure_agent]`
 ```
 2. change the `node['newrelic']['license']` attribute to your New Relic license keys
 --- OR ---

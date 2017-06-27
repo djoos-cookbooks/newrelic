@@ -1,6 +1,7 @@
 if defined?(ChefSpec)
   ChefSpec.define_matcher :newrelic_server_monitor
   ChefSpec.define_matcher :newrelic_agent_php
+  ChefSpec.define_matcher :newrelic_agent_infrastructure
   ChefSpec.define_matcher :newrelic_agent_java
   ChefSpec.define_matcher :newrelic_agent_ruby
   ChefSpec.define_matcher :newrelic_agent_dotnet
@@ -13,6 +14,10 @@ if defined?(ChefSpec)
 
   def install_newrelic_agent_php(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(:newrelic_agent_php, :install, resource_name)
+  end
+
+  def install_newrelic_agent_infrastructure(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:newrelic_agent_infrastructure, :install, resource_name)
   end
 
   def install_newrelic_agent_java(resource_name)

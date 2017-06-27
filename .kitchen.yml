@@ -96,6 +96,8 @@ suites:
           execute_php5enmod: true
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
+  - name: infrastructure-agent
+    run_list: "recipe[newrelic_lwrp_test::agent_infrastructure]"
   - name: java-agent
     run_list: "recipe[newrelic_lwrp_test::agent_java]"
     attributes:

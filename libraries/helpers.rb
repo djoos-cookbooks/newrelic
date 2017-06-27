@@ -6,6 +6,10 @@ module NewRelic
       install_newrelic_repo
     end
 
+    def newrelic_repository_infrastructure
+      install_newrelic_repo_infrastructure
+    end
+
     def check_license
       # check license key provided
       raise 'The NewRelic key is required.' if new_resource.license.nil?
@@ -32,6 +36,46 @@ module NewRelic
         gpgkey node['newrelic']['repository']['key']
         sslverify node['newrelic']['repository']['ssl_verify']
       end
+    end
+
+    def install_newrelic_repo_infrastructure
+      install_newrelic_repo_infrastructure_debian if node['platform_family'] == 'debian'
+      install_newrelic_repo_infrastructure_rhel if node['platform_family'] == ('rhel' || 'fedora')
+    end
+
+    def install_newrelic_repo_infrastructure_debian
+      apt_repository 'newrelic-infra' do
+        uri node['newrelic']['repository']['infrastructure']['uri']
+        distribution deb_version_to_codename(node['platform_version'].to_i)
+        components node['newrelic']['repository']['infrastructure']['components']
+        key node['newrelic']['repository']['infrastructure']['key']
+        arch 'amd64'
+      end
+    end
+
+    def install_newrelic_repo_infrastructure_rhel
+      yum_repository 'newrelic-infra' do
+        description 'New Relic Infrastructure'
+        baseurl node['newrelic']['repository']['infrastructure']['uri']
+        gpgkey node['newrelic']['repository']['infrastructure']['key']
+        sslverify node['newrelic']['repository']['infrastructure']['ssl_verify']
+        gpgcheck true
+        repo_gpgcheck true
+      end
+    end
+
+    def deb_version_to_codename(version)
+      deb_version_to_codename = {
+        7 => 'wheezy',
+        8 => 'jessie',
+        9 => 'stretch',
+        10 => 'buster',
+        12 => 'precise',
+        14 => 'trusty',
+        16 => 'xenial'
+      }
+
+      deb_version_to_codename[version]
     end
 
     def directory_exists?(dir)

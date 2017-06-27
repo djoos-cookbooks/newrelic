@@ -18,10 +18,10 @@ def stub_resources
 end
 
 def stub_node_resources(node)
-  node.set['newrelic']['license'] = '0000ffff0000ffff0000ffff0000ffff0000ffff'
-  node.set['newrelic']['php_agent']['web_server']['service_name'] = 'httpd'
-  node.set['newrelic']['php_agent']['php_config'] = '/etc/php.d/newrelic.ini'
-  node.set['rubygems'] = 'rubygems'
+  node.override['newrelic']['license'] = '0000ffff0000ffff0000ffff0000ffff0000ffff'
+  node.override['newrelic']['php_agent']['web_server']['service_name'] = 'httpd'
+  node.override['newrelic']['php_agent']['php_config'] = '/etc/php.d/newrelic.ini'
+  node.override['rubygems'] = 'rubygems'
 end
 
 RSpec.configure do |config|
