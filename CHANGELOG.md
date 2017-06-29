@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.29.0
+- implementation of the New Relic Infrastructure Agent
+
 ## v2.28.1
 - addition of CHANGELOG entry for version 2.28.0
 
