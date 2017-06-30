@@ -4,7 +4,7 @@
 
 ## Description
 
-This cookbook provides an easy way to install various New Relic agents and the New Relic server monitor.
+This cookbook provides an easy way to install various New Relic application monitoring agents and the New Relic Infrastructure agent.
 
 The agent installs are being converted into libraries, currently the following agents are now resources:
 
@@ -19,7 +19,7 @@ The agent installs are being converted into libraries, currently the following a
 
 More information?
 
-* https://docs.newrelic.com/docs/server/new-relic-for-server-monitoring
+* https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/getting-started/introduction-new-relic-infrastructure
 * https://docs.newrelic.com/docs/php/new-relic-for-php
 * https://docs.newrelic.com/docs/python/new-relic-for-python
 * https://docs.newrelic.com/docs/dotnet/new-relic-for-net
