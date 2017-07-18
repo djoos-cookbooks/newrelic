@@ -3,7 +3,6 @@ driver_plugin: vagrant
 
 provisioner:
   name: chef_zero
-  chef_version: 12.19.36
   attributes:
     newrelic:
       license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
