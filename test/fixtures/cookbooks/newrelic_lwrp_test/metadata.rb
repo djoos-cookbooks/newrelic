@@ -1,4 +1,3 @@
-# Encoding: utf-8
 name 'newrelic_lwrp_test'
 maintainer 'David Joos'
 maintainer_email 'development@davidjoos.com'

@@ -7,7 +7,7 @@
 
 require 'uri'
 
-use_inline_resources if defined?(use_inline_resources)
+use_inline_resources
 
 def whyrun_supported?
   true
@@ -40,6 +40,4 @@ action :generate do
     sensitive true
     action :create
   end
-
-  new_resource.updated_by_last_action(t.updated_by_last_action?)
 end

@@ -5,7 +5,7 @@
 # Copyright (c) 2016, David Joos
 #
 
-use_inline_resources if defined?(use_inline_resources)
+use_inline_resources
 
 def whyrun_supported?
   true
@@ -67,8 +67,6 @@ action :notify do
       command command_curl
       action :run
     end
-
-    new_resource.updated_by_last_action(true)
   end
 end
 

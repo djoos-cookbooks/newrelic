@@ -247,23 +247,23 @@ namespace :publish do
 end
 
 desc 'Run lint checks'
-task :lint => %w(style)
+task :lint => %w[style]
 
 desc 'Run unit tests'
-task :unit => %w(spec)
+task :unit => %w[spec]
 
 desc 'Run Travis CI tests'
-task :travis => %w(lint unit)
+task :travis => %w[lint unit]
 
 desc 'Run all integration tests'
-task :integration => %w(integration:vagrant)
+task :integration => %w[integration:vagrant]
 
 desc 'Publish'
-task :publish => %w(publish:scm publish:chef:supermarket publish:chef:server)
+task :publish => %w[publish:scm publish:chef:supermarket publish:chef:server]
 
 desc 'Release'
 task :release do
   ReleaseCommands.release(environment)
 end
 
-task :default => %w(lint unit integration)
+task :default => %w[lint unit integration]

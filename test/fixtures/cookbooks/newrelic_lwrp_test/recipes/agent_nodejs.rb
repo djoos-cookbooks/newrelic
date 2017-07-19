@@ -1,4 +1,3 @@
-# Encoding: utf-8
 #
 # Cookbook Name:: newrelic_lwrp_test
 # Recipe:: agent_nodejs
