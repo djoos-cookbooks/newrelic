@@ -168,7 +168,7 @@ def startup_mode_config
     # ensure that the daemon isn't currently running
     # only stop the daemon if it has not been run by the agent (with a newrelic.cfg)
     service 'newrelic-daemon' do
-      action [:disable, :stop] # stops the service if it's running and disables it from starting at system boot time
+      action %i[disable stop] # stops the service if it's running and disables it from starting at system boot time
       only_if { ::File.exist?('/etc/newrelic/newrelic.cfg') }
     end
     # ensure that the file /etc/newrelic/newrelic.cfg does not exist if it does, move it aside (or remove it)
@@ -198,7 +198,7 @@ def startup_mode_config
       notifies new_resource.service_action, "service[#{new_resource.service_name}]", :delayed if new_resource.service_name
     end
     service 'newrelic-daemon' do
-      action [:enable, :start] # starts the service if it's not running and enables it to start at system boot time
+      action %i[enable start] # starts the service if it's not running and enables it to start at system boot time
     end
   else
     raise "#{new_resource.startup_mode} is not a valid newrelic-daemon startup mode."
