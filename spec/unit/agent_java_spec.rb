@@ -7,7 +7,7 @@ describe 'newrelic_lwrp_test::agent_java' do
 
   context 'Centos' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_agent_java']) do |node|
+      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.8', :step_into => ['newrelic_agent_java']) do |node|
         stub_node_resources(node)
       end.converge(described_recipe)
     end
@@ -43,7 +43,7 @@ describe 'newrelic_lwrp_test::agent_java' do
 
   context 'Centos, class_transformer_config' do
     let(:chef_run) do
-      ChefSpec::Runner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_agent_java']) do |node|
+      ChefSpec::Runner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.8', :step_into => ['newrelic_agent_java']) do |node|
         stub_node_resources(node)
         node.override['newrelic']['java_agent']['class_transformer_config'] = {
           'classloader_blacklist' => %w[class1 class2],
