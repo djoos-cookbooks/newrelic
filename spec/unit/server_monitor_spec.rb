@@ -7,7 +7,7 @@ describe 'newrelic_lwrp_test::server_monitor' do
 
   context 'Centos' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_server_monitor']) do |node|
+      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.8', :step_into => ['newrelic_server_monitor']) do |node|
         stub_node_resources(node)
       end.converge(described_recipe)
     end
