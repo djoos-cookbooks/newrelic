@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.30.0
+- logic for repository proxy for RHEL
+- support for Amazon Linux in Chef 13
+
 ## v2.29.0
 - implementation of the New Relic Infrastructure Agent
 
