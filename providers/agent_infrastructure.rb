@@ -18,7 +18,7 @@ action :install do
   check_license
   newrelic_repository_infrastructure
   case node['platform_family']
-  when 'debian', 'rhel'
+  when 'debian', 'rhel', 'amazon'
     install_newrelic_infrastructure_service_linux
   when 'windows'
     install_newrelic_infrastructure_service_windows

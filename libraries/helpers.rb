@@ -16,8 +16,12 @@ module NewRelic
     end
 
     def install_newrelic_repo
-      install_newrelic_repo_debian if node['platform_family'] == 'debian'
-      install_newrelic_repo_rhel if node['platform_family'] == ('rhel' || 'fedora')
+      case node['platform_family']
+      when 'debian'
+        install_newrelic_repo_debian
+      when 'rhel', 'fedora', 'amazon'
+        install_newrelic_repo_rhel
+      end
     end
 
     def install_newrelic_repo_debian
@@ -39,8 +43,12 @@ module NewRelic
     end
 
     def install_newrelic_repo_infrastructure
-      install_newrelic_repo_infrastructure_debian if node['platform_family'] == 'debian'
-      install_newrelic_repo_infrastructure_rhel if node['platform_family'] == ('rhel' || 'fedora')
+      case node['platform_family']
+      when 'debian'
+        install_newrelic_repo_infrastructure_debian
+      when 'rhel', 'fedora', 'amazon'
+        install_newrelic_repo_infrastructure_rhel
+      end
     end
 
     def install_newrelic_repo_infrastructure_debian
