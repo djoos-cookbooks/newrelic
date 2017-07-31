@@ -39,6 +39,9 @@ module NewRelic
         baseurl node['newrelic']['repository']['uri']
         gpgkey node['newrelic']['repository']['key']
         sslverify node['newrelic']['repository']['ssl_verify']
+        proxy node['newrelic']['repository']['proxy'] unless node['newrelic']['repository']['proxy'].nil?
+        proxy_username node['newrelic']['repository']['proxy_username'] unless node['newrelic']['repository']['proxy_username'].nil?
+        proxy_password node['newrelic']['repository']['proxy_password'] unless node['newrelic']['repository']['proxy_password'].nil?
       end
     end
 
