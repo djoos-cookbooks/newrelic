@@ -5,6 +5,8 @@
 # Copyright (c) 2016, David Joos
 #
 
+include NewRelic::Helpers
+
 actions :install, :remove
 default_action :install
 
@@ -45,9 +47,9 @@ attribute :app_disable_samplers, :kind_of => [TrueClass, FalseClass], :default =
 attribute :instrumentation_applications, :kind_of => Array, :default => []
 attribute :instrumentation_log_enable, :kind_of => [TrueClass, FalseClass], :default => false
 
-attribute :attributes_collection_enabled, :kind_of => [TrueClass, FalseClass], :default => true
-attribute :attributes_exclude, :kind_of => Array, :default => []
-attribute :attributes_include, :kind_of => Array, :default => []
+attribute :attributes_collection_enabled, :kind_of => [TrueClass, FalseClass], :default => node['newrelic']['application_monitoring']['attributes']['enabled']
+attribute :attributes_exclude, :kind_of => Array, :default => NewRelic.string_to_array(node['newrelic']['application_monitoring']['attributes']['exclude'])
+attribute :attributes_include, :kind_of => Array, :default => NewRelic.string_to_array(node['newrelic']['application_monitoring']['attributes']['include'])
 
 attribute :app_pools, :kind_of => Array, :default => [] # [{name: '', instrument: true|false}]
 attribute :app_pools_instrument_default_behavior, :kind_of => [TrueClass, FalseClass], :default => false

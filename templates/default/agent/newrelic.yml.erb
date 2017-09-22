@@ -372,6 +372,24 @@ common: &default_settings
     # Default is true.
     enabled: true
 
+  # Attributes are key-value pairs containing information that determines the properties of an event or transaction.
+  # These key-value pairs can be viewed within transaction traces in New Relic APM, traced errors in New Relic APM, transaction events in Insights, and page views in Insights.
+  # You can customize exactly which attributes will be sent to each of these destinations.
+  attributes:
+
+    # By default, capture of attributes in New Relic is enabled.
+    enabled: <%= @resource.attributes_collection_enabled %>
+
+    <% unless @resource.attributes_exclude.nil? %>
+    # Prefix of attributes to exclude from all destinations. Allows * as wildcard at end.
+    exclude: [<%= @resource.attributes_exclude %>]
+    <% end %>
+
+    <% unless @resource.attributes_include.nil? %>
+    # Prefix of attributes to include from all destinations. Allows * as wildcard at end. Sample for Resque job attributes is 'job.resque.args.*'
+    include: [<%= @resource.attributes_include %>]
+    <% end %>
+
 # Application Environments
 # ------------------------------------------
 # Environment specific settings are in this section.

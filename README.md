@@ -78,6 +78,9 @@ Make sure you run Chef >= 0.10.0.
 * `node['newrelic']['server_monitoring']['timeout']`
 * `node['newrelic']['server_monitoring']['other_options']`
 
+* `node['newrelic']['application_monitoring']['attributes']['enabled']`
+* `node['newrelic']['application_monitoring']['attributes']['exclude']`
+* `node['newrelic']['application_monitoring']['attributes']['include']`
 * `node['newrelic']['application_monitoring']['enabled']`
 * `node['newrelic']['application_monitoring']['logfile']`
 * `node['newrelic']['application_monitoring']['logfile_path']`

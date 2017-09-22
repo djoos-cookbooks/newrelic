@@ -35,6 +35,9 @@ default['newrelic']['server_monitoring']['timeout'] = nil
 default['newrelic']['server_monitoring']['other_options'] = {}
 
 # application monitoring
+default['newrelic']['application_monitoring']['attributes']['enabled'] = true
+default['newrelic']['application_monitoring']['attributes']['exclude'] = nil
+default['newrelic']['application_monitoring']['attributes']['include'] = nil
 default['newrelic']['application_monitoring']['enabled'] = nil
 default['newrelic']['application_monitoring']['logfile'] = nil
 default['newrelic']['application_monitoring']['logfile_path'] = nil
