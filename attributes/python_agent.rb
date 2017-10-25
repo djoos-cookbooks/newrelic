@@ -5,8 +5,8 @@
 # Copyright (c) 2016, David Joos
 #
 
-default['newrelic']['python_agent']['agent_action'] = :install
-default['newrelic']['python_agent']['python_version'] = 'latest'
+default['newrelic']['python_agent']['agent_action'] = 'install'
+default['newrelic']['python_agent']['python_version'] = nil
 default['newrelic']['python_agent']['python_venv'] = nil
 default['newrelic']['python_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
 default['newrelic']['python_agent']['template']['cookbook'] = 'newrelic'

@@ -34,6 +34,7 @@ end
 
 def install_newrelic
   gem_package 'newrelic_rpm' do
+    version new_resource.version unless new_resource.version == 'latest'
     action :install
   end
 end

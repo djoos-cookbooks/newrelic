@@ -4,7 +4,7 @@
 
 ## Description
 
-This cookbook provides an easy way to install various New Relic agents and the New Relic server monitor.
+This cookbook provides an easy way to install various New Relic application monitoring agents and the New Relic Infrastructure agent.
 
 The agent installs are being converted into libraries, currently the following agents are now resources:
 
@@ -15,10 +15,11 @@ The agent installs are being converted into libraries, currently the following a
 * python_agent
 * nodejs_agent
 * dotnet_agent
+* infrastructure_agent
 
 More information?
 
-* https://docs.newrelic.com/docs/server/new-relic-for-server-monitoring
+* https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/getting-started/introduction-new-relic-infrastructure
 * https://docs.newrelic.com/docs/php/new-relic-for-php
 * https://docs.newrelic.com/docs/python/new-relic-for-python
 * https://docs.newrelic.com/docs/dotnet/new-relic-for-net
@@ -34,7 +35,7 @@ Make sure you run Chef >= 0.10.0.
 
 ### Cookbooks:
 
-* python
+* poise-python
 * curl
 * apt
 * yum
@@ -75,6 +76,7 @@ Make sure you run Chef >= 0.10.0.
 * `node['newrelic']['server_monitoring']['pidfile']`
 * `node['newrelic']['server_monitoring']['collector_host']`
 * `node['newrelic']['server_monitoring']['timeout']`
+* `node['newrelic']['server_monitoring']['other_options']`
 
 * `node['newrelic']['application_monitoring']['enabled']`
 * `node['newrelic']['application_monitoring']['logfile']`
@@ -119,6 +121,9 @@ Make sure you run Chef >= 0.10.0.
 ### repository.rb:
 
 * `node['newrelic']['repository']['key']` - URL to the New Relic repository key, defaults to "http://download.newrelic.com/548C16BF.gpg"
+* `node['newrelic']['repository']['proxy']` - Repository proxy host, defaults to nil
+* `node['newrelic']['repository']['proxy_username']` - Repository proxy username, defaults to nil
+* `node['newrelic']['repository']['proxy_password']` - Repository proxy password, defaults to nil
 
 ### python_agent.rb:
 
@@ -232,6 +237,7 @@ The `newrelic_server_monitor` resource will handle the requirements to configure
 * `'pidfile'` - defaults to nil
 * `'collector_host'` - defaults to nil
 * `'timeout'` - defaults to nil
+* `'other_options'` - defaults to empty Hash
 * `'alert_policy_id'` - defaults to nil
 
 #### Example
@@ -563,6 +569,29 @@ newrelic_agent_dotnet 'Install' do
 end
 ```
 
+### `newrelic_agent_infrastructure`
+This cookbook includes an LWRP for installing the infrastructure agent
+
+The `newrelic_agent_infrastructure` resource will handle the requirements to set up the infrastructure agent.
+
+#### Actions
+
+- :install -  will setup the New Relic Infrastructure agent.
+
+#### Attribute parameters
+
+* `'license'` - New Relic license key
+* `'version'` - New Relic Infrastructure Agent version to use. To find the current version, check New Relic repo
+* `'display_name'` - Overrides the auto-generated hostname for reporting, defaults to nil
+* `'logfile'` - To log to another location, provide a full path and file name, defaults to nil
+* `'verbose'` - Enables verbose logging for the agent, defaults to 0
+* `'proxy'` - Defaults to nil
+* `'template_cookbook'` - Sets cookbook for template, defaults to 'newrelic'
+* `'template_source'` - Sets source for template, defaults to 'agent/infrastructure/newrelic.yml.erb'
+* `'service_actions'` - The New Relic infrastructure agent service actions, defaults to "`%w(enable start)`" (#starts the service if it's not running and enables it to start at system boot time)
+* `'windows_version'` - the Windows version to install, defaults to "1.0.703"
+* `'windows_checksum'` - checksum of the (64-bit) Windows version, defaults to "3c9f98325dc484ee8735f01b913803eaef54f06641348b3dd9f3c0b3cd803ace"
+
 ### `newrelic_deployment`
 This cookbook includes an LWRP for notifying New Relic of a deployment
 
@@ -610,9 +639,10 @@ This cookbook includes an LWRP for generating the newrelic.yml configuration fil
 2. In your application cookbook, generate the newrelic.yml for this application:
 
 ```ruby
-newrelicyml="#{my_app_path}/newrelic.yml"
-newrelic_yml newrelicyml do
+yml_path = "#{my_app_path}/newrelic.yml"
+newrelic_yml yml_path do
   app_name 'my-super-duper-application'
+  agent_type 'java'
 end
 ```
 
@@ -636,6 +666,7 @@ include the bits and pieces explicitly in a run list:
 `recipe[newrelic::php_agent]`
 `recipe[newrelic::python_agent]`
 `recipe[newrelic::ruby_agent]`
+`recipe[newrelic::infrastructure_agent]`
 ```
 2. change the `node['newrelic']['license']` attribute to your New Relic license keys
 --- OR ---

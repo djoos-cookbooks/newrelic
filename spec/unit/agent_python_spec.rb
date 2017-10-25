@@ -7,7 +7,7 @@ describe 'newrelic_lwrp_test::agent_python' do
 
   context 'Centos' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_agent_python']) do |node|
+      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.8', :step_into => ['newrelic_agent_python']) do |node|
         stub_node_resources(node)
       end.converge(described_recipe)
     end
@@ -25,11 +25,7 @@ describe 'newrelic_lwrp_test::agent_python' do
     end
 
     it 'installs python-pip newrelic package' do
-      expect(chef_run).to install_python_pip('newrelic')
-    end
-
-    it 'execute verify python agent' do
-      expect(chef_run).to run_execute('newrelic-admin validate-config /etc/newrelic/newrelic.ini')
+      expect(chef_run).to install_python_package('newrelic')
     end
 
     it 'creates newrelic ini config template from newrelic.ini.erb' do

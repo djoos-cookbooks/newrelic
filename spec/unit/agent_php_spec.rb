@@ -7,12 +7,12 @@ describe 'newrelic_lwrp_test::agent_php' do
 
   context 'Centos' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_agent_php']) do |node|
+      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.8', :step_into => ['newrelic_agent_php']) do |node|
         stub_node_resources(node)
       end.converge(described_recipe)
     end
 
-    it 'Installs New Relic PHP agent' do
+    it 'installs New Relic PHP agent' do
       expect(chef_run).to install_newrelic_agent_php('Install')
     end
 
@@ -28,11 +28,7 @@ describe 'newrelic_lwrp_test::agent_php' do
       expect(chef_run).to install_package('newrelic-php5')
     end
 
-    it 'Webserver service' do
-      expect(chef_run).to_not enable_service('httpd')
-    end
-
-    it 'Stub service' do
+    it 'stub service' do
       expect(chef_run).to_not enable_service('stub_service')
     end
 
@@ -58,7 +54,7 @@ describe 'newrelic_lwrp_test::agent_php' do
 
     context 'with an external startup mode' do
       let(:chef_run) do
-        ChefSpec::Runner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_agent_php']) do |node|
+        ChefSpec::Runner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.8', :step_into => ['newrelic_agent_php']) do |node|
           stub_node_resources(node)
         end.converge(described_recipe)
       end

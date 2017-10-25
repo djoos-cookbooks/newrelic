@@ -7,12 +7,12 @@ describe 'newrelic_lwrp_test::agent_ruby' do
 
   context 'Centos' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_agent_ruby']) do |node|
+      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.8', :step_into => ['newrelic_agent_ruby']) do |node|
         stub_node_resources(node)
       end.converge(described_recipe)
     end
 
-    it 'Installs New Relic Java agent' do
+    it 'Installs New Relic Ruby agent' do
       expect(chef_run).to install_newrelic_agent_ruby('Install')
     end
 

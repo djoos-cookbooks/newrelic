@@ -9,7 +9,7 @@ actions :notify
 default_action :notify
 
 attribute :url, :kind_of => String, :default => 'https://api.newrelic.com/deployments.xml'
-attribute :key_type, :kind_of => String, :equal_to => %w(license_key api_key), :default => 'api_key'
+attribute :key_type, :kind_of => String, :equal_to => %w[license_key api_key], :default => 'api_key'
 attribute :key, :name_attribute => true, :kind_of => String
 
 # @todo take out deprecated api_key logic
@@ -24,7 +24,5 @@ attribute :user, :kind_of => String, :default => nil # optional
 
 def initialize(*args)
   super
-  @action = :notify
-
   @run_context.include_recipe 'curl'
 end

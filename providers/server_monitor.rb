@@ -15,7 +15,7 @@ action :install do
   check_license
   newrelic_repository
   case node['platform_family']
-  when 'debian', 'rhel', 'fedora'
+  when 'debian', 'rhel', 'fedora', 'amazon'
     install_newrelic_service_linux
   when 'windows'
     install_newrelic_service_windows
@@ -24,7 +24,7 @@ end
 
 action :remove do
   case node['platform_family']
-  when 'debian', 'rhel', 'fedora'
+  when 'debian', 'rhel', 'fedora', 'amazon'
     remove_newrelic_service_linux
   when 'windows'
     remove_newrelic_service_windows

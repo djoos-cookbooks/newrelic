@@ -2,6 +2,50 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.30.0
+- logic for repository proxy for RHEL
+- support for Amazon Linux in Chef 13
+
+## v2.29.0
+- implementation of the New Relic Infrastructure Agent
+
+## v2.28.1
+- addition of CHANGELOG entry for version 2.28.0
+
+## v2.28.0
+- addition of ssl verify on yum_repository for those that have a mirror yum repo with a self-signed certificate
+
+## v2.27.1
+
+- integration test fix(es)
+
+## v2.27.0
+
+- swapping out python for poise-python as its deprecated
+- additional (integration) test suite: python-agent
+- added the ability to specify New Relic NodeJS agent version
+- rename test fixture cookbook: newrelic_poc > newrelic_lwrp_test
+- adding other_options to server_monitor
+
+## v2.26.0
+
+- (feature) class transformer configuration support for Java agent
+- (bugfix) default agent_actions converted to strings
+- (bugfix) for missing erb tag for feature_flag variable (#289)
+
+## v2.25.0
+
+- don't verify the Python agent configuration on every Chef run
+- Rubocop fix(es) for cops in latest Chef DK version
+
+## v2.24.2
+
+- updated version constraint for apt cookbook
+
+## v2.24.1
+
+- fix for enable_custom_tracing when using newrelic_yml-LWRP directly
+
 ## v2.24.0
 
 - support for PHP7

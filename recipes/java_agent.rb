@@ -45,6 +45,7 @@ newrelic_agent_java 'Install' do
   browser_monitoring_auto_instrument node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'] unless node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'].nil?
   cross_application_tracer_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['cross_application_tracer']['enable']) unless node['newrelic']['application_monitoring']['cross_application_tracer']['enable'].nil?
   thread_profiler_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['thread_profiler']['enable']) unless node['newrelic']['application_monitoring']['thread_profiler']['enable'].nil?
+  class_transformer_config node['newrelic']['java_agent']['class_transformer_config'] unless node['newrelic']['java_agent']['class_transformer_config'].empty?
   labels node['newrelic']['application_monitoring']['labels'] unless node['newrelic']['application_monitoring']['labels'].nil?
   agent_action node['newrelic']['java_agent']['agent_action'] unless node['newrelic']['java_agent']['agent_action'].nil?
   execute_agent_action node['newrelic']['java_agent']['execute_agent_action'] unless node['newrelic']['java_agent']['execute_agent_action'].nil?

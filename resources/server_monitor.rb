@@ -21,11 +21,12 @@ attribute :labels, :kind_of => String, :default => nil
 attribute :pidfile, :kind_of => String, :default => nil
 attribute :collector_host, :kind_of => String, :default => nil
 attribute :timeout, :kind_of => String, :default => nil
+attribute :other_options, :kind_of => Hash, :default => {}
 attribute :alert_policy_id, :kind_of => String, :default => nil
 
 attribute :config_file_user, :kind_of => String, :default => 'root'
 attribute :service_notify_action, :kind_of => String, :default => 'restart'
-attribute :service_actions, :kind_of => Array, :default => %w(enable start)
+attribute :service_actions, :kind_of => Array, :default => %w[enable start]
 attribute :windows_version, :kind_of => String, :default => '2.0.0.198'
 attribute :windows64_checksum, :kind_of => String, :default => '5a8f3f5e8f15997463430401756d377c321c8899c2790ca85e5587a5b643651e'
 attribute :windows32_checksum, :kind_of => String, :default => 'ac2b65eecaad461fdd2e4386e3e4c9f96ea940b35bdf7a8c532c21dbd1c99ff0'
