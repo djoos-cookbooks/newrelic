@@ -5,7 +5,7 @@ describe 'newrelic_lwrp_test::server_monitor' do
     stub_resources
   end
 
-  context 'Centos' do
+  context 'Centos, installing method' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.8', :step_into => ['newrelic_server_monitor']) do |node|
         stub_node_resources(node)
@@ -22,6 +22,27 @@ describe 'newrelic_lwrp_test::server_monitor' do
 
     it 'installs nrsysmond' do
       expect(chef_run).to install_package('newrelic-sysmond')
+    end
+
+    it 'creates newrelic config template from nrsysmond.cfg.erb' do
+      expect(chef_run).to render_file('/etc/newrelic/nrsysmond.cfg').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
+    end
+
+    it 'enables service' do
+      expect(chef_run).to enable_service('newrelic-sysmond')
+    end
+  end
+
+  context 'Centos, updating method' do
+    let(:chef_run) do
+      ChefSpec::Runner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.6', :step_into => ['newrelic_server_monitor']) do |node|
+        node.set['newrelic']['server_monitoring']['action'] = :update
+        stub_node_resources(node)
+      end.converge(described_recipe)
+    end
+
+    it 'Installs New Relic PHP agent' do
+      expect(chef_run).to install_newrelic_server_monitor('Install')
     end
 
     it 'creates newrelic config template from nrsysmond.cfg.erb' do

@@ -31,10 +31,16 @@ action :remove do
   end
 end
 
-def install_newrelic_service_linux
-  package new_resource.service_name do
-    action new_resource.action
+action :update do
+  case node['platform_family']
+  when 'debian', 'rhel', 'fedora'
+    update_newrelic_service_linux
+  when 'windows'
+    raise 'Not supported method for windows'
   end
+end
+
+def update_newrelic_service_linux
   # configure your New Relic license key
   template "#{new_resource.config_path}/nrsysmond.cfg" do
     cookbook new_resource.cookbook
@@ -48,12 +54,20 @@ def install_newrelic_service_linux
     sensitive true
     notifies new_resource.service_notify_action, "service[#{new_resource.service_name}]"
   end
+
   service new_resource.service_name do
     supports :status => true, :start => true, :stop => true, :restart => true, :enable => true
     action new_resource.service_actions
   end
 
   update_newrelic_alert_policy_linux(new_resource.alert_policy_id, new_resource.hostname) if new_resource.alert_policy_id
+end
+
+def install_newrelic_service_linux
+  package new_resource.service_name do
+    action new_resource.action
+  end
+  update_newrelic_service_linux
 end
 
 def install_newrelic_service_windows

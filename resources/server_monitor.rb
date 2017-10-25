@@ -5,7 +5,7 @@
 # Copyright (c) 2016, David Joos
 #
 
-actions :install, :remove
+actions :install, :remove, :update
 default_action :install
 
 attribute :license, :kind_of => String, :default => NewRelic.server_monitoring_license(node)
