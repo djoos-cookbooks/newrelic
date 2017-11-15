@@ -5,4 +5,4 @@
 # Copyright (c) 2016, David Joos
 #
 
-include_recipe 'newrelic::server_monitor_agent'
+# Blank recipe to allow use of resources
