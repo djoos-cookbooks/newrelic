@@ -5,34 +5,34 @@ describe 'newrelic::repository' do
   #   stub_command('apt-key list | grep 548C16BF').and_return(true)
   # end
 
-  context 'Ubuntu 12.04' do
-    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'ubuntu', :version => '12.04').converge(described_recipe) }
+  context 'Ubuntu 14.04' do
+    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'ubuntu', :version => '14.04').converge(described_recipe) }
 
     it 'installs the New Relic apt repository' do
       expect(chef_run).to add_apt_repository('newrelic').with(
         :uri          => 'http://download.newrelic.com/debian/',
         :distribution => 'newrelic',
         :components   => ['non-free'],
-        :key          => 'http://download.newrelic.com/548C16BF.gpg'
+        :key          => ['http://download.newrelic.com/548C16BF.gpg']
       )
     end
   end
 
   context 'Debian 7' do
-    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'debian', :version => '7.1').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'debian', :version => '7.11').converge(described_recipe) }
 
     it 'installs the New Relic apt repository' do
       expect(chef_run).to add_apt_repository('newrelic').with(
         :uri          => 'http://download.newrelic.com/debian/',
         :distribution => 'newrelic',
         :components   => ['non-free'],
-        :key          => 'http://download.newrelic.com/548C16BF.gpg'
+        :key          => ['http://download.newrelic.com/548C16BF.gpg']
       )
     end
   end
 
   context 'CentOS 6' do
-    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'centos', :version => '6.4').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'centos', :version => '6.9').converge(described_recipe) }
 
     it 'installs the New Relic yum repository' do
       expect(chef_run).to create_yum_repository('newrelic').with(
@@ -44,7 +44,7 @@ describe 'newrelic::repository' do
   end
 
   context 'RedHat 6' do
-    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'redhat', :version => '6.3').converge(described_recipe) }
+    let(:chef_run) { ChefSpec::SoloRunner.new(:platform => 'redhat', :version => '6.9').converge(described_recipe) }
 
     it 'installs the New Relic yum repository' do
       expect(chef_run).to create_yum_repository('newrelic').with(
