@@ -31,7 +31,7 @@ More information?
 
 ### Chef version:
 
-Make sure you run Chef >= 0.10.0.
+Make sure you run Chef >= 12.1
 
 ### Cookbooks:
 
