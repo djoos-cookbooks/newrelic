@@ -26,6 +26,19 @@ action :install do
 end
 
 def install_newrelic_infrastructure_service_linux
+  # lay down newrelic-infra agent config
+  template '/etc/newrelic-infra.yml' do
+    cookbook new_resource.template_cookbook
+    source new_resource.template_source
+    owner 'root'
+    group 'root'
+    mode '0644'
+    variables(
+      :resource => new_resource
+    )
+    notifies :restart, 'service[newrelic-infra]', :delayed
+  end
+
   # install the newrelic infrastructure agent
   package 'newrelic-infra' do
     action new_resource.action
@@ -43,19 +56,6 @@ def install_newrelic_infrastructure_service_linux
   service 'newrelic-infra' do
     provider service_provider unless service_provider.nil?
     action new_resource.service_actions
-  end
-
-  # lay down newrelic-infra agent config
-  template '/etc/newrelic-infra.yml' do
-    cookbook new_resource.template_cookbook
-    source new_resource.template_source
-    owner 'root'
-    group 'root'
-    mode '0644'
-    variables(
-      :resource => new_resource
-    )
-    notifies :restart, 'service[newrelic-infra]', :delayed
   end
 end
 
