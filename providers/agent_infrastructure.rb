@@ -45,18 +45,30 @@ def install_newrelic_infrastructure_service_linux
     action new_resource.version unless new_resource.version.nil?
   end
 
-  # workaround for issue on RHEL family version six
-  # service is not known to chkconfig
-  # dribble the issue by not making use of the RHEL service provider
-  service_provider = if node['platform_family'] == 'rhel' && node['platform_version'] =~ /^6/
-                       Chef::Provider::Service::Upstart
-                     end
+  service_provider = linux_service_provider
 
   # setup newrelic infrastructure service
   service 'newrelic-infra' do
     provider service_provider unless service_provider.nil?
     action new_resource.service_actions
   end
+end
+
+def linux_service_provider
+  # workaround for issue on RHEL family version six
+  # service is not known to chkconfig
+  # dribble the issue by not making use of the RHEL service provider
+  if node['platform_family'] == 'rhel' && node['platform_version'] =~ /^6/
+    return Chef::Provider::Service::Upstart
+  end
+
+  # workaround for issue on ubuntu where sysvinit provider incorrectly takes
+  # precedence over upstart
+  if node.platform?('ubuntu') && node['platform_version'].to_f < 16.04
+    return Chef::Provider::Service::Upstart
+  end
+
+  nil
 end
 
 def install_newrelic_infrastructure_service_windows
