@@ -13,7 +13,7 @@ describe 'newrelic::repository' do
         :uri          => 'http://download.newrelic.com/debian/',
         :distribution => 'newrelic',
         :components   => ['non-free'],
-        :key          => 'http://download.newrelic.com/548C16BF.gpg'
+        :key          => ['http://download.newrelic.com/548C16BF.gpg']
       )
     end
   end
@@ -26,7 +26,7 @@ describe 'newrelic::repository' do
         :uri          => 'http://download.newrelic.com/debian/',
         :distribution => 'newrelic',
         :components   => ['non-free'],
-        :key          => 'http://download.newrelic.com/548C16BF.gpg'
+        :key          => ['http://download.newrelic.com/548C16BF.gpg']
       )
     end
   end
