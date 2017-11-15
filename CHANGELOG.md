@@ -2,6 +2,13 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.31.0
+- write infrastructure license before package
+- set service provisioner to Upstart for ubuntu < 16.04
+- bump Chef version in README (caused by poise-python dependency)
+- ChefSpec fix(es) - String (or Array) key on apt_repository is treated as Array upon inspection
+- FoodCritic fix(es) - FC028: Incorrect #platform? usage
+
 ## v2.30.0
 - logic for repository proxy for RHEL
 - support for Amazon Linux in Chef 13
