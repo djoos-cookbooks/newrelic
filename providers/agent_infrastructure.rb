@@ -58,13 +58,13 @@ def linux_service_provider
   # workaround for issue on RHEL family version six
   # service is not known to chkconfig
   # dribble the issue by not making use of the RHEL service provider
-  if node['platform_family'] == 'rhel' && node['platform_version'] =~ /^6/
+  if platform_family?('rhel') && node['platform_version'] =~ /^6/
     return Chef::Provider::Service::Upstart
   end
 
   # workaround for issue on ubuntu where sysvinit provider incorrectly takes
   # precedence over upstart
-  if node.platform?('ubuntu') && node['platform_version'].to_f < 16.04
+  if platform?('ubuntu') && node['platform_version'].to_f < 16.04
     return Chef::Provider::Service::Upstart
   end
 
