@@ -20,6 +20,7 @@ attribute :template_source, :kind_of => String, :default => 'agent/newrelic.yml.
 attribute :enabled, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :app_name, :kind_of => String, :default => nil
 attribute :high_security, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :max_stack_trace_lines, :kind_of => String, :default => nil
 attribute :owner, :kind_of => String, :default => 'newrelic'
 attribute :group, :kind_of => String, :default => 'newrelic'
 attribute :logfile, :kind_of => String, :default => 'newrelic-daemon.log'

@@ -398,57 +398,6 @@ The `newrelic_agent_java` resource will handle the requirements to install java 
 
 #### Attribute parameters
 
-* `'license'` - New Relic license key
-* `'version'` - New Relic Java Agent version to use. To find the current version, check New Relic repo
-* `'https_download'` - The url to download the jar for the New Relic Java agent. If you override version parameter, you must also update this.
-* `'jar_file'` - The name of the newrelic jar file that will be used locally, defaults to `newrelic-agent-version.jar`
-* `'install_dir'` - The directory to install the newrelic jar and config file
-* `'app_user'` - The user that runs the Java application that will use the New Relic Java agent
-* `'app_group'` - The group for the app_user
-* `'audit_mode'` - Boolean, log all data to and from New Relic in plain text
-* `'log_file_count'` - The number of log files to use
-* `'log_limit_in_kbytes'` - The maximum number of bytes to write to any one log file
-* `'log_daily'` - Override other log rolling configuration and roll the logs daily
-* `'agent_action'` - Agent action, defaults to `:install`
-* `'execute_agent_action'` - Execute the agent action or not, defaults to true
-* `'app_location'` - Application's location, defaults to `install_dir`
-* `'template_cookbook'` - Sets cookbook for template, defaults to 'newrelic'
-* `'template_source'` - Sets source for template, defaults to `agent/newrelic.yml.erb`
-
-#### Advanced parameters
-
-* `'enabled'` - Defaults to true
-* `'high_security'` - Defaults to false
-* `'owner'` - Defaults to 'newrelic'
-* `'group'` - Defaults to 'newrelic'
-* `'logfile'` - Defaults to nil
-* `'logfile_path'` - Defaults to nil
-* `'loglevel'` - Defaults to nil
-* `'audit_mode'` - Defaults to false
-* `'log_file_count'` - Defaults to nil
-* `'log_limit_in_kbytes'` - Defaults to nil
-* `'log_daily'` - Defaults to false
-* `'daemon_ssl'` - Defaults to true
-* `'daemon_proxy'` - Defaults to nil
-* `'daemon_proxy_host'` - Defaults to nil
-* `'daemon_proxy_port'` - Defaults to nil
-* `'daemon_proxy_user'` - Defaults to nil
-* `'daemon_proxy_password'` - Defaults to nil
-* `'capture_params'` - Defaults to nil
-* `'ignored_params'` - Defaults to nil
-* `'transaction_tracer_enable'` - Defaults to true
-* `'transaction_tracer_threshold'` - Defaults to nil
-* `'transaction_tracer_record_sql'` - Defaults to nil
-* `'transaction_tracer_stack_trace_threshold'` - Defaults to nil
-* `'transaction_tracer_slow_sql'` - Defaults to nil
-* `'transaction_tracer_explain_threshold'` - Defaults to nil
-* `'error_collector_enable'` - Defaults to true
-* `'error_collector_ignore_errors'` - Defaults to nil
-* `'error_collector_ignore_status_codes'` - Defaults to nil
-* `'browser_monitoring_auto_instrument'` - Defaults to nil
-* `'cross_application_tracer_enable'` - Defaults to true
-* `'thread_profiler_enable'` - Defaults to true
-
 #### Example
 ```ruby
 newrelic_agent_java 'Install' do

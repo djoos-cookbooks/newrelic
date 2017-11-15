@@ -22,6 +22,7 @@ attribute :template_source, :kind_of => String, :default => 'agent/newrelic.yml.
 attribute :enabled, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :app_name, :kind_of => String, :default => nil
 attribute :high_security, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :max_stack_trace_lines, :kind_of => String, :default => nil
 attribute :logfile, :kind_of => String, :default => nil
 attribute :logfile_path, :kind_of => String, :default => nil
 attribute :loglevel, :kind_of => String, :default => nil
