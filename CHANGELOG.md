@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.31.1
+- download server monitor msi over https
+- ChefSpec update(s) - version bumps
+
 ## v2.31.0
 - write infrastructure license before package
 - set service provisioner to Upstart for ubuntu < 16.04
