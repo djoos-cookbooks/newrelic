@@ -36,6 +36,7 @@ def install_newrelic_infrastructure_service_linux
     variables(
       :resource => new_resource
     )
+    sensitive true
     notifies :restart, 'service[newrelic-infra]', :delayed
   end
 
@@ -87,6 +88,7 @@ def install_newrelic_infrastructure_service_windows
     variables(
       :resource => new_resource
     )
+    sensitive true
     notifies :restart, 'service[newrelic-infra]', :delayed
   end
 
