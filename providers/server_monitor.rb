@@ -59,7 +59,7 @@ end
 def install_newrelic_service_windows
   if node['kernel']['machine'] == 'x86_64'
     windows_package 'New Relic Server Monitor' do
-      source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x64_#{new_resource.windows_version}.msi"
+      source "https://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x64_#{new_resource.windows_version}.msi"
       options "/L*v install.log /qn NR_LICENSE_KEY=#{new_resource.license}"
       action new_resource.action
       version new_resource.windows_version
@@ -67,7 +67,7 @@ def install_newrelic_service_windows
     end
   else
     windows_package 'New Relic Server Monitor' do
-      source "http://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x86_#{new_resource.windows_version}.msi"
+      source "https://download.newrelic.com/windows_server_monitor/release/NewRelicServerMonitor_x86_#{new_resource.windows_version}.msi"
       options "/L*v install.log /qn NR_LICENSE_KEY=#{new_resource.license}"
       action new_resource.action
       version new_resource.windows_version
