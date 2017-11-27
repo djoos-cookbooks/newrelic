@@ -560,7 +560,7 @@ The `newrelic_agent_dotnet` resource will handle the requirements to install .Ne
 #### Attribute parameters
 
 * `'https_download'` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
-* `'dotnet_agent'` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
+* `'install_level'` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
 
 #### Example
 ```ruby
