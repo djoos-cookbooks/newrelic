@@ -63,6 +63,10 @@ def linux_service_provider
     return Chef::Provider::Service::Upstart
   end
 
+  # workaround for issue on Amazon family versions
+  # service is not known to chkconfig
+  return Chef::Provider::Service::Upstart if platform_family?('amazon')
+
   # workaround for issue on ubuntu where sysvinit provider incorrectly takes
   # precedence over upstart
   if platform?('ubuntu') && node['platform_version'].to_f < 16.04
