@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.32.2
+- added upstart support for Amazon Linux (infrastructure agent)
+
 ## v2.31.1
 - download server monitor msi over https
 - ChefSpec update(s) - version bumps
