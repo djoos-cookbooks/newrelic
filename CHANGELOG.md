@@ -2,7 +2,11 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
-## v2.32.2
+## v2.32.0
+- add error_collector_ignore_errors attribute for php_agent
+- fixed location of closing tag for service element
+
+## v2.31.2
 - added upstart support for Amazon Linux (infrastructure agent)
 
 ## v2.31.1
