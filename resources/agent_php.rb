@@ -47,6 +47,7 @@ attribute :ignored_params, :kind_of => String, :default => nil
 attribute :error_collector_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :error_collector_record_database_errors, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :error_collector_prioritize_api_errors, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :error_collector_ignore_errors, :kind_of => String, :default => ' '
 attribute :browser_monitoring_auto_instrument, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :transaction_tracer_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :transaction_tracer_threshold, :kind_of => String, :default => nil
