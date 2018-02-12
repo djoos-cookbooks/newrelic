@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.34.0
+- allow custom attributes for infrastructure agent
+
 ## v2.33.0
 - bring dotnet agent's README, attribute and recipe in sync
 - fix dotnet MSI download url, given New Relic changed it all of a sudden...
