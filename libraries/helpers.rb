@@ -93,5 +93,15 @@ module NewRelic
       return false unless ::File.exist?(dir)
       true
     end
+
+    def create_newrelic_user
+      user node['newrelic']['user']['name'] do
+        comment 'New Relic'
+        shell node['newrelic']['user']['shell']
+        home node['newrelic']['user']['home']
+        manage_home true
+        not_if "getent passwd #{node['newrelic']['user']['name']}"
+      end
+    end
   end
 end

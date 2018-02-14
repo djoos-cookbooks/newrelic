@@ -13,6 +13,7 @@ use_inline_resources if defined?(use_inline_resources)
 action :install do
   # Check license key provided
   check_license
+  create_newrelic_user
   create_install_directory
   install_newrelic
   generate_agent_config

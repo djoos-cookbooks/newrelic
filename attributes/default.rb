@@ -19,6 +19,11 @@ default['newrelic']['proxy'] = nil
 default['newrelic']['server_monitoring']['proxy'] = node['newrelic']['proxy']
 default['newrelic']['application_monitoring']['daemon']['proxy'] = node['newrelic']['proxy']
 
+# user
+default['newrelic']['user']['name'] = 'newrelic'
+default['newrelic']['user']['home'] = '/opt/newrelic'
+default['newrelic']['user']['shell'] = '/bin/false'
+
 #################
 # ADVANCED CONFIG
 #################
