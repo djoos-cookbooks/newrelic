@@ -51,12 +51,10 @@ def agent_jar
                "newrelic-java-#{new_resource.version}.zip"
              end
 
-  https_download = "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/#{version}/#{filename}"
-
   cache_dir = Chef::Config[:file_cache_path]
 
   remote_file "#{new_resource.install_dir}/newrelic.zip" do
-    source https_download
+    source "#{new_resource.repository}/#{version}/#{filename}"
     user new_resource.app_user
     group new_resource.app_group
     mode '0664'

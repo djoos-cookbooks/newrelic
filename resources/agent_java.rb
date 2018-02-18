@@ -10,6 +10,7 @@ default_action :install
 attribute :license, :kind_of => String, :default => NewRelic.application_monitoring_license(node)
 attribute :version, :kind_of => String, :default => 'latest'
 attribute :install_dir, :kind_of => String, :default => '/opt/newrelic/java'
+attribute :repository, :kind_of => String, :default => 'https://download.newrelic.com/newrelic/java-agent/newrelic-agent'
 attribute :agent_action, :kind_of => String, :default => 'install'
 attribute :execute_agent_action, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :app_location, :kind_of => String, :default => nil
