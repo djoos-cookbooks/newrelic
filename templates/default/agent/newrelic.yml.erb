@@ -289,6 +289,17 @@ common: &default_settings
     ignore_errors: <%= @resource.error_collector_ignore_errors %>
     <% end %>
 
+    # Specified exception class names will be ignored and will not affect error rate or Apdex score, or be reported to APM. Cannot be specified by system property.
+    # This setting is dynamic, so running agents will notice changes to newrelic.yml without a JVM restart.To stop specific Java exceptions from reporting to New Relic, set this property
+    #
+    # ignore_classes:
+    <% unless @resource.error_collector_ignore_classes.nil? %>
+    ignore_classes:
+      <% @resource.error_collector_ignore_classes.each do |ignore_class| -%>
+      - "<%= ignore_class %>"
+      <% end -%>
+    <% end %>
+
     # To stop specific http status codes from being reporting to New Relic as errors,
     # set this property to a comma separated list of status codes to ignore.
     # When this property is commented out it defaults to ignoring 404s.
