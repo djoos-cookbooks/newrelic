@@ -41,6 +41,7 @@ newrelic_agent_java 'Install' do
   transaction_tracer_explain_threshold node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold'] unless node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold'].nil?
   error_collector_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['error_collector']['enable']) unless node['newrelic']['application_monitoring']['error_collector']['enable'].nil?
   error_collector_ignore_errors node['newrelic']['application_monitoring']['error_collector']['ignore_errors'] unless node['newrelic']['application_monitoring']['error_collector']['ignore_errors'].nil?
+  error_collector_ignore_classes node['newrelic']['application_monitoring']['error_collector']['ignore_classes'] unless node['newrelic']['application_monitoring']['error_collector']['ignore_classes'].nil?
   error_collector_ignore_status_codes node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes'] unless node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes'].nil?
   browser_monitoring_auto_instrument node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'] unless node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'].nil?
   cross_application_tracer_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['cross_application_tracer']['enable']) unless node['newrelic']['application_monitoring']['cross_application_tracer']['enable'].nil?
