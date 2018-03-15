@@ -7,6 +7,8 @@ end
 describe file('/etc/apt/sources.list.d/newrelic-infra.list'), :if => %w[debian ubuntu].include?(os[:family]) do
   it { is_expected.to be_file }
 end
-describe package 'newrelic-infra' do
-  it { is_expected.to be_installed }
+%w[newrelic-infra newrelic-infra-integrations].each do |pkg|
+  describe package pkg do
+    it { is_expected.to be_installed }
+  end
 end
