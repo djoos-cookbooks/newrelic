@@ -48,6 +48,7 @@ attribute :transaction_tracer_slow_sql, :kind_of => String, :default => nil
 attribute :transaction_tracer_explain_threshold, :kind_of => String, :default => nil
 attribute :error_collector_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :error_collector_ignore_errors, :kind_of => String, :default => nil
+attribute :error_collector_ignore_classes, :kind_of => Array, :default => nil
 attribute :error_collector_ignore_status_codes, :kind_of => String, :default => nil
 attribute :class_transformer_config, :kind_of => Hash, :default => {}
 attribute :browser_monitoring_auto_instrument, :kind_of => String, :default => nil

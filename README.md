@@ -137,9 +137,8 @@ Make sure you run Chef >= 12.1
 
 ### dotnet_agent.rb:
 
-* `node['newrelic']['dotnet_agent']['https_download']` - The URL to download the MSI installer from New Relic. Default is to pull "latest"
-* `node['newrelic']['dotnet_agent']['install_level']` - The install version of the .NET Agent. Default is '1' but can use '50' for a complete installation
-* `node['newrelic']['dotnet_agent']['agent_action']` - Agent action, defaults to :install
+* `node['newrelic']['dotnet_agent']['https_download']` - The URL to download the MSI installer from New Relic. Defaults to nil, so default in resource (https://download.newrelic.com/dot_net_agent/latest_release/x64) is picked up.
+* `node['newrelic']['dotnet_agent']['install_level']` - The install version of the .NET Agent. Defaults to nil, so default in resource ('1') is picked up.
 
 ### java_agent.rb:
 
@@ -444,6 +443,7 @@ The `newrelic_agent_java` resource will handle the requirements to install java 
 * `'transaction_tracer_explain_threshold'` - Defaults to nil
 * `'error_collector_enable'` - Defaults to true
 * `'error_collector_ignore_errors'` - Defaults to nil
+* `'error_collector_ignore_classes'` - Defaults to nil
 * `'error_collector_ignore_status_codes'` - Defaults to nil
 * `'browser_monitoring_auto_instrument'` - Defaults to nil
 * `'cross_application_tracer_enable'` - Defaults to true

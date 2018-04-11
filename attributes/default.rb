@@ -59,6 +59,7 @@ default['newrelic']['application_monitoring']['labels'] = nil
 default['newrelic']['application_monitoring']['ignored_params'] = nil
 default['newrelic']['application_monitoring']['error_collector']['enable'] = nil
 default['newrelic']['application_monitoring']['error_collector']['ignore_errors'] = nil
+default['newrelic']['application_monitoring']['error_collector']['ignore_classes'] = nil
 default['newrelic']['application_monitoring']['error_collector']['ignore_status_codes'] = nil
 default['newrelic']['application_monitoring']['error_collector']['record_database_errors'] = nil
 default['newrelic']['application_monitoring']['error_collector']['prioritize_api_errors'] = nil

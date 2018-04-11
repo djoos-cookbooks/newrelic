@@ -2,6 +2,16 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.35.0
+- add error_collector_ignore_classes attribute for java_agent
+
+## v2.34.0
+- allow custom attributes for infrastructure agent
+
+## v2.33.0
+- bring dotnet agent's README, attribute and recipe in sync
+- fix dotnet MSI download url, given New Relic changed it all of a sudden...
+
 ## v2.32.0
 - add error_collector_ignore_errors attribute for php_agent
 - fixed location of closing tag for service element

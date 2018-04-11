@@ -15,6 +15,7 @@ attribute :display_name, :kind_of => String, :default => nil
 attribute :logfile, :kind_of => String, :default => nil
 attribute :verbose, :kind_of => Integer, :default => 0
 attribute :proxy, :kind_of => String, :default => nil
+attribute :custom_attributes, :kind_of => Hash, :default => {}
 attribute :template_cookbook, :kind_of => String, :default => 'newrelic'
 attribute :template_source, :kind_of => String, :default => 'agent/infrastructure/newrelic.yml.erb'
 attribute :service_actions, :kind_of => Array, :default => %w[enable start]

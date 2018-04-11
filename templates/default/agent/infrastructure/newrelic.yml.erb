@@ -17,3 +17,10 @@ verbose: <%= @resource.verbose %>
 <% unless @resource.proxy.nil? -%>
 proxy: <%= @resource.proxy %>
 <% end -%>
+<% unless @resource.custom_attributes.empty? -%>
+custom_attributes:
+<% @resource.custom_attributes.each do |attribute, value|%>
+  <%= attribute %>: <%= value %>
+<% end %>
+<% end -%>
+
