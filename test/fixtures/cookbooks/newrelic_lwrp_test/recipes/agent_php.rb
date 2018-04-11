@@ -6,6 +6,8 @@
 #
 
 include_recipe 'apache2'
+
+node.set['php']['pear'] = 'pear'
 include_recipe 'php'
 
 newrelic_agent_php 'Install' do
