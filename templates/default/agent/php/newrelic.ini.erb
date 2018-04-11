@@ -668,7 +668,7 @@ newrelic.high_security = <%= @resource.high_security %>
 ;          refer to See http://php.net/manual/en/errorfunc.constants.php
 ;
 <% if @resource.error_collector_ignore_errors.nil? %>
-;error_collector.ignore_errors =
+;newrelic.error_collector.ignore_errors = 0
 <% else %>
 newrelic.error_collector.ignore_errors = <%= @resource.error_collector_ignore_errors %>
 <% end %>
