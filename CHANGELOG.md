@@ -2,6 +2,15 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.36.0
+- support for amazon linux 2018
+- allow installing on-host integrations package
+- repository attribute for java agent download
+- multiple application names for Windows
+
+## v2.35.1
+- fix Travis CI build
+
 ## v2.35.0
 - add error_collector_ignore_classes attribute for java_agent
 
