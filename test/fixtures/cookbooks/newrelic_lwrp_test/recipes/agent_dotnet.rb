@@ -7,4 +7,5 @@
 
 newrelic_agent_dotnet 'Install' do
   license node['newrelic']['license']
+  app_name 'My Application;Sub Application'
 end

@@ -37,7 +37,9 @@
     fileName="<%= @resource.log_file_name %>" />
 
   <application disableSamplers="<%= @resource.app_disable_samplers %>">
-    <name><%= @resource.app_name %></name>
+  	<% @resource.app_name.split(';').first(3).each do |app_name|%>
+    <name><%= app_name %></name>
+    <% end %>
   </application>
 
   <instrumentation log="<%= @resource.instrumentation_log_enable %>">
