@@ -24,3 +24,7 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   Enabled: false
+
+# no RuboCop, we're not going to "Parenthesize the param lazy"
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
