@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.36.1
+- download path to DotNet agent has changed, again...
+
 ## v2.36.0
 - support for amazon linux 2018
 - allow installing on-host integrations package
