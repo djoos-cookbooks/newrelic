@@ -8,7 +8,7 @@
 actions :install, :remove
 default_action :install
 
-attribute :license, :kind_of => String, :default => NewRelic.server_monitoring_license(node)
+attribute :license, :kind_of => String, :default => lazy { NewRelic.server_monitoring_license(node) }
 
 attribute :logfile, :kind_of => String, :default => nil
 attribute :loglevel, :kind_of => String, :default => nil

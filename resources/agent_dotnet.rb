@@ -18,7 +18,7 @@ attribute :enabled, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :max_stack_trace_lines, :kind_of => Integer, :default => 80
 attribute :timing_precision, :kind_of => String, :default => 'low'
 
-attribute :license, :kind_of => String, :default => NewRelic.application_monitoring_license(node)
+attribute :license, :kind_of => String, :default => lazy { NewRelic.application_monitoring_license(node) }
 attribute :daemon_ssl, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :svc_send_env_info, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :svc_sync_startup, :kind_of => [TrueClass, FalseClass], :default => false

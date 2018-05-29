@@ -8,7 +8,7 @@
 actions :install
 default_action :install
 
-attribute :license, :kind_of => String, :default => NewRelic.application_monitoring_license(node)
+attribute :license, :kind_of => String, :default => lazy { NewRelic.application_monitoring_license(node) }
 attribute :version, :kind_of => String, :default => nil
 
 attribute :display_name, :kind_of => String, :default => nil

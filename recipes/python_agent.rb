@@ -6,7 +6,7 @@
 #
 
 newrelic_agent_python 'new python agent' do
-  license NewRelic.application_monitoring_license(node)
+  license lazy { NewRelic.application_monitoring_license(node) }
   config_file node['newrelic']['python_agent']['config_file'] unless node['newrelic']['python_agent']['config_file'].nil?
   cookbook node['newrelic']['python_agent']['template']['cookbook'] unless node['newrelic']['python_agent']['template']['cookbook'].nil?
   source node['newrelic']['python_agent']['template']['source'] unless node['newrelic']['python_agent']['template']['source'].nil?

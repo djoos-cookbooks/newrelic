@@ -6,7 +6,7 @@
 #
 
 newrelic_agent_php 'Install' do
-  license NewRelic.application_monitoring_license(node)
+  license lazy { NewRelic.application_monitoring_license(node) }
   config_file node['newrelic']['php_agent']['config_file'] unless node['newrelic']['php_agent']['config_file'].nil?
   startup_mode node['newrelic']['php_agent']['startup_mode'] unless node['newrelic']['php_agent']['startup_mode'].nil?
   app_name node['newrelic']['application_monitoring']['app_name'] unless node['newrelic']['application_monitoring']['app_name'].nil?
