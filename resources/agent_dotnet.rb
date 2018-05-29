@@ -8,7 +8,7 @@
 actions :install, :remove
 default_action :install
 
-attribute :https_download, :kind_of => String, :default => 'https://download.newrelic.com/dot_net_agent/latest_release/x64'
+attribute :https_download, :kind_of => String, :default => 'https://download.newrelic.com/dot_net_agent/latest_release/NewRelicDotNetAgent_x64.msi'
 attribute :install_level, :kind_of => String, :default => '1'
 attribute :config_dir, :kind_of => String, :default => 'C:\ProgramData\New Relic\.NET Agent'
 attribute :cookbook, :kind_of => String, :default => 'newrelic'
