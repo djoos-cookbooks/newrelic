@@ -32,7 +32,7 @@ def install_newrelic_infrastructure_service_linux
     source new_resource.template_source
     owner 'root'
     group 'root'
-    mode '0644'
+    mode '0600'
     variables(
       :resource => new_resource
     )
