@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.38.0
+- update file permission for infra agent YML config file
+
 ## v2.37.0
 - lazy evaluation of license attribute(s)
 
