@@ -379,6 +379,11 @@ common: &default_settings
     <% else %>
     auto_instrument: <%= @resource.browser_monitoring_auto_instrument %>
     <% end %>
+    <% if @browser_monitoring_capture_attributes.nil? %>
+    capture_attributes: true
+    <% else %>
+    capture_attributes: <%= @browser_monitoring_capture_attributes %>
+    <% end %>
     # Set this attribute to false to prevent injection of the monitoring JavaScript.
     # Default is true.
     enabled: true

@@ -45,6 +45,7 @@ attribute :error_collector_ignore_errors, :default => node['newrelic']['applicat
 attribute :error_collector_ignore_classes, :default => node['newrelic']['application_monitoring']['error_collector']['ignore_classes']
 attribute :error_collector_ignore_status_codes, :default => node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes']
 attribute :browser_monitoring_auto_instrument, :default => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
+attribute :browser_monitoring_capture_attributes, :default => node['newrelic']['application_monitoring']['browser_monitoring']['capture_attributes']
 attribute :cross_application_tracer_enable, :default => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
 attribute :thread_profiler_enable, :default => node['newrelic']['application_monitoring']['thread_profiler']['enable']
 attribute :labels, :default => node['newrelic']['application_monitoring']['labels']
