@@ -12,7 +12,7 @@
     syncStartup="<%= @resource.svc_sync_startup %>"
     sendDataOnExit="<%= @resource.svc_send_data_on_exit %>"
     sendDataOnExitThreshold="<%= @resource.svc_send_data_on_exit_threshold %>"
-    autoStart="<%= @resource.svc_auto_start %>"
+    autoStart="<%= @resource.svc_auto_start %>">
 
     <% if @resource.use_proxy -%>
     <proxy host="<%= @resource.proxy_host %>"
@@ -28,7 +28,7 @@
       <% end -%>
     />
     <% end -%>
-  />
+  </service>
 
   <log level="<%= @resource.app_log_level %>"
     auditLog="<%= @resource.audit_log_enabled %>"
