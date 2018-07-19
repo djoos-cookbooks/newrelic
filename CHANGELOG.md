@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.38.1
+- Fix .NET agent configuration when a proxy is specified
+
 ## v2.38.0
 - update file permission for infra agent YML config file
 
