@@ -31,6 +31,8 @@ when 'rhel', 'fedora'
   default['newrelic']['repository']['infrastructure']['uri'] = "https://download.newrelic.com/infrastructure_agent/linux/yum/el/#{rhel_version}/x86_64"
 when 'amazon'
   case node['platform_version'].to_i
+  when 2
+    rhel_version = 7
   when 2013, 2014, 2015, 2016, 2017, 2018
     rhel_version = 6
   end
