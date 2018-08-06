@@ -72,10 +72,10 @@ def linux_service_provider
 
   # workaround for issue on Amazon family versions
   # service is not known to chkconfig
-  if platform_family?('amazon') 
-    if platform_version.to_i == 2
+  if platform_family?('amazon') && platform_version.to_i == 2
       return Chef::Provider::Service::Systemd
-    end
+  end
+  if platform_family?('amazon')
     return Chef::Provider::Service::Upstart
   end
 
