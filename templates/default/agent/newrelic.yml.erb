@@ -309,6 +309,17 @@ common: &default_settings
     ignore_status_codes: <%= @resource.error_collector_ignore_status_codes %>
     <% end %>
 
+  # Distributed tracing lets you see the path that a request takes through your distributed system.
+  # Enabling distributed tracing changes the behavior of some New Relic features, so carefully consult the transition
+  # guide before you enable this feature: https://docs.newrelic.com/docs/transition-guide-distributed-tracing
+  # Default is false.
+  distributed_tracing:
+    <%if @resource.distributed_tracing_enable.nil? %>
+    enabled: false
+    <% else %>
+    enabled: <%= @resource.distributed_tracing_enable %>
+    <% end %>
+
   # Cross Application Tracing adds request and response headers to
   # external calls using the Apache HttpClient libraries to provided better
   # performance data when calling applications monitored by other New Relic Agents.
