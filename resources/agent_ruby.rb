@@ -35,6 +35,7 @@ attribute :daemon_proxy_host, :kind_of => String, :default => nil
 attribute :daemon_proxy_port, :kind_of => String, :default => nil
 attribute :daemon_proxy_user, :kind_of => String, :default => nil
 attribute :daemon_proxy_password, :kind_of => String, :default => nil
+attribute :distributed_tracing_enable, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :capture_params, :kind_of => String, :default => nil
 attribute :ignored_params, :kind_of => String, :default => nil
 attribute :enable_custom_tracing, :kind_of => [TrueClass, FalseClass], :default => false
