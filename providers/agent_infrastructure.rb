@@ -62,29 +62,27 @@ def install_newrelic_infrastructure_service_linux
   end
 end
 
+# rubocop:disable Metrics/CyclomaticComplexity
 def linux_service_provider
-  # workaround for issue on RHEL family version six
-  # service is not known to chkconfig
-  # dribble the issue by not making use of the RHEL service provider
-  if platform_family?('rhel') && node['platform_version'] =~ /^6/
-    return Chef::Provider::Service::Upstart
+  service_provider = Chef::Provider::Service::Systemd
+
+  # upstart workaround(s)
+  case node['platform_family']
+  when 'amazon'
+    if node['platform_version'].to_i == 1
+      service_provider = Chef::Provider::Service::Upstart
+    end
+  when 'rhel'
+    if node['platform_version'] =~ /^6/
+      service_provider = Chef::Provider::Service::Upstart
+    end
+  when 'ubuntu'
+    if node['platform_version'].to_f < 16.04
+      service_provider = Chef::Provider::Service::Upstart
+    end
   end
 
-  # workaround for issue on Amazon family versions
-  # service is not known to chkconfig
-  if platform_family?('amazon') && platform_version.to_i == 2
-    return Chef::Provider::Service::Systemd
-  elsif platform_family?('amazon')
-    return Chef::Provider::Service::Upstart
-  end
-
-  # workaround for issue on ubuntu where sysvinit provider incorrectly takes
-  # precedence over upstart
-  if platform?('ubuntu') && node['platform_version'].to_f < 16.04
-    return Chef::Provider::Service::Upstart
-  end
-
-  nil
+  service_provider
 end
 
 def install_newrelic_infrastructure_service_windows
