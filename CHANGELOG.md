@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.39.0
+- add distributed_tracing attribute for Java and Ruby APM
+
 ## v2.38.2
 - Fix linux service provider for Amazon Linux 2 support
 
