@@ -24,6 +24,7 @@ newrelic_agent_ruby 'Install' do
   log_daily node['newrelic']['ruby_agent']['log_daily'] unless node['newrelic']['ruby_agent']['log_daily']
   daemon_ssl NewRelic.to_boolean(node['newrelic']['application_monitoring']['daemon']['ssl']) unless node['newrelic']['application_monitoring']['daemon']['ssl']
   daemon_proxy node['newrelic']['application_monitoring']['daemon']['proxy'] unless node['newrelic']['application_monitoring']['daemon']['proxy']
+  distributed_tracing_enable node['newrelic']['ruby_agent']['distributed_tracing_enable'] unless node['newrelic']['ruby_agent']['distributed_tracing_enable'].nil?
   capture_params node['newrelic']['application_monitoring']['capture_params'] unless node['newrelic']['application_monitoring']['capture_params']
   ignored_params node['newrelic']['application_monitoring']['ignored_params'] unless node['newrelic']['application_monitoring']['ignored_params']
   transaction_tracer_enable node['newrelic']['application_monitoring']['transaction_tracer']['enable'] unless node['newrelic']['application_monitoring']['transaction_tracer']['enable']
