@@ -32,6 +32,7 @@ newrelic_agent_java 'Install' do
   daemon_proxy_port node['newrelic']['application_monitoring']['daemon']['proxy_port'] unless node['newrelic']['application_monitoring']['daemon']['proxy_port'].nil?
   daemon_proxy_user node['newrelic']['application_monitoring']['daemon']['proxy_user'] unless node['newrelic']['application_monitoring']['daemon']['proxy_user'].nil?
   daemon_proxy_password node['newrelic']['application_monitoring']['daemon']['proxy_password'] unless node['newrelic']['application_monitoring']['daemon']['proxy_password'].nil?
+  distributed_tracing_enable node['newrelic']['java_agent']['distributed_tracing_enable'] unless node['newrelic']['java_agent']['distributed_tracing_enable'].nil?
   capture_params node['newrelic']['application_monitoring']['capture_params'] unless node['newrelic']['application_monitoring']['capture_params'].nil?
   ignored_params node['newrelic']['application_monitoring']['ignored_params'] unless node['newrelic']['application_monitoring']['ignored_params'].nil?
   transaction_tracer_enable node['newrelic']['application_monitoring']['transaction_tracer']['enable'] unless node['newrelic']['application_monitoring']['transaction_tracer']['enable'].nil?
