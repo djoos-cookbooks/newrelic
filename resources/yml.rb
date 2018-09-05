@@ -31,6 +31,7 @@ attribute :daemon_proxy_host, :kind_of => String, :default => nil
 attribute :daemon_proxy_port, :kind_of => String, :default => nil
 attribute :daemon_proxy_user, :kind_of => String, :default => nil
 attribute :daemon_proxy_password, :kind_of => String, :default => nil
+attribute :distributed_tracing_enable, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :capture_params, :default => node['newrelic']['application_monitoring']['capture_params']
 attribute :ignored_params, :default => node['newrelic']['application_monitoring']['ignored_params']
 attribute :enable_custom_tracing, :kind_of => [TrueClass, FalseClass], :default => false
