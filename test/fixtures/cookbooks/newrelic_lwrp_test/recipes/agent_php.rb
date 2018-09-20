@@ -6,9 +6,10 @@
 #
 
 include_recipe 'apache2'
-
-node.set['php']['pear'] = 'pear'
 include_recipe 'php'
+
+## Commented this to enable php test to pass just using default attribute in PHP Cookbook
+# node.set['php']['pear'] = 'pear'
 
 newrelic_agent_php 'Install' do
   license node['newrelic']['license']
