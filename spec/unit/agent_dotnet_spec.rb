@@ -21,8 +21,7 @@ describe 'newrelic_lwrp_test::agent_dotnet' do
     end
 
     it 'Create newrelic.config file' do
-      expect(chef_run).to render_file('C:\ProgramData\New Relic\.NET Agent\newrelic.config').with_content("0000ffff0000ffff0000ffff0000ffff0000ffff")
+      expect(chef_run).to render_file('C:\ProgramData\New Relic\.NET Agent\newrelic.config').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
-
   end
 end

@@ -5,13 +5,13 @@ describe 'newrelic_lwrp_test::agent_dotnetcore' do
     stub_resources
   end
 
-  ## test lwrp install on Windows Systems
   context 'when on Windows' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'windows', :version => '2012', :step_into => ['newrelic_agent_dotnetcore']) do |node|
         stub_node_resources(node)
       end.converge(described_recipe)
     end
+
     it 'Installs the New Relic .Net Core Agent on Windows' do
       expect(chef_run).to install_newrelic_agent_dotnetcore('Install')
     end
@@ -21,25 +21,22 @@ describe 'newrelic_lwrp_test::agent_dotnetcore' do
     end
 
     it 'Creates environmental Variable for Agent Home Directory' do
-      expect(chef_run).to create_windows_Envriomental_Variable('CORECLR_NEWRELIC_HOME')
+      expect(chef_run).to create_windows_envriomental_variable('CORECLR_NEWRELIC_HOME')
     end
 
     it 'Creates environmental Variable for CLR Profiler' do
-      expect(chef_run).to create_windows_Envriomental_Variable('CORECLR_PROFILER')
+      expect(chef_run).to create_windows_envriomental_variable('CORECLR_PROFILER')
     end
 
     it 'Creates environmental Variable for PAth to CLR Profiler' do
-      expect(chef_run).to create_windows_Envriomental_Variable('CORECLR_PROFILER_PATH')
+      expect(chef_run).to create_windows_envriomental_variable('CORECLR_PROFILER_PATH')
     end
 
     it 'Create newrelic.config file' do
-      expect(chef_run).to render_file('C:\New Relic\newrelic-netcore20-agent\newrelic.config').with_content("0000ffff0000ffff0000ffff0000ffff0000ffff")
+      expect(chef_run).to render_file('C:\New Relic\newrelic-netcore20-agent\newrelic.config').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
-  # Windows
   end
 
-
-  ## test lwrp install on Debian family
   context 'when on Debian Family' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'ubuntu', :version => '18.04', :step_into => ['newrelic_agent_dotnetcore']) do |node|
@@ -64,21 +61,18 @@ describe 'newrelic_lwrp_test::agent_dotnetcore' do
     end
 
     it 'Creates environmental Variable for Agent Home Directory' do
-      expect(chef_run).to create_CoreCLR_NewRelic_home('CORECLR_NEWRELIC_HOME')
+      expect(chef_run).to create_coreclr_newrelic_home('CORECLR_NEWRELIC_HOME')
     end
 
     it 'Create newrelic.config file' do
-      expect(chef_run).to render_file('/usr/local/newrelic-netcore20-agent/newrelic.config').with_content("0000ffff0000ffff0000ffff0000ffff0000ffff")
+      expect(chef_run).to render_file('/usr/local/newrelic-netcore20-agent/newrelic.config').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
-
   end
 
-
-  # teslt lwrp install on RHEL family
   context 'when on RHEL family' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'redhat', :version => '7', :step_into => ['newrelic_agent_dotnetcore']) do |node|
-          stub_node_resources(node)
+        stub_node_resources(node)
       end.converge(described_recipe)
     end
 
@@ -95,19 +89,18 @@ describe 'newrelic_lwrp_test::agent_dotnetcore' do
     end
 
     it 'Creates environmental Variable for Agent Home Directory' do
-      expect(chef_run).to create_CoreCLR_NewRelic_home('CORECLR_NEWRELIC_HOME')
+      expect(chef_run).to create_coreclr_newrelic_home('CORECLR_NEWRELIC_HOME')
     end
 
     it 'Create newrelic.config file' do
-      expect(chef_run).to render_file('/usr/local/newrelic-netcore20-agent/newrelic.config').with_content("0000ffff0000ffff0000ffff0000ffff0000ffff")
+      expect(chef_run).to render_file('/usr/local/newrelic-netcore20-agent/newrelic.config').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
   end
 
-  # teslt lwrp install on CentOS family
   context 'when on CentOS' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.8', :step_into => ['newrelic_agent_dotnetcore']) do |node|
-          stub_node_resources(node)
+        stub_node_resources(node)
       end.converge(described_recipe)
     end
 
@@ -124,20 +117,18 @@ describe 'newrelic_lwrp_test::agent_dotnetcore' do
     end
 
     it 'Creates environmental Variable for Agent Home Directory' do
-      expect(chef_run).to create_CoreCLR_NewRelic_home('CORECLR_NEWRELIC_HOME')
+      expect(chef_run).to create_coreclr_newrelic_home('CORECLR_NEWRELIC_HOME')
     end
 
     it 'Create newrelic.config file' do
-      expect(chef_run).to render_file('/usr/local/newrelic-netcore20-agent/newrelic.config').with_content("0000ffff0000ffff0000ffff0000ffff0000ffff")
+      expect(chef_run).to render_file('/usr/local/newrelic-netcore20-agent/newrelic.config').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
-
   end
 
-  # teslt lwrp install on Amazon Linux family
   context 'when on Amazon Linux' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'amazon', :version => '2018', :step_into => ['newrelic_agent_dotnetcore']) do |node|
-          stub_node_resources(node)
+        stub_node_resources(node)
       end.converge(described_recipe)
     end
 
@@ -154,13 +145,11 @@ describe 'newrelic_lwrp_test::agent_dotnetcore' do
     end
 
     it 'Creates environmental Variable for Agent Home Directory' do
-      expect(chef_run).to create_CoreCLR_NewRelic_home('CORECLR_NEWRELIC_HOME')
+      expect(chef_run).to create_coreclr_newrelic_home('CORECLR_NEWRELIC_HOME')
     end
 
     it 'Create newrelic.config file' do
-      expect(chef_run).to render_file('/usr/local/newrelic-netcore20-agent/newrelic.config').with_content("0000ffff0000ffff0000ffff0000ffff0000ffff")
+      expect(chef_run).to render_file('/usr/local/newrelic-netcore20-agent/newrelic.config').with_content('0000ffff0000ffff0000ffff0000ffff0000ffff')
     end
-
-
   end
 end

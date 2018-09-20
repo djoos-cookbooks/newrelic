@@ -19,7 +19,7 @@ depends 'curl'
 depends 'apt'
 depends 'yum'
 
-depends 'zipfile','~> 0.2.0'
+depends 'zipfile', '~> 0.2.0'
 depends 'magic_shell', '~> 1.0.0'
 
 recipe 'newrelic', 'Adds the New Relic repository, installs & configures the New Relic server monitor agent.'

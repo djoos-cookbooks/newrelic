@@ -41,11 +41,11 @@ if defined?(ChefSpec)
     ChefSpec::Matchers::ResourceMatcher.new(:zipfile, :extract, resource_name)
   end
 
-  def create_CoreCLR_NewRelic_home(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(:magic_shell_environment, :add ,resource_name)
+  def create_coreclr_newrelic_home(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:magic_shell_environment, :add, resource_name)
   end
 
-  def create_windows_Envriomental_Variable(resource_name)
+  def create_windows_envriomental_variable(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(:windows_env, :create, resource_name)
   end
 

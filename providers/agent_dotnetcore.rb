@@ -50,7 +50,6 @@ def install_newrelic_dotnetcore_linux
     )
     sensitive true
   end
-
 end
 
 def install_newrelic_apt
@@ -65,7 +64,7 @@ end
 
 def install_newrelic_yum
   yum_package 'newrelic-netcore20-agent' do
-    flush_cache [ :before ]
+    flush_cache [:before]
     allow_downgrade true
     package_name 'newrelic-netcore20-agent'
     action :install
@@ -76,7 +75,7 @@ def install_newrelic_dotnetcore_windows
   zipfile 'unzip source to NewRelic directory' do
     from new_resource.https_download
     into new_resource.config_dir
-    not_if {::File.exists?('#{new_resource.config_dir}\\NewRelic.Profiler.dll')}
+    not_if { ::File.exists?('#{new_resource.config_dir}\NewRelic.Profiler.dll') }
   end
 
   windows_env 'CORECLR_NEWRELIC_HOME' do
@@ -91,7 +90,7 @@ def install_newrelic_dotnetcore_windows
 
   windows_env 'CORECLR_PROFILER_PATH' do
     action :create
-    value '%CORECLR_NEWRELIC_HOME%\\NewRelic.Profiler.dll'
+    value '%CORECLR_NEWRELIC_HOME%\NewRelic.Profiler.dll'
   end
 
   template "#{new_resource.config_dir}\\newrelic.config" do
