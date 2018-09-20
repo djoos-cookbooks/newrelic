@@ -35,9 +35,11 @@ module NewRelic
 
     def install_newrelic_repo_rhel
       yum_repository 'newrelic' do
-        description 'New Relic packages for Enterprise Linux 5 - $basearch'
+        description 'New Relic packages for Enterprise Linux 5'
         baseurl node['newrelic']['repository']['uri']
         gpgkey node['newrelic']['repository']['key']
+        enabled true
+        gpgcheck true
         sslverify node['newrelic']['repository']['ssl_verify']
         proxy node['newrelic']['repository']['proxy'] unless node['newrelic']['repository']['proxy'].nil?
         proxy_username node['newrelic']['repository']['proxy_username'] unless node['newrelic']['repository']['proxy_username'].nil?
