@@ -34,7 +34,7 @@ platforms:
           php_config: '/etc/php/7.0/mods-available/newrelic.ini'
       nodejs:
         repo: 'https://deb.nodesource.com/node_6.x'
-  - name: ubuntu-17.04
+  - name: ubuntu-18.04
     run_list:
       - recipe[apt]
     attributes:
@@ -85,6 +85,15 @@ suites:
           service_notify_action: nothing
           service_actions:
             - nothing
+  - name: dotnetcore-agent
+    run_list:
+      - recipe[newrelic_lwrp_test::agent_dotnetcore]
+    excludes:
+      - centos-6.8 # dotnet Core 2.0 only supported on Centos 7 or later
+    attributes:
+     newrelic:
+       dotnetcore_agent:
+         enable_module: true
   - name: php-agent
     run_list: "recipe[newrelic_lwrp_test::agent_php]"
     attributes:
@@ -103,6 +112,7 @@ suites:
       newrelic:
         php_agent:
           execute_php5enmod: true
+  # Server Monitor Deprecated
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
   - name: infrastructure-agent

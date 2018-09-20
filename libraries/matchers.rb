@@ -5,6 +5,7 @@ if defined?(ChefSpec)
   ChefSpec.define_matcher :newrelic_agent_java
   ChefSpec.define_matcher :newrelic_agent_ruby
   ChefSpec.define_matcher :newrelic_agent_dotnet
+  ChefSpec.define_matcher :newrelic_agent_dotnetcore
   ChefSpec.define_matcher :newrelic_agent_python
   ChefSpec.define_matcher :newrelic_agent_nodejs
 
@@ -30,6 +31,22 @@ if defined?(ChefSpec)
 
   def install_newrelic_agent_dotnet(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(:newrelic_agent_dotnet, :install, resource_name)
+  end
+
+  def install_newrelic_agent_dotnetcore(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:newrelic_agent_dotnetcore, :install, resource_name)
+  end
+
+  def unzip_newrelic_agent(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:zipfile, :extract, resource_name)
+  end
+
+  def create_CoreCLR_NewRelic_home(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:magic_shell_environment, :add ,resource_name)
+  end
+
+  def create_windows_Envriomental_Variable(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(:windows_env, :create, resource_name)
   end
 
   def install_newrelic_agent_python(resource_name)
