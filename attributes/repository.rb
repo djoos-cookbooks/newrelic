@@ -5,7 +5,6 @@
 # Copyright (c) 2016, David Joos
 #
 
-
 default['newrelic']['repository']['ssl_verify'] = true
 default['newrelic']['repository']['key'] = 'http://download.newrelic.com/548C16BF.gpg'
 
