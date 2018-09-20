@@ -75,7 +75,7 @@ def install_newrelic_dotnetcore_windows
   zipfile 'unzip source to NewRelic directory' do
     from new_resource.https_download
     into new_resource.config_dir
-    not_if { ::File.exist?("#{new_resource.config_dir}\\NewRelic.Profiler.dll") }
+    not_if { ::File.exist?('#{new_resource.config_dir}\NewRelic.Profiler.dll') }
   end
 
   windows_env 'CORECLR_NEWRELIC_HOME' do
