@@ -76,6 +76,9 @@ def linux_service_provider
     if node['platform_version'] =~ /^6/
       service_provider = Chef::Provider::Service::Upstart
     end
+  end
+
+  case node['platform']
   when 'ubuntu'
     if node['platform_version'].to_f < 16.04
       service_provider = Chef::Provider::Service::Upstart
