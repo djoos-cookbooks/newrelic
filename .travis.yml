@@ -3,7 +3,7 @@
 addons:
   apt:
     sources:
-      - chef-stable-precise
+      - chef-stable-bionic
     packages:
       - chefdk
 
