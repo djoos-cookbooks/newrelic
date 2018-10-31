@@ -3,7 +3,7 @@
 addons:
   apt:
     sources:
-      - chef-stable-xenial # Ubuntu 16.04 LTS Xenial Xerus
+      - chef-stable-trusty # Ubuntu 14.04 LTS Trusty Tahr
     packages:
       - chefdk
 
