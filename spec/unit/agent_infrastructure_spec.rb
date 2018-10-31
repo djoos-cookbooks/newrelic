@@ -57,9 +57,9 @@ describe 'newrelic_lwrp_test::agent_infrastructure' do
     end
 
     it 'enables newrelic-infra service with systemd' do
-        expect(chef_run).to enable_service('newrelic-infra').with(
-          :provider => Chef::Provider::Service::Systemd
-        )
+      expect(chef_run).to enable_service('newrelic-infra').with(
+        :provider => Chef::Provider::Service::Systemd
+      )
     end
   end
 
@@ -71,9 +71,9 @@ describe 'newrelic_lwrp_test::agent_infrastructure' do
     end
 
     it 'enables newrelic-infra service with upstart' do
-        expect(chef_run).to enable_service('newrelic-infra').with(
-          :provider => Chef::Provider::Service::Upstart
-        )
+      expect(chef_run).to enable_service('newrelic-infra').with(
+        :provider => Chef::Provider::Service::Upstart
+      )
     end
   end
 
@@ -85,11 +85,9 @@ describe 'newrelic_lwrp_test::agent_infrastructure' do
     end
 
     it 'enables newrelic-infra service with systemd' do
-        expect(chef_run).to enable_service('newrelic-infra').with(
-          :provider => Chef::Provider::Service::Systemd
-        )
+      expect(chef_run).to enable_service('newrelic-infra').with(
+        :provider => Chef::Provider::Service::Systemd
+      )
     end
   end
-
-  
 end
