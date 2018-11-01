@@ -69,7 +69,8 @@ def linux_service_provider
   # upstart workaround(s)
   case node['platform_family']
   when 'amazon'
-    if node['platform_version'].to_i == 1
+    # Amazon 1.x version format is 'YEAR.MONTH'
+    if node['platform_version'].to_i > 2000
       service_provider = Chef::Provider::Service::Upstart
     end
   when 'rhel'
@@ -77,6 +78,7 @@ def linux_service_provider
       service_provider = Chef::Provider::Service::Upstart
     end
   end
+  
   case node['platform']
   when 'ubuntu'
     if node['platform_version'].to_f < 16.04

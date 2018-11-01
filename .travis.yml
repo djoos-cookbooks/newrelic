@@ -3,7 +3,7 @@
 addons:
   apt:
     sources:
-      - chef-stable-precise
+      - chef-stable-trusty # Ubuntu 14.04 LTS Trusty Tahr
     packages:
       - chefdk
 
