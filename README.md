@@ -593,6 +593,7 @@ The `newrelic_agent_infrastructure` resource will handle the requirements to set
 * `'service_actions'` - The New Relic infrastructure agent service actions, defaults to "`%w(enable start)`" (#starts the service if it's not running and enables it to start at system boot time)
 * `'windows_version'` - the Windows version to install, defaults to "1.0.703"
 * `'windows_checksum'` - checksum of the (64-bit) Windows version, defaults to "3c9f98325dc484ee8735f01b913803eaef54f06641348b3dd9f3c0b3cd803ace"
+* `'strip_command_line'` - Undocumented boolean flag for the newrelic-infra.yml file, if set to false includes the parameters in the command line reported by the infrastructure agent. Defaults to nil, which defaults to false for the infrastructure agent.
 
 ### `newrelic_deployment`
 This cookbook includes an LWRP for notifying New Relic of a deployment
