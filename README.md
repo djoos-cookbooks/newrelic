@@ -3,7 +3,7 @@
 # newrelic cookbook
 
 ## Description
-
+Foo
 This cookbook provides an easy way to install various New Relic application monitoring agents and the New Relic Infrastructure agent.
 
 The agent installs are being converted into libraries, currently the following agents are now resources:
