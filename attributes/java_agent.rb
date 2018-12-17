@@ -28,6 +28,9 @@ default['newrelic']['java_agent']['class_transformer_config'] = {}
 #   }
 # }
 #
+default['newrelic']['java_agent']['circuitbreaker_enable'] = true
+default['newrelic']['java_agent']['circuitbreaker_memory_threshold'] = 20
+default['newrelic']['java_agent']['circuitbreaker_gc_cpu_threshold'] = 10
 default['newrelic']['java_agent']['app_location'] = node['newrelic']['java_agent']['install_dir']
 default['newrelic']['java_agent']['template']['cookbook'] = 'newrelic'
 default['newrelic']['java_agent']['template']['source'] = 'agent/newrelic.yml.erb'
