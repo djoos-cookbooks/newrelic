@@ -150,6 +150,9 @@ Make sure you run Chef >= 12.1
 * `node['newrelic']['java_agent']['log_file_count']` - The number of log files to use
 * `node['newrelic']['java_agent']['log_limit_in_kbytes']` - The maximum number of bytes to write to any one log file
 * `node['newrelic']['java_agent']['log_daily']` - Override other log rolling configuration and roll the logs daily
+* `node['newrelic']['java_agent']['circuitbreaker_enabled']` - Boolean, permits to disable circuitbreaker
+* `node['newrelic']['java_agent']['circuitbreaker_memory_threshold']` - Integer, customize the precentage of free heap memory below which the circuit breaker should trip
+* `node['newrelic']['java_agent']['circuitbreaker_gc_cpu_threshold']` - Integer, customize the precentage of garbage collection CPU time above which the circuit breaker should trip
 * `node['newrelic']['java_agent']['agent_action']` - Agent action, defaults to :install
 * `node['newrelic']['java_agent']['execute_agent_action']` - Execute the agent action or not, defaults to true
 * `node['newrelic']['java_agent']['enable_custom_tracing']` - Configure New Relic to detect custom traces

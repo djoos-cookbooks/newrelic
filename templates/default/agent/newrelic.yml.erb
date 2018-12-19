@@ -34,9 +34,13 @@ common: &default_settings
   # Memory threshold: 20%
   # Garbage collection CPU threshold: 10%
   circuitbreaker:
-    enabled: <%= node['newrelic']['java_agent']['circuitbreaker_enable'] %>
-    memory_threshold: <%= @node['newrelic']['java_agent']['circuitbreaker_memory_threshold'] %>
-    gc_cpu_threshold: <%= @node['newrelic']['java_agent']['circuitbreaker_gc_cpu_threshold'] %>
+  <% if @resource.circuitbreaker_enabled.nil? -%>
+    enabled: false
+  <% else -%>
+    enabled: true
+    memory_threshold: <%= @resource.circuitbreaker_memory_threshold %>
+    gc_cpu_threshold: <%= @resource.circuitbreaker_gc_cpu_threshold %>
+  <% end -%>
 
   # Set to true to enable support for auto app naming.
   # The name of each web app is detected automatically
