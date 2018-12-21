@@ -448,6 +448,9 @@ The `newrelic_agent_java` resource will handle the requirements to install java 
 * `'error_collector_ignore_errors'` - Defaults to nil
 * `'error_collector_ignore_classes'` - Defaults to nil
 * `'error_collector_ignore_status_codes'` - Defaults to nil
+* `'circuitbreaker_enabled'` - Defaults to true
+* `'circuitbreaker_memory_threshold'` - Defaults to 20
+* `'circuitbreaker_gc_cpu_threshold'` - Defaults to 10
 * `'browser_monitoring_auto_instrument'` - Defaults to nil
 * `'cross_application_tracer_enable'` - Defaults to true
 * `'thread_profiler_enable'` - Defaults to true

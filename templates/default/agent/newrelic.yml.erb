@@ -322,6 +322,19 @@ common: &default_settings
     ignore_status_codes: <%= @resource.error_collector_ignore_status_codes %>
     <% end %>
 
+  # Circuit breaker configuration
+  # Enabled by default with values:
+  # Memory threshold: 20%
+  # Garbage collection CPU threshold: 10%
+  circuitbreaker:
+  <% if @resource.circuitbreaker_enabled.nil? -%>
+    enabled: false
+  <% else -%>
+    enabled: true
+    memory_threshold: <%= @resource.circuitbreaker_memory_threshold %>
+    gc_cpu_threshold: <%= @resource.circuitbreaker_gc_cpu_threshold %>
+  <% end -%>
+
   # Distributed tracing lets you see the path that a request takes through your distributed system.
   # Enabling distributed tracing changes the behavior of some New Relic features, so carefully consult the transition
   # guide before you enable this feature: https://docs.newrelic.com/docs/transition-guide-distributed-tracing
