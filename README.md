@@ -427,9 +427,6 @@ The `newrelic_agent_java` resource will handle the requirements to install java 
 * `'log_file_count'` - Defaults to nil
 * `'log_limit_in_kbytes'` - Defaults to nil
 * `'log_daily'` - Defaults to false
-* `'circuitbreaker_enabled'` - Defaults to true
-* `'circuitbreaker_memory_threshold'` - Defaults to 20
-* `'circuitbreaker_gc_cpu_threshold'` - Defaults to 10
 * `'daemon_ssl'` - Defaults to true
 * `'daemon_proxy'` - Defaults to nil
 * `'daemon_proxy_host'` - Defaults to nil

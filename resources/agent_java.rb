@@ -32,9 +32,6 @@ attribute :audit_mode, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :log_file_count, :kind_of => Integer, :default => nil
 attribute :log_limit_in_kbytes, :kind_of => Integer, :default => nil
 attribute :log_daily, :kind_of => [TrueClass, FalseClass], :default => false
-attribute :circuitbreaker_enabled, :kind_of => [TrueClass, FalseClass], :default => true
-attribute :circuitbreaker_memory_threshold, :kind_of => Integer, :default => 20
-attribute :circuitbreaker_gc_cpu_threshold, :kind_of => Integer, :default => 10
 attribute :daemon_ssl, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :daemon_proxy, :kind_of => String, :default => nil
 attribute :daemon_proxy_host, :kind_of => String, :default => nil
