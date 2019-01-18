@@ -83,7 +83,7 @@ module NewRelic
         10 => 'buster',
         12 => 'precise',
         14 => 'trusty',
-        16 => 'xenial'
+        16 => 'xenial',
       }
 
       deb_version_to_codename[version]

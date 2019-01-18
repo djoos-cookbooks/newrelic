@@ -26,7 +26,7 @@ end
 
 RSpec.configure do |config|
   config.mock_with :rspec do |c|
-    c.syntax = %i[should expect]
+    c.syntax = %i(should expect)
   end
   config.log_level = :error
   config.formatter = :documentation

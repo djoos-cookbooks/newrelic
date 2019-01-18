@@ -62,7 +62,6 @@ def install_newrelic_infrastructure_service_linux
   end
 end
 
-# rubocop:disable Metrics/CyclomaticComplexity
 def linux_service_provider
   service_provider = Chef::Provider::Service::Systemd
 
@@ -70,20 +69,14 @@ def linux_service_provider
   case node['platform_family']
   when 'amazon'
     # Amazon 1.x version format is 'YEAR.MONTH'
-    if node['platform_version'].to_i > 2000
-      service_provider = Chef::Provider::Service::Upstart
-    end
+    service_provider = Chef::Provider::Service::Upstart if node['platform_version'].to_i > 2000
   when 'rhel'
-    if node['platform_version'] =~ /^6/
-      service_provider = Chef::Provider::Service::Upstart
-    end
+    service_provider = Chef::Provider::Service::Upstart if node['platform_version'] =~ /^6/
   end
 
   case node['platform']
   when 'ubuntu'
-    if node['platform_version'].to_f < 16.04
-      service_provider = Chef::Provider::Service::Upstart
-    end
+    service_provider = Chef::Provider::Service::Upstart if node['platform_version'].to_f < 16.04
   end
 
   service_provider

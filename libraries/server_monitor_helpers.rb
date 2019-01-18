@@ -34,8 +34,8 @@ module NewRelic
         JSON.generate(
           :alert_policy => {
             :links => {
-              :servers => new_server_ids + current_server_ids
-            }
+              :servers => new_server_ids + current_server_ids,
+            },
           }
         )
       )
