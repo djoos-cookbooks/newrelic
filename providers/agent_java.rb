@@ -7,8 +7,10 @@
 
 require 'uri'
 
+# rubocop:disable Style/MixinUsage
 # include helper methods
 include NewRelic::Helpers
+# rubocop:enable Style/MixinUsage
 
 use_inline_resources if defined?(use_inline_resources)
 

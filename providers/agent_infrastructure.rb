@@ -5,8 +5,10 @@
 # Copyright (c) 2017, David Joos
 #
 
+# rubocop:disable Style/MixinUsage
 # include helper methods
 include NewRelic::Helpers
+# rubocop:enable Style/MixinUsage
 
 use_inline_resources if defined?(use_inline_resources)
 
@@ -70,24 +72,19 @@ def linux_service_provider
   case node['platform_family']
   when 'amazon'
     # Amazon 1.x version format is 'YEAR.MONTH'
-    if node['platform_version'].to_i > 2000
-      service_provider = Chef::Provider::Service::Upstart
-    end
+    service_provider = Chef::Provider::Service::Upstart if node['platform_version'].to_i > 2000
   when 'rhel'
-    if node['platform_version'] =~ /^6/
-      service_provider = Chef::Provider::Service::Upstart
-    end
+    service_provider = Chef::Provider::Service::Upstart if node['platform_version'] =~ /^6/
   end
 
   case node['platform']
   when 'ubuntu'
-    if node['platform_version'].to_f < 16.04
-      service_provider = Chef::Provider::Service::Upstart
-    end
+    service_provider = Chef::Provider::Service::Upstart if node['platform_version'].to_f < 16.04
   end
 
   service_provider
 end
+# rubocop:enable Metrics/CyclomaticComplexity
 
 def install_newrelic_infrastructure_service_windows
   windows_package 'newrelic-infra' do

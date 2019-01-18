@@ -5,9 +5,11 @@
 # Copyright (c) 2016, David Joos
 #
 
+# rubocop:disable Style/MixinUsage
 # include helper methods
 include NewRelic::Helpers
 include NewRelic::ServerMonitorHelpers
+# rubocop:enable Style/MixinUsage
 
 use_inline_resources if defined?(use_inline_resources)
 
