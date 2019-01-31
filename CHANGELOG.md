@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.39.2
+- add Java agent circuit breaker configuration support
+
 ## v2.39.1
 - Fix distributed tracing issues
 

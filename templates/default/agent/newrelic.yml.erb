@@ -314,10 +314,10 @@ common: &default_settings
   # Memory threshold: 20%
   # Garbage collection CPU threshold: 10%
   circuitbreaker:
-  <% if @resource.circuitbreaker_enabled.nil? -%>
+  <% if @resource.circuitbreaker_enable.nil? -%>
     enabled: false
   <% else -%>
-    enabled: true
+    enabled: <%= @resource.circuitbreaker_enable %>
     memory_threshold: <%= @resource.circuitbreaker_memory_threshold %>
     gc_cpu_threshold: <%= @resource.circuitbreaker_gc_cpu_threshold %>
   <% end -%>
