@@ -30,6 +30,7 @@ module NewRelic
         distribution node['newrelic']['repository']['distribution']
         components node['newrelic']['repository']['components']
         key node['newrelic']['repository']['key']
+        trusted true # To eliminate failure on Ubuntu 18.04, repository not signed
       end
     end
 
@@ -92,6 +93,7 @@ module NewRelic
 
     def directory_exists?(dir)
       return false unless ::File.exist?(dir)
+
       true
     end
   end
