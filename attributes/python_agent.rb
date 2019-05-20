@@ -2,11 +2,11 @@
 # Cookbook Name:: newrelic
 # Attributes:: python_agent
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
-default['newrelic']['python_agent']['agent_action'] = :install
-default['newrelic']['python_agent']['python_version'] = 'latest'
+default['newrelic']['python_agent']['agent_action'] = 'install'
+default['newrelic']['python_agent']['python_version'] = nil
 default['newrelic']['python_agent']['python_venv'] = nil
 default['newrelic']['python_agent']['config_file'] = '/etc/newrelic/newrelic.ini'
 default['newrelic']['python_agent']['template']['cookbook'] = 'newrelic'

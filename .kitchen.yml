@@ -1,36 +1,72 @@
 ---
 driver_plugin: vagrant
-driver_config:
-  require_chef_omnibus: true
 
 provisioner:
+  name: chef_zero
   attributes:
     newrelic:
       license: '0000ffff0000ffff0000ffff0000ffff0000ffff'
 
 platforms:
-  - name: ubuntu-12.04
-    run_list:
-      - recipe[apt]
-    attributes:
-      rubygems: 'rubygems'
-      newrelic:
-        php_agent:
-          web_server:
-            service_name: apache2
-          php_config: '/etc/php5/conf.d/newrelic.ini'
   - name: ubuntu-14.04
     run_list:
       - recipe[apt]
     attributes:
       rubygems: 'rubygems-integration'
       newrelic:
-        php5enmode: = true
         php_agent:
           web_server:
             service_name: apache2
           php_config: '/etc/php5/mods-available/newrelic.ini'
-  - name: centos-6.6
+        ruby_agent:
+          version: 3.18.1.330 # Ruby version >= 1.8.7, newrelic_rmp 4.x requires Ruby >= 2.0.0
+  - name: ubuntu-16.04
+    run_list:
+      - recipe[apt]
+    attributes:
+      rubygems: 'rubygems-integration'
+      java:
+          jdk_version: 7
+      newrelic:
+        php_agent:
+          web_server:
+            service_name: apache2
+          php_config: '/etc/php/7.0/mods-available/newrelic.ini'
+      nodejs:
+        repo: 'https://deb.nodesource.com/node_6.x'
+  - name: ubuntu-17.04
+    run_list:
+      - recipe[apt]
+    attributes:
+      rubygems: 'rubygems-integration'
+      java:
+          jdk_version: 8
+      newrelic:
+        php_agent:
+          web_server:
+            service_name: apache2
+          php_config: '/etc/php/7.0/mods-available/newrelic.ini'
+      nodejs:
+        repo: 'https://deb.nodesource.com/node_6.x'
+      php:
+        packages:
+          - php7.0-cgi
+          - php7.0
+          - php7.0-dev
+          - php7.0-cli
+          - php-pear
+        conf_dir: '/etc/php/7.0/cli'
+  - name: centos-6.8
+    attributes:
+      rubygems: 'rubygems'
+      newrelic:
+        php_agent:
+          web_server:
+            service_name: httpd
+          php_config: '/etc/php.d/newrelic.ini'
+        ruby_agent:
+          version: 3.18.1.330 # Ruby version >= 1.8.7, newrelic_rmp 4.x requires Ruby >= 2.0.0
+  - name: centos-7.2
     attributes:
       rubygems: 'rubygems'
       newrelic:
@@ -51,19 +87,58 @@ suites:
             - nothing
   - name: php-agent
     run_list: "recipe[newrelic_lwrp_test::agent_php]"
+    attributes:
+      newrelic:
+        php_agent:
+          enable_module: false
+  - name: php-agent-enable-module
+    run_list: "recipe[newrelic_lwrp_test::agent_php]"
+    attributes:
+      newrelic:
+        php_agent:
+          enable_module: true
+  - name: php-agent-php5enmod
+    run_list: "recipe[newrelic_lwrp_test::agent_php]"
+    attributes:
+      newrelic:
+        php_agent:
+          execute_php5enmod: true
   - name: server-monitor
     run_list: "recipe[newrelic_lwrp_test::server_monitor]"
+  - name: infrastructure-agent
+    run_list: "recipe[newrelic_lwrp_test::agent_infrastructure]"
+    excludes:
+      - ubuntu-17.04 # @07/2017: [12.04, 14.04, 16.04](https://docs.newrelic.com/docs/infrastructure/new-relic-infrastructure/getting-started/compatibility-requirements-new-relic-infrastructure#operating-systems)
   - name: java-agent
     run_list: "recipe[newrelic_lwrp_test::agent_java]"
+    attributes:
+      newrelic:
+        java_agent:
+          install_dir: '/opt/tomcat_java_test_app'
+  - name: java-agent-not-latest-version
+    run_list: "recipe[newrelic_lwrp_test::agent_java]"
+    attributes:
+      newrelic:
+        java_agent:
+          version: 3.31.1
+          install_dir: '/opt/tomcat_java_test_app'
   - name: ruby-agent
     run_list: "recipe[newrelic_lwrp_test::agent_ruby]"
     attributes:
       newrelic:
         ruby_agent:
           install_dir: '/opt/newrelic/ruby'
+  - name: python-agent
+    run_list: "recipe[newrelic_lwrp_test::agent_python]"
   - name: python-agent-recipe
     run_list: "recipe[newrelic_lwrp_test::agent_python_recipe]"
   - name: nodejs-agent
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs]"
   - name: nodejs-agent-recipe
     run_list: "recipe[newrelic_lwrp_test::agent_nodejs_recipe]"
+  - name: lwrp_yml
+    run_list: "recipe[newrelic_lwrp_test::lwrp_yml]"
+    attributes:
+      newrelic:
+        java_agent:
+          install_dir: '/opt/tomcat_java_test_app'

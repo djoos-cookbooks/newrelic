@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Provider:: agent_nodejs
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 # include helper methods
@@ -17,8 +17,8 @@ end
 action :install do
   # Check license key provided
   check_license
-  fail 'Cannot install newrelic nodejs agent. Missing npm. Please ensure nodejs and npm are installed before calling this resource.' unless npm_installed?
-  fail "Cannot install newrelic nodejs agent. app_path #{new_resource.app_path} directory does not exist." unless directory_exists?(new_resource.app_path)
+  raise 'Cannot install newrelic nodejs agent. Missing npm. Please ensure nodejs and npm are installed before calling this resource.' unless npm_installed?
+  raise "Cannot install newrelic nodejs agent. app_path #{new_resource.app_path} directory does not exist." unless directory_exists?(new_resource.app_path)
   newrelic_repository
   install_nodejs_agent
 end
@@ -33,7 +33,7 @@ end
 def install_nodejs_agent
   execute 'npm-install-nodejs_agent' do
     cwd new_resource.app_path
-    command 'npm install newrelic'
+    command "npm install newrelic@#{new_resource.version}"
   end
 
   template "#{new_resource.app_path}/newrelic.js" do

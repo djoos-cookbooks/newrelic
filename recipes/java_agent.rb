@@ -2,13 +2,14 @@
 # Cookbook Name:: newrelic
 # Recipe:: java_agent
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 newrelic_agent_java 'Install' do
-  license NewRelic.application_monitoring_license(node)
+  license lazy { NewRelic.application_monitoring_license(node) }
   version node['newrelic']['java_agent']['version'] unless node['newrelic']['java_agent']['version'].nil?
   install_dir node['newrelic']['java_agent']['install_dir'] unless node['newrelic']['java_agent']['install_dir'].nil?
+  repository node['newrelic']['java_agent']['repository'] unless node['newrelic']['java_agent']['repository'].nil?
   app_location node['newrelic']['java_agent']['app_location'] unless node['newrelic']['java_agent']['app_location'].nil?
   template_cookbook node['newrelic']['java_agent']['template_cookbook'] unless node['newrelic']['java_agent']['template_cookbook'].nil?
   template_source node['newrelic']['java_agent']['template_source'] unless node['newrelic']['java_agent']['template_source'].nil?
@@ -31,6 +32,7 @@ newrelic_agent_java 'Install' do
   daemon_proxy_port node['newrelic']['application_monitoring']['daemon']['proxy_port'] unless node['newrelic']['application_monitoring']['daemon']['proxy_port'].nil?
   daemon_proxy_user node['newrelic']['application_monitoring']['daemon']['proxy_user'] unless node['newrelic']['application_monitoring']['daemon']['proxy_user'].nil?
   daemon_proxy_password node['newrelic']['application_monitoring']['daemon']['proxy_password'] unless node['newrelic']['application_monitoring']['daemon']['proxy_password'].nil?
+  distributed_tracing_enable node['newrelic']['java_agent']['distributed_tracing_enable'] unless node['newrelic']['java_agent']['distributed_tracing_enable'].nil?
   capture_params node['newrelic']['application_monitoring']['capture_params'] unless node['newrelic']['application_monitoring']['capture_params'].nil?
   ignored_params node['newrelic']['application_monitoring']['ignored_params'] unless node['newrelic']['application_monitoring']['ignored_params'].nil?
   transaction_tracer_enable node['newrelic']['application_monitoring']['transaction_tracer']['enable'] unless node['newrelic']['application_monitoring']['transaction_tracer']['enable'].nil?
@@ -41,10 +43,13 @@ newrelic_agent_java 'Install' do
   transaction_tracer_explain_threshold node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold'] unless node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold'].nil?
   error_collector_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['error_collector']['enable']) unless node['newrelic']['application_monitoring']['error_collector']['enable'].nil?
   error_collector_ignore_errors node['newrelic']['application_monitoring']['error_collector']['ignore_errors'] unless node['newrelic']['application_monitoring']['error_collector']['ignore_errors'].nil?
+  error_collector_ignore_classes node['newrelic']['application_monitoring']['error_collector']['ignore_classes'] unless node['newrelic']['application_monitoring']['error_collector']['ignore_classes'].nil?
   error_collector_ignore_status_codes node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes'] unless node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes'].nil?
   browser_monitoring_auto_instrument node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'] unless node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'].nil?
   cross_application_tracer_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['cross_application_tracer']['enable']) unless node['newrelic']['application_monitoring']['cross_application_tracer']['enable'].nil?
   thread_profiler_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['thread_profiler']['enable']) unless node['newrelic']['application_monitoring']['thread_profiler']['enable'].nil?
+  class_transformer_config node['newrelic']['java_agent']['class_transformer_config'] unless node['newrelic']['java_agent']['class_transformer_config'].empty?
   labels node['newrelic']['application_monitoring']['labels'] unless node['newrelic']['application_monitoring']['labels'].nil?
+  agent_action node['newrelic']['java_agent']['agent_action'] unless node['newrelic']['java_agent']['agent_action'].nil?
   execute_agent_action node['newrelic']['java_agent']['execute_agent_action'] unless node['newrelic']['java_agent']['execute_agent_action'].nil?
 end

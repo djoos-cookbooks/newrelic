@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Attributes:: server_monitor_agent
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 default['newrelic']['server_monitor_agent']['agent_action'] = nil

@@ -2,11 +2,11 @@
 # Cookbook Name:: newrelic
 # Recipe:: server_monitor_agent
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 newrelic_server_monitor 'Install' do
-  license NewRelic.server_monitoring_license(node)
+  license lazy { NewRelic.server_monitoring_license(node) }
   logfile node['newrelic']['server_monitoring']['logfile'] unless node['newrelic']['server_monitoring']['logfile'].nil?
   loglevel node['newrelic']['server_monitoring']['loglevel'] unless node['newrelic']['server_monitoring']['loglevel'].nil?
   proxy node['newrelic']['server_monitoring']['proxy'] unless node['newrelic']['server_monitoring']['proxy'].nil?
@@ -18,6 +18,7 @@ newrelic_server_monitor 'Install' do
   pidfile node['newrelic']['server_monitoring']['pidfile'] unless node['newrelic']['server_monitoring']['pidfile'].nil?
   collector_host node['newrelic']['server_monitoring']['collector_host'] unless node['newrelic']['server_monitoring']['collector_host'].nil?
   timeout node['newrelic']['server_monitoring']['timeout'] unless node['newrelic']['server_monitoring']['timeout'].nil?
+  other_options node['newrelic']['server_monitoring']['other_options'] unless node['newrelic']['server_monitoring']['other_options'].nil?
   alert_policy_id node['newrelic']['server_monitoring']['alert_policy_id'] unless node['newrelic']['server_monitoring']['alert_policy_id'].nil?
   config_file_user node['newrelic']['server_monitor_agent']['config_file_user'] unless node['newrelic']['server_monitor_agent']['config_file_user'].nil?
   config_file_group node['newrelic']['server_monitor_agent']['config_file_group'] unless node['newrelic']['server_monitor_agent']['config_file_group'].nil?

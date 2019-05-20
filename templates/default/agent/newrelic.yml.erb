@@ -289,6 +289,17 @@ common: &default_settings
     ignore_errors: <%= @resource.error_collector_ignore_errors %>
     <% end %>
 
+    # Specified exception class names will be ignored and will not affect error rate or Apdex score, or be reported to APM. Cannot be specified by system property.
+    # This setting is dynamic, so running agents will notice changes to newrelic.yml without a JVM restart.To stop specific Java exceptions from reporting to New Relic, set this property
+    #
+    # ignore_classes:
+    <% unless @resource.error_collector_ignore_classes.nil? %>
+    ignore_classes:
+      <% @resource.error_collector_ignore_classes.each do |ignore_class| -%>
+      - "<%= ignore_class %>"
+      <% end -%>
+    <% end %>
+
     # To stop specific http status codes from being reporting to New Relic as errors,
     # set this property to a comma separated list of status codes to ignore.
     # When this property is commented out it defaults to ignoring 404s.
@@ -296,6 +307,17 @@ common: &default_settings
     # ignore_status_codes: 404
     <% unless @resource.error_collector_ignore_status_codes.nil? %>
     ignore_status_codes: <%= @resource.error_collector_ignore_status_codes %>
+    <% end %>
+
+  # Distributed tracing lets you see the path that a request takes through your distributed system.
+  # Enabling distributed tracing changes the behavior of some New Relic features, so carefully consult the transition
+  # guide before you enable this feature: https://docs.newrelic.com/docs/transition-guide-distributed-tracing
+  # Default is false.
+  distributed_tracing:
+    <%if @resource.distributed_tracing_enable.nil? %>
+    enabled: false
+    <% else %>
+    enabled: <%= @resource.distributed_tracing_enable %>
     <% end %>
 
   # Cross Application Tracing adds request and response headers to
@@ -330,6 +352,28 @@ common: &default_settings
   #labels:
   <% else %>
   labels: <%= @resource.labels %>
+  <% end %>
+
+  <% if @resource.respond_to? :class_transformer_config %>
+  <% if @resource.class_transformer_config.empty? %>
+  #class_transformer:
+  #  classloader_blacklist: org.codehaus.groovy.runtime.callsite.CallSiteClassLoader, groovy.lang.GroovyClassLoader$InnerLoader
+  #  com.newrelic.instrumentation.akka-2.0:
+  #    enabled: false
+  <% else %>
+  class_transformer:
+    <% if @resource.class_transformer_config.key?('classloader_blacklist') %>
+    classloader_blacklist: <%= @resource.class_transformer_config['classloader_blacklist'].join(', ') %>
+    <% end %>
+    <% if @resource.class_transformer_config.key?('instrumentation_classes') %>
+      <% @resource.class_transformer_config['instrumentation_classes'].each do |class_to_config, config| %>
+    com.newrelic.instrumentation.<%= class_to_config %>:
+        <% config.each do |key, value| %>
+      <%= key %>: <%= value %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
   <% end %>
 
   #============================== Browser Monitoring ===============================

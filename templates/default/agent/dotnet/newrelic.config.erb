@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) 2008-2014 New Relic, Inc.  All rights reserved. -->
+<!-- For more information see: https://newrelic.com/docs/dotnet/dotnet-agent-configuration -->
+<configuration xmlns="urn:newrelic-config"
+  agentEnabled="<%= @resource.enabled %>"
+  maxStackTraceLines="<%= @resource.max_stack_trace_lines %>"
+  timingPrecision="<%= @resource.timing_precision %>">
+
+  <service licenseKey="<%= @resource.license %>"
+    ssl="<%= @resource.daemon_ssl %>"
+    sendEnvironmentInfo="<%= @resource.svc_send_env_info %>"
+    syncStartup="<%= @resource.svc_sync_startup %>"
+    sendDataOnExit="<%= @resource.svc_send_data_on_exit %>"
+    sendDataOnExitThreshold="<%= @resource.svc_send_data_on_exit_threshold %>"
+    autoStart="<%= @resource.svc_auto_start %>">
+
+    <% if @resource.use_proxy -%>
+    <proxy host="<%= @resource.proxy_host %>"
+      port="<%= @resource.proxy_port %>"
+      <% unless @resource.proxy_domain.empty? -%>
+      domain="<%= @resource.proxy_domain %>"
+      <% end -%>
+      <% unless @resource.proxy_user.empty? -%>
+      user="<%= @resource.proxy_user %>"
+      <% end -%>
+      <% unless @resource.proxy_password.empty? -%>
+      password="<%= @resource.proxy_password %>"
+      <% end -%>
+    />
+    <% end -%>
+  </service>
+
+  <log level="<%= @resource.app_log_level %>"
+    auditLog="<%= @resource.audit_log_enabled %>"
+    console="<%= @resource.log_to_console %>"
+    directory="<%= @resource.log_directory %>"
+    fileName="<%= @resource.log_file_name %>" />
+
+  <application disableSamplers="<%= @resource.app_disable_samplers %>">
+  	<% @resource.app_name.split(';').first(3).each do |app_name|%>
+    <name><%= app_name %></name>
+    <% end %>
+  </application>
+
+  <instrumentation log="<%= @resource.instrumentation_log_enable %>">
+    <% unless @resource.instrumentation_applications.empty? -%>
+    <applications>
+      <% @resource.instrumentation_applications.each do |app| -%>
+      <application name="<%= app %>" />
+      <% end -%>
+    </applications>
+    <% end -%>
+  </instrumentation>
+
+  <attributes enabled="<%= @resource.attributes_collection_enabled %>">
+    <% @resource.attributes_exclude.each do |excluded_attribute| -%>
+    <exclude><%= excluded_attribute %></exclude>
+    <% end -%>
+    <% @resource.attributes_include.each do |included_attribute| -%>
+    <include><%= included_attribute %></include>
+    <% end -%>
+  </attributes>
+  
+  <% unless @resource.app_pools.empty? -%>
+  <applicationPools>
+    <defaultBehavior instrument="<%= @resource.app_pools_instrument_default_behavior %>"/>
+    <% @resource.app_pools.each do |pool| -%>
+    <applicationPool name="<%= pool.name %>" instrument="<%= pool.instrument %>"/>
+    <% end -%>
+  </applicationPools>
+  <% end -%>
+
+  <crossApplicationTracer enabled="<%= @resource.cross_application_tracer_enabled %>" />
+
+  <errorCollector enabled="<%= @resource.error_collector_enabled %>">
+    <ignoreErrors>
+      <% @resource.ignored_exceptions.each do |ignored_exception| -%>
+      <exception><%= ignored_exception %></exception>
+      <% end -%>
+    </ignoreErrors>
+    <ignoreStatusCodes>
+      <% @resource.ignored_status_codes.each do |ignored_code| -%>
+      <code><%= ignored_code %></code>
+      <% end -%>
+    </ignoreStatusCodes>
+  </errorCollector>
+
+  <highSecurity enabled="<%= @resource.high_security_enabled %>"/>
+    
+  <transactionEvents enabled="<%= @resource.tx_events_enabled %>"
+    maximumSamplesPerMinute="<%= @resource.tx_events_max_samples_per_minute %>"
+    maximumSamplesStored="<%= @resource.tx_events_max_samples_stored %>">
+    <attributes enabled="<%= @resource.tx_events_attributes_collection_enabled %>">
+      <% @resource.tx_events_attributes_exclude.each do |excluded_attribute| -%>
+      <exclude><%= excluded_attribute %></exclude>
+      <% end -%>
+      <% @resource.tx_events_attributes_include.each do |included_attribute| -%>
+      <include><%= included_attribute %></include>
+      <% end -%>
+    </attributes>
+  </transactionEvents>
+
+  <customEvents enabled="<%= @resource.custom_events_enabled %>"></customEvents>
+  <% unless @resource.labels.empty? -%>
+  <labels><%= @resource.labels %></labels> 
+  <% end -%>
+
+  <browserMonitoring autoInstrument="<%= @resource.browser_monitoring_auto_instrument %>">
+    <requestPathsExcluded>
+      <% @resource.browser_monitoring_req_paths_excluded.each do |path_regex| -%>
+      <path regex="<%= path_regex %>"/>
+      <% end -%>
+    </requestPathsExcluded>
+    <attributes enabled="<%= @resource.browser_monitoring_attributes_collection_enabled %>">
+      <% @resource.browser_monitoring_attributes_exclude.each do |excluded_attribute| -%>
+      <exclude><%= excluded_attribute %></exclude>
+      <% end -%>
+      <% @resource.browser_monitoring_attributes_include.each do |included_attribute| -%>
+      <include><%= included_attribute %></include>
+      <% end -%>
+    </attributes>
+  </browserMonitoring>
+
+  <slowSql enabled="<%= @resource.slow_queries_enabled %>"/>
+
+  <transactionTracer enabled="<%= @resource.tx_tracer_enabled %>"
+    transactionThreshold="<%= @resource.tx_tracer_transaction_threshold %>"
+    stackTraceThreshold="<%= @resource.tx_tracer_stack_trace_threshold %>"
+    recordSql="<%= @resource.tx_tracer_record_sql %>"
+    explainEnabled="<%= @resource.tx_tracer_explain_enabled %>"
+    explainThreshold="<%= @resource.tx_tracer_explain_threshold %>"
+    maxSegments="<%= @resource.tx_tracer_max_segments %>"
+    maxStackTrace="<%= @resource.tx_tracer_max_stack_trace %>"
+    maxExplainPlans="<%= @resource.tx_tracer_max_explain_plans %>">
+    <attributes enabled="<%= @resource.tx_tracer_attributes_collection_enabled %>">
+      <% @resource.tx_tracer_attributes_exclude.each do |excluded_attribute| -%>
+      <exclude><%= excluded_attribute %></exclude>
+      <% end -%>
+      <% @resource.tx_tracer_attributes_include.each do |included_attribute| -%>
+      <include><%= included_attribute %></include>
+      <% end -%>
+    </attributes>
+  </transactionTracer>
+
+  <threadProfiling>
+    <% @resource.ignored_thread_profiling_methods.each do |ignored_method| -%>
+    <ignoreMethod><%= ignored_method %></ignoreMethod>
+    <% end -%>
+  </threadProfiling>
+
+</configuration>

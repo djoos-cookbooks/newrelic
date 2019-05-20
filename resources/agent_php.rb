@@ -2,13 +2,13 @@
 # Cookbook Name:: newrelic
 # Resource:: agent_php
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 actions :install, :remove
 default_action :install
 
-attribute :license, :kind_of => String, :default => NewRelic.application_monitoring_license(node)
+attribute :license, :kind_of => String, :default => lazy { NewRelic.application_monitoring_license(node) }
 attribute :config_file, :kind_of => String, :default => nil
 attribute :startup_mode, :kind_of => String, :default => 'agent'
 attribute :app_name, :kind_of => String, :default => nil
@@ -17,7 +17,11 @@ attribute :install_silently, :kind_of => [TrueClass, FalseClass], :default => fa
 attribute :config_file_to_be_deleted, :kind_of => String, :default => nil
 attribute :service_name, :kind_of => String, :default => nil
 attribute :service_action, :kind_of => String, :default => 'restart'
+
+# @todo take out deprecated execute_php5enmod logic: use enable_module instead
 attribute :execute_php5enmod, :kind_of => [TrueClass, FalseClass], :default => false
+
+attribute :enable_module, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :cookbook_ini, :kind_of => String, :default => 'newrelic'
 attribute :source_ini, :kind_of => String, :default => 'agent/php/newrelic.ini.erb'
 attribute :cookbook, :kind_of => String, :default => 'newrelic'
@@ -43,6 +47,8 @@ attribute :ignored_params, :kind_of => String, :default => nil
 attribute :error_collector_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :error_collector_record_database_errors, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :error_collector_prioritize_api_errors, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :error_collector_ignore_errors, :kind_of => String, :default => nil
+attribute :error_collector_ignore_classes, :kind_of => Array, :default => nil
 attribute :browser_monitoring_auto_instrument, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :transaction_tracer_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :transaction_tracer_threshold, :kind_of => String, :default => nil

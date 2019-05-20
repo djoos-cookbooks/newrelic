@@ -657,6 +657,22 @@ newrelic.cross_application_tracer.enabled = <%= @resource.cross_application_trac
 newrelic.high_security = <%= @resource.high_security %>
 <% end %>
 
+;
+; Setting: error_collector.ignore_errors
+; Type   : Integer or Predefined Constant string.
+; Scope  : per-directory
+; Default: 0
+; Info   : Sets the error levels for the PHP agent to ignore.
+;          This uses the same error syntax as PHP's error_reporting option. For more information see
+;          http://php.net/manual/en/errorfunc.configuration.php#ini.error-reporting and for a list of constants
+;          refer to See http://php.net/manual/en/errorfunc.constants.php
+;
+<% if @resource.error_collector_ignore_errors.nil? %>
+;newrelic.error_collector.ignore_errors = 0
+<% else %>
+newrelic.error_collector.ignore_errors = <%= @resource.error_collector_ignore_errors %>
+<% end %>
+
 <% @resource.additional_config.each do |config, value|%>
 <%= config %> = "<%= value %>"
 <% end %>

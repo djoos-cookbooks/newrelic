@@ -1,9 +1,8 @@
-# Encoding: utf-8
 #
-# Cookbook Name:: newrelic_poc
+# Cookbook Name:: newrelic_lwrp_test
 # Recipe:: server_monitor
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 newrelic_server_monitor 'Install' do

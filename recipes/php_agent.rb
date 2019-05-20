@@ -2,11 +2,11 @@
 # Cookbook Name:: newrelic
 # Recipe:: php_agent
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 newrelic_agent_php 'Install' do
-  license NewRelic.application_monitoring_license(node)
+  license lazy { NewRelic.application_monitoring_license(node) }
   config_file node['newrelic']['php_agent']['config_file'] unless node['newrelic']['php_agent']['config_file'].nil?
   startup_mode node['newrelic']['php_agent']['startup_mode'] unless node['newrelic']['php_agent']['startup_mode'].nil?
   app_name node['newrelic']['application_monitoring']['app_name'] unless node['newrelic']['application_monitoring']['app_name'].nil?
@@ -15,7 +15,9 @@ newrelic_agent_php 'Install' do
   config_file_to_be_deleted node['newrelic']['php_agent']['config_file_to_be_deleted'] unless node['newrelic']['php_agent']['config_file_to_be_deleted'].nil?
   service_name node['newrelic']['php_agent']['web_server']['service_name'] unless node['newrelic']['php_agent']['web_server']['service_name'].nil?
   service_action node['newrelic']['php_agent']['web_server']['service_action'] unless node['newrelic']['php_agent']['web_server']['service_action'].nil?
+  # @todo take out deprecated execute_php5enmod logic: use enable_module instead
   execute_php5enmod NewRelic.to_boolean(node['newrelic']['php_agent']['execute_php5enmod']) unless node['newrelic']['php_agent']['execute_php5enmod'].nil?
+  enable_module NewRelic.to_boolean(node['newrelic']['php_agent']['enable_module']) unless node['newrelic']['php_agent']['enable_module'].nil?
   cookbook_ini node['newrelic']['php_agent']['template']['cookbook_ini'] unless node['newrelic']['php_agent']['template']['cookbook_ini'].nil?
   source_ini node['newrelic']['php_agent']['template']['source_ini'] unless node['newrelic']['php_agent']['template']['source_ini'].nil?
   cookbook node['newrelic']['php_agent']['template']['cookbook'] unless node['newrelic']['php_agent']['template']['cookbook'].nil?
@@ -40,6 +42,7 @@ newrelic_agent_php 'Install' do
   error_collector_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['error_collector']['enable']) unless node['newrelic']['application_monitoring']['error_collector']['enable'].nil?
   error_collector_record_database_errors NewRelic.to_boolean(node['newrelic']['application_monitoring']['error_collector']['record_database_errors']) unless node['newrelic']['application_monitoring']['error_collector']['record_database_errors'].nil?
   error_collector_prioritize_api_errors NewRelic.to_boolean(node['newrelic']['application_monitoring']['error_collector']['prioritize_api_errors']) unless node['newrelic']['application_monitoring']['error_collector']['prioritize_api_errors'].nil?
+  error_collector_ignore_errors node['newrelic']['application_monitoring']['error_collector']['ignore_errors'] unless node['newrelic']['application_monitoring']['error_collector']['ignore_errors'].nil?
   browser_monitoring_auto_instrument NewRelic.to_boolean(node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']) unless node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument'].nil?
   transaction_tracer_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['transaction_tracer']['enable']) unless node['newrelic']['application_monitoring']['transaction_tracer']['enable'].nil?
   transaction_tracer_threshold node['newrelic']['application_monitoring']['transaction_tracer']['threshold'] unless node['newrelic']['application_monitoring']['transaction_tracer']['threshold'].nil?

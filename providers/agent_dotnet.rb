@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: agent_dotnet
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 # include helper methods
@@ -26,6 +26,15 @@ def install_newrelic
     installer_type :msi
     action :install
     not_if { ::File.exist?('C:\\Program Files\\New Relic\\.NET Agent') }
+  end
+
+  template "#{new_resource.config_dir}/newrelic.config" do
+    cookbook new_resource.cookbook
+    source new_resource.source
+    variables(
+      :resource => new_resource
+    )
+    sensitive true
   end
 end
 

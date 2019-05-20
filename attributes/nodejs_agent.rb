@@ -2,10 +2,10 @@
 # Cookbook Name:: newrelic
 # Attributes:: nodejs_agent
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
-default['newrelic']['nodejs_agent']['agent_action'] = :install
+default['newrelic']['nodejs_agent']['agent_action'] = 'install'
 default['newrelic']['nodejs_agent']['apps'] = []
 default['newrelic']['nodejs_agent']['template']['cookbook'] = 'newrelic'
 default['newrelic']['nodejs_agent']['template']['source'] = 'agent/nodejs/newrelic.js.erb'

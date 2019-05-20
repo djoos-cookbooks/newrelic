@@ -2,10 +2,10 @@
 # Cookbook Name:: newrelic
 # Provider:: deployment
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
-use_inline_resources if defined?(use_inline_resources)
+use_inline_resources
 
 def whyrun_supported?
   true
@@ -29,11 +29,11 @@ action :notify do
 
     data = []
 
-    if new_resource.key_type == 'license_key'
-      data << '"x-license-key:' + key + '"'
-    else
-      data << '"x-api-key:' + key + '"'
-    end
+    data << if new_resource.key_type == 'license_key'
+              '"x-license-key:' + key + '"'
+            else
+              '"x-api-key:' + key + '"'
+            end
 
     unless new_resource.app_name.nil?
       data << '-d "deployment[app_name]=' + new_resource.app_name + '"'
@@ -67,8 +67,6 @@ action :notify do
       command command_curl
       action :run
     end
-
-    new_resource.updated_by_last_action(true)
   end
 end
 

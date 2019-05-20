@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Resource:: yml
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 actions :generate
@@ -17,7 +17,7 @@ attribute :agent_type, :kind_of => String, :required => true, :regex => /^(java|
 attribute :enabled, :kind_of => [TrueClass, FalseClass, String], :default => nil
 attribute :owner, :kind_of => String, :default => nil
 attribute :group, :kind_of => String, :default => nil
-attribute :license, :kind_of => String, :default => NewRelic.application_monitoring_license(node)
+attribute :license, :kind_of => String, :default => lazy { NewRelic.application_monitoring_license(node) }
 attribute :logfile, :kind_of => String, :default => node['newrelic']['application_monitoring']['logfile']
 attribute :logfile_path, :kind_of => String, :default => node['newrelic']['application_monitoring']['logfile']
 attribute :loglevel, :kind_of => String, :default => node['newrelic']['application_monitoring']['loglevel']
@@ -31,8 +31,10 @@ attribute :daemon_proxy_host, :kind_of => String, :default => nil
 attribute :daemon_proxy_port, :kind_of => String, :default => nil
 attribute :daemon_proxy_user, :kind_of => String, :default => nil
 attribute :daemon_proxy_password, :kind_of => String, :default => nil
+attribute :distributed_tracing_enable, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :capture_params, :default => node['newrelic']['application_monitoring']['capture_params']
 attribute :ignored_params, :default => node['newrelic']['application_monitoring']['ignored_params']
+attribute :enable_custom_tracing, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :transaction_tracer_enable, :default => node['newrelic']['application_monitoring']['transaction_tracer']['enable']
 attribute :transaction_tracer_threshold, :default => node['newrelic']['application_monitoring']['transaction_tracer']['threshold']
 attribute :transaction_tracer_record_sql, :default => node['newrelic']['application_monitoring']['transaction_tracer']['record_sql']
@@ -41,6 +43,7 @@ attribute :transaction_tracer_slow_sql, :default => node['newrelic']['applicatio
 attribute :transaction_tracer_explain_threshold, :default => node['newrelic']['application_monitoring']['transaction_tracer']['explain_threshold']
 attribute :error_collector_enable, :default => node['newrelic']['application_monitoring']['error_collector']['enable']
 attribute :error_collector_ignore_errors, :default => node['newrelic']['application_monitoring']['error_collector']['ignore_errors']
+attribute :error_collector_ignore_classes, :default => node['newrelic']['application_monitoring']['error_collector']['ignore_classes']
 attribute :error_collector_ignore_status_codes, :default => node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes']
 attribute :browser_monitoring_auto_instrument, :default => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
 attribute :cross_application_tracer_enable, :default => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']

@@ -2,9 +2,8 @@
 # Cookbook Name:: newrelic
 # Attributes:: dotnet_agent
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
-default['newrelic']['dotnet_agent']['https_download'] = 'https://download.newrelic.com/dot_net_agent/release/x64'
-default['newrelic']['dotnet_agent']['install_level'] = '1'
-default['newrelic']['dotnet_agent']['agent_action'] = :install
+default['newrelic']['dotnet_agent']['https_download'] = nil
+default['newrelic']['dotnet_agent']['install_level'] = nil

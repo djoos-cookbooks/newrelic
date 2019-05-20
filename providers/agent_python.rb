@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Provider:: agent_python
 #
-# Copyright 2012-2014, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 # include helper methods
@@ -21,21 +21,22 @@ action :install do
   install_python_agent
   create_config_dir
   generate_agent_config
-  verify_agent_config
 end
 
 action :remove do
-  python_pip 'newrelic' do
+  python_package 'newrelic' do
     virtualenv new_resource.virtualenv if new_resource.virtualenv
     version new_resource.version if new_resource.version
+    python new_resource.python if new_resource.python
     action :remove
   end
 end
 
 def install_python_agent
-  python_pip 'newrelic' do
+  python_package 'newrelic' do
     virtualenv new_resource.virtualenv if new_resource.virtualenv
     version new_resource.version if new_resource.version
+    python new_resource.python if new_resource.python
     action :install
   end
 end
@@ -46,19 +47,12 @@ def generate_agent_config
     source new_resource.source
     owner 'root'
     group 'root'
-    mode 0644
+    mode '0644'
     variables(
       :resource => new_resource
     )
     sensitive true
     action :create
-  end
-end
-
-def verify_agent_config
-  virtualenv = "#{new_resource.virtualenv}/bin/" if new_resource.virtualenv
-  execute 'verify-python-agent' do
-    command "#{virtualenv}newrelic-admin validate-config #{new_resource.config_file}"
   end
 end
 

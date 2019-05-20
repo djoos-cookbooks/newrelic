@@ -2,11 +2,12 @@
 # Cookbook Name:: newrelic
 # Recipe:: ruby_agent
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 newrelic_agent_ruby 'Install' do
-  license NewRelic.application_monitoring_license(node)
+  license lazy { NewRelic.application_monitoring_license(node) }
+  version node['newrelic']['ruby_agent']['version'] unless node['newrelic']['ruby_agent']['version']
   template_cookbook node['newrelic']['ruby_agent']['template_cookbook'] unless node['newrelic']['ruby_agent']['template_cookbook']
   template_source node['newrelic']['ruby_agent']['template_source'] unless node['newrelic']['ruby_agent']['template_source']
   enabled NewRelic.to_boolean(node['newrelic']['application_monitoring']['enabled']) unless node['newrelic']['application_monitoring']['enabled']
@@ -23,6 +24,7 @@ newrelic_agent_ruby 'Install' do
   log_daily node['newrelic']['ruby_agent']['log_daily'] unless node['newrelic']['ruby_agent']['log_daily']
   daemon_ssl NewRelic.to_boolean(node['newrelic']['application_monitoring']['daemon']['ssl']) unless node['newrelic']['application_monitoring']['daemon']['ssl']
   daemon_proxy node['newrelic']['application_monitoring']['daemon']['proxy'] unless node['newrelic']['application_monitoring']['daemon']['proxy']
+  distributed_tracing_enable node['newrelic']['ruby_agent']['distributed_tracing_enable'] unless node['newrelic']['ruby_agent']['distributed_tracing_enable'].nil?
   capture_params node['newrelic']['application_monitoring']['capture_params'] unless node['newrelic']['application_monitoring']['capture_params']
   ignored_params node['newrelic']['application_monitoring']['ignored_params'] unless node['newrelic']['application_monitoring']['ignored_params']
   transaction_tracer_enable node['newrelic']['application_monitoring']['transaction_tracer']['enable'] unless node['newrelic']['application_monitoring']['transaction_tracer']['enable']

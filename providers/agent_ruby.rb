@@ -2,7 +2,7 @@
 # Cookbook Name:: newrelic
 # Recipe:: agent_ruby
 #
-# Copyright 2012-2015, Escape Studios
+# Copyright (c) 2016, David Joos
 #
 
 # include helper methods
@@ -27,13 +27,14 @@ def create_install_directory
     owner new_resource.app_user
     group new_resource.app_group
     recursive true
-    mode 0775
+    mode '0775'
     action :create
   end
 end
 
 def install_newrelic
   gem_package 'newrelic_rpm' do
+    version new_resource.version unless new_resource.version == 'latest'
     action :install
   end
 end
@@ -58,7 +59,7 @@ def generate_agent_config
     source new_resource.template_source
     owner 'root'
     group 'root'
-    mode 0644
+    mode '0644'
     variables(
       :resource => new_resource
     )

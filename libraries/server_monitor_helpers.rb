@@ -6,7 +6,7 @@ require 'json'
 module NewRelic
   # Server monitor helper module
   module ServerMonitorHelpers
-    def update_alert_policy(alert_policy_id)
+    def update_alert_policy(alert_policy_id, hostname = nil)
       api_path = 'https://api.newrelic.com/v2'
       api_alert_path = api_path + '/alert_policies'
       new_server_ids = []
@@ -17,7 +17,8 @@ module NewRelic
 
       # Loop 60 times waiting for the installed server to be registered on service or timeout
       60.times.each do |i|
-        hostname = Mixlib::ShellOut.new('hostname').run_command.stdout
+        hostname = Mixlib::ShellOut.new('hostname').run_command.stdout if hostname.nil?
+
         result_servers = make_api_get_request("#{api_path}/servers.json?filter[name]=#{hostname}")
 
         if result_servers.is_a?(Net::HTTPSuccess)
