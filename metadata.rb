@@ -1,18 +1,18 @@
 name 'newrelic'
-maintainer 'David Joos'
+maintainer 'David Joos, modified by HireIQ'
 maintainer_email 'development@davidjoos.com'
 license 'MIT'
 description 'Installs/Configures New Relic'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '2.39.1'
+version '2.39.1h'
 chef_version '>= 0.10.0' if respond_to?(:chef_version)
 
 %w[debian ubuntu redhat centos fedora scientific amazon windows smartos oracle].each do |os|
   supports os
 end
 
-source_url 'https://github.com/djoos-cookbooks/newrelic' if respond_to?(:source_url)
-issues_url 'https://github.com/djoos-cookbooks/newrelic/issues' if respond_to?(:issues_url)
+source_url 'https://github.com/hireiq/newrelic' if respond_to?(:source_url)
+#issues_url 'https://github.com/djoos-cookbooks/newrelic/issues' if respond_to?(:issues_url)
 
 depends 'poise-python'
 depends 'curl'
