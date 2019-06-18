@@ -16,3 +16,4 @@ default['newrelic']['ruby_agent']['log_limit_in_kbytes'] = 0
 default['newrelic']['ruby_agent']['log_daily'] = true
 default['newrelic']['ruby_agent']['template']['cookbook'] = 'newrelic'
 default['newrelic']['ruby_agent']['template']['source'] = 'agent/newrelic.yml.erb'
+default['newrelic']['java_agent']['trim_stats'] = false

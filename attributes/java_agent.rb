@@ -18,6 +18,7 @@ default['newrelic']['java_agent']['agent_action'] = 'install'
 default['newrelic']['java_agent']['execute_agent_action'] = true
 default['newrelic']['java_agent']['enable_custom_tracing'] = false
 default['newrelic']['java_agent']['class_transformer_config'] = {}
+default['newrelic']['java_agent']['trim_stats'] = false
 # Example:
 # default['newrelic']['java_agent']['class_transformer_config'] = {
 #   'classloader_blacklist' => ['org.codehaus.groovy.runtime.callsite.CallSiteClassLoader'],
