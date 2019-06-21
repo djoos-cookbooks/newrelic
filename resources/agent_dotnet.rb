@@ -89,6 +89,9 @@ attribute :tx_tracer_record_sql, :kind_of => String, :default => 'obfuscated'
 attribute :tx_tracer_explain_enabled, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :tx_tracer_explain_threshold, :kind_of => Integer, :default => 500
 attribute :tx_tracer_max_segments, :kind_of => Integer, :default => 3_000
+
+attribute :distributed_tracing_enabled, :kind_of => [TrueClass, FalseClass], :default => true
+
 attribute :tx_tracer_max_stack_trace, :kind_of => Integer, :default => 30
 attribute :tx_tracer_max_explain_plans, :kind_of => Integer, :default => 20
 attribute :tx_tracer_attributes_collection_enabled, :kind_of => [TrueClass, FalseClass], :default => true
