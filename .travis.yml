@@ -15,7 +15,7 @@ install: true
 before_script:
   - eval "$(/opt/chefdk/bin/chef shell-init bash)" # make ChefDK's Ruby the default
   - chef --version
-  - chef exec berks install
+  - chef exec berks install --accept-license
 
 script:
   - chef exec rake travis
