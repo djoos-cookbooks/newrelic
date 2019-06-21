@@ -15,7 +15,7 @@ module GeneralCommands
     expected_exitstatuses << 0 if expected_exitstatuses.empty?
     error_message = "ERROR: '#{cmd}' failed with exit status #{$CHILD_STATUS.exitstatus}"
     raise StandardError, error_message unless [expected_exitstatuses].flatten.include?($CHILD_STATUS.exitstatus)
-    
+
     output
   end
 
@@ -34,7 +34,7 @@ module ReleaseCommands
     modified_files = modified_files.split(/\n+/)
 
     return if allowed_modified_files.uniq.sort == modified_files.uniq.sort
-    
+
     raise '[RELEASE] Working directory is in an unexpected state'
   end
 
@@ -133,7 +133,7 @@ end
 module BerkshelfCommands
   def self.update
     return if GeneralCommands.run('chef exec berks update', 0, 1)
-    
+
     raise '[BERKSHELF] Failed to update'
   end
 
@@ -141,7 +141,7 @@ module BerkshelfCommands
     raise '[BERKSHELF] You must specify an archive filename.' if archive_filename.blank?
 
     return if GeneralCommands.run("chef exec berks package #{archive_filename}", 0, 1)
-    
+
     raise "[BERKSHELF] Failed to create #{archive_filename}-archive"
   end
 
@@ -149,7 +149,7 @@ module BerkshelfCommands
     raise '[BERKSHELF] You must specify an environment.' if environment.blank?
 
     return unless GeneralCommands.run("chef exec berks apply #{environment}", 0, 1).empty?
-    
+
     raise "[BERKSHELF] Failed to apply the cookbook version locks to the '#{environment}'-Chef environment"
   end
 end
@@ -160,7 +160,7 @@ module BerkflowCommands
     raise '[BERKFLOW] You must specify an archive filename.' if archive_filename.blank?
 
     return if /Done./ =~ GeneralCommands.run("chef exec blo in #{archive_filename}", 0, 1)
-    
+
     raise "[BERKFLOW] Failed to install packaged cookbooks #{archive_filename} into Chef Server"
   end
 end
@@ -178,7 +178,7 @@ module GitCommands
     raise '[GIT] You must specify a tag.' if tag.blank?
 
     return if GeneralCommands.run("git tag -a #{tag} -m '#{tag}'", 0, 1)
-    
+
     raise '[GIT] Failed to tag'
   end
 
@@ -188,7 +188,7 @@ module GitCommands
     raise '[GIT] You must specify a tag.' if tag.blank?
 
     return if GeneralCommands.run("git push #{remote} #{branch} --tags", 0, 1)
-    
+
     raise '[GIT] Failed to push to remote'
   end
 end
@@ -200,7 +200,7 @@ module KnifeCommands
     raise '[KNIFE] Missing cookbook category.' if cookbook_category.blank?
 
     return if /Upload complete/ =~ GeneralCommands.run("chef exec knife supermarket share '#{cookbook_name}' '#{cookbook_category}' --cookbook-path ../", 0, 1)
-    
+
     raise "[KNIFE] Failed to publish the #{cookbook_name}-cookbook on the Chef Supermarket"
   end
 end
