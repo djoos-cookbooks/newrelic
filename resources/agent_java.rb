@@ -20,6 +20,9 @@ attribute :agent_type, :kind_of => String, :default => 'java'
 attribute :template_cookbook, :kind_of => String, :default => 'newrelic'
 attribute :template_source, :kind_of => String, :default => 'agent/newrelic.yml.erb'
 
+attribute :attributes_collection_enabled, :kind_of => [TrueClass, FalseClass], :default => node['newrelic']['application_monitoring']['attributes']['enabled']
+attribute :attributes_exclude, :kind_of => String, :default => node['newrelic']['application_monitoring']['attributes']['exclude']
+attribute :attributes_include, :kind_of => String, :default => node['newrelic']['application_monitoring']['attributes']['include']
 attribute :enabled, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :app_name, :kind_of => String, :default => nil
 attribute :high_security, :kind_of => [TrueClass, FalseClass], :default => false

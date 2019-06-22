@@ -19,4 +19,8 @@ module NewRelic
       variable == 'true' || variable == 1
     end
   end
+
+  def self.string_to_array(str, delimiter = ',')
+    str.nil? ? [] : str.split(delimiter)
+  end
 end

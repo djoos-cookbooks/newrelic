@@ -49,3 +49,6 @@ attribute :browser_monitoring_auto_instrument, :default => node['newrelic']['app
 attribute :cross_application_tracer_enable, :default => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
 attribute :thread_profiler_enable, :default => node['newrelic']['application_monitoring']['thread_profiler']['enable']
 attribute :labels, :default => node['newrelic']['application_monitoring']['labels']
+attribute :attributes_collection_enabled, :kind_of => [TrueClass, FalseClass], :default => node['newrelic']['application_monitoring']['attributes']['enabled']
+attribute :attributes_exclude, :kind_of => String, :default => node['newrelic']['application_monitoring']['attributes']['exclude']
+attribute :attributes_include, :kind_of => String, :default => node['newrelic']['application_monitoring']['attributes']['include']
