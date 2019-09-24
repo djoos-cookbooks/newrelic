@@ -53,3 +53,4 @@ attribute :browser_monitoring_auto_instrument, :kind_of => String, :default => n
 attribute :cross_application_tracer_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :thread_profiler_enable, :kind_of => [TrueClass, FalseClass], :default => true
 attribute :labels, :kind_of => String, :default => nil
+attribute :trim_stats, :kind_of => [TrueClass, FalseClass], :default => false
