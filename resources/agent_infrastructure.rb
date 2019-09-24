@@ -22,3 +22,4 @@ attribute :template_source, :kind_of => String, :default => 'agent/infrastructur
 attribute :service_actions, :kind_of => Array, :default => %w[enable start]
 attribute :windows_version, :kind_of => String, :default => '1.0.703'
 attribute :windows_checksum, :kind_of => String, :default => '3c9f98325dc484ee8735f01b913803eaef54f06641348b3dd9f3c0b3cd803ace'
+attribute :strip_command_line, :kind_of => [TrueClass, FalseClass], :default => nil
