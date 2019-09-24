@@ -3,6 +3,8 @@ driver_plugin: vagrant
 
 provisioner:
   name: chef_zero
+  client_rb:
+    chef_license: accept
   attributes:
     newrelic:
       license: '0000ffff0000ffff0000ffff0000ffff0000ffff'

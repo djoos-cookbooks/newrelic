@@ -41,6 +41,8 @@
     <name><%= app_name %></name>
     <% end %>
   </application>
+  
+  <distributedTracing enabled="<%= @resource.distributed_tracing_enabled %>" />
 
   <instrumentation log="<%= @resource.instrumentation_log_enable %>">
     <% unless @resource.instrumentation_applications.empty? -%>
