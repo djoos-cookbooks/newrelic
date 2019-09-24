@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.40.1
+- add explicit circuit breaker configuration for Ruby agent
+
 ## v2.40.0
 - support strip_command_line flag for the infra agent
 - add explicit circuit breaker configuration for Java agent
