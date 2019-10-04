@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.40.3
+- circuit breaker configuration for YML LWRP
+
 ## v2.40.2
 - trim_stats for YML LWRP
 
