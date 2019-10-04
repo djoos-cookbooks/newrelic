@@ -45,6 +45,9 @@ attribute :error_collector_enable, :default => node['newrelic']['application_mon
 attribute :error_collector_ignore_errors, :default => node['newrelic']['application_monitoring']['error_collector']['ignore_errors']
 attribute :error_collector_ignore_classes, :default => node['newrelic']['application_monitoring']['error_collector']['ignore_classes']
 attribute :error_collector_ignore_status_codes, :default => node['newrelic']['application_monitoring']['error_collector']['ignore_status_codes']
+attribute :circuitbreaker_enabled, :kind_of => [TrueClass, FalseClass], :default => true
+attribute :circuitbreaker_memory_threshold, :kind_of => Integer, :default => 20
+attribute :circuitbreaker_gc_cpu_threshold, :kind_of => Integer, :default => 10
 attribute :browser_monitoring_auto_instrument, :default => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
 attribute :cross_application_tracer_enable, :default => node['newrelic']['application_monitoring']['browser_monitoring']['auto_instrument']
 attribute :thread_profiler_enable, :default => node['newrelic']['application_monitoring']['thread_profiler']['enable']
