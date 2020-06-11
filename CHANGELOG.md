@@ -2,6 +2,12 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.40.5
+- update default value for windows_checksum
+
+## v2.40.4
+- addition of circuit breaker configuration to java_agent recipe
+
 ## v2.40.3
 - circuit breaker configuration for YML LWRP
 
