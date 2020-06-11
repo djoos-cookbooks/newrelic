@@ -53,4 +53,7 @@ newrelic_agent_java 'Install' do
   trim_stats node['newrelic']['java_agent']['trim_stats'] unless node['newrelic']['java_agent']['trim_stats'].nil?
   agent_action node['newrelic']['java_agent']['agent_action'] unless node['newrelic']['java_agent']['agent_action'].nil?
   execute_agent_action node['newrelic']['java_agent']['execute_agent_action'] unless node['newrelic']['java_agent']['execute_agent_action'].nil?
+  circuitbreaker_enabled node['newrelic']['java_agent']['circuitbreaker_enabled'] unless node['newrelic']['java_agent']['circuitbreaker_enabled'].nil?
+  circuitbreaker_memory_threshold node['newrelic']['java_agent']['circuitbreaker_memory_threshold'] unless node['newrelic']['java_agent']['circuitbreaker_memory_threshold'].nil?
+  circuitbreaker_gc_cpu_threshold node['newrelic']['java_agent']['circuitbreaker_gc_cpu_threshold'] unless node['newrelic']['java_agent']['circuitbreaker_gc_cpu_threshold'].nil?
 end
