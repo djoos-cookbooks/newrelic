@@ -21,5 +21,5 @@ attribute :template_cookbook, :kind_of => String, :default => 'newrelic'
 attribute :template_source, :kind_of => String, :default => 'agent/infrastructure/newrelic.yml.erb'
 attribute :service_actions, :kind_of => Array, :default => %w[enable start]
 attribute :windows_version, :kind_of => String, :default => '1.0.703'
-attribute :windows_checksum, :kind_of => String, :default => '3c9f98325dc484ee8735f01b913803eaef54f06641348b3dd9f3c0b3cd803ace'
+attribute :windows_checksum, :kind_of => String, :default => 'dd528d84a6d82f9efc41369bbfcb92b6aa504bf20fc2ad23b1693d05efa22a9e'
 attribute :strip_command_line, :kind_of => [TrueClass, FalseClass], :default => nil
