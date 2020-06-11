@@ -4,7 +4,7 @@ maintainer_email 'development@davidjoos.com'
 license 'MIT'
 description 'Installs/Configures New Relic'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '2.40.3'
+version '2.40.4'
 chef_version '>= 0.10.0' if respond_to?(:chef_version)
 
 %w[debian ubuntu redhat centos fedora scientific amazon windows smartos oracle].each do |os|
