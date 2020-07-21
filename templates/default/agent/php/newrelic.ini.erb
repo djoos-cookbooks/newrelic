@@ -676,3 +676,33 @@ newrelic.error_collector.ignore_errors = <%= @resource.error_collector_ignore_er
 <% @resource.additional_config.each do |config, value|%>
 <%= config %> = "<%= value %>"
 <% end %>
+
+;
+; Setting: newrelic.distributed_tracing_enabled
+; Type   : Boolean
+; Scope  : per-directory
+; Default: false
+; Info   : Enable or disable distributed tracing. When the agent's
+;          transaction tracer and distributed tracing features are
+;          enabled, the agent will insert headers into outbound
+;          requests, and scan incoming requests for distributed
+;          tracing headers.
+newrelic.distributed_tracing_enabled = <%= @resource.distributed_tracing_enabled %>
+
+;
+; Setting: newrelic.distributed_tracing_exclude_newrelic_header
+; Type   : Boolean
+; Scope  : per-directory
+; Default: false
+; Info   : Set this to true to exclude the New Relic
+;          distributed tracing header that is attached to outbound
+;          requests, and to instead only rely on W3C Trace Context
+;          Headers for distributed tracing. If this is false then
+;          both types of headers are attached to outbound requests.
+;
+;          The New Relic distributed tracing header allows
+;          interoperability with older agents that do not support
+;          W3C Trace Context headers. Agent versions that support
+;          W3C Trace Context headers will prioritize them over New
+;          Relic headers for distributed tracing.
+newrelic.distributed_tracing_exclude_newrelic_header = <%= @resource.distributed_tracing_exclude_newrelic_header %>

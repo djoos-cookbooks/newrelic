@@ -308,6 +308,8 @@ The `newrelic_agent_php` resource will handle the requirements to install php ap
 * `'webtransaction_name_functions'` - Defaults to nil
 * `'webtransaction_name_files'` - Defaults to nil
 * `'cross_application_tracer_enable'` - Defaults to true
+* `'distributed_tracing_enabled'` - Defaults to false
+* `'distributed_tracing_exclude_newrelic_header'` - Default to false
 
 #### Example
 

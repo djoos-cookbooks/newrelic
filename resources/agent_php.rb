@@ -42,6 +42,8 @@ attribute :daemon_pidfile, :kind_of => String, :default => nil
 attribute :daemon_location, :kind_of => String, :default => nil
 attribute :daemon_collector_host, :kind_of => String, :default => nil
 attribute :daemon_dont_launch, :kind_of => String, :default => nil
+attribute :distributed_tracing_enabled, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :distributed_tracing_exclude_newrelic_header, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :capture_params, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :ignored_params, :kind_of => String, :default => nil
 attribute :error_collector_enable, :kind_of => [TrueClass, FalseClass], :default => true
