@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.41.0
+- add distributed tracing to php agent resource
+
 ## v2.40.5
 - update default value for windows_checksum
 
