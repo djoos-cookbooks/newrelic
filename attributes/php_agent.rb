@@ -5,6 +5,7 @@
 # Copyright (c) 2016, David Joos
 #
 
+default['newrelic']['php_agent']['version'] = nil
 default['newrelic']['php_agent']['agent_action'] = nil
 default['newrelic']['php_agent']['install_silently'] = nil
 default['newrelic']['php_agent']['startup_mode'] = nil
