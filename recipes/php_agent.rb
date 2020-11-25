@@ -38,6 +38,7 @@ newrelic_agent_php 'Install' do
   daemon_collector_host node['newrelic']['application_monitoring']['daemon']['collector_host'] unless node['newrelic']['application_monitoring']['daemon']['collector_host'].nil?
   daemon_dont_launch node['newrelic']['application_monitoring']['daemon']['dont_launch'] unless node['newrelic']['application_monitoring']['daemon']['dont_launch'].nil?
   distributed_tracing_enabled NewRelic.to_boolean(node['newrelic']['application_monitoring']['distributed_tracing_enabled']) unless node['newrelic']['application_monitoring']['distributed_tracing_enabled'].nil?
+  distributed_tracing_exclude_newrelic_header NewRelic.to_boolean(node['newrelic']['application_monitoring']['distributed_tracing_exclude_newrelic_header']) unless node['newrelic']['application_monitoring']['distributed_tracing_exclude_newrelic_header'].nil?
   capture_params NewRelic.to_boolean(node['newrelic']['application_monitoring']['capture_params']) unless node['newrelic']['application_monitoring']['capture_params'].nil?
   ignored_params node['newrelic']['application_monitoring']['ignored_params'] unless node['newrelic']['application_monitoring']['ignored_params'].nil?
   error_collector_enable NewRelic.to_boolean(node['newrelic']['application_monitoring']['error_collector']['enable']) unless node['newrelic']['application_monitoring']['error_collector']['enable'].nil?
