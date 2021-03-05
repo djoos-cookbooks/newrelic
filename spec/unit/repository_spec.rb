@@ -37,7 +37,7 @@ describe 'newrelic::repository' do
     it 'installs the New Relic yum repository' do
       expect(chef_run).to create_yum_repository('newrelic').with(
         :description => 'New Relic packages for Enterprise Linux 5 - $basearch',
-        :baseurl => 'http://download.newrelic.com/pub/newrelic/el5/$basearch/',
+        :baseurl => 'http://yum.newrelic.com/pub/newrelic/el7/$basearch',
         :gpgkey => 'http://download.newrelic.com/548C16BF.gpg'
       )
     end
@@ -49,7 +49,7 @@ describe 'newrelic::repository' do
     it 'installs the New Relic yum repository' do
       expect(chef_run).to create_yum_repository('newrelic').with(
         :description => 'New Relic packages for Enterprise Linux 5 - $basearch',
-        :baseurl => 'http://download.newrelic.com/pub/newrelic/el5/$basearch/',
+        :baseurl => 'http://yum.newrelic.com/pub/newrelic/el7/$basearch',
         :gpgkey => 'http://download.newrelic.com/548C16BF.gpg'
       )
     end
