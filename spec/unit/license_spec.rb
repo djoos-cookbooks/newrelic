@@ -33,28 +33,28 @@ describe 'libraries/newrelic.rb' do
   end
 
   it "returns node['newrelic']['license'] for all licenses when main value is set" do
-    node = build_node(lic = 'a')
+    node = build_node('a')
     expect(NewRelic.license(node)).to eq('a')
     expect(NewRelic.server_monitoring_license(node)).to eq('a')
     expect(NewRelic.application_monitoring_license(node)).to eq('a')
   end
 
   it "returns node['newrelic']['license'] for all licenses except node['newrelic']['server_monitoring']['license']" do
-    node = build_node(lic = 'a', server = 'b', app = nil)
+    node = build_node('a', 'b', nil)
     expect(NewRelic.license(node)).to eq('a')
     expect(NewRelic.server_monitoring_license(node)).to eq('b')
     expect(NewRelic.application_monitoring_license(node)).to eq('a')
   end
 
   it "returns node['newrelic']['license'] for all licenses except node['newrelic']['application_monitoring']['license']" do
-    node = build_node(lic = 'a', server = nil, app = 'c')
+    node = build_node('a', nil, 'c')
     expect(NewRelic.license(node)).to eq('a')
     expect(NewRelic.server_monitoring_license(node)).to eq('a')
     expect(NewRelic.application_monitoring_license(node)).to eq('c')
   end
 
   it "returns unique node['newrelic']['license'], node['newrelic']['server_monitoring']['license'], and node['newrelic']['application_monitoring']['license']" do
-    node = build_node(lic = 'a', server = 'b', app = 'c')
+    node = build_node('a', 'b', 'c')
     expect(NewRelic.license(node)).to eq('a')
     expect(NewRelic.server_monitoring_license(node)).to eq('b')
     expect(NewRelic.application_monitoring_license(node)).to eq('c')
