@@ -1,4 +1,3 @@
-
 require 'spec_helper'
 
 describe yumrepo('newrelic'), if: os[:family] == 'redhat' do

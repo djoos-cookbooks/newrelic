@@ -1,4 +1,3 @@
-
 #
 # Cookbook:: newrelic
 # Resource:: agent_nodejs
