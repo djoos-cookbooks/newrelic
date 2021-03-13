@@ -687,7 +687,11 @@ newrelic.error_collector.ignore_errors = <%= @resource.error_collector_ignore_er
 ;          enabled, the agent will insert headers into outbound
 ;          requests, and scan incoming requests for distributed
 ;          tracing headers.
+<% if @resource.distributed_tracing_enabled.nil? %>
+;newrelic.distributed_tracing_enabled = false
+<% else %>
 newrelic.distributed_tracing_enabled = <%= @resource.distributed_tracing_enabled %>
+<% end %>
 
 ;
 ; Setting: newrelic.distributed_tracing_exclude_newrelic_header
@@ -705,4 +709,8 @@ newrelic.distributed_tracing_enabled = <%= @resource.distributed_tracing_enabled
 ;          W3C Trace Context headers. Agent versions that support
 ;          W3C Trace Context headers will prioritize them over New
 ;          Relic headers for distributed tracing.
+<% if @resource.distributed_tracing_exclude_newrelic_header.nil? %>
+;newrelic.distributed_tracing_exclude_newrelic_header = false
+<% else %>
 newrelic.distributed_tracing_exclude_newrelic_header = <%= @resource.distributed_tracing_exclude_newrelic_header %>
+<% end %>
