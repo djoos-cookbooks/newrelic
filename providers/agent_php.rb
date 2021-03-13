@@ -58,6 +58,7 @@ def newrelic_php_agent
   package 'newrelic-php5' do
     action new_resource.action
     notifies :run, 'execute[newrelic-install]', :immediately
+    version new_resource.version
   end
 end
 
