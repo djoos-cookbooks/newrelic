@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.43.0
+- lazy evaluation of default properties in yml.rb
+
 ## v2.42.0
 - adds PHP agent version attribute to allow pinning the version
 - fixed PHP agent distributed tracing
