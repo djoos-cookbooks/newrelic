@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.42.0
+- adds PHP agent version attribute to allow pinning the version
+- fixed PHP agent distributed tracing
+- Ubuntu 20.04 support
+
 ## v2.41.0
 - add distributed tracing to php agent resource
 
