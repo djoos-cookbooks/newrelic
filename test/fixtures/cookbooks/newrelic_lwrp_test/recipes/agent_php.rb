@@ -1,13 +1,13 @@
 #
-# Cookbook Name:: newrelic_lwrp_test
+# Cookbook:: newrelic_lwrp_test
 # Recipe:: agent_php
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 include_recipe 'apache2'
 
-node.set['php']['pear'] = 'pear'
+node.normal['php']['pear'] = 'pear'
 include_recipe 'php'
 
 newrelic_agent_php 'Install' do

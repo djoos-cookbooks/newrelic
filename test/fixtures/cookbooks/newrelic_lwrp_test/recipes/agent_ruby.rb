@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: newrelic_lwrp_test
+# Cookbook:: newrelic_lwrp_test
 # Recipe:: agent_java
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 package 'ruby'

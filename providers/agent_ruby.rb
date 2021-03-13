@@ -1,14 +1,12 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Recipe:: agent_ruby
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 # include helper methods
 include NewRelic::Helpers
-
-use_inline_resources if defined?(use_inline_resources)
 
 action :install do
   # Check license key provided
@@ -40,20 +38,6 @@ def install_newrelic
 end
 
 def generate_agent_config
-  if new_resource.daemon_proxy.nil?
-    daemon_proxy_host = nil
-    daemon_proxy_port = nil
-    daemon_proxy_user = nil
-    daemon_proxy_password = nil
-  else
-    proxy = URI(new_resource.daemon_proxy)
-
-    daemon_proxy_host = proxy.host
-    daemon_proxy_port = proxy.port
-    daemon_proxy_user = proxy.user
-    daemon_proxy_password = proxy.password
-  end
-
   template "#{new_resource.install_dir}/newrelic.yml" do
     cookbook new_resource.template_cookbook
     source new_resource.template_source
@@ -61,7 +45,7 @@ def generate_agent_config
     group 'root'
     mode '0644'
     variables(
-      :resource => new_resource
+      resource: new_resource
     )
     sensitive true
     action :create

@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: newrelic_lwrp_test
+# Cookbook:: newrelic_lwrp_test
 # Recipe:: agent_nodejs_recipe
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 # version one dot thirty eight dot two has invalid readable stream version two dot two dot three

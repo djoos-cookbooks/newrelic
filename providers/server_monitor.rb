@@ -1,15 +1,13 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Provider:: server_monitor
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 # include helper methods
 include NewRelic::Helpers
 include NewRelic::ServerMonitorHelpers
-
-use_inline_resources if defined?(use_inline_resources)
 
 action :install do
   check_license
@@ -43,13 +41,13 @@ def install_newrelic_service_linux
     group new_resource.config_file_group
     mode '0640'
     variables(
-      :resource => new_resource
+      resource: new_resource
     )
     sensitive true
     notifies new_resource.service_notify_action, "service[#{new_resource.service_name}]"
   end
   service new_resource.service_name do
-    supports :status => true, :start => true, :stop => true, :restart => true, :enable => true
+    supports status: true, start: true, stop: true, restart: true, enable: true
     action new_resource.service_actions
   end
 

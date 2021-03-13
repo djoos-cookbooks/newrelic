@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Recipe:: dotnet_agent
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 newrelic_agent_dotnet 'Install' do

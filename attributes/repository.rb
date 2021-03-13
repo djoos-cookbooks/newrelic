@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Attributes:: repository
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 default['newrelic']['repository']['key'] = 'http://download.newrelic.com/548C16BF.gpg'

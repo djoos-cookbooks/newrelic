@@ -5,7 +5,7 @@ source 'https://supermarket.chef.io'
 cookbook 'ark', '= 1.1.0'
 
 group :integration do
-  cookbook 'newrelic_lwrp_test', :path => 'test/fixtures/cookbooks/newrelic_lwrp_test'
+  cookbook 'newrelic_lwrp_test', path: 'test/fixtures/cookbooks/newrelic_lwrp_test'
 end
 
 metadata

@@ -1,15 +1,9 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Provider:: deployment
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
-
-use_inline_resources
-
-def whyrun_supported?
-  true
-end
 
 action :notify do
   key = new_resource.key

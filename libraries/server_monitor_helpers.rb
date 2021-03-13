@@ -32,10 +32,10 @@ module NewRelic
       result_server_put = make_api_put_request(
         "#{api_alert_path}/#{alert_policy_id}.json",
         JSON.generate(
-          :alert_policy => {
-            :links => {
-              :servers => new_server_ids + current_server_ids
-            }
+          alert_policy: {
+            links: {
+              servers: new_server_ids + current_server_ids,
+            },
           }
         )
       )
@@ -59,7 +59,7 @@ module NewRelic
     def make_api_request(url, req)
       req['X-Api-Key'] = node['newrelic']['api_key']
       req['Content-Type'] = 'application/json'
-      Net::HTTP.start(url.host, url.port, :use_ssl => (url.scheme == 'https')) do |http|
+      Net::HTTP.start(url.host, url.port, use_ssl: (url.scheme == 'https')) do |http|
         http.request(req)
       end
     end

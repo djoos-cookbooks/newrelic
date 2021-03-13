@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Recipe:: python_agent
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 newrelic_agent_python 'new python agent' do

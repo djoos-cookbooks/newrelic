@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Attributes:: php_agent
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 default['newrelic']['php_agent']['version'] = nil

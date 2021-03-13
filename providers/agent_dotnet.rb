@@ -1,14 +1,12 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Recipe:: agent_dotnet
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 # include helper methods
 include NewRelic::Helpers
-
-use_inline_resources if defined?(use_inline_resources)
 
 action :install do
   check_license
@@ -32,7 +30,7 @@ def install_newrelic
     cookbook new_resource.cookbook
     source new_resource.source
     variables(
-      :resource => new_resource
+      resource: new_resource
     )
     sensitive true
   end

@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Recipe:: server_monitor_agent
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 newrelic_server_monitor 'Install' do

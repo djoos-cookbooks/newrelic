@@ -7,7 +7,7 @@ describe 'newrelic_lwrp_test::agent_php' do
 
   context 'Centos' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.8', :step_into => ['newrelic_agent_php']) do |node|
+      ChefSpec::SoloRunner.new(log_level: LOG_LEVEL, platform: 'centos', version: '6', step_into: ['newrelic_agent_php']) do |node|
         stub_node_resources(node)
       end.converge(described_recipe)
     end
@@ -21,7 +21,7 @@ describe 'newrelic_lwrp_test::agent_php' do
     end
 
     it 'removes newrelic-php5-broken ' do
-      expect(chef_run).to remove_package('newrelic-php5-broken').with(:version => '3.0.5.95')
+      expect(chef_run).to remove_package('newrelic-php5-broken').with(version: '3.0.5.95')
     end
 
     it 'installs newrelic-php5' do
@@ -54,7 +54,7 @@ describe 'newrelic_lwrp_test::agent_php' do
 
     context 'with an external startup mode' do
       let(:chef_run) do
-        ChefSpec::Runner.new(:log_level => LOG_LEVEL, :platform => 'centos', :version => '6.8', :step_into => ['newrelic_agent_php']) do |node|
+        ChefSpec::Runner.new(log_level: LOG_LEVEL, platform: 'centos', version: '6', step_into: ['newrelic_agent_php']) do |node|
           stub_node_resources(node)
         end.converge(described_recipe)
       end

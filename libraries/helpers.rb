@@ -85,7 +85,7 @@ module NewRelic
         14 => 'trusty',
         16 => 'xenial',
         18 => 'bionic',
-        20 => 'focal'
+        20 => 'focal',
       }
 
       deb_version_to_codename[version]

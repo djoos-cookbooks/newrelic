@@ -1,18 +1,12 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Provider:: agent_nodejs
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 # include helper methods
 include NewRelic::Helpers
-
-use_inline_resources if defined?(use_inline_resources)
-
-def whyrun_supported?
-  true
-end
 
 action :install do
   # Check license key provided
@@ -40,7 +34,7 @@ def install_nodejs_agent
     cookbook new_resource.cookbook
     source new_resource.source
     variables(
-      :resource => new_resource
+      resource: new_resource
     )
     sensitive true
   end

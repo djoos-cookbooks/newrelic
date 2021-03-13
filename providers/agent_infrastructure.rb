@@ -1,18 +1,12 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Provider:: agent_infrastructure
 #
-# Copyright (c) 2017, David Joos
+# Copyright:: (c) 2017, David Joos
 #
 
 # include helper methods
 include NewRelic::Helpers
-
-use_inline_resources if defined?(use_inline_resources)
-
-def whyrun_supported?
-  true
-end
 
 action :install do
   check_license
@@ -34,7 +28,7 @@ def install_newrelic_infrastructure_service_linux
     group 'root'
     mode '0600'
     variables(
-      :resource => new_resource
+      resource: new_resource
     )
     sensitive true
     notifies :restart, 'service[newrelic-infra]', :delayed
@@ -79,8 +73,7 @@ def linux_service_provider
     end
   end
 
-  case node['platform']
-  when 'ubuntu'
+  if platform?('ubuntu')
     if node['platform_version'].to_f < 16.04
       service_provider = Chef::Provider::Service::Upstart
     end
@@ -103,7 +96,7 @@ def install_newrelic_infrastructure_service_windows
     cookbook new_resource.template_cookbook
     source new_resource.template_source
     variables(
-      :resource => new_resource
+      resource: new_resource
     )
     sensitive true
     notifies :restart, 'service[newrelic-infra]', :delayed

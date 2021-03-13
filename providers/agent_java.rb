@@ -1,16 +1,14 @@
 #
-# Cookbook Name:: newrelic
+# Cookbook:: newrelic
 # Recipe:: agent_java
 #
-# Copyright (c) 2016, David Joos
+# Copyright:: (c) 2016, David Joos
 #
 
 require 'uri'
 
 # include helper methods
 include NewRelic::Helpers
-
-use_inline_resources if defined?(use_inline_resources)
 
 action :install do
   # Check license key provided
@@ -51,8 +49,6 @@ def agent_jar
                "newrelic-java-#{new_resource.version}.zip"
              end
 
-  cache_dir = Chef::Config[:file_cache_path]
-
   remote_file "#{new_resource.install_dir}/newrelic.zip" do
     source "#{new_resource.repository}/#{version}/#{filename}"
     user new_resource.app_user
@@ -79,7 +75,7 @@ def generate_agent_config
     group new_resource.app_group
     mode '0644'
     variables(
-      :resource => new_resource
+      resource: new_resource
     )
     sensitive true
     action :create
