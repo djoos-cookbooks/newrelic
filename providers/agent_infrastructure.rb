@@ -56,7 +56,6 @@ def install_newrelic_infrastructure_service_linux
   end
 end
 
-# rubocop:disable Metrics/CyclomaticComplexity
 def linux_service_provider
   service_provider = Chef::Provider::Service::Systemd
 
