@@ -33,7 +33,7 @@ attribute :windows32_checksum, kind_of: String, default: 'ac2b65eecaad461fdd2e43
 attribute :cookbook, kind_of: String, default: 'newrelic'
 attribute :source, kind_of: String, default: 'agent/server_monitor/nrsysmond.cfg.erb'
 
-if platform?('smartos')
+if node['platform'] == 'smartos'
   attribute :service_name, kind_of: String, default: 'nrsysmond'
   attribute :config_file_group, kind_of: String, default: 'root'
   attribute :config_path, kind_of: String, default: '/opt/local/etc'
