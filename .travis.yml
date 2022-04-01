@@ -1,11 +1,10 @@
-# install the stable release of the Chef Development Kit (ChefDK)
-# use chef-current-precise to install the pre-release
+# use chef-current-focal to install the pre-release
 addons:
   apt:
     sources:
-      - chef-stable-trusty # Ubuntu 14.04 LTS Trusty Tahr
+      - chef-stable-focal
     packages:
-      - chefdk
+      - chef-workstation
 
 services: docker
 
@@ -16,7 +15,7 @@ env:
   - CHEF_LICENSE="accept"
 
 before_script:
-  - eval "$(/opt/chefdk/bin/chef shell-init bash)" # make ChefDK's Ruby the default
+  - eval "$(/opt/chef-workstation/bin/chef shell-init bash)" # make Chef workstation's Ruby the default
   - chef --version
   - chef exec berks install
 
