@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.44.0
+- OS refresh
+- remove dependency on archived/deprecated poise cookbook(s)
+
 ## v2.43.0
 - lazy evaluation of default properties in yml.rb
 
