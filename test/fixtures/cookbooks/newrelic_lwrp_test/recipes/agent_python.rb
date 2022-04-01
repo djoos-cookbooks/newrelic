@@ -5,14 +5,6 @@
 # Copyright:: (c) 2016, David Joos
 #
 
-python_runtime '2' do
-  provider :system
-  setuptools_version true
-  virtualenv_version false
-  pip_version true
-  action :install
-end
-
 newrelic_agent_python 'Install' do
   license node['newrelic']['license']
   config_file '/etc/newrelic/newrelic.ini'

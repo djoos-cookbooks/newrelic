@@ -18,20 +18,26 @@ action :install do
 end
 
 action :remove do
-  python_package 'newrelic' do
-    virtualenv new_resource.virtualenv if new_resource.virtualenv
-    version new_resource.version if new_resource.version
-    python new_resource.python if new_resource.python
-    action :remove
+  newrelic_python_agent = 'newrelic'
+
+  execute 'remove_python_agent' do
+    command "pip uninstall #{newrelic_python_agent}"
+    only_if "pip list | grep #{newrelic_python_agent}"
   end
 end
 
 def install_python_agent
-  python_package 'newrelic' do
-    virtualenv new_resource.virtualenv if new_resource.virtualenv
-    version new_resource.version if new_resource.version
-    python new_resource.python if new_resource.python
-    action :install
+  if node['platform_family'] == 'debian' && node['platform_version'] == '20.04'
+    package 'python3-pip'
+  else
+    package 'python-pip'
+  end
+
+  newrelic_python_agent = 'newrelic'
+
+  execute 'install_python_agent' do
+    command "pip install #{newrelic_python_agent}"
+    not_if "pip list | grep #{newrelic_python_agent}"
   end
 end
 

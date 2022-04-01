@@ -11,8 +11,6 @@ newrelic_agent_python 'new python agent' do
   cookbook node['newrelic']['python_agent']['template']['cookbook'] unless node['newrelic']['python_agent']['template']['cookbook'].nil?
   source node['newrelic']['python_agent']['template']['source'] unless node['newrelic']['python_agent']['template']['source'].nil?
   app_name node['newrelic']['application_monitoring']['app_name'] unless node['newrelic']['application_monitoring']['app_name'].nil?
-  virtualenv node['newrelic']['python_agent']['python_venv'] unless node['newrelic']['python_agent']['python_venv'].nil?
-  version node['newrelic']['python_agent']['python_version'] unless node['newrelic']['python_agent']['python_version'].nil?
   high_security NewRelic.to_boolean(node['newrelic']['application_monitoring']['high_security']) unless node['newrelic']['application_monitoring']['high_security'].nil?
   enabled NewRelic.to_boolean(node['newrelic']['application_monitoring']['enabled']) unless node['newrelic']['application_monitoring']['enabled'].nil?
   logfile node['newrelic']['application_monitoring']['logfile'] unless node['newrelic']['application_monitoring']['logfile'].nil?

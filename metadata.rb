@@ -13,7 +13,6 @@ end
 source_url 'https://github.com/djoos-cookbooks/newrelic'
 issues_url 'https://github.com/djoos-cookbooks/newrelic/issues'
 
-depends 'poise-python'
 depends 'curl'
 depends 'apt'
 depends 'yum'

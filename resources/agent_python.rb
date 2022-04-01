@@ -9,8 +9,6 @@ actions :install, :remove
 default_action :install
 
 attribute :license, kind_of: String, required: true
-attribute :version, kind_of: String, default: nil
-attribute :virtualenv, kind_of: String, default: nil
 attribute :config_file, kind_of: String, default: '/etc/newrelic/newrelic.ini'
 attribute :cookbook, kind_of: String, default: 'newrelic'
 attribute :source, kind_of: String, default: 'agent/python/newrelic.ini.erb'
@@ -35,4 +33,3 @@ attribute :error_collector_ignore_classes, kind_of: Array, default: nil
 attribute :browser_monitoring_auto_instrument, kind_of: [TrueClass, FalseClass], default: true
 attribute :cross_application_tracer_enable, kind_of: [TrueClass, FalseClass], default: true
 attribute :feature_flag, kind_of: String, default: nil
-attribute :python, kind_of: String, default: nil

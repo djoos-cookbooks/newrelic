@@ -35,7 +35,6 @@ Make sure you run Chef >= 12.1
 
 ### Cookbooks:
 
-* poise-python
 * curl
 * apt
 * yum
@@ -128,8 +127,6 @@ Make sure you run Chef >= 12.1
 ### python_agent.rb:
 
 * `node['newrelic']['python_agent']['agent_action']` - Agent action, defaults to :install
-* `node['newrelic']['python_agent']['python_version']` - Defaults to "latest". Version numbers can be found at http://download.newrelic.com/python_agent/release/
-* `node['newrelic']['python_agent']['python_venv']` - Virtual environment, default to nil
 * `node['newrelic']['python_agent']['config_file']` - The New Relic python agent config file, defaults to "/etc/newrelic/newrelic.ini"
 * `node['newrelic']['python_agent']['template']['cookbook']` - Sets cookbook for template, defaults to 'newrelic'
 * `node['newrelic']['python_agent']['template']['source']` - Sets source for template, defaults to 'agent/python/newrelic.ini.erb'
@@ -481,8 +478,6 @@ See https://docs.newrelic.com/docs/agents/python-agent/installation-configuratio
 for an explanation on each attribute.
 
 * `'license'` - NewRelic license key
-* `'version'` - Python agent version. Will default to latest if nil.
-* `'virtualenv'` - VirtualEnv to install puthon agent into. Default nil.
 * `'config_file'` - Path to config file. Default '/etc/newrelic/newrelic.ini'
 * `'cookbook'` - Cookbook holding config template. Default this cookbook.
 * `'source'` - Config template source. Default 'agent/python/newrelic.ini.erb'
