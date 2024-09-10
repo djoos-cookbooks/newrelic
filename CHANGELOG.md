@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.45.0
+- support for installation of the PHP agent on ARM architecture
+
 ## v2.44.0
 - OS refresh
 - remove dependency on archived/deprecated poise cookbook(s)
