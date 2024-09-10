@@ -23,3 +23,6 @@ default['newrelic']['php_agent']['template']['source_ini'] = nil
 default['newrelic']['php_agent']['template']['cookbook'] = nil
 default['newrelic']['php_agent']['template']['source'] = nil
 default['newrelic']['php_agent']['additional_config'] = {}
+
+# for non-package based installations (eg. ARM)
+default['newrelic']['php_agent']['repository'] = "https://download.newrelic.com/php_agent/release"

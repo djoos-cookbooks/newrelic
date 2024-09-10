@@ -22,6 +22,8 @@ attribute :service_action, kind_of: String, default: 'restart'
 # @todo take out deprecated execute_php5enmod logic: use enable_module instead
 attribute :execute_php5enmod, kind_of: [TrueClass, FalseClass], default: false
 
+attribute :repository, kind_of: String, default: 'https://download.newrelic.com/php_agent/release'
+
 attribute :enable_module, kind_of: [TrueClass, FalseClass], default: false
 attribute :cookbook_ini, kind_of: String, default: 'newrelic'
 attribute :source_ini, kind_of: String, default: 'agent/php/newrelic.ini.erb'

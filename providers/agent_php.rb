@@ -15,11 +15,45 @@ action :install do
   # check config_file attribute value
   raise "Please specify the path to your New Relic php agent config file (#{new_resource.config_file})" if new_resource.config_file.nil?
 
-  newrelic_repository
-  newrelic_php5_broken
-  newrelic_php_agent
+  if arm?
+    # ARM (https://docs.newrelic.com/docs/apm/agents/php-agent/installation/php-agent-installation-tar-file/)
+
+    filename = "newrelic-php5-#{new_resource.version}-linux"
+    extension = "tar.gz"
+    file = "#{filename}.#{extension}"
+
+    dir = Chef::Config[:file_cache_path]
+
+    remote_file "#{dir}/#{filename}.tar.gz" do
+      source "#{new_resource.repository}/#{file}"
+      owner 'root'
+      group 'root'
+      mode '0664'
+      action :create
+      notifies :run, 'execute[newrelic-extract-archive]', :immediately
+    end
+
+    execute 'newrelic-extract-archive' do
+      cwd dir
+      command "tar xvfz #{file}"
+      # notifies :run, 'execute[newrelic-install]', :immediately
+    end
+  else
+    # x86_64
+
+    newrelic_repository
+    newrelic_php5_broken
+    newrelic_php_agent
+  end
   webserver_service if new_resource.service_name
-  newrelic_install
+
+  current_working_directory = nil
+
+  if arm?
+    current_working_directory = "#{dir}/#{filename}"
+  end
+
+  newrelic_install(current_working_directory)
   newrelic_daemon
   newrelic_php_enable_module
   generate_agent_config
@@ -56,10 +90,11 @@ def newrelic_php_agent
   end
 end
 
-def newrelic_install
+def newrelic_install(current_working_directory = nil)
   # run newrelic-install
   install_silently = new_resource.install_silently ? 'true' : 'false'
   execute 'newrelic-install' do
+    cwd current_working_directory unless current_working_directory.nil?
     command 'newrelic-install install'
     if install_silently
       environment(
