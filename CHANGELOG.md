@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.45.1
+- fixed PHP agent ARM installation
+
 ## v2.45.0
 - support for installation of the PHP agent on ARM architecture
 
