@@ -15,43 +15,22 @@ action :install do
   # check config_file attribute value
   raise "Please specify the path to your New Relic php agent config file (#{new_resource.config_file})" if new_resource.config_file.nil?
 
+  current_working_directory = nil
+
   if arm?
-    # ARM (https://docs.newrelic.com/docs/apm/agents/php-agent/installation/php-agent-installation-tar-file/)
-
-    filename = "newrelic-php5-#{new_resource.version}-linux"
-    extension = "tar.gz"
-    file = "#{filename}.#{extension}"
-
     dir = Chef::Config[:file_cache_path]
+    filename = "newrelic-php5-#{new_resource.version}-linux"
 
-    remote_file "#{dir}/#{filename}.tar.gz" do
-      source "#{new_resource.repository}/#{file}"
-      owner 'root'
-      group 'root'
-      mode '0664'
-      action :create
-      notifies :run, 'execute[newrelic-extract-archive]', :immediately
-    end
+    newrelic_tar(dir, filename)
 
-    execute 'newrelic-extract-archive' do
-      cwd dir
-      command "tar xvfz #{file}"
-      # notifies :run, 'execute[newrelic-install]', :immediately
-    end
+    current_working_directory = "#{dir}/#{filename}"
   else
-    # x86_64
-
     newrelic_repository
     newrelic_php5_broken
     newrelic_php_agent
   end
+
   webserver_service if new_resource.service_name
-
-  current_working_directory = nil
-
-  if arm?
-    current_working_directory = "#{dir}/#{filename}"
-  end
 
   newrelic_install(current_working_directory)
   newrelic_daemon
@@ -90,12 +69,31 @@ def newrelic_php_agent
   end
 end
 
+def newrelic_tar(dir, filename, extension="tar.gz")
+    file = "#{filename}.#{extension}"
+
+    remote_file "#{dir}/#{filename}.tar.gz" do
+      source "#{new_resource.repository}/#{file}"
+      owner 'root'
+      group 'root'
+      mode '0664'
+      action :create
+      notifies :run, 'execute[newrelic-extract-archive]', :immediately
+    end
+
+    execute 'newrelic-extract-archive' do
+      cwd dir
+      command "tar xvfz #{file}"
+      notifies :run, 'execute[newrelic-install]', :immediately
+    end
+end
+
 def newrelic_install(current_working_directory = nil)
-  # run newrelic-install
   install_silently = new_resource.install_silently ? 'true' : 'false'
+
   execute 'newrelic-install' do
     cwd current_working_directory unless current_working_directory.nil?
-    command 'newrelic-install install'
+    command './newrelic-install install'
     if install_silently
       environment(
         'NR_INSTALL_SILENT' => '1'
