@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.45.3
+- include version into PHP (ARM) agent archive repository url
+
 ## v2.45.2
 - cut over from /release to /archive as PHP (ARM) agent installation repository
 
