@@ -21,7 +21,7 @@ action :install do
     dir = Chef::Config[:file_cache_path]
     filename = "newrelic-php5-#{new_resource.version}-linux"
 
-    newrelic_tar(dir, filename)
+    newrelic_tar(dir, new_resource.version, filename)
 
     current_working_directory = "#{dir}/#{filename}"
   else
@@ -69,11 +69,11 @@ def newrelic_php_agent
   end
 end
 
-def newrelic_tar(dir, filename, extension="tar.gz")
+def newrelic_tar(dir, version, filename, extension="tar.gz")
     file = "#{filename}.#{extension}"
 
     remote_file "#{dir}/#{filename}.tar.gz" do
-      source "#{new_resource.repository}/#{file}"
+      source "#{new_resource.repository}/#{version}/#{file}"
       owner 'root'
       group 'root'
       mode '0664'
