@@ -86,6 +86,8 @@ module NewRelic
         16 => 'xenial',
         18 => 'bionic',
         20 => 'focal',
+        22 => 'jammy',
+        24 => 'noble'
       }
 
       deb_version_to_codename[version]
