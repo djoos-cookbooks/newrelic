@@ -3,7 +3,7 @@ maintainer 'David Joos'
 maintainer_email 'development@davidjoos.com'
 license 'MIT'
 description 'Installs/Configures New Relic'
-version '2.45.3'
+version '2.45.4'
 chef_version '>= 0.10.0'
 
 %w(debian ubuntu redhat centos fedora scientific amazon windows smartos oracle).each do |os|

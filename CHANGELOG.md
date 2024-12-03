@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.45.4
+- added version to string handling for newer Ubuntu version(s)
+
 ## v2.45.3
 - include version into PHP (ARM) agent archive repository url
 
