@@ -17,7 +17,7 @@ action :install do
 
   current_working_directory = nil
 
-  if arm?
+  if arm? && (node['platform_family'] != 'debian' || (node['platform'] == 'ubuntu' && node['platform_version'].to_f < 22.04))
     dir = Chef::Config[:file_cache_path]
     filename = "newrelic-php5-#{new_resource.version}-linux"
 
