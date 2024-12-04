@@ -60,7 +60,6 @@ module NewRelic
         distribution deb_version_to_codename(node['platform_version'].to_i)
         components node['newrelic']['repository']['infrastructure']['components']
         key node['newrelic']['repository']['infrastructure']['key']
-        arch 'amd64'
       end
     end
 
