@@ -90,10 +90,11 @@ end
 
 def newrelic_install(current_working_directory = nil)
   install_silently = new_resource.install_silently ? 'true' : 'false'
-
+  install_command = arm? ? './newrelic-install install' : 'newrelic-install install'
+  
   execute 'newrelic-install' do
     cwd current_working_directory unless current_working_directory.nil?
-    command './newrelic-install install'
+    command install_command
     if install_silently
       environment(
         'NR_INSTALL_SILENT' => '1'
