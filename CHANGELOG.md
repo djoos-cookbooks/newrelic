@@ -2,6 +2,9 @@
 
 This file is used to list changes made in each version (>= 2.11.0) of the newrelic cookbook.
 
+## v2.45.6
+- update install command to not break on non-ARM architectures
+
 ## v2.45.5
 - allow support for the ARM repository in Debian
 
